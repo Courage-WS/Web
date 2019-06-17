@@ -47,5 +47,5 @@ HTML属性应该按照特定的顺序出现，以保证易读性
 6. placeholder, title, alt
 7. aria-*, role
 8. required, readonly, disbled
-class是为高可复用组件设计的，应放在第一位，id更加具体而且尽量少用，所以放在第二位。
 
+class是为高可复用组件设计的，应放在第一位，id更加具体而且尽量少用，所以放在第二位。
