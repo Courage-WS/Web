@@ -6,7 +6,7 @@
 | Safari | webkit / webkit2 | JScore |
 | Firefox | gecko |  |
 | Opera | presto  / chromium / blink |  |
-##注意事项
+## 注意事项
 class：以字母开头，同一属性两个及以上用空格隔开
 id：以数字或字母开头，不能纯数字。都不能有空格
 所有的logo都是可以点击的链接
@@ -27,7 +27,7 @@ id：以数字或字母开头，不能纯数字。都不能有空格
 </body>
 
 ```
-##常见元素
+## 常见元素
 常见的块元素：
 div、p、h1、ol、ul、dl、table、address、blockquote、form
 
@@ -37,7 +37,7 @@ a、span、br、i、em、strong、label、q、var、cite、code
 常见的内联块元素：
 img、input
 
-##属性顺序
+## 属性顺序
 HTML属性应该按照特定的顺序出现，以保证易读性
 1. class
 2. id
