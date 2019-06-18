@@ -6,6 +6,11 @@
 | Safari | webkit / webkit2 | JScore |
 | Firefox | gecko |  |
 | Opera | presto  / chromium / blink |  |
+## 浏览器模式
+- 标准模式
+- 兼容模式
+  - 向前兼容：应用发展超前系统
+  - 向后兼容：系统发展超越应用
 ## 注意事项
 class：以字母开头，同一属性两个及以上用空格隔开
 id：以数字或字母开头，不能纯数字。都不能有空格
