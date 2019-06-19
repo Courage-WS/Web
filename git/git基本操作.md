@@ -77,7 +77,7 @@ git config --global color.ui true
 |git log --pretty=oneline|查看提交日志的版本号|
 |git rebase|把提交日志整理成直线|
 ### 分支版本
-|代码|说明|
+|代码|说明||
 |-|-|-|
 |git reset --hard HEAD^|返回前一个版本|上上个为HEAD^^, 上100个位HEAD~100，这里处理的事分支的版本。HEAD 表示当前版本|
 |git reset --hard 102992|到某一特定版本|后面数字为版本号，前几位就可以了|
@@ -86,6 +86,7 @@ git config --global color.ui true
   一般工作思路：建立次分支，在次分支工作，与主分支合并（合并方法：次分支指向master），删除次分支
   master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活
   dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了
+
 |代码|说明||
 |-|-|-|
 |git branch name|创建分支|
