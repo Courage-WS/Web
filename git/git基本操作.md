@@ -49,7 +49,7 @@ git config --global color.ui true
 |ls|查看目录|
 ### 工作区
 |代码|说明||
-|-|-|
+|-|-|-|
 |git status|查看工作区和暂存区状态|
 |git diff HEAD -- name|查看文件工作区和版本库最新版本的区别|
 |git checkout -- name|取消工作区的修改并恢复|如果暂存区有 恢复为暂存区，否则恢复为分支当前状态|
