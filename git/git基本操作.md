@@ -78,7 +78,7 @@ git config --global color.ui true
 |git rebase|把提交日志整理成直线|
 ### 分支版本
 |代码|说明|
-|-|-||
+|-|-|-|
 |git reset --hard HEAD^|返回前一个版本|上上个为HEAD^^, 上100个位HEAD~100，这里处理的事分支的版本。HEAD 表示当前版本|
 |git reset --hard 102992|到某一特定版本|后面数字为版本号，前几位就可以了|
 ## 分支
@@ -99,7 +99,7 @@ git config --global color.ui true
 |git branch -D name|强行删除分支|
 ### 标签
 |代码|说明||
-|-|-|—|
+|-|-|-|
 |git tag tagname|新建标签|默认为HEAD，也可以指定一个commit id|
 |git tag -a tagname -m "说明"|新建带有说明的标签|-a指定标签名，-m指定说明文字|
 |git tag|查看所有标签|
@@ -124,6 +124,7 @@ git config --global color.ui true
 |-|-|-|
 |git push origin tagname|推送一个本地标签|
 |git push origin --tags|推送所有本地标签|
+
 `git push origin :refs/tags/tagname`
 ## github
 - 克隆项目：在项目主页点击fork
