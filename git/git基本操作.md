@@ -69,7 +69,7 @@ git config --global color.ui true
 |git stash apply sthah@{0}|恢复指定的 stash|
 ### 暂存区
 |代码|说明||
-|-|-|
+|-|-|-|
 |git rese HEAD name|退回暂存区的修改|
 |git rm name|删除暂存区文件|
 |git commit -m"说明"|把文件提交到分支|-m后面是本次提交说明, 有中文会有未知错误，每次可以提交多次添加。从暂存区提交到分支|
@@ -86,8 +86,8 @@ git config --global color.ui true
   一般工作思路：建立次分支，在次分支工作，与主分支合并（合并方法：次分支指向master），删除次分支
   master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活
   dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了
-|代码|说明|
-|-|-||
+|代码|说明||
+|-|-|-|
 |git branch name|创建分支|
 |git branch|查看分支|
 |git checkout name|切换分支|
@@ -98,8 +98,8 @@ git config --global color.ui true
 |git branch -d name|删除分支|
 |git branch -D name|强行删除分支|
 ### 标签
-|代码|说明|
-|-|-||
+|代码|说明||
+|-|-|—|
 |git tag tagname|新建标签|默认为HEAD，也可以指定一个commit id|
 |git tag -a tagname -m "说明"|新建带有说明的标签|-a指定标签名，-m指定说明文字|
 |git tag|查看所有标签|
@@ -110,8 +110,8 @@ git config --global color.ui true
 - 创建秘钥：ssh-keygen -t rsa -C "youremail@example.com"。id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥
 - 关联本地：登录github，打开“account settings”，“ssh keys”页面：点“add ssh key”，填上任义title，在key文本框里粘贴id_rsa.pub文件的内容
 ### 基本
-|代码|说明|
-|-|-||
+|代码|说明||
+|-|-|-|
 |git remote add origin git@github,com:gitname/web.git|github库与本地仓库关联|
 |git push -u origin master|本地分支推到远程库|origin为远程库默认名，master为本地分支名，首次推送加 -u，用来关联本地分支和远程分支，首次推送认证选yes|
 |git clone git@github,com:gitname/web.git|克隆远程仓库|要从自己的账号克隆|
@@ -120,8 +120,8 @@ git config --global color.ui true
 |git branch --set-upstream branch-name origin/brabnch-name|建立本地分支和远程分支的关联|
 |git pull|抓取远程的最新提交|远程仓库有变动后无法直接push，需要先pull|
 ###远程标签
-|代码|说明|
-|-|-||
+|代码|说明||
+|-|-|-|
 |git push origin tagname|推送一个本地标签|
 |git push origin --tags|推送所有本地标签|
 `git push origin :refs/tags/tagname`
