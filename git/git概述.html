@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>git概述</title>
+</head>
+<body>
+    <h1>GIT</h1>
+    <p>git是世界上先进的分布式版本控制系统</p>
+    <h2>安装和更新</h2>
+    <h3>安装</h3>
+    <p>在windows上，从官网<a href="https://git-scm.com/downloads">下载安装程序
+    </a>，默认安装，安装完成后，在开始菜单里找到“Git”->“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
+    <h3>更新</h3>
+    <p>打开命令提示符，输入命令"git --version"查看当前git版本后，输入命令"2.17.1之前用git update /
+        2.17.1之后用git update-git-for-windows"进行升级，当有新版本可用提示是否升级时，输入"y"后回车开始自动下载安装包。安装包下载完成后安装程序会自动运行并弹出安装界面。安装提示安装完成后，输入命令"git --version"查看当前git版本，发现已经升级到安装的版本。</p>
+
+    <h2>初步配置</h2>
+    <p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量. 这些变量存储在三个不同的位置：</p>
+    <ol>
+        <li>/etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 --system 选项的 git
+            config 时，它会从此文件读写配置变量。
+        </li>
+        <li>~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 --global 选项让
+            Git 读写此文件。
+        </li>
+        <li>当前使用仓库的 Git 目录中的 config 文件（就是 .git/config）：针对该仓库。</li>
+    </ol>
+    <p>每一个级别覆盖上一级别的配置，所以 .git/config 的配置变量会覆盖 /etc/gitconfig 中的配置变量。</p>
+
+    <h3>用户信息</h3>
+    <p>$ git config --global user.name "John Doe"
+        $ git config --global user.email johndoe@example.com</p>
+    <p>针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 --global(全局变量) 选项的命令来配置。</p>
+    <p>尽量让名字和邮址与注册GitHub时的一样</p>
+
+    <h3>文本编辑器</h3>
+    <p>$ git config --global core.editor "C:/Program Files/Sublime Text
+        2/sublime_text.exe' -n -w" <br>  重启Git Shell即可生效</p>
+
+    <h3>显示颜色</h3>
+    <p>git config --global color.ui true</p>
+
+    <h3>忽略文件</h3>
+    <p>新建文件.gitignore，把需要忽略的文件编写进去。需要放进版本库</p>
+    <p>检查规则：<code>git check-ignore -v name</code>,提交文件时，遇到被忽略的文件</p>
+
+    <h2>本地仓库</h2>
+    <h3>基本</h3>
+    <p>输入显示  >  ,可以用Ctrl+D返回</p>
+    <p>把当前目录变为仓库：<code>git init</code></p>
+    <p>创建文件夹：<code>mkdir name</code></p>
+    <p>进入子文件夹：<code>cd name</code></p>
+
+    <hr>
+    <h3>查看</h3>
+    <p>查看当前位置：<code>pwd</code></p>
+
+    <p>查看命令记录：<code>git reflog</code></p>
+    <p>查看文件内容：<code>cat name</code></p>
+    <p>查看目录：<code>ls</code></p>
+
+    <hr>
+    <h3>工作区</h3>
+    <p>查看工作区和暂存区状态：<code>git status</code></p>
+    <p>查看文件工作区和版本库最新版本的区别：<code>git diff HEAD -- name</code></p>
+    <p>取消工作区的修改并恢复：<code>git checkout -- name</code>,如果暂存区有
+        恢复为暂存区，否则恢复为分支当前状态</p>
+    <p>删除工作区文件：<code>rm name</code></p>
+    <p>把文件添加到暂存：<code>git add name</code>,一次可以添加多个文件，用空格隔开</p>
+    <ul>
+        <li><code>git add -A</code> 提交所有变化,从工作区提交到暂存区</li>
+        <li><code>git add -u</code> 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)</li>
+        <li><code>git add .</code>  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件</li>
+    </ul>
+    <p>强制把文件添加到暂存：<code>git add -f name</code></p>
+    <h4>储存工作区</h4>
+    <p>储存正在进行的工作区：<code>git stash</code></p>
+    <p>查看 stash：<code>git stash list</code></p>
+    <p>恢复 stash：<code>git stash apply</code></p>
+    <p>删除 stash：<code>git stash drop</code></p>
+    <p>恢复并删除 stash：<code>git stash pop</code></p>
+    <p>恢复指定的 stash：<code>git stash apply sthah@{0}</code></p>
+
+    <hr>
+    <h3>暂存区</h3>
+    <p>退回暂存区的修改：<code>git rese HEAD name</code></p>
+    <p>删除暂存区文件：<code>git rm name</code></p>
+    <p>把文件提交到分支：<code>git commit -m"说明"</code>,-m后面是本次提交说明,
+        有中文会有未知错误，每次可以提交多次添加。从暂存区提交到分支</p>
+    <p>查看提交日志：<code>git log</code>.只能看最近三次</p>
+    <p>查看提交日志的版本号：<code>git log --pretty=oneline</code></p>
+    <p>把提交日志整理成直线：<code>git rebase</code></p>
+
+    <hr>
+    <h3>分支版本</h3>
+    <p>返回前一个版本：<code>git reset --hard HEAD^</code>，上上个为HEAD^^,
+        上100个位HEAD~100，这里处理的事分支的版本。HEAD 表示当前版本</p>
+    <p>到某一特定版本：<code>git reset --hard 102992</code>,后面数字为版本号，前几位就可以了</p>
+
+    <hr>
+    <h2>分支</h2>
+    <p>主分支：master；（先commit一些东西，否则master不存在）当前分支：HEAD</p>
+    <p>一般工作思路：建立次分支，在次分支工作，与主分支合并（合并方法：次分支指向master），删除次分支</p>
+    <p>master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活</p>
+    <p>dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了</p>
+    <hr>
+    <p>创建分支：<code>git branch name</code></p>
+    <p>查看分支：<code>git branch</code></p>
+    <p>切换分支：<code>git checkout name</code></p>
+    <p>创建+切换分支：<code>git checkout -b name</code></p>
+    <p>合并某分支到当前分支：<code>git merge name</code></p>
+    <p>合并强制禁用Fast forward模式：<code>git merge --no-ff -m"说明" name</code>,这样，从分支历史上就可以看出分支信息</p>
+    <p>查看分支合并图：<code>git log --graph</code></p>
+    <p>删除分支：<code>git branch -d name</code></p>
+    <p>强行删除分支：<code>git branch -D name</code></p>
+
+    <hr>
+    <h3>标签</h3>
+    <p>新建标签：<code>git tag tagname</code>默认为HEAD，也可以指定一个commit id</p>
+    <p>新建带有说明的标签：<code>git tag -a tagname -m "blablabla..."</code>,-a指定标签名，-m
+        指定说明文字</p>
+    <p>查看所有标签：<code>git tag</code></p>
+    <p>删除本地标签：<code>git tag -b tagname</code></p>
+
+    <img src="0.jpg" alt="0">
+    <h2>远程仓库</h2>
+    <h3>链接</h3>
+    <p>生成秘钥，用户主目录下需有 .ssh 目录，用 <code>cd ~/.ssh</code>检查是否有秘钥。</p>
+    <p>创建秘钥：<code>ssh-keygen -t rsa -C "youremail@example.com"</code>   id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥</p>
+    <p>登陆GitHub，打开“Account settings”，“SSH Keys”页面：点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容</p>
+
+    <h3>基本</h3>
+    <p>github库与本地仓库关联：<code>git remote add origin git@github.com:michaelliao/learngit.git</code></p>
+    <p>本地分支推到远程库：<code>git push -u origin master</code>,
+        origin为远程仓库默认名，master为本地分支名，首次推送加 -u
+        参数，把本地分支和远程分支关联起来，后续可删去。首次推送会遇到一个警告，选yes就好</p>
+    <p>克隆远程仓库：<code>git clone git@github.com:michaelliao/gitskills.git</code>
+        ，要从自己的账号克隆</p>
+    <p>查看远程仓库：<code>git remote</code>/详细：<code>git remote
+        -v</code>可以看到抓取（fetch）和推送（push）地址，没有权限就看不到。
+    </p>
+    <p>创建远程仓库的分支到本地：<code>git checkout -b branch-name origin/branch-name</code></p>
+    <p>建立本地分支和远程分支的关联：<code>git branch --set-upstream branch-name origin/branch-name</code></p>
+    <p>抓取远程的最新提交：<code>git pull</code></p>
+
+    <h3>远程标签</h3>
+    <p>推送一个本地标签：<code>git push origin tagname</code></p>
+    <p>推送所有本地标签：<code>git push origin --tags</code></p>
+    <p>git push origin :refs/tags/tagname</p>
+
+    <h2>github</h2>
+    <p>克隆项目：在项目主页点击fork</p>
+    <p>给官方账户贡献代码：发起一个pull request</p>
+
+    <h2>配置别名</h2>
+    <h2>搭建Git服务器</h2>
+
+</body>
+</html>
