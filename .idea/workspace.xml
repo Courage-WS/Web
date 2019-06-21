@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="37fb2fec-475a-44ab-bfff-5ffc5bca9ecf" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://D:/web资料/grammar/git/git概述.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="95" column="12" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>title</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/images/index.html" />
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/index.css" />
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/index.html" />
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/案例/images/index.html" />
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/案例/云道页面/index.html" />
+        <option value="$PROJECT_DIR$/资料/前端基础第七天/案例/云道页面/images/index.html" />
+        <option value="$PROJECT_DIR$/jd/jd/css/cssreset.css" />
+        <option value="$PROJECT_DIR$/jd/jd/css/base.css" />
+        <option value="$USER_HOME$/Desktop/index.html" />
+        <option value="$PROJECT_DIR$/jd/jd/index.html" />
+        <option value="$PROJECT_DIR$/jd/jd/css/index.css" />
+        <option value="$PROJECT_DIR$/mackdown/mackdown.md" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/git概述.html" />
+        <option value="$PROJECT_DIR$/git概述.html" />
+        <option value="$PROJECT_DIR$/git/git概述.html" />
+        <option value="$PROJECT_DIR$/grammar/git/git概述.html" />
+        <option value="D:/web资料/grammar/git/git概述.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="610" />
+    <option name="y" value="41" />
+    <option name="width" value="786" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="grammar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="grammar" type="462c0819:PsiDirectoryNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37fb2fec-475a-44ab-bfff-5ffc5bca9ecf" name="Default Changelist" comment="" />
+      <created>1554254497436</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1554254497436</updated>
+      <workItem from="1554254500248" duration="1171000" />
+      <workItem from="1554257225618" duration="1242000" />
+      <workItem from="1554259483668" duration="109000" />
+      <workItem from="1554259614128" duration="9558000" />
+      <workItem from="1554339689508" duration="19491000" />
+      <workItem from="1554688555240" duration="13791000" />
+      <workItem from="1554714993325" duration="2443000" />
+      <workItem from="1554773166389" duration="12352000" />
+      <workItem from="1554864328812" duration="22834000" />
+      <workItem from="1554944553792" duration="13220000" />
+      <workItem from="1555033069686" duration="1086000" />
+      <workItem from="1555471104459" duration="228000" />
+      <workItem from="1555897117134" duration="10304000" />
+      <workItem from="1555982482001" duration="9467000" />
+      <workItem from="1556171587100" duration="7711000" />
+      <workItem from="1556246913182" duration="9279000" />
+      <workItem from="1557910715430" duration="1679000" />
+      <workItem from="1557984784365" duration="14161000" />
+      <workItem from="1558055594452" duration="1035000" />
+      <workItem from="1558488014682" duration="17951000" />
+      <workItem from="1558577305311" duration="9121000" />
+      <workItem from="1558660785653" duration="9839000" />
+      <workItem from="1558919120955" duration="25200000" />
+      <workItem from="1559032693392" duration="4582000" />
+      <workItem from="1559096962980" duration="1203000" />
+      <workItem from="1559194420036" duration="649000" />
+      <workItem from="1559534275702" duration="3483000" />
+      <workItem from="1559615210440" duration="5514000" />
+      <workItem from="1560391633897" duration="20261000" />
+      <workItem from="1560474830063" duration="6310000" />
+      <workItem from="1560736435114" duration="8834000" />
+      <workItem from="1560748968679" duration="675000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="264783000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="610" y="41" width="786" height="1000" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.35026738" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/index.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/index.css" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/挑错题/03 sohu/images/index.html" />
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/phrase.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="345" column="16" selection-start-line="345" selection-start-column="16" selection-end-line="345" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/02 仿土豆显示透明盒子.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/08  精灵图使用.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/images/index.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/云道页面/index.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/云道页面/css/index.css" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第八天/素材/icomoon/demo.html" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第八天/素材/icomoon/style.css" />
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第七天/案例/云道页面/images/index.html" />
+    <entry file="file://$PROJECT_DIR$/jd/css/normalize.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/css/cssreset.css" />
+    <entry file="file://$PROJECT_DIR$/jd/jd/css/normalize.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/资料/前端基础第八天/案例/demo.html" />
+    <entry file="file://$PROJECT_DIR$/jd/css/index.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/icomoon/demo.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/案例/jd/index.html" />
+    <entry file="file://$USER_HOME$/Desktop/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="488" column="12" selection-start-line="488" selection-start-column="12" selection-end-line="488" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="309" column="3" selection-start-line="309" selection-start-column="3" selection-end-line="309" selection-end-column="3" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#li#8;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#14;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#3;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#3;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#4;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jd/jd/icomoon/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mackdown/mackdown.md" />
+    <entry file="file://$PROJECT_DIR$/git概述.html" />
+    <entry file="file://$PROJECT_DIR$/git/git概述.html" />
+    <entry file="file://$PROJECT_DIR$/grammar/git/git概述.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="156" column="16" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/web资料/grammar/git/git概述.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="95" column="12" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

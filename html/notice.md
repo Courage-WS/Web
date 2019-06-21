@@ -42,6 +42,8 @@ a、span、br、i、em、strong、label、q、var、cite、code
 常见的内联块元素：
 img、input
 
+内联元素里面放内联元素，块元素里都可以放。p,dt和h1里面不可以放块级元素，a元素里可以放块元素
+
 ## 属性顺序
 HTML属性应该按照特定的顺序出现，以保证易读性
 1. class
