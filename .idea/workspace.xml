@@ -2,82 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5042c782-bca1-4f4b-980c-72ce10360881" name="默认" comment="">
-      <change afterPath="$PROJECT_DIR$/~$浏览器快捷键.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/JavaScript核心参考手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/Javascript参考手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/W3CSchool.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/Web前端开发规范手册.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/XMLHttp中文参考手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/css.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/css.chw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/jQuery 1.3参考手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/jQuery 1.4参考手册.CHM" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/jQuery1.7 中文手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/w3c标准html5手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/xHTML参考手册.chm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/参考手册/~$b前端开发规范手册.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/1selector.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/2font.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/3text.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/4background.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/5box.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/css.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/css_float_clear.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/CSS/nav.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/1format.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/2list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/3table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/4form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/HTML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/frame.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/image_audio_video.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/HTML/meta.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/00.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/Array.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/dataTypeConversion.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/example_javascript.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/function.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/operator.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/processControl.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/swapValueVariable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/JavaScript/练习.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/111.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/apple.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/aubergine.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/bd_logo1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/carrots.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/cherries.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/fruit_bw.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/grapes.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/horse.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/movie.ogg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/mushroom.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/orange.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/pear.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/salad.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/image/song.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_blue_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_blue_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_inset_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_inset_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/corner_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/dot.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/dot_blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/magnifier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/menu_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/练习手册/vimeo_navigation/menu_right.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/WEB.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/git/git基本操作.md" beforeDir="false" afterPath="$PROJECT_DIR$/git/git基本操作.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/新建文本文档.txt" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -93,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+            <state relative-caret-position="125">
+              <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -321,12 +248,12 @@
       <workItem from="1558840237029" duration="683000" />
       <workItem from="1560210280441" duration="1163000" />
       <workItem from="1561648057752" duration="51000" />
-      <workItem from="1561648536159" duration="231000" />
+      <workItem from="1561648536159" duration="1471000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="594464000" />
+    <option name="totallyTimeSpent" value="595704000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -445,8 +372,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+        <state relative-caret-position="125">
+          <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
         </state>
       </provider>
     </entry>
