@@ -1,6 +1,5 @@
-## ignore this file ##
+##ignore this file##
 /.idea/
 .idea
 
 *.xml
-*.gitignore
