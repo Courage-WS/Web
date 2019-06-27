@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>函数</title>
+</head>
+<body>
+<script >
+    /*
+    * function
+    * 语法：
+    * function functionName(arg0, arg1,...,argN) {
+    *     statements
+    * }
+    *
+    * 把函数命名的变量命名区分开
+    * 不能把函数命名为 eval 或 arguments；
+    * 不能把参数命名为 eval 或 arguments；
+    * 不能出现两个命名参数同名的情况。
+    *
+    * 任何函数在任何时候都可以通过return 语句后跟要返回的值来实现返回值
+    * 函数会在执行完 return 语句之后停止并立即退出，后面的代码不会执行
+    * function sum(num1, num2) {
+    *     return num1 + num2;      //返回值
+    *     alert("Hello world"); // 永远不会执行
+    * }
+    * 调用函数的代码：
+    * var result = sum(5, 10);    // 定义一个变量接收返回值
+    * */
+
+    function sayHi(name, message) {
+        alert("Hello " + name + "," + message);     // Hello Nicholas,how are you today?
+    }
+    // 调用 sayHi()函数的代码如下所示
+    sayHi("Nicholas", "how are you today?");
+
+    function sum(num1, num2) {
+        return num1 + num2;     // 任何函数在任何时候都可以通过return 语句后跟要返回的值来实现返回值
+        alert("Hello world");   // 函数会在执行完 return 语句之后停止并立即退出，后面的代码永远不会执行
+    }
+    // 调用函数的代码：
+    var result = sum(5, 10);
+    confirm(result);
+
+    /*
+    * 参数
+    * 在函数体内可以通过 arguments 对象来访问这个参数数组，从而获取传递给函数的每一个参数
+    * 使用 length 属性来确定传递进来多少个参数
+    * 命名的参数只提供便利，但不是必需的
+    * arguments 对象的长度是由传入的参数个数决定的，不是由定义函数时的命名参数的个数决定的
+    * 没有传递值的命名参数将自动被赋予 undefined 值
+    * 即使把 arguments[1]设置为 10，num2 的值仍然还是 undefined。
+    * 重写arguments 的值会导致语法错误
+    * */
+    // ECMAScript 中的所有参数传递的都是值，不可能通过引用传递参数。
+
+    function doAdd(num1, num2) {
+        arguments[1] = 1;           // 如果只传入了一个参数，那么为 arguments[1]设置的值不会反应到命名参数中
+        console.log(num1,num2);
+    }
+    doAdd(3);
+
+    /*
+    * 实例
+    * 求1和 n 之间所有数的和
+    * 求n和m之间所有有数的和
+    * 求圆的面积
+    * 求2个数中最大值
+    * 求三个数中最大值
+    * 判断一个数是否是素数
+    * */
+    // 和函数
+    function aaa(n,m) {
+        var sum=0;
+        // 求和循环
+        for (i=n;i<=m;i++){
+            sum+=i;
+        }
+        // 输出值
+        return sum;
+    }
+    // 必须要把字符串转换为数值
+    // 输入循环范围
+    var a=Number(prompt("请输入最小值")),
+        aa=Number(prompt("请输入最大值"));
+    // 调用函数
+    console.log(aaa(a,aa));
+    
+    // 面积函数
+    function cricle(r) {
+        return Math.PI *r*r;
+    }
+    console.log(cricle(5));
+    
+    // 最大值函数
+    function value(x,y,z) {
+        var a=new Array(x,y,z);
+        var sum=0;
+        for (var i=0;i<3;i++){
+            sum+=a[i];
+        }
+        return sum;
+    }
+    console(value(1,2,3))
+</script>
+</body>
+</html>

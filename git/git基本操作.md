@@ -6,15 +6,15 @@ git是世界上先进的分布式版本控制系统
 ### 安装
 
   在Windows上，从官网[下载安装程序](https://git-scm.com/downloads),默认安装后，在开始菜单里找到“Git Bash”，蹦出一个类似命令行窗口的东西，证明Git安装成功！
-  
+
 ### 更新
 
   打开命令提示符CMD，输入“git -- version"查看当前git版本后，输入命令”git update-git-for-windows"进行升级，输入“y“并回车，开始下载并自动打开安装。
-  
+
 ## 初步配置
 
   git自带一个Git config的工具来帮助设置控制git外观和行为的配置变量，这些变量储存在三个不同的位置：
-  
+
 1. /etc/gitconfig 文件: 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 --system 选项的 git config 时，它会从此文件读写配置变量。
 2. ~/.gitconfig 或 ~/.config/git/config 文件：只针对当前用户。 可以传递 --global 选项让 Git 读写此文件。
 3. 当前使用仓库的 Git 目录中的 config 文件（就是 .git/config）：针对该仓库。
@@ -44,9 +44,9 @@ git config --global color.ui true
 ### 忽略文件
 
   新建文件.gitignore，把需要忽略的文件编写进去。需要放进版本库
-  
+
   检查规则：git check-ignore -v name,提交文件时，遇到被忽略的文件
-  
+
 ## 本地仓库
 ![本地仓库](images/0.jpg)
 ### 基本
@@ -55,6 +55,7 @@ git config --global color.ui true
 |git init|把当前目录变为仓库|
 |mkdir name|创建文件夹|
 |cd name|进入子文件夹|
+|touch name|创建文件|
 ### 查看
 |代码|说明|
 |-|-|
@@ -99,11 +100,11 @@ git config --global color.ui true
 ## 分支
 
   主分支：master；（先commit一些东西，否则master不存在）当前分支：HEAD
-  
+
   一般工作思路：建立次分支，在次分支工作，与主分支合并（合并方法：次分支指向master），删除次分支
-  
+
   master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活
-  
+
   dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了
 
 |代码|说明||

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <base target="_blank">
+        <title>float and clear</title>
+        <style type="text/css">
+            .a , .c , .d {
+                /*margin: 10px;*/
+                padding: 20px;
+                border: 3px solid;
+                width: 50px;
+                height: 50px;
+            }
+            .a {
+                border-color: #0f0;
+                background: #000;
+            }
+            .f { /*  ie清理浮动 */
+                zoom: 1;
+            }
+            .f:after { /* 清理浮动 */
+                display: block;
+                content: '.';     /* 插入的文本 */
+                clear:both;            /* 两侧无浮动 */
+                line-height: 0;
+                visibility: hidden;   /* 不显示 */
+            }
+            .c {
+                border-color: #3af;
+                background: #fea;
+                float: left;           /* 浮动 */
+            }
+
+        </style>
+    </head>
+    <body>
+    <div class="a"></div>
+    <div class="f">   <!--需要给浮动元素加个块元素-->
+        <div class="c"></div>
+    </div>
+    <div class="d"></div>
+
+    </body>
+</html>
