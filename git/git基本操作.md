@@ -86,13 +86,13 @@ git config --global color.ui true
 ### 暂存区
 |代码|说明||
 |-|-|-|
-|git rese HEAD name|退回暂存区的修改|
-|git rm name|删除暂存区文件|
-|git rm -r -f --cached ./|删除缓存|
+|git rese HEAD name|退回暂存区的修改||
+|git rm name|删除暂存区文件||
+|git rm -r -f --cached .|删除缓存||
 |git commit -m"说明"|把文件提交到分支|-m后面是本次提交说明, 有中文会有未知错误，每次可以提交多次添加。从暂存区提交到分支|
 |git log|查看提交日志|只能看最近三次|
-|git log --pretty=oneline|查看提交日志的版本号|
-|git rebase|把提交日志整理成直线|
+|git log --pretty=oneline|查看提交日志的版本号||
+|git rebase|把提交日志整理成直线||
 ### 分支版本
 |代码|说明||
 |-|-|-|
