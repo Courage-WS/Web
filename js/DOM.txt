@@ -1,0 +1,20 @@
+
+节点：元素节点，文本节点，属性节点，
+
+获取元素节点的3种dom方法：（通过document对象调用）
+1，getElementById (是document的函数，参数是id值）
+     document . getElementById("id")   (id值必须放在引号里）
+2，getElementsByTagName (参数是标签名字，返回一个数组，值放在引号里）
+    document . getElementsByTagName("tag")
+3,  getElementsByClassName(参数是class，值放在引号里，）
+    document . getElementsByTagName("class class")(同时带有多个参数用空格分开）
+
+获取和设置属性节点的办法：（通过元素节点对象调用）
+    object . getAttribute()
+	var paras = document . getElementById("id");
+	alert(paras.getAttribute("title");（获取title属性节点）
+
+    object . setAttribute(,)
+	var par = document . getElementById("id");          
+	alert(par . setAttribute("title","value")；（把title元素的值设置为value）   另一种方法：alert( par.title = "value"; )
+setAttribute 方法是“第一级DOM”，在它出现之前可以通过另一种方法设置属性。
