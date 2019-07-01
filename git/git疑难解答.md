@@ -1,7 +1,7 @@
 #Git疑难解答
 ### Git输入时显示 >
-  按Ctrl+D
-### git pull时提示让输入merge信息
+  按Ctrl+D   表示你没有输入完成, 跟git无关, 是命令行的问题
+### git pull时进入vim，提示让输入merge信息
   先按 i 切换到insert模式，就可以输入了，输入完之后先按esc，再输入:wq,回车就好了
 #### 避免办法
   因为git pull的时候会自动进行merge操作
