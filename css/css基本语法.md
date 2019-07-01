@@ -2,7 +2,7 @@
 - [验证工具](http://jigsaw.w3.org/css-vallidator/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
 
-注释：/*...*/
+注释：/\*...\*/
 
 property-value pairs        名值对
 
@@ -46,7 +46,7 @@ property-value pairs        名值对
 |.div > h2|子元素选择器|直接孩子|
 |.div + p|相邻元素|紧跟类div后面的段落|
 |.div ~ p|同父兄弟元素|类div后拥有共同父元素的所有兄弟元素p|
-|* {...}|通配符|
+|\* {...}|通配符|
 #### 伪类选择器
 ##### 链接伪类
 |选择器|说明||
@@ -101,7 +101,7 @@ property-value pairs        名值对
 |[class|\=value]|带有指定值开头的属性值的元素|必须是整个单词|
 |[class^=value]|以指定值开头的每个元素|
 |[class$=value]|以指定值结尾的每个元素|
-|class*\=value]|包含指定值的每个元素|
+|class\*=value]|包含指定值的每个元素|
 ### 插入样式
 代入样式的三种方法：
 1. 行内样式表：`<p style="color: #ccc"></p>`
@@ -481,3 +481,152 @@ button在高度计算上始终使用了Quirks模式。在Quirks模式下，边�
 
 ### inline-block和float的区别
 
+1. float元素会脱离文档流，周围元素会环绕这个元素，需清楚浮动；
+2. 可以给inline-block的父元素设置text-align: center 让元素水平居中；
+3. float元素top对齐，inline-block元素可以通过vetical-align设置垂直对齐方式；
+4. inline-block会产生元素换行空白
+5. ie浏览器兼容问题
+
+inline-block的优点：可以控制水平对齐和垂直对齐
+
+block的优点：可以让元素环绕，低版本ie支持比较好，不用处理空白
+
+### 盒子水平居中
+
+浏览器垂直方向默认靠上对齐
+
+- margin: 0 auto;      盒子必须有宽度
+- position: absolute;   left: 50%;    margin-left: -(box/2)     子绝父相
+
+### 外边距重叠
+
+只有普通文档流中快框的垂直外边距才会发生外边距合并。*行内框、浮动框或绝对定位之间的外边距不会合并*
+
+1. 全部为正值，外边距取最大值
+2. 不全是正值，外边距为两个值的和
+3. 没有正值，外边距取最小值
+
+#### 解决外边距合并
+- 上下级：float   position: absolute;   display: inline-block;  overflow: hidden;      设置BFC
+- 父子级：父元素设置border或padding        父元素设置BFC
+
+如果元素的margin和他的父元素的margin-top折叠在一起，盒模型border-top的边界定义和它的父元素相同
+
+margin-top绝不会和他的会计父元素的margin-bottom折叠
+
+### 清楚浮动
+1. 在浮动元素后添加空白标签设置属性 ：clar: both;   *这个方法有个非常大且致命的bug，margin失效*
+2. 为父元素添加属性：overflow: hidden;
+3. 在浮动元素后添加伪元素，为父元素设置：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
+4. 用双伪元素清楚浮动： 
+   - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清楚浮动*
+   - clearfix:after{clear: both;}
+   - .clearfix{\*zoom: 1;}
+### BFC
+
+浅析css中的BEC、IFC、GFC和FFC
+
+block formatting context （块级格式化上下文）规定了内部的block-level box如何布局，并且与这个区域外部毫不相干。是一个独立的渲染区域
+
+一般用于自适应两栏式布局，解决高度塌陷，处理外边距合并，清除浮动。
+
+#### 创建条件
+1. 浮动元素(`float: left|right`)
+2. 定位元素(`position: absolute|fixed`)不包含relative
+3. `overflow`特性不为visible的元素（除非该值已经传播到viewport）
+4. 行内块元素(`display: inline-block`)
+5. 表格的单元格(`display: table-cells,td,th`)
+6. 表格的标题(`display: tabel-captions,caption`)
+7. 表格元素创建的匿名框
+
+**_注意，"display:table" 本身并不产生"block formatting contexts"。但是，它可以产生匿名框，其中包含"display:table-cell" 的框会产生块格式化上下文。总之，对于"display:table" 的元素，产生块格式化上下文的是匿名框而不是"display:table"。_**
+
+**_注意，是这些元素创建了块格式化上下文，它们本身不是块格式化上下。_**
+
+#### bfc布局规则
+1. 内部的box会再垂直方向，一个接一个得放置。
+2. box垂直方向的距离由margin决定。属于同一个bfc的两个相邻box的margin会发生重叠
+3. 每个元素的margin box的左边，与包含块border box 的左边相接处（对从左向右的格式化，否则相反）。及时存在浮动也是如此。
+4. bfc的区域不会与float box重叠
+5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
+6. 计算bfc的高度时，浮动元素也参与计算
+
+### BEM命名规范
+#### 什么是BEM命名规范
+
+bem是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
+
+BEM 是一个简单又非常有用的命名约定。让你的前端代码更容易阅读和理解，更容易协作，更容易控制，更加健壮和明确，而且更加严密。
+
+#### BEM命名模式
+```
+ .block {}
+ .block__element {}
+ .block--modifier {} 
+```
+
+ .block 代表了更高级别的抽象或组件
+
+ .block__element 代表.block的后代，用于形成一个完整的.block的整体
+
+ .block--modifier代表.block的不同状态或不同版本。
+
+ 使用两个连字符和下划线而不是一个，是为了让你自己的块可以用单个连字符来界定
+```
+ .sub-block__element {}.sub-block--modifier {}
+```
+### css书写顺序
+1. 位置属性(position, top, right, z-index, display, float等)
+2. 大小(width, height, padding, margin)
+3. 文字系列(font, line-height, letter-spacing, color- text-align等)
+4. 背景(background, border等)
+5. 其他(animation, transition等)
+
+- -ms-（私有属性）；//IE
+- -moz-（私有属性）；//Firefox 
+- -webkit-（私有属性）；//Safari 和 Chrome 
+- -o-（私有属性）；// Opera
+
+如：-moz-column-count:4;（分成4块显示） // Firefox
+
+先写带有浏览器私有标志的，后写W3C标准的。
+
+参考网址：[web规范](http://nec.netease.com/standard)
+
+### 布局流程
+1. 确定版心（可视区或者网页主体），常见宽度960，980，1000，1200
+2. 分析页面中的行模块，和行模块中的列模块
+3. 制作html结构
+4. css初始化，运用盒子模型原理，通过div + css控制网页模块
+
+html需要设置最小尺寸，浏览器放大或缩小时会改变html尺寸
+
+### 浏览器标准模式和兼容模式区别
+1. width不同
+
+在严格模式中：width是内容宽度，元素真正的宽度 = margin-left + border-left-width + padding-left + width + padding-right + border-right- width +  margin-right;
+
+在兼容模式中：width则是元素的实际宽度，内容宽度 = width - ( padding-left + padding-right + border-left-width + border-right-width)
+
+2. 兼容模式下可设置百分比的高度和行内元素的高宽
+
+在standards模式下，给span等行内元素设置wdith和height都不会生效，而在兼容模式下，则会生效。
+
+在standards模式下，一个元素的高度是由其包含的内容来决定的，如果父元素没有设置高度，子元素设置一个百分比的高度是无效的。
+
+3. 用margin:0 auto设置水平居中在ie下会失效
+
+使用margin:0 auto在standards模式下可以使元素水平居中，但在兼容模式下却会失效（用text-align属性解决）
+
+body{text-align:center};#content{text-align:left}
+
+4. 兼容模式下table中的字体属性不能继承上层的设置，white-space:pre会失效，设置图片的padding会失效
+
+|代码|说明|
+|-|-|
+|caption|有标题的控件|
+|icon|图标标签|
+|menu|菜单|
+|message-box|对话框|
+|small-caption|小控件|
+|status-bar|窗口状态条|
