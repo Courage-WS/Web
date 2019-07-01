@@ -372,3 +372,112 @@ _如果有多组属性变化，需要用逗号隔开_
 
 时间的单位西续写 s秒 ms毫秒
 
+|值|说明|等同于|
+|-|-|-|
+|linear|线性过渡|贝塞尔曲线(0.0, 0.0, 1.0, 1.0)|
+|ease|平滑过渡|贝塞尔曲线(0.25, 0.1, 0.25, 1.0)|
+|ease-in|由慢到快|贝塞尔曲线(0.42, 0, 1.0, 1.0)|
+|ease-out|由快到慢|贝塞尔曲线(0, 0, 0.58, 1.0)|
+|ease-in-out|由慢到快再到慢|贝塞尔曲线(0.42, 0, 0.58, 1.0)|
+|step-start||steps(1, start)|
+|step-end||steps(1, end)|
+```
+steps(<integer>[, [ start | end ] ]?):
+```
+
+接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
+
+```
+cubic-bezier(<number>, <number>, <number>, <number>)：
+```
+
+特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内
+
+### 2D变形
+
+transforms:matrix(a,b,c,d,e,f);搞不懂
+
+#### 2D平移
+```
+transfprm: translate(-50%,-50%);
+           translatex();
+           translatey();
+```
+#### 2D缩放
+```
+transform: scale(0.8,1);
+           scalex();
+           scalex();
+```
+#### 2D旋转
+
+    原点：`transform-origin` 如果提供两个，第一个用于横坐标，第二个用于纵坐标；如果只提供一个，该值将用于横坐标，纵坐标默认为50%。
+
+```
+transform: rotate(45deg);
+```
+
+单位是：deg度数；正值为顺时针，负值为逆时针。
+
+#### 倾斜
+
+```
+transform: skew(30deg,0deg);
+```
+
+第二个参数不写默认为0。
+
+X正值：下边往右拉伸，上边往左拉伸，倾斜30度；
+
+Y正值：右边往下拉伸，左边往上拉伸，倾斜30度；负数方向相反。
+
+### 3D变形
+![3d](images/3d.png)
+
+x左边是负的，右边是正数
+
+y上面是负数，下面是正数
+
+z里面是负数，外面是正数
+
+- maerix3d():     以一个4*4矩阵的形式指定一个3D变换
+
+#### 3D旋转
+|名值对|说明|
+|-|-|
+|transform:rotateX(180deg); |前后翻着旋转|
+|transform:rotateY(180deg);|左右翻着旋转|
+|transform:rotateZ(180deg); |像时钟一样旋转|
+|transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；|分开写只显示下面的代码，简写可一起显示|
+#### 透视
+- transform: oerspective();     指定透视距离
+
+#### 3D移动
+```
+transform:translate3d(X，Y，Z); 
+translatex()： 
+translatey()： 
+translatez()：
+```
+- backface-visibility      属性定义当元素不是正面对向屏幕时是否可见。
+
+### 框架
+
+### 解决img下方空白
+
+在HTML5与CSS3中，DIV标签中的图片也就是IMG标签的默认vertical-align属性为baseline，文字分为顶线，中线，基线，底线。图片的下边缘是基线，所以在下方会留出基线和底线这一段距离的空白
+
+1. display：block
+2. vertical-align: middle/bottom/top；
+3. 负外边距
+4. 父元素font-size：0；
+5. line-height: 0；
+
+### input空间和button上下不对齐的原因
+
+button在高度计算上始终使用了Quirks模式。在Quirks模式下，边框的计算是在元素的宽度内的，而不像标准模式一样计算在外部（button的高度包含边框的高度
+
+由于【button元素】在浏览器中属性默认为inline-block，因此代码中空格会被显示为的空白
+
+### inline-block和float的区别
+
