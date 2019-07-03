@@ -1,7 +1,6 @@
 ##ignore this file##
 
-/book/.idea/
-.idea
+/book/*、/.idea/*、/practce/*
 
 *.pdf
 *.rar
