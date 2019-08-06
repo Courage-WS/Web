@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base target="_blank">
+	<title>Embedded element</title>
+</head>
+<body>
+	<p>img map area audio video iframe embed canvas meter object param progress source svg tarck</p>
+    <h3>image</h3>
+	<!-- 将图像定义为客户器端图像映射,ismap服务器端 -->
+	<img src="../image/111.png" alt="111" border="1" usemap="#asd">
+	<!-- 带有可点击区域的图像映射,最好name/id都有 -->
+	<map name="asd" id="asd">
+		<!-- 映射区域的形状,坐标 -->
+		<area shape="circle" coords="222,222,111" href ="http://www.baidu.com" alt="Venus" />
+	</map>
+    <h3>audio</h3>
+    <h3>audio</h3>
+    <p>container:.WAV,.AIFF,.MP3,.MP4A和AAC</p>
+    <p>codec:ACC,MPEG-3,Ogg Voribs</p>
+    <h4>html 4</h4>
+    <!-- 内嵌对象 -->
+    <code>object</code><br>
+    <object data="../image/horse.mp3" width="250" height="100"></object>
+    <h4>html 5</h4>
+    <!-- 内嵌对象 -->
+    <code>embed</code><br>
+    <embed src="../image/horse.mp3" width="250" height="100" type="audio/mp3" />
+    <br>
+    <!-- 定义声音,必须双属性 -->
+    <code>audio</code><br>
+    <audio src="../image/horse.mp3" controls="controls">no</audio>
+    <br>
+    <!-- 最佳方案 -->
+    <audio controls="controls">
+        <source src="../image/song.ogg" type="audio/ogg">
+        <source src="../image/song.mp3" type="audio/mpeg">
+        <embed height="100" width="100" src="../image/song.mp3" />
+    </audio>
+    <h3>video</h3>
+    <p>container:.avi,.flv,.mp4,.mkv,.ogg,.webm</p>
+    <p>codec:H.264,VP8,ogg Theora</p>
+    <h5>h4</h5>
+    <code>&lt;object&gt;</code><br>
+    <object width="320" height="240" data="../image/movie.ogg"></object><hr>
+    <h5>h5</h5>
+    <code>&lt;embed&gt;</code><br>
+    <embed width="420" height="340" src="../image/movie.ogg" /><hr>
+    <code>&lt;video&gt;</code><br>
+    <video width="320" height="240" controls="controls" autoplay="autoplay">
+        <source src="../image/movie.ogg" type="video/ogg" />
+        <source src="../image/movie.mp4" type="video/mp4" />
+        <source src="../image/movie.webm" type="video/webm" />
+    </video>
+    <h5>HTML 5 + &lt;object&gt; + &lt;embed&gt;</h5>
+    <video width="320" height="240" controls="controls" autoplay="autoplay">
+        <source src="../image/movie.ogg" type="video/ogg" />
+        <source src="../image/movie.mp4" type="video/mp4" />
+        <source src="../image/movie.webm" type="video/webm" />
+        <object data="../image/movie.mp4" width="320" height="240">
+            <embed width="320" height="240" src="../image/movie.swf" />
+        </object>
+    </video>
+	
+</body>
+</html>

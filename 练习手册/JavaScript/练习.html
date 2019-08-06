@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-cn">    
+    <head>             
+        <meta charset="UTF-8">             
+        <title>练习         
+        </title>    
+    </head>    
+    <body><h1 class="aa">1,2,3</h1>        
+        <p title="a">1,2,3         
+        </p>        
+        <ul id="b" class="aa">                 
+            <li>1             
+            </li>                 
+            <li>2             
+            </li>                 
+            <li>3             
+            </li>        
+        </ul>
+<script type="text/javascript">
+    // 元素节点    属性节点    文本节点 
+    
+    // 联系一：通过id获取元素节点   （通过document对象调用）
+    // var c = document.getElementById("b");
+    // alert(typeof c);    // 结果是对象类型
+    // 练习二： 通过标签名获取元素节点
+    // var tag = document.getElementsByTagName("*");
+    // for (var i=0;i<tag.length;i++){
+    //     alert(tag[i]);
+    // }
+    // 练习三：通过class获取元素节点
+    // var cla = document.getElementsByClassName("aa");
+    // for (var i=0;i<cla.length;i++){
+    //     alert (cla[i]);
+    // }
+    // 练习四：获取属性节点
+    // var acquireElement = document.getElementById("b");
+    // var acquireAttribute = acquireElement.getAttribute("id");
+    // alert(acquireAttribute);
+    // 练习五：设置属性节点
+     var acquireElement = document.getElementById("b");
+     var ssetAttribute = acquireElement.setAttribute("class","bb");
+    var a = acquireElement.getAttribute("class");
+     alert(a);
+</script>    
+    </body>
+</html>

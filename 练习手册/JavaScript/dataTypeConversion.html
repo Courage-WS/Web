@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>数据类型的转换</title>
+    <script type="text/javascript">
+        var un;
+        var nu = null;
+        var bool1 = true,
+            bool2 = false;
+        var num1 = 122,
+            num2 = 1.1,
+            num3 = 0,
+            num4 = Infinity,
+            num5 = NaN;
+        var str1 = "",
+            str2 = "77",
+            str3 = "12.1a.1",
+            str4 = "a1",
+            str5 = "1.23e4",
+            str6 = "0xD";
+        var ob = new Object();
+
+// 判断数据类型
+        console.log(typeof(un),typeof nu,typeof(bool1),typeof num5,typeof(str1),typeof ob);
+
+// Boolean()
+
+                // Number
+                /* 0和NaN输出为false，其他输出true */
+        document.write(Boolean(num5), Boolean(num4));
+        document.write(Boolean(num2), Boolean(num3));
+
+                // String
+                /* 空字符串为false，其他为true */
+        console.log(Boolean(str2));            // 在控制台输出信息，可输出多个值，会自动换行,有不同数据类型时，字符串带引号
+        document.write(Boolean(str1));        // 在页面输出行内信息，可输出多个值
+
+                // Null和Undefined
+                /* null合undefined输出false */
+        confirm(Boolean(nu));                  //弹出一个带取消的对话框，只可输出一个值，常用于IF函数
+        confirm(Boolean(un));
+
+                //Object
+                /* 输出true */
+        console.log(Boolean(ob));
+
+// number
+//         Number.MIN_VALUE;
+//         Number.MAX_VALUE;
+            // 判断是否是NaN
+        console.log(isNaN(num4));
+            // Number()
+            // 对象调用valueOf()，NaN调用toString()
+
+                // undefined
+                /* 输出NaN */
+        prompt(Number(un));              // 弹出一个可以接受用户信息的对话框
+
+                // null
+                /* 输出0 */
+        console.log(Number(nu));
+
+                // boolean
+                /* ture输出1，false输出0 */
+        console.log(Number(bool1));
+        prompt(Number(bool2));
+
+                // String
+                /* 空字符串转换为0，
+                 * 纯数字字符串转化为number,认识小数点
+                 * 识别科学计数法和16进制
+                 * 其他转化为NaN */
+        alert(Number(str1));              // 弹出一个对话框
+        alert(Number(str2));
+        alert(Number(str3));
+        document.write(Number(str5));
+        document.write(Number(str6));
+
+            // parseInt()
+                /**整数字符串，不识别小数点
+                 * 数字开头转化为数字
+                 * 其他转化为NaN
+                 * 可以用转换基数
+                 * */
+        confirm(parseInt(str3, 16));
+        confirm(parseInt(str4));
+
+            // parseFloat()
+                /* 识别小数点，只解析十进制，识别科学计数法 */
+        confirm(parseFloat(str3));
+        confirm(parseFloat(str5));
+        document.write(parseFloat(str6));
+
+// string
+
+        //获取字符串的长度
+        confirm(str3.length);
+            // .toString()
+                // 支持基数格式,没有null和undefined方法
+        console.log(num1.toString(2));
+
+            // String()
+                // 支持几乎所有值
+        prompt(String(num1));
+        prompt(String(un));
+
+        // 在页面输出信息，可输出HTML标签
+        document.write("<h1>23</h1>");
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>交换变量的值的方法</title>
+    <script type="text/javascript">
+        //[D
+
+        //]
+    </script>
+    <script type="text/javascript">
+        // 用第三变量，可交换其他变量
+        var num1 = "10",
+            num2 = "20";
+        var num3 = num1;
+        num1 = num2;
+        num2 = num3;
+        console.log(num1, num2);
+    </script>
+    <script type="text/javascript">
+        // 只可交换数值
+        var a = 10,
+            b = 20;
+        a = a + b;
+        b = a - b;
+        a = a - b;
+        console.log(a, b);
+    </script>
+    <script type="text/javascript">
+        // 二进制位操作符，交换数值
+        var q = 10,
+            w = 20;
+        q = q ^ w;
+        w = q ^ w;
+        q = q ^ w;
+        console.log(q, w);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

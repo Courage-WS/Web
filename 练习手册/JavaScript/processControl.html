@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>语句</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    * 流程控制的方式有三种
+    * 1 顺序结构：从上到下
+    * 2 分支结构：if语句，if-else语句，if-else if-else if……语句，switch-case语句，三元表达式语句
+    * 3 循环结构：while语句，do-while语句，for语句，for-in语句
+    * */
+
+    // 判断某一年是不是闰年
+    // 判断前半年每月的天数
+    // 计算1~100之间，所有偶数的和
+    // 求密码账号是否一致
+    // 100以内3的倍数的和
+    // 表格形式乘法口诀表
+
+    /*
+    * if语句：主要是针对范围的判断
+    * 语法：
+    *
+    * 如果表达式的结果是true，则执行大括号中的代码，false不执行
+    * if(condition) {
+    *     statement;
+    * }
+    *
+    * 如果表达式的结果是true，则执行代码1，false执行代码2
+    * if(condition) {
+    *     statement1;
+    * } else {
+    *     statement2;
+    * }
+    *
+    * 判断一个值是否为null，就是在判断它是否存在
+    * if（some）等价于if（some！=null）
+    * */
+    // 判断一个年份是不是闰年
+    var year = prompt("请输入年份");
+    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+        document.write("闰年")
+    } else {
+        document.write("平年")
+    }
+
+    /*
+    * swith-case 语句  针对值的判断
+    * 语法：
+    *
+    * 如果condidition为value，则执行srarement，遇到Barak跳出。
+    * swith (condition) {
+    *     case value:
+    *         statement;
+    *         break;
+    *     default:
+    *         statement;
+    * }
+    *
+    * switch (condition) {
+    *     case value:
+    *     case value:
+    *         srarement;
+    *         break;
+    *     default:             可以省略
+    *         statement;        可以省略
+    * }
+    * */
+    switch ("hello world") {
+        case "hello" + " world":
+            alert("Greeting was found.");
+            break;
+        case "goodbye":
+            alert("Closing was found.");
+            break;
+        default:
+            alert("Unexpected message was found.");
+    }
+    var num = 25;
+    switch (true) {
+        case num < 0:
+            alert("Less than 0.");
+            break;
+        case num >= 0 && num <= 10:
+            alert("Between 0 and 10.");
+            break;
+        case num > 10 && num <= 20:
+            alert("Between 10 and 20.");
+            break;
+        default:
+            alert("More than 20.");
+    }
+    // 前半年每月天数
+    var month = parseInt(prompt("请输入月份"));
+    switch (month) {
+        case 1:
+        case 3:
+        case 5:
+            document.write("31天");
+            break;
+        case 4:
+        case 6:
+            document.write("30天");
+            break;
+        case 2:
+            document.write("28天");
+            break;
+        default:
+            document.write("输入错误")
+    }
+
+    /*
+    * while语句  前测试循环语句
+    * 语法：
+    * 如果expression为true，则执行statement。
+    * while (expression) {
+    *     statement
+    * }
+    * */
+    // 计算1~100之间所有偶数的和
+    var sum1 = 0,
+        i1 = 0;
+    // while (i1<101){
+    //     if(i1%2==1){
+    //         sum1+=i1;
+    //     }
+    //     i++;
+    // }
+    while (i1 < 101) {
+        sum1 += i1;
+        i1 += 2;
+    }
+    console.log(sum1);
+
+    // 计算6的阶乘
+    var sum2 = 1,         // 存储最终的结果
+        i2 = 1;           //变量
+    while (i2 < 7) {
+        sum2 *= i2;
+        i2++;
+    }
+    console.log(sum2);
+
+    // 求账号密码是否一致
+    var userName = prompt("请输入账号"),
+        parssWord = prompt("请输入密码");
+    while (userName != "1" || parssWord != "1") {
+        userName = prompt("请输入账号");
+        parssWord = prompt("请输入密码");
+    }
+    console.log("登陆成功");
+
+    // 100以内3的倍数的和
+    var x = 0,
+        y = 0;
+    while (x <= 100) {
+        if (x % 3 == 0) {
+            y += x;
+        }
+        x++;
+    }
+    console.log(y);
+
+    /*
+    * do while 语句 后测试循环语句
+    * 语法：
+    * 只要条件成立，就会一直循环
+    * do {
+    *    statement
+    * } while ( expression );
+    * */
+    do {
+        var result = prompt("我帅吗？y/n");
+    } while (result != "y");
+    console.log("很有眼光！");
+
+    /*
+
+    * 语法：
+    * 只要expression成立，就会一直循环
+    * for (initialization; expression;  post-loop-expression){
+    *     statement;
+    * }
+    * */
+    // 计算1-100之间所有偶数的和
+    var s = 0;
+    for (var n = 1; n <= 100; n++) {
+        if (n % 2 == 0) {
+            s += n;
+        }
+    }
+    console.log(s);
+
+    // 画星星
+    // 控制行数
+    for (var y = 1; y <= 5; y++) {
+        // 控制每行个数
+        for (var z = 1; z <= 5; z++) {
+            document.write("★");
+        }
+        document.write("<br />");
+    }
+
+    // 乘法口诀表
+    for (var q = 1; q <= 9; q++) {
+        // 三角形输出
+        for (var w = 1; w <= q; w++) {
+            document.write(q + "*" + w + "=" + q * w);
+        }
+        document.write("<br />");
+    }
+
+    // 表格
+    document.write("<table border='1' cellpadding='0' cellspacing='0'>");
+    for (var t = 1; t <= 9; t++) {
+        document.write("<tr>");
+        for (var d = 1; d <= t; d++) {
+            document.write("<td width='40'>");
+            document.write(d + "*" + t + "=" + d * t);
+            document.write("</td>");
+        }
+        document.write("</tr>");
+    }
+    document.write("<table>");
+
+    // break         continue
+    /*
+    * break      循环结束
+    * continue   跳过本次循环
+    * */
+    // 求1~100的和，跳过个位数为3的数
+    for (var sum=0,num1 = 1; num1 <= 100; num1++) {
+        if (num1 % 10 != 3) {
+            sum+=num1;
+        }
+    }
+    document.write(sum);
+
+    /*
+    * for in 精准的迭代语句,可以用来枚举对象的属性
+    * for (property in expression) statement
+    *
+    * 在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined
+    * */
+    for (var propName in window) {
+        document.write(propName);
+        document.write("<br />");
+    }
+</script>
+</body>
+</html>

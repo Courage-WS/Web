@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>运算符</title>
+    <script type="text/javascript">
+        /*
+        * 布尔操作符
+        * ! && ||
+        * 属于短路操作，第一个操作符有结果，不会调用第二个操作符，即使是错误也忽略
+        * ! 逻辑非
+        * 转换成布尔值，再求其反
+        *
+        * && 逻辑与
+        * 同为true返回true，否则返回false
+        *
+        * || 逻辑或
+        * 有一个true返回true，否则返回false
+        * */
+
+        /*
+        * 关系操作符
+        * < > <= >= == != === !==
+        * === !== 不进行数据类型转换
+        * null === unfinity
+        * NaN != NaN
+        * 只有一个数字先进行Number()转换
+        * 比较== != 前不转换null和undefined
+        * 两个数都是字符串，比较两个字符串每个字符的字符编码值，位置越靠后越大,大写字母比小写字母靠前，数字比字母靠前。首位相同比较次位
+        * */
+
+        // 条件操作符
+        /*
+        * ?
+        * 条件成立返回第一个值，*/
+        var dj = 30,
+            dj1 = 29;
+        var dj2 = (dj > dj1) ? dj : dj1,
+            dj3 = (dj < dj1) ? dj : dj1;
+        console.log(dj2, dj3);
+
+        // 一元操作符      +  -  ++  --
+        // + -  转化为数字类型(Number())
+        var str = +"77";
+        console.log(str, typeof str);
+
+        // 递增++，递减--,转化为数字类型(Number())
+        var str1 = "1.23e4";
+        var nu = str1++;             // str5++ == str5=str5+1
+        console.log(nu, str1);
+
+        /*
+        * 算术操作符
+        * + - * / %
+        * 有一个是NaN，结果是NaN,调用Number()
+        * var num=10;   num+=10 == num=num+10
+        * */
+        var inf = Infinity;
+
+        /*
+        * +
+        * Infinity+Infinity=Infinity
+        * 有一个是字符串，转为字符串,否则转化为数值
+        * -0+(-0)=-0
+        * */
+        console.log(-0 + (-0));
+        console.log(-inf + (-inf));
+        console.log("1" + NaN);
+        console.log(NaN + (-1));
+
+        /*
+        * -
+        * Inifnity - Infinity = NaN
+        * o - o = 0
+        * 有一个是对象调用valueOf(),没有调用.tostring()
+        * */
+        console.log(-inf + inf);
+
+        /*
+        * *
+        * Infinity * Infinity = Infinity
+        * Infinity * 1 = Infinity
+        * Infinity * 0 = NaN
+        * */
+        console.log(inf * inf);
+        console.log(inf * 1);
+        console.log(inf * 0);
+
+        /*
+        * /
+        * Infinity / Infinity = NaN
+        * 0 / 0 = NaN
+        * number(非Infinity) / Infinity = 0
+        * Infinity / number(非Infinity) = Infinity
+        * number(非0) / 0 = Infinity
+        * 0 / number(非0) = 0
+        * */
+        document.write(inf / inf);
+        document.write(0 / inf);
+        document.write(inf / 0);
+        document.write(0 / 0);
+        console.log(0 / 1);
+        console.log(0 / inf);
+
+        /*
+        * %
+        * Infinity % number = NaN
+        * number % 0 = NaN
+        * 0 % number(非0) = 0
+        * number(非Infinity) % Infinity = number
+        * */
+        console.log(inf % inf);
+        console.log(111 % inf);
+        console.log(inf % 1);         //NaN
+        console.log(0 % 3);
+        console.log(1 % 0);
+        console.log(0 % 0);
+
+        /*
+        * 位操作符
+        * 二进制的负值(补码）：绝对值，反码，加1。
+        * ~ & | ^ << >> >>>
+        *
+        * ~ 按位非
+        * 返回数值的反码，本质是：负值减1。
+        *
+        * & 按位与
+        * 同为1，返回1，否则返回0
+        *
+        * | 按位或
+        * 同为0，返回0，否则返回1
+        *
+        * ^ 按位异或
+        * 同为1或同为0，返回0，否则返回1
+        *
+        * << 左移
+        * 不会影响符号位
+        *
+        * >> 右移
+        * 不会影响符号位
+        *
+        * >>> 有符号右移
+        * */
+
+        /*
+        * 操作符优先级
+        * 1，（）优先级最高   符合运算符
+        * 2，一元运算符 ++  --  !
+        * 3，算术运算符  * / % + -
+        * 4，关系运算符 <  >  <=  >=
+        * 5，相等运算符 == !=  === !==
+        * 6，逻辑运算符 && ||
+        * 7，赋值运算符 = += -= *= /= %=
+        * */
+        var num = 10;
+        var str = 5 == num / 2 && (2 + 2 * num).toString() === "22";
+        console.log(str);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

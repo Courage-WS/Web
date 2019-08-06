@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    * 创建数组的方法
+    * 语法：
+    *
+    * 1~ 通过构建数组创建
+    * var num = new Array();
+    *
+    * 2~ 通过字面量创建
+    * var num = [];
+    *
+    *               元素   长度    下标（索引）
+    *
+    * 设置下标的值
+    * 数组名[下标]=值；
+    *
+    * 获取下标的值
+    * console.log(数组名[下标]）；
+    * */
+
+    // 遍历数组
+
+    // 求数组平均数
+
+    // 求最小值
+
+    // 倒叙数组
+
+    // 去掉数组中重复的1  把其他数据放在新数组中
+
+    // 反转数组,把前面的数据和倒数对应的数据交换位置
+    /*var arr=new Array(6,1,12,43,4,1,2);
+    // 反转的次数循环
+    for(var n=0;n<arr.length/2;n++){
+        // 使用第三方交换数据
+        var i=arr[n];
+
+        arr[n]=arr[arr.length-1-n];
+        arr[arr.length-1-n]=i;
+    }
+    confirm(arr);*/
+
+    // 创建一个数组
+
+    // 提示用户输入班级人数和成绩，求总成绩，平均成绩，最大和最小成绩
+    /*var classSize = parseInt(prompt("请输班级入人数"));
+    var classPer = new Array();
+    var sum = 0;
+    var max=Number.MIN_VALUE;
+    for (var i = 0; i < classSize; i++) {
+        // 为成绩数组的每个下标赋值
+        classPer[i] = parseInt(prompt("请输入第" +  (i + 1) + "个学生的成绩"));
+        // 求数组的和
+        sum += classPer[i];
+        // 求数组的最大值
+        if (max < classPer[i]) {
+            max=classPer[i];
+        }
+    }
+    confirm(classPer);
+    console.log(sum);
+    document.write(sum / classSize);
+    console.log(max);*/
+
+    // 把数组中的元素用|连接在一起转换成字符串输出
+
+    // 冒泡排序，把所有的数据按照顺序排列（从大到小）
+    /*var arr=new Array(1,23,13,53,12,2,3,7);
+    // 控制比较的轮数
+    for (var n=0;n<arr.length-1;n++){
+        // 每轮比较的次数
+        for (var v=n+1;v<arr.length;v++){
+            // 如果数值大的在后面，就调换位置
+            if (arr[n]<arr[v]){
+                // 用第三方元素调换位置
+                var num=arr[n];
+                arr[n]=arr[v];
+                arr[v]=num;
+            }
+        }
+    }
+    console.log(arr);*/
+
+    var num=new Array(5);
+    console.log(num);
+</script>
+</body>
+</html>

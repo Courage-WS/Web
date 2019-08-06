@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "zh-cn">
+<head>
+    <meta charset = "UTF-8">
+    <title>selector</title>
+    <style type = "text/css">
+        div {
+            font-size: 16px;
+            text-align: center;
+        }
+        /* 后代选择器 */
+        .nav a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: orange;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 0.2em;
+            color: #ffffff;
+        }
+        /* 子元素 */
+        .nav > a:hover {
+            color: #f0f;
+            background-color: blue;
+        }
+        /* 相邻兄弟元素 */
+        .nav + blockquote {
+            height: 200px;
+            border: 1px solid #000000;
+            width: 200px;
+        }
+        /* 并列选择器 */
+        div.nav {
+            background-color: rgba(0,0,0,1);
+        }
+        /* 属性选择器 */
+        [ class = nav ] {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href = "#">链接</a>
+        <a href = "#">链接</a>
+        <a href = "#">链接</a>
+    </div>
+    <blockquote>122222</blockquote>
+</body>
+</html>

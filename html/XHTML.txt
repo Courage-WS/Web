@@ -1,0 +1,29 @@
+XHTML 元素必须被正确地嵌套。
+XHTML 元素必须被关闭。
+标签名必须用小写字母。
+XHTML 文档必须拥有根元素    HTML   head   body
+属性名称必须小写
+属性值必须加引号
+属性不能简写
+用 Id 属性代替 name 属性
+XHTML DTD 定义了强制使用的 HTML 元素：
+	DOCTYPE
+	Head
+	Body
+XHTML 1.0 Strict（严格型）
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+XHTML 1.0 Transitional（过渡型）
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+XHTML 1.0 Frameset（框架型）
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+
+语言属性：某元素中使用 lang 属性，就必须添加额外的 xml:lang
+<div lang="no" xml:lang="no">Heia Norge!</div>

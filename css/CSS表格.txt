@@ -1,0 +1,24 @@
+      
+ 
+     div#id{
+            diasplay:table;       表示像个表格一样
+            border-spacing：10px  边框间距，相当于外边距
+     }
+     div#di{
+            display:table-row;    每行有个div
+     }
+     #main{
+            display:table-cell;   每一列有一个块元素作为该列内容
+            ...
+            vertical-align：top； 所有内容上对齐
+     }
+     #maie{
+            display:table-cell;
+            ...
+            vertical-align：top； 所有内容上对齐
+     }
+
+表格、对应行、单元格都有一个块元素，一般为<div>。
+
+
+           浮动布局、凝胶布局、绝对布局、表格显示布局

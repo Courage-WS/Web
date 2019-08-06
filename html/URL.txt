@@ -1,0 +1,30 @@
+﻿uniform resource locator
+
+相对路径：www/1.jpg      ../1.jpg       1.jpg
+绝对路径：D:\www\1.jpg   http://www.1.jpg
+file:///***
+localhost：***
+磁盘绝对路径用反斜线
+
+URL 只能使用 ASCII 字符集，用 "%" 其后跟随两位的十六进制数来替换非 ASCII 字符。
+http://www.w3school.com.cn:80/html/index.asp
+acheme://host.domain:port/path/filename
+acheme   -因特网服务类型（常见：http）
+host     -域主机（http默认主机：www)
+domain   -因特网域名
+:port    -主机上的端口号（http默认：80）
+path     -服务器上的路径
+filename -文档/资源名称
+
+主流acheme：
+http      超文本传输协议（不加密）
+https     安全超文本传输协议（加密）
+ftp       文件传输协议（文件传输）
+file      计算机上的文件
+
+
+
+在使用webstorm过程中，使用某张图片的绝对路径始终显示不出来，各种百度无果，貌似根本就没有人出现过这个问题。。。
+比如：<img src="file://D:\Pictures\holo.jpg" >   显示不出来，设置相对路径就可以显示了。但是绝对路径不管怎么样都显示不出来。
+
+在webstorm中，它帮你虚拟了一个服务器（可以认为在此虚拟服务器外的文件相当于在另一个电脑里），因此你点击webstorm右上角的浏览器图标打开网页时，网页路径是localhost:****而你的图片也显示不出来；你可以摁住Shift再点击右上浏览器图标使用本地打开的方式，此时打开的网页路径是file:///****，这时候你的图片应该就能显示出来了。

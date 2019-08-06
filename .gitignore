@@ -1,0 +1,12 @@
+##ignore this file##
+
+/book/*
+/.idea/*
+/practce/*
+
+.idea
+*.pdf
+*.rar
+*.xml
+*.iml
+test.html

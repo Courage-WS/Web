@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8"/>
+    <title>1</title>
+    <base target="_self"/>
+    <style rel="stylesheet">
+
+    </style>
+    <script type="text/javascript">
+        function mag() {
+            alert("Hello Word!");
+        }
+    </script>
+</head>
+
+<body>
+    <h2>表单</h2>
+    <p>input 标注 文本，密码，单选，多选，上传文件，隐藏字段，重置按钮，提交按钮，图片提交
+        ,下拉列表，多行文本
+        只读，禁用，预选中2，最大长度，上传类型，可见选项数</p>
+
+    <!-- method指提交方法get/post -->
+    <!-- action是脚本地址 -->
+    <!-- 所属表单,用空格分隔的表单 id 列表 -->
+    <form action="#" method="get" id="form">
+        <!--input标注-->
+        <label for="1">文本</label>
+
+        <!-- 只读模式 -->
+        <input type="text" name="text" value="只读" readonly="readonly" id="1"/>
+        <br/>
+
+        <!--禁用模式-->
+        <label for="2">文本</label>
+        <input type="text" name="tt" value="禁用" disabled="disabled" id="2">
+        <br/>
+
+        <!--单选-->
+        <label for="3">单选</label>
+        <input type="radio" name="radio" value="1" id="3"/> <br/>
+
+        <!--最大长度-->
+        <label for="4">密码</label>
+        <input type="password" name="password" maxlength="6" id="4"/> <br/>
+
+        <!--复选预选中-->
+        <label for="5">复选</label>
+        <input type="checkbox" name="checkbox" value="2" checked="checked"
+               id="5"/> <br/>
+
+        <!--上传文件--><!--规定上传文件的类型-->
+        <label for="6">上传</label>
+        <input type="file" name="file" accept="image/*" id="6"/> <br/>
+
+        <!--隐藏字段-->
+        <label for="7">隐藏</label>
+        <input type="hidden" name="hidden" value="hidden" id="7"/> <br/>
+
+        <label>
+            文本
+            <textarea rows = "2" cols = "20" name = "textarea">
+        多行文本
+        </textarea>
+        </label> <br/>
+
+        <!--下拉列表-->
+        <!--可见选项数-->
+        <!--预选中-->
+        <label>
+            <!--下拉-->
+            <select name = "select" size = "2">
+                <option value = "1">1</option>
+                <option value = "2" selected = "selected">2</option>
+            </select>
+        </label> <br/>
+
+        按钮
+        <!--name的作用是向后台传递数据-->
+        <input type="button" value="可点击按钮" onclick="mag()"/>
+        <input type="submit" value="提交" name="submit"/>
+        <input type="image" src="#" name="image" alt="图片提交"/>
+        <!--图片提交-->
+        <input type="reset" value="重置"/>
+    </form>
+    <!-- 所属表单 -->
+    <label>
+        <input type="text" name="form" form="form" />
+    </label>
+</body>
+</html>
