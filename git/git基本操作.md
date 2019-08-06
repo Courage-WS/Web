@@ -143,8 +143,7 @@ git config --global color.ui true
 |git checkout -b branch-name origin/branch-name|创建远程仓库到本地||
 |git branch --set-upstream branch-name origin/brabnch-name|建立本地分支和远程分支的关联||
 |git pull|抓取远程的最新提交|远程仓库有变动后无法直接push，需要先pull|
-
-###远程标签
+### 远程标签
 |代码|说明||
 |-|-|-|
 |git push origin tagname|推送一个本地标签|
