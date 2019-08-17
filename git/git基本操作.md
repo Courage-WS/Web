@@ -134,16 +134,6 @@ git config --global color.ui true
 ### 基本
 |代码|说明||
 |-|-|-|
-<<<<<<< HEAD
-|git remote add origin git@github,com:gitname/web.git|github库与本地仓库关联|
-|git push -u origin master|本地分支推到远程库|origin为远程库默认名，master为本地分支名，首次推送加 -u，用来关联本地分支和远程分支，首次推送认证选yes|
-|git clone git@github,com:gitname/web.git|克隆远程仓库|要从自己的账号克隆|
-|git remote / 详细git remote -v|查看远程仓库|可以看到抓取（fetch）和推送（push）地址，没有权限看不到|
-|git checkout -b branch-name origin/branch-name|创建远程仓库到本地|
-|git branch --set-upstream branch-name origin/brabnch-name|建立本地分支和远程分支的关联|
-|git pull|抓取远程的最新提交|远程仓库有变动后无法直接push，需要先pull|
-###远程标签
-=======
 |git remote add origin git@github.com:gitname/web.git|github库与本地仓库关联||
 |git remote set-url origin git@github.com:megamouthRen/Web.git|修改remote URL|
 |find . -name ".git" \| xargs rm -Rf|删除Git本地仓库和远程的关联||
@@ -154,7 +144,6 @@ git config --global color.ui true
 |git branch --set-upstream branch-name origin/brabnch-name|建立本地分支和远程分支的关联||
 |git pull|抓取远程的最新提交|远程仓库有变动后无法直接push，需要先pull|
 ### 远程标签
->>>>>>> ea7213375ef06bcf1931aedbebac8e1ba0372c24
 |代码|说明||
 |-|-|-|
 |git push origin tagname|推送一个本地标签|
