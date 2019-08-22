@@ -98,7 +98,7 @@ property-value pairs        名值对
 |[class]|指定属性的元素|
 |[class=value]|指定属性和值的元素|
 |[class~=value]|属性值中包含指定词汇的元素|必须是整个单词|
-|[class|\=value]|带有指定值开头的属性值的元素|必须是整个单词|
+|[class\|=value]|带有指定值开头的属性值的元素|必须是整个单词|
 |[class^=value]|以指定值开头的每个元素|
 |[class$=value]|以指定值结尾的每个元素|
 |class\*=value]|包含指定值的每个元素|
@@ -192,11 +192,11 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 ### text
 - **color:** transparent;    _#000, rgb()256进制, 透明度安全色：20% 51,16进制33的倍数_
 - **line-height:** 0.9em;    _指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右就可以了_
-- **text-align:**     _centent / left / right**仅用作块元素**_
-- **text-decoration:**    _line-through / overline / underline**css有条规则，要求关闭text-decoration，而使用边框建立链接下划线**_
+- **text-align:**     _center / left / right**仅用作块元素**_
+- **text-decoration:**    _line-through / overline / underline **css有条规则，要求关闭text-decoration，而使用边框建立链接下划线**_
 - **text-indent:** 3em;
-- **text-shadow:** _水平位置  垂直位置  模糊聚类  阴影颜色_
-可以设定多组效果，每组参数以都和分隔；第一个阴影在最上面，以此类推。
+- **text-shadow:** _水平位置  垂直位置  模糊距离  阴影颜色_
+可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推。
 
 ##### 火焰文字效果
 ```
