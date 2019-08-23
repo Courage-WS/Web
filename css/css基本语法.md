@@ -72,7 +72,7 @@ property-value pairs        名值对
 |:nth-last-child(n) {...}|父元素的倒数第n个子元素|
 ##### 目标伪类
 
-`:target` 目标伪类选择器：可用于选取当前活动的目标元素
+`:target` 目标伪类选择器：可用于选取当前活动的目标元素。比如：当点击A链接时，地址B的样式。
 ```
 :target {
     color: red;
