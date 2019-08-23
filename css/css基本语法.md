@@ -65,7 +65,7 @@ property-value pairs        名值对
 ##### 结构（位置）伪类
 |选择器|说明||
 |-|-|-|
-|:lang()|静态伪类|语言选择器。类似|\=|
+|:lang()|静态伪类|语言选择器。类似\|=|
 |p:first-child {...}|父元素的第一个p元素|必须要满足第一个和p元素|
 |:last-child {...}|父元素的最后一个元素|
 |:nth-child(n) {...}|父元素的第n个子元素|
@@ -100,7 +100,7 @@ property-value pairs        名值对
 |[class]|指定属性的元素|
 |[class=value]|指定属性和值的元素|
 |[class~=value]|属性值中包含指定词汇的元素|必须是整个单词|
-|[class\|=value]|带有指定值开头的属性值的元素|必须是整个单词|
+|[class\|=value]|带有指定词汇开头的属性值的元素|必须是整个单词|
 |[class^=value]|以指定值开头的每个元素|
 |[class$=value]|以指定值结尾的每个元素|
 |class\*=value]|包含指定值的每个元素|
@@ -173,7 +173,7 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 ```
 @font-face {	一般放在上面
-    font-family:"文件名"
+    font-family:"字体名"
     src:url("文件位置"),
     url("文件位置");
 }
@@ -206,7 +206,7 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 ```
 ### background
 - **background-color:**
-- **background-inage:** uir();
+- **background-image:** uir();
 - **background-repeat:** no-repeat;
 - **background-attachment:** _fixed scroll_
 - **background-position:**    _top rigth bottom left; 20% 20%; 20px 20px; 仅规定一个关键字，那么第二个的值是 center_
@@ -336,7 +336,7 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 
 ### 文本
 
-基线：字母“X”的底部
+基线：大写字母“X”的底部
 
 - **vertical-align:**      _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于行内元素和表单元格
 - **word-spacing:**     _单词间隔_
@@ -345,7 +345,7 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 - **white-space:**     _normal / nowrap / pre / pre-line / pre-wrap_   处理空白符
 - **text-overfolw:**    _clip / ellipsis_  文本溢出**overflow需要设置为非visible**
 - **direction:**    _rtl / ltr_
-- **unicodr-bidi:**     _normal / embed / bidi-pverride_
+- **unicode-bidi:**     _normal / embed / bidi-pverride_
 - **cursor:** url()   _default, pointer, move, text;_
 - **outline:** none;
 - **resize:**     _none / both / vertical / horizontal_
@@ -365,7 +365,7 @@ _如果有多组属性变化，需要用逗号隔开_
 |属性|描述|
 |-|-|
 |transition|简写属性，用于在一个属性中设置四个过渡属性。|
-|transition-property|规定应用过渡的 CSS 属性的名称。|
+|transition-property|规定应用过渡的 CSS 属性的名称，逗号分隔。|
 |transition-duration|定义过渡效果花费的时间。默认是 0。|
 |transition-timing-function|规定过渡效果的时间曲线。默认是 "ease"。|
 |transition-delay|规定过渡效果何时开始。默认是 0。|
