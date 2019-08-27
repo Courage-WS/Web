@@ -70,3 +70,6 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.**
 
 .再次push
 
+### 多次commit时，git Your branch is ahead of 'origin/master' by X commits解决方法
+
+git reset --hard origin/master        将当前head的内容重置
