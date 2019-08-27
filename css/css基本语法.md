@@ -135,12 +135,15 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 ```
 ### font
 
-- **font:**			_简写不能变更顺序，必须有**`font-size`**和**`font-family`**_
-- **font-style:**	_normal italic oblique_	
-- **font-weight:**	_normal 100—400—700—900 bold lighter_
-- **font-size / line-height:**	_继承的事计算后的值，并不是倍数em_
-- **font-family:**	_serif sans-serif cursive fantasy monospace_
-- 
+| 属性        | 值                                                          | 描述                                                       |
+| ----------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
+| font        | style / variant / weight / stretch / size / height / family | 简写不能变更顺序，必须有**`font-size`**和**`font-family`** |
+| font-style  | normal / italic / oblique                                   |                                                            |
+| font-weight | normal 100—400—700—900 bold lighter                         |                                                            |
+| font-size   |                                                             | 继承的事计算后的值，并不是倍数em                           |
+| font-family | serif sans-serif cursive fantasy monospace                  |                                                            |
+
+
 无衬线用于计算机屏幕，有衬线用于报纸文字，等宽用于代码示例，手写字体用于标题，装饰性文字
 
 1. 普遍使用14px+
@@ -191,45 +194,97 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     font-style: normal;
 }
 ```
+### color
+
+| 属性    | 值                              | 描述                                |
+| ------- | ------------------------------- | ----------------------------------- |
+| color   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数 |
+| opacity | 0.0~1.0                         | 不透明度                            |
+
 ### text
-- **color:** transparent;    _#000, rgb()256进制, 透明度安全色：20% 51,16进制33的倍数_
-- **line-height:** 0.9em;    _指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右就可以了_
-- **text-align:**     _center / left / right**仅用作块元素**_
-- **text-decoration:**    _line-through / overline / underline **css有条规则，要求关闭text-decoration，而使用边框建立链接下划线**_
-- **text-indent:** 3em;
-- **text-shadow:** _水平位置  垂直位置  模糊距离  阴影颜色_
-可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推。
+
+| 属性                 | 值                                            | 描述                                                         |
+| -------------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| line-height          |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
+| text-align           | center / left / right                         | 对齐仅用作块元素                                             |
+| vertical-align       | baseline / top / bottom / middle              | 垂直对齐                                                     |
+| text-indent          |                                               | 缩进                                                         |
+| text-decoration-line | line-through / overline / underline           | 装饰                                                         |
+| text-transform       | none / lowercase / uppercase / capitalize     | 大小写转换                                                   |
+| word-spacing         |                                               | 单词距离                                                     |
+| letter-spacing       |                                               | 字母距离                                                     |
+| text-shape           | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
 ##### 火焰文字效果
 ```
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
+| 属性         | 值                                                           | 描述                       |
+| ------------ | ------------------------------------------------------------ | -------------------------- |
+| white-space  | normal / nowrap / pre-line / pre / pre-wrap                  |                            |
+| word-wrap    | normal / break-word                                          | 文本换行                   |
+| direction    | rtl / ltr                                                    | 文本方向                   |
+| unicode-bidi | normal / embed  / bidi-override                              | 重新排序 / 强调direction值 |
+| writing-mode | horizontal-tb / vertical-rl ( 垂直方向自右而左 ) / vertical-lr ( 垂直方向自左而右) | 书写方式                   |
+
+
+
 ### background
-- **background-color:**
-- **background-image:** uir();
-- **background-repeat:** no-repeat;
-- **background-attachment:** _fixed scroll_
-- **background-position:**    _top rigth bottom left; 20% 20%; 20px 20px; 仅规定一个关键字，那么第二个的值是 center_
+
+| 属性                  | 值                                              | 描述 |
+| --------------------- | ----------------------------------------------- | ---- |
+| background            |                                                 | 简写 |
+| background-image      |                                                 | 图片 |
+| background-repeat     | repeat-x / repeat-y / no-repeat / round / space | 填充 |
+| background-attachment | scroll / fixed                                  | 滚动 |
+| background-position   | content / left / right / top / bottom           | 定位 |
+| background-size       | width、height / auto / cover / contain          | 大小 |
+| background-origin     | border-box / padding-box / content-box          | 原点 |
+| background-clip       | border-box / padding-box / content-box          | 剪裁 |
+| background-color      | transparent                                     | 颜色 |
+
+**background-position:**   仅规定一个关键字，那么第二个的值是 center_
 
 **(相对于左上角x，y轴)只给一个百分数意味着垂直定位于50%，(容器宽度-照片宽度)*百分比=像素值**
 
-- **background-size:** 12px 20px;      _cover  contain  背景尺寸_
-
-指定一个尺寸，另一个为width height自动
+**background-size:**_指定一个尺寸，另一个为width height自动
 
 cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超出
 
 可以设置多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
 
+### border
+
+| 属性          | 值                                            | 描述                                                        |
+| ------------- | --------------------------------------------- | ----------------------------------------------------------- |
+| border        | width / style / color                         | 简写                                                        |
+| border-width  |                                               |                                                             |
+| border-style  |                                               |                                                             |
+| border-color  |                                               |                                                             |
+| border-radius |                                               | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
+| box-shadow    | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 |                                                             |
+
+| 属性                | 值                          | 描述       |
+| ------------------- | --------------------------- | ---------- |
+| border-image        |                             |            |
+| border-image-source |                             |            |
+| border-image-slice  | top / right / bottom / left | 分隔       |
+| border-image-width  |                             |            |
+| border-image-outset |                             | 外偏移距离 |
+| border-image-repeat | strech / repeat /           | 填充       |
+
+
+
 ### list
-- **list-style-image:** url();
 - **list-style-type:**    _disc circle square decimal leading zero upper lower roman alpha_
 - **list-style-position:**    _inside outside_
+- **list-style-image:** url();
 ### table
 - **border-collapse:**    _separate  collspas_
 - **border-spacing:** 1px 5px;    _水平  垂直_
 - **empty-cells:**      _hide  show 是否绘制空白单元格_
 - **caption-side:**
+- **table-layout：** auto  fixed
 ### boxes
 ```
 box width = margin + border + padding + height
@@ -397,11 +452,11 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 ### 2D变形
 
-transforms:matrix(a,b,c,d,e,f);搞不懂
+transform:matrix(a,b,c,d,e,f);搞不懂 https://www.cnblogs.com/Ivy-s/p/6786622.html
 
 #### 2D平移
 ```
-transfprm: translate(-50%,-50%);
+transform: translate(-50%,-50%);
            translatex();
            translatey();
 ```
