@@ -307,7 +307,7 @@ _**box-shadow 添加一个或多个阴影。该属性是由逗号分隔的阴影
 
 - **box-sizing:** _content-box / border-box_
    - content-box：盒子大小为 width + padding + border；默认值，其让元素维持W3C的标准Box Mode
-   - box-sizing：盒子大小为width；就是说 padding 和 border 是包含到width里面的
+   - border-box：盒子大小为width；就是说 padding 和 border 是包含到width里面的
 ## 布局
 
 _**浮动用来布局，定位用来做特效**_
