@@ -1,96 +1,4 @@
-/* !important * ,  > + ~ link hover focus visited active lang nth-last-child first not target before after
-= *= |= ~= ^= $= */
-@media screen and (width: 100px){}
- body>p {
-	font:italic lighter 14px cursive,monospace,sans-serif;
-	text-transform: lowercase;
-	white-space: normal;
-	text-align: left;
-	letter-spacing: 1px;
-	text-indent: 2em;
-	vertical-align: baseline;
-	line-height: 22px;
-	text-decoration: underline;
-	text-shadow: 2px 3px 5px #ccc;
-	direction: ltr;
-	unicode-bidi: bidi-override;
-	writing-mode: horizontal-tb;
-	color: #f90;
-	opacity: 0.8;
-}
 
-p+div {
-	width: 100px;
-	height: 100px;
-	margin: 100px;
-	background-image: url(abc.jpg);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: center;
-	-webkit-background-size: 60px 80px;
-	background-size: 60px 80px;
-	-webkit-background-origin: content-box;
-	background-origin: content-box;
-	-webkit-background-clip: padding-box;
-	-moz-background-clip: padding-box;
-	background-clip: padding-box;
-	background-color: #f90;
-
-	border: 15px solid #ccc;
-	border-radius: 5px;
-	box-shadow: 2px 2px 6px #f00;
-	border-image-source: url(border.png);
-	border-image-slice: 27;
-	border-image-repeat: stretch;
-	border-image-outset: 7px;
-}
-table,tr,td {
-	border: 1px solid #f90;
-}
-table {
-	caption-side: bottom;
-	table-collspae: separate;
-	border-spacing: 5px;
-	table-layout: fixed;
-	empty-cells: hide;
-}
-li {
-	list-style-type: none;
-	counter-increment: li 2;
-	counter-reset: li -4;
-}
-li::before {
-	content: counter(li) ": ";
-}
-
-.position {
-	width: 300px;
-	height: 300px;
-	margin: 200px;
-	background-color: #eee;
-	position: relative;
-}
-div div {
-	width: 100px;
-	height: 100px;
-}
-div .first {
-	background-color: #f40;
-	position: absolute;
-	top:15px;
-	z-index:1;
-}
-div > .center {
-	background-color: yellow;
-	position: static;
-}
-div.nth {
-	background-color: blue;
-	position: absolute;
-	top:10px;
-	/*right: 10px;*/
-	/*z-index: 3;*/
-}
 div.float {
 	width: 350px;
 	height: 350px;
@@ -99,18 +7,27 @@ div.float {
 }
 div.f1 {
 	background-color: #f40;
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 50px;
 	height: 50px;
+	/*clear: both;*/
 }
 div.f2 {
+	width: 100px;
+	height: 100px;
 	background-color: yellow;
 	float: left;
 
 }
 div.f3 {
 	background-color: blue;
-	display: inline-block;
-	width: 80px;
-	height: 80px;
+	/*display: inline-block;*/
+	width: 180px;
+	height: 180px;
+	clear: both;
+	/*white-space: nowrap;*/
+	/*overflow: hidden;*/
+	text-overflow: ellipsis;
+	overflow: auto;
+	cursor: move;
 }

@@ -396,11 +396,11 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 - **vertical-align:**      _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于行内元素和表单元格
 - **word-spacing:**     _单词间隔_
 - **letter-spacing:**    _字母间隔_
-- **text-teansform:**     _capitalize / uppercase / lowercase_  文本转换
+- **text-transform:**     _capitalize / uppercase / lowercase_  文本转换
 - **white-space:**     _normal / nowrap / pre / pre-line / pre-wrap_   处理空白符
-- **text-overfolw:**    _clip / ellipsis_  文本溢出**overflow需要设置为非visible**
+- **text-overflow:**    _clip / ellipsis_  文本溢出**overflow需要设置为非visible**
 - **direction:**    _rtl / ltr_
-- **unicode-bidi:**     _normal / embed / bidi-pverride_
+- **unicode-bidi:**     _normal / embed / bidi-override_
 - **cursor:** url()   _default, pointer, move, text;_
 - **outline:** none;
 - **resize:**     _none / both / vertical / horizontal_
@@ -528,7 +528,7 @@ translatez()：
 2. vertical-align: middle/bottom/top；
 3. 负外边距
 4. 父元素font-size：0；
-5. line-height: 0；
+5. 父元素line-height: 0；
 
 ### input空间和button上下不对齐的原因
 
@@ -538,7 +538,7 @@ button在高度计算上始终使用了Quirks模式。在Quirks模式下，边�
 
 ### inline-block和float的区别
 
-1. float元素会脱离文档流，周围元素会环绕这个元素，需清楚浮动；
+1. float元素会脱离文档流，周围元素会环绕这个元素，需清除浮动；
 2. 可以给inline-block的父元素设置text-align: center 让元素水平居中；
 3. float元素top对齐，inline-block元素可以通过vetical-align设置垂直对齐方式；
 4. inline-block会产生元素换行空白
@@ -546,7 +546,7 @@ button在高度计算上始终使用了Quirks模式。在Quirks模式下，边�
 
 inline-block的优点：可以控制水平对齐和垂直对齐
 
-block的优点：可以让元素环绕，低版本ie支持比较好，不用处理空白
+float的优点：可以让元素环绕，低版本ie支持比较好，不用处理空白
 
 ### 盒子水平居中
 
@@ -569,15 +569,15 @@ block的优点：可以让元素环绕，低版本ie支持比较好，不用处�
 
 如果元素的margin和他的父元素的margin-top折叠在一起，盒模型border-top的边界定义和它的父元素相同
 
-margin-top绝不会和他的会计父元素的margin-bottom折叠
+margin-top绝不会和他的块级父元素的margin-bottom折叠
 
-### 清楚浮动
-1. 在浮动元素后添加空白标签设置属性 ：clar: both;   *这个方法有个非常大且致命的bug，margin失效*
+### 清除浮动
+1. 在浮动元素后添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
 2. 为父元素添加属性：overflow: hidden;
 3. 在浮动元素后添加伪元素，为父元素设置：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
 4. 用双伪元素清楚浮动： 
-   - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清楚浮动*
-   - clearfix:after{clear: both;}
+   - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清除浮动*
+   - .clearfix:after{clear: both;}
    - .clearfix{\*zoom: 1;}
 ### BFC
 
@@ -601,7 +601,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 **_注意，是这些元素创建了块格式化上下文，它们本身不是块格式化上下。_**
 
 #### bfc布局规则
-1. 内部的box会再垂直方向，一个接一个得放置。
+1. 内部的box会在垂直方向，一个接一个得放置。
 2. box垂直方向的距离由margin决定。属于同一个bfc的两个相邻box的margin会发生重叠
 3. 每个元素的margin box的左边，与包含块border box 的左边相接处（对从左向右的格式化，否则相反）。及时存在浮动也是如此。
 4. bfc的区域不会与float box重叠
