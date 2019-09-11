@@ -411,6 +411,28 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 
 “|”后面换行会合成一个空格空格 前面也需要加个空格
 
+### 伸缩盒
+
+| 属性            | 描述         |
+| --------------- | ------------ |
+| flex            | 缩写         |
+| flex-grow       | 扩展比率     |
+| flex-shrink     | 收缩比率     |
+| flex-basis      | 基准值       |
+| flex-flow       | 缩写         |
+| flex-direction  | 主轴排列方式 |
+| flex-wrap       | 主轴是否换行 |
+| justify-content | 主轴对齐方式 |
+| align-items     | 侧轴对齐     |
+| align-self      | 单独侧轴对齐 |
+| order           | 排列顺序     |
+
+flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
+
+flex-shrink 计算方式：
+
+- 基准值和宽一致：
+
 ### 过渡
 
 **`transition`:要过渡的属性  花费时间  运动曲线  何时开始;**
@@ -573,7 +595,7 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 ### 清除浮动
 1. 在浮动元素后添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
-2. 为父元素添加属性：overflow: hidden;
+2. 为父元素添加属性：overflow: hidden;（触发bfc：5、6，父元素不能设置 height）
 3. 在浮动元素后添加伪元素，为父元素设置：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
 4. 用双伪元素清楚浮动： 
    - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清除浮动*

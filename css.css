@@ -1,33 +1,19 @@
 
-div.float {
-	width: 350px;
-	height: 350px;
-	background-color: #eee;
-	margin: 100px;
+.box {
+	display: flex;
+	width: 400px;
+	background-color: #ccc;
+	outline: 1px red solid;
 }
-div.f1 {
-	background-color: #f40;
-	/*display: inline-block;*/
-	width: 50px;
-	height: 50px;
-	/*clear: both;*/
+.item-2-1 {
+	flex: 1 1;
+	padding: 50px;
+	background-color: #32d6d6;
+	background-clip: content-box;
 }
-div.f2 {
-	width: 100px;
-	height: 100px;
-	background-color: yellow;
-	float: left;
-
-}
-div.f3 {
-	background-color: blue;
-	/*display: inline-block;*/
-	width: 180px;
-	height: 180px;
-	clear: both;
-	/*white-space: nowrap;*/
-	/*overflow: hidden;*/
-	text-overflow: ellipsis;
-	overflow: auto;
-	cursor: move;
+.item-2-2 {
+	flex: 1 1;
+	padding: 20px;
+	background-color: #b85ad0;
+	background-clip: content-box;
 }
