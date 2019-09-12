@@ -1,6 +1,7 @@
 # css层叠样式表
 - [验证工具](http://jigsaw.w3.org/css-vallidator/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
+- [兼容性测试](https://caniuse.com/#search=word-wrap)
 
 注释：/\*...\*/
 

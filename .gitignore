@@ -10,5 +10,5 @@
 *.xml
 *.iml
 text.html
-text.css
+css.css
 debug.log

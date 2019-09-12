@@ -1,19 +1,23 @@
-
-.box {
-	display: flex;
-	width: 400px;
-	background-color: #ccc;
-	outline: 1px red solid;
+* {
+	margin: 0;
+	padding: 0;
 }
-.item-2-1 {
-	flex: 1 1;
-	padding: 50px;
-	background-color: #32d6d6;
-	background-clip: content-box;
+.float {
+	width: 300px;
+	height: 300px;
+	margin: 30px;
+	padding: 10px;
+	background-color: #eee;
+	position: relative;
 }
-.item-2-2 {
-	flex: 1 1;
-	padding: 20px;
-	background-color: #b85ad0;
-	background-clip: content-box;
+.float div {
+	width: 100px;
+	height: 100px;
+}
+.fl {
+	background-color: royalblue;
+}
+.fr {
+	background-color: rosybrown;
+	word-wrap: break-word;
 }
