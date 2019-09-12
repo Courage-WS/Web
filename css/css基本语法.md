@@ -1,7 +1,11 @@
 # css层叠样式表
 - [验证工具](http://jigsaw.w3.org/css-vallidator/)
+
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
-- [兼容性测试](https://caniuse.com/#search=word-wrap)
+
+- [兼容性测试](https://caniuse.com/#search=word-wrap
+
+  )
 
 注释：/\*...\*/
 
@@ -414,19 +418,19 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 
 ### 伸缩盒
 
-| 属性            | 描述         |
-| --------------- | ------------ |
-| flex            | 缩写         |
-| flex-grow       | 扩展比率     |
-| flex-shrink     | 收缩比率     |
-| flex-basis      | 基准值       |
-| flex-flow       | 缩写         |
-| flex-direction  | 主轴排列方式 |
-| flex-wrap       | 主轴是否换行 |
-| justify-content | 主轴对齐方式 |
-| align-items     | 侧轴对齐     |
-| align-self      | 单独侧轴对齐 |
-| order           | 排列顺序     |
+| 属性            | 值                                                           | 描述         |
+| --------------- | ------------------------------------------------------------ | ------------ |
+| flex            |                                                              | 缩写         |
+| flex-grow       |                                                              | 扩展比率     |
+| flex-shrink     |                                                              | 收缩比率     |
+| flex-basis      |                                                              | 基准值       |
+| flex-flow       |                                                              | 缩写         |
+| flex-direction  | row、column                                                  | 主轴排列方式 |
+| flex-wrap       | nowrap                                                       | 主轴是否换行 |
+| justify-content | flex-start、flex-end、center、baseline、stretch、left、right、start、end | 主轴对齐方式 |
+| align-items     | flex-start、flex-end、center、baseline、stretch、left、right | 侧轴对齐     |
+| align-self      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐 |
+| order           |                                                              | 排列顺序     |
 
 flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 

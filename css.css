@@ -2,22 +2,39 @@
 	margin: 0;
 	padding: 0;
 }
-.float {
-	width: 300px;
-	height: 300px;
-	margin: 30px;
+.flex {
+	display: flex;
+	width: 400px;
+	height: 200px;
+	margin: 10px;
 	padding: 10px;
 	background-color: #eee;
-	position: relative;
+	flex-direction: row-reverse;
+	flex-wrap: nowrap;
+	justify-content: left;
+	align-items: center;
 }
-.float div {
-	width: 100px;
-	height: 100px;
+.flex div {
+	min-width: 0;
+	height: 130px;
+	flex-basis: 120px;
+	overflow: hidden;
 }
-.fl {
+.flex .f1{
+	background-color: rebeccapurple;
+	align-self: baseline;
+}
+.flex .f2 {
+	flex-shrink: 2;
+	background-color: rosybrown;
+	flex-basis: 100px;
+	align-self: flex-end;
+}
+.flex .f3 {
+	flex-shrink: 2;
 	background-color: royalblue;
 }
-.fr {
-	background-color: rosybrown;
-	word-wrap: break-word;
+.flex .f4 {
+	background-color: yellowgreen;
+	flex-basis: 110px;
 }
