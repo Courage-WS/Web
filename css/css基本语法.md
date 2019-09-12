@@ -434,9 +434,9 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 
 flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
-flex-shrink 计算方式：
+flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) * 差额空间 = 收缩宽度，比率占比和基准值有关
 
-- 基准值和宽一致：
+flex 设置*文本溢出显示省略号*，需要先显式设置：min-width: 0; 因为 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
 ### 过渡
 
