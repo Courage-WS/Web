@@ -219,20 +219,18 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 | word-spacing         |                                               | 单词距离                                                     |
 | letter-spacing       |                                               | 字母距离                                                     |
 | text-shape           | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
-| white-space          |                                               | 空白处理                                                     |
-| overflow-wrap        | normal / anywhere / break-word                | 溢出包裹                                                     |
 
 ##### 火焰文字效果
 ```
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
-| 属性         | 值                                                           | 描述                       |
-| ------------ | ------------------------------------------------------------ | -------------------------- |
-| white-space  | normal / nowrap / pre-line / pre / pre-wrap                  |                            |
-| word-wrap    | normal / break-word                                          | 文本换行                   |
-| direction    | rtl / ltr                                                    | 文本方向                   |
-| unicode-bidi | normal / embed  / bidi-override                              | 重新排序 / 强调direction值 |
-| writing-mode | horizontal-tb / vertical-rl ( 垂直方向自右而左 ) / vertical-lr ( 垂直方向自左而右) | 书写方式                   |
+| 属性          | 值                                                           | 描述                       |
+| ------------- | ------------------------------------------------------------ | -------------------------- |
+| white-space   | normal / nowrap / pre-line / pre / pre-wrap                  |                            |
+| overflow-wrap | normal / break-word / anywhere                               | 溢出包裹                   |
+| direction     | rtl / ltr                                                    | 文本方向                   |
+| unicode-bidi  | normal / embed  / bidi-override                              | 重新排序 / 强调direction值 |
+| writing-mode  | horizontal-tb / vertical-rl ( 垂直方向自右而左 ) / vertical-lr ( 垂直方向自左而右) | 书写方式                   |
 
 
 
