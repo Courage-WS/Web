@@ -219,6 +219,8 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 | word-spacing         |                                               | 单词距离                                                     |
 | letter-spacing       |                                               | 字母距离                                                     |
 | text-shape           | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
+| white-space          |                                               | 空白处理                                                     |
+| overflow-wrap        | normal / anywhere / break-word                | 溢出包裹                                                     |
 
 ##### 火焰文字效果
 ```

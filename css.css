@@ -1,40 +1,55 @@
-* {
-	margin: 0;
-	padding: 0;
+/*important transparent hover after before active media screen */
+p {
+    font-style: oblique;
+    font-weight: lighter;
+    font-size: 14px;
+    font-family: monospace,cursive;
+    text-transform: lowercase;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    text-align: left;
+    letter-spacing: 2px;
+    text-indent: 2px;
+    vertical-align: middle;
+    line-height: 22px;
+    text-decoration: underline;
+    text-shadow: 1px 1px 1px #7FCDFE;
+    direction: ltr;
+    unicode-bidi: bidi-override;
+    writing-mode: horizontal-tb;
+    color: #402312;
+    opacity: 0.3;
 }
-.flex {
-	display: flex;
-	width: 400px;
-	height: 200px;
-	margin: 10px;
-	padding: 10px;
-	background-color: #eee;
-	flex-direction: row-reverse;
-	flex-wrap: nowrap;
-	justify-content: left;
-	align-items: center;
+.b {
+    width: 300px;
+    height: 300px;
+    background: url(abc.jpg) no-repeat scroll center/640px 812px content-box padding-box #eee;
+    border: 14px solid #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 3px 3px 15px #f40;
+    -moz-box-shadow: 3px 3px 15px #f40;
+    box-shadow: 3px 3px 15px #f40;
+    border-image-source: url(border.png);
+    border-image-slice: 27 fill;
+    border-image-repeat: stretch;
+    outline: 2px solid #f90;
 }
-.flex div {
-	min-width: 0;
-	height: 130px;
-	flex-basis: 120px;
-	overflow: hidden;
+.table {
+    caption-side: bottom;
+    border-collapse: separate;
+    border-spacing: 3px;
+    table-layout: auto;
+    empty-cells: hide;
 }
-.flex .f1{
-	background-color: rebeccapurple;
-	align-self: baseline;
+li {
+    list-style: none;/*disc circle square*/
+    counter-increment: increment 2;
+    counter-reset: increment -1;
+    content: counter(increment) ". ";
 }
-.flex .f2 {
-	flex-shrink: 2;
-	background-color: rosybrown;
-	flex-basis: 100px;
-	align-self: flex-end;
+.position {
+    position: static;/*static rev*/ z-index:1;clip:rect();
 }
-.flex .f3 {
-	flex-shrink: 2;
-	background-color: royalblue;
-}
-.flex .f4 {
-	background-color: yellowgreen;
-	flex-basis: 110px;
-}
+
