@@ -425,16 +425,19 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 | flex-shrink     |                                                              | 收缩比率     |
 | flex-basis      |                                                              | 基准值       |
 | flex-flow       |                                                              | 缩写         |
-| flex-direction  | row、column                                                  | 主轴排列方式 |
+| flex-direction  | row、column-reverse                                          | 主轴排列方式 |
 | flex-wrap       | nowrap                                                       | 主轴是否换行 |
-| justify-content | flex-start、flex-end、center、baseline、stretch、left、right、start、end | 主轴对齐方式 |
-| align-items     | flex-start、flex-end、center、baseline、stretch、left、right | 侧轴对齐     |
+| justify-content | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式 |
+| align-items     | flex-start、flex-end、center、baseline、stretch              | 单行侧轴对齐 |
+| align-content   | flex-start、flex-end、center、space-between、space-around、stretch | 多行侧轴对齐 |
 | align-self      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐 |
 | order           |                                                              | 排列顺序     |
 
 flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
 flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) * 差额空间 = 收缩宽度，比率占比和基准值有关
+
+alingn-content 只作用于多行容器，和 align-items 的却别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
 
 flex 设置*文本溢出显示省略号*，需要先显式设置：min-width: 0; 因为 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
