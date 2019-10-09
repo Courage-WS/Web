@@ -31,6 +31,10 @@ E627DDBA 960A2153 69A2D98A C87C0607
 
 ## 插件
 
+[配色方案](http://tmtheme-editor.herokuapp.com/)
+
+[配置规则](http://echizen.github.io/tech/2016/08-07-code-space-standard)
+
 ctrl + shift + p 选择 install package
 
 1. [代码追踪](https://www.cnblogs.com/gushengyan/p/11064295.html)
