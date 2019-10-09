@@ -3,9 +3,8 @@
 
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
 
-- [兼容性测试](https://caniuse.com/#search=word-wrap
+- [兼容性测试](https://caniuse.com/#search=word-wrap)
 
-  )
 
 注释：/\*...\*/
 
