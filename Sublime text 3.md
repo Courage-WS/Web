@@ -31,6 +31,10 @@ E627DDBA 960A2153 69A2D98A C87C0607
 
 ## 插件
 
+1. 安装“Install package”
+2. 升级“upgrade packages”
+3. 删除“remove package”
+
 [配色方案](http://tmtheme-editor.herokuapp.com/)
 
 [配置规则](http://echizen.github.io/tech/2016/08-07-code-space-standard)
