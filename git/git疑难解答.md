@@ -73,3 +73,17 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.**
 ### 多次commit时，git Your branch is ahead of 'origin/master' by X commits解决方法
 
 git reset --hard origin/master        将当前hard的内容重置
+
+# [git] git reset --hard后恢复操作
+
+$ git reflog
+b7057a9 HEAD@{0}: reset: moving to b7057a9
+98abc5a HEAD@{1}: commit: more stuff added to foo
+b7057a9 HEAD@{2}: commit (initial): initial commit
+
+
+
+git reflog 后显示过多 点击“q“
+
+所以，我们要找回我们第二commit，只需要做如下操作：
+$ git reset –hard 98abc5a

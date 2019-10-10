@@ -1,7 +1,72 @@
 div {
+<<<<<<< HEAD
     direction: ltr;
     width: 30px;
     background-origin: padding-box;
     box-shadow: 2px 3px 3px #ccc;
     color: #870000;
 }
+=======
+    flex-flow: ;
+    flex-direction: ;
+    flex-wrap: ;
+    justify-content: ;
+}
+
+C
+
+/*important transparent active before after shortcut screen italic oblique
+weight lighter */
+/*transform lowercase white sapce overflow wrap break word align letter index
+vertical middle bCcaseline decoration underline shadow direction unicode writingembed*/
+/*opacity repeat attachment position origin clip color radius  shadow inset
+source slice fill repeat stretch outset outline outline-offset disc square
+circle decimal inside content counter increment reset collapse separate
+table-layout empty-cells colcCCCumn count gap rule span balance*/
+/*cursor crosshair pointer move wait default box-sizing resize*/
+/*flex grow shrink basis direction column-reverse flex-wrap justify-content*/
+/*grow shrink basiss align-self order*/
+/*start end center space-between around*/
+/*flex-direction column-reverse*/
+/*flex-wrap nowrap*/
+/*justify-content flex-start flex-end content space-between space-around*/
+/*align-items flex-start flex-end content baseline stretch*/
+/*align-content flex-start flex-end content space-between space-around stretch*/
+/*flex-grow flex-shrink flex-basis align-self order*/
+/*column-count column-gap column-rule column-span column-fill*/
+.flex {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+    background-color: #eee;
+    display: flex;
+    flex-wrap: wrap;
+    /*align-items: flex-end;*/
+}
+
+.flex div {
+    width: 120px;
+    height: 80px;
+}
+
+.flex .f1 {
+    background-color: royalblue;
+}
+
+.flex .f2 {
+    height: 100px;
+    background-color: rosybrown;
+}
+
+.flex .f3 {
+    background-color: rebeccapurple;
+
+    p {
+        flex-grow: 2;
+        flex-shrink: 2;
+        flex-shrink: 2;
+        flex-basis: 200px;
+        justify-content: ;
+        color: red;
+    }
+>>>>>>> f13c213af20ef0dfc62bb5361ab1e32c0158cf92
