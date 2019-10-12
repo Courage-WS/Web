@@ -100,13 +100,13 @@ property-value pairs        名值对
 #### 属性选择器
 |选择器|说明||
 |-|-|-|
-|[class]|指定属性的元素|
-|[class=value]|指定属性和值的元素|
-|[class~=value]|属性值中包含指定词汇的元素|必须是整个单词|
+|[class]|指定属性的元素||
+|[class=value]|指定属性和值的元素||
+|[class~=value]|包含指定值的元素||
+|[class^=value]|以指定值开头的每个元素||
+|[class$=value]|以指定值结尾的每个元素||
+|class\*=value]|包含指定词汇的每个元素|必须是整个单词|
 |[class\|=value]|带有指定词汇开头的属性值的元素|必须是整个单词|
-|[class^=value]|以指定值开头的每个元素|
-|[class$=value]|以指定值结尾的每个元素|
-|class\*=value]|包含指定值的每个元素|
 ### 插入样式
 代入样式的三种方法：
 1. 行内样式表：`<p style="color: #ccc"></p>`
