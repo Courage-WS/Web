@@ -105,8 +105,8 @@ property-value pairs        名值对
 |[class~=value]|包含指定值的元素||
 |[class^=value]|以指定值开头的每个元素||
 |[class$=value]|以指定值结尾的每个元素||
-|class\*=value]|包含指定词汇的每个元素|必须是整个单词|
-|[class\|=value]|带有指定词汇开头的属性值的元素|必须是整个单词|
+|class\*=value]|包含指定词汇的每个元素||
+|[class\|=value]|带有指定词汇开头的属性值的元素||
 ### 插入样式
 代入样式的三种方法：
 1. 行内样式表：`<p style="color: #ccc"></p>`
@@ -141,9 +141,6 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 | 属性        | 值                                                          | 描述                                                       |
 | ----------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
 | font        | style / variant / weight / stretch / size / height / family | 简写不能变更顺序，必须有**`font-size`**和**`font-family`** |
-| font-style  | normal / italic / oblique                                   |                                                            |
-| font-weight | normal 100—400—700—900 bold lighter                         |                                                            |
-| font-size   |                                                             | 继承的事计算后的值，并不是倍数em                           |
 | font-family | serif sans-serif cursive fantasy monospace                  |                                                            |
 
 
@@ -206,45 +203,23 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 ### text
 
-| 属性                 | 值                                            | 描述                                                         |
-| -------------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| line-height          |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
-| text-align           | center / left / right                         | 对齐仅用作块元素                                             |
-| vertical-align       | baseline / top / bottom / middle              | 垂直对齐                                                     |
-| text-indent          |                                               | 缩进                                                         |
-| text-decoration-line | line-through / overline / underline           | 装饰                                                         |
-| text-transform       | none / lowercase / uppercase / capitalize     | 大小写转换                                                   |
-| word-spacing         |                                               | 单词距离                                                     |
-| letter-spacing       |                                               | 字母距离                                                     |
-| text-shadow          | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
+| 属性        | 值                                            | 描述                                                         |
+| ----------- | --------------------------------------------- | ------------------------------------------------------------ |
+| line-height |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
+| text-align  | center / left / right                         | 对齐仅用作块元素                                             |
+| text-shadow | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
 ##### 火焰文字效果
 ```
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
-| 属性          | 值                                                           | 描述                       |
-| ------------- | ------------------------------------------------------------ | -------------------------- |
-| white-space   | normal / nowrap / pre-line / pre / pre-wrap                  |                            |
-| overflow-wrap | normal / break-word / anywhere                               | 溢出包裹                   |
-| direction     | rtl / ltr                                                    | 文本方向                   |
-| unicode-bidi  | normal / embed  / bidi-override                              | 重新排序 / 强调direction值 |
-| writing-mode  | horizontal-tb / vertical-rl ( 垂直方向自右而左 ) / vertical-lr ( 垂直方向自左而右) | 书写方式                   |
+| 属性         | 值                              | 描述                       |
+| ------------ | ------------------------------- | -------------------------- |
+| unicode-bidi | normal / embed  / bidi-override | 重新排序 / 强调direction值 |
 
 
 
 ### background
-
-| 属性                  | 值                                              | 描述 |
-| --------------------- | ----------------------------------------------- | ---- |
-| background            |                                                 | 简写 |
-| background-image      |                                                 | 图片 |
-| background-repeat     | repeat-x / repeat-y / no-repeat / round / space | 填充 |
-| background-attachment | scroll / fixed                                  | 滚动 |
-| background-position   | content / left / right / top / bottom           | 定位 |
-| background-size       | width、height / auto / cover / contain          | 大小 |
-| background-origin     | border-box / padding-box / content-box          | 原点 |
-| background-clip       | border-box / padding-box / content-box          | 剪裁 |
-| background-color      | transparent                                     | 颜色 |
 
 **background-position:**   仅规定一个关键字，那么第二个的值是 center_
 
@@ -258,53 +233,20 @@ cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超�
 
 ### border
 
-| 属性          | 值                                            | 描述                                                        |
-| ------------- | --------------------------------------------- | ----------------------------------------------------------- |
-| border        | width / style / color                         | 简写                                                        |
-| border-width  |                                               |                                                             |
-| border-style  |                                               |                                                             |
-| border-color  |                                               |                                                             |
-| border-radius |                                               | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
-| box-shadow    | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 |                                                             |
+| 属性          | 值   | 描述                                                        |
+| ------------- | ---- | ----------------------------------------------------------- |
+| border-radius |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
 
-| 属性                | 值                          | 描述       |
-| ------------------- | --------------------------- | ---------- |
-| border-image        |                             |            |
-| border-image-source |                             |            |
-| border-image-slice  | top / right / bottom / left | 分隔       |
-| border-image-width  |                             |            |
-| border-image-outset |                             | 外偏移距离 |
-| border-image-repeat | strech / repeat /           | 填充       |
-
-
-
-### list
-- **list-style-type:**    _disc circle square decimal leading zero upper lower roman alpha_
-- **list-style-position:**    _inside outside_
-- **list-style-image:** url();
-### table
-- **border-collapse:**    _separate  collspas_
-- **border-spacing:** 1px 5px;    _水平  垂直_
-- **empty-cells:**      _hide  show 是否绘制空白单元格_
-- **caption-side:**
-- **table-layout：** auto  fixed
 ### boxes
-```
-box width = margin + border + padding + height
-```
-
 根据盒子布局的稳定性，建议 width > padding > margin
 
-- **border-width:**
-- **border-style:**     _none  hidden dotted dashed solid double_
-- **border-color:**
 - **border-radius:**     _**如果提欧共三个值，第一个用于上，第二个用于左-右，第三个用于下**_
 
 _**可点击图像可能有边框，边框设为none**_
 
 - **padding:**   _不可以是负数_
 - **margin:** 0 auto;    在ie6中可能有双倍边距的bug
-- **box-shadow:** h-shadow  v-shadow  blur sparead  colorinset;    _阴影水平  垂直模糊距离  尺寸  颜色  外部阴影改为内部阴影_外部阴影可以影响其他盒子
+- **box-shadow:**        外部阴影可以影响其他盒子
 
 _**box-shadow 添加一个或多个阴影。该属性是由逗号分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。**_
 
@@ -357,23 +299,17 @@ top / bottom / left / right：200px;
 
 相对定位，绝对定位，固定定位，正常流；子绝父相
 
-```
-.id {
-    position: relative / absolute / fixed /static;
-    top:
-    left:
-    bottom:
-    right: -12px;        负偏移量
-}
-```
+**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
 
-`clip:rect(top,right,bottom,left);`     _剪裁：四个数值都是从上边边缘和左边边缘算起的_
+### 剪裁
+
+`clip:rect(top,right,bottom,left);`      四个数值都是从上边边缘和左边边缘算起的_
 
 文本回绕
 
-**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
+### 布局
 
-布局：流体（适应页面）、冻结（固定）、凝胶（内容固定，外边距随机）
+流体（适应页面）、冻结（固定）、凝胶（内容固定，外边距随机）
 
 ### 溢出和隐藏
 ```
@@ -392,20 +328,15 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 2. `overfolow: hidden;`  溢出部分隐藏
 3. `text-overflow: ellipsis;`  超出的部分以省略号显示
 
+使用 __text-indent__ 时，文本是先变成省略号再缩进，所以可能会把省略号剪裁掉。
+
 ### 文本
 
 基线：大写字母“X”的底部
 
 - **vertical-align:**      _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于行内元素和表单元格
-- **word-spacing:**     _单词间隔_
-- **letter-spacing:**    _字母间隔_
-- **text-transform:**     _capitalize / uppercase / lowercase_  文本转换
-- **white-space:**     _normal / nowrap / pre / pre-line / pre-wrap_   处理空白符
 - **text-overflow:**    _clip / ellipsis_  文本溢出**overflow需要设置为非visible**
-- **direction:**    _rtl / ltr_
-- **unicode-bidi:**     _normal / embed / bidi-override_
-- **cursor:** url()   _default, pointer, move, text;_
-- **outline:** none;
+- **cursor:** url()   _default, pointer, move, text;
 - **resize:**     _none / both / vertical / horizontal_
 ```
 <a href="#">shopcmd</a> |  
@@ -600,10 +531,10 @@ float的优点：可以让元素环绕，低版本ie支持比较好，不用处�
 margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 ### 清除浮动
-1. 在浮动元素后添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
-2. 为父元素添加属性：overflow: hidden;（触发bfc：5、6，父元素不能设置 height）
-3. 在浮动元素后添加伪元素，为父元素设置：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
-4. 用双伪元素清楚浮动： 
+1. 在浮动元素后：添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
+2. 为父元素：添加属性：overflow: hidden;（触发bfc：5、6，父元素不能设置 height）
+3. 为父元素：添加伪元素：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
+4. 为父元素：用双伪元素清除浮动： 
    - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清除浮动*
    - .clearfix:after{clear: both;}
    - .clearfix{\*zoom: 1;}
