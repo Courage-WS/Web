@@ -1,44 +1,34 @@
-/*media screen improtant*/
-/*link visited focus hover active rang lnag first-child nth-last-child not target*/
-/*first-letter first-line before after */
-p {
-    width: 300px;
-    height: 440px;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 16px;
-    font-family: cursive monospace;
-    color: #f90;
-    opacity: 0.8;
-}
 
-p {
-    text-transform: capitalize;
-    white-space: nowrap;
+ul {
+    padding: 0;
+    margin: 30px;
+    list-style-type: none;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+
+}
+ul p {
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    /*overflow-wrap: break-word;*/
-    text-align: left;
-    letter-spacing: 1px;
-    text-indent: 8px;
-    vertical-align: middle;
-    line-height: 26px;
-    text-decoration: underline;
-    text-shadow: 1px 2px 3px #ccc;
-    /*direction: rtl;*/
-    /*unicode-bidi: bidi-override;*/
-    writing-mode: horizontal-tb;
+
 }
-
-p {
-    /*image repeat attachment position size origin clip color*/
-    background:url(abc.jpg) no-repeat scroll center/300px content-box padding-box #ccc;
-    border: 16px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 1px 2px 3px #f40 inset;
-    /*image source slice repeat outset*/
-    border-image: url(border.png) 28 fill stretch 3px;
-    outline: 2px solid #000;
-    outlie-offset: 3px;
-
+ul li {
+    min-width: 0;
+    
+}
+ul li:nth-last-child(3) {
+    background-color: #ccc;
+    width: 400px;
+    width: 200px;
+}
+ul li:nth-last-child(2) {
+    background-color: #f90;
+    flex: 1;
+}
+ul li:nth-last-child(1) {
+    background-color: #f40;
 }
