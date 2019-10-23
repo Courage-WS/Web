@@ -368,7 +368,7 @@ flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) *
 
 alingn-content 只作用于多行容器，和 align-items 的却别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
 
-flex 设置*文本溢出显示省略号*，需要先显式设置：min-width: 0; 保证内容不超过外层容器
+flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
