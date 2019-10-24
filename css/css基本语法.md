@@ -303,7 +303,9 @@ top / bottom / left / right：200px;
 
 ### 剪裁
 
-`clip:rect(top,right,bottom,left);`      四个数值都是从上边边缘和左边边缘算起的_
+`clip:rect(top,right,bottom,left);`      -_四个数值都是从上边边缘和左边边缘算起的_
+
+clip-pash: polygon (); __*inset circle ellipse polygon path*__
 
 文本回绕
 
@@ -366,7 +368,7 @@ flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
 flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) * 差额空间 = 收缩宽度，比率占比和基准值有关
 
-alingn-content 只作用于多行容器，和 align-items 的却别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
+align-content 只作用于多行容器，和 align-items 的却别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
 
 flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
