@@ -1,34 +1,22 @@
+div.flex {
+    width: 300px;
+    height: 400px;
+    background-color: #f8f8f2;
+    padding: 1px;
+}
 
-ul {
-    padding: 0;
+div.f1 {
     margin: 30px;
-    list-style-type: none;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
+    width: 100px;
+    height: 80px;
+    background-color: #f44;
+    box-shadow: 3px 5px 8px #ccc inset;
+}
 
-}
-ul p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-}
-ul li {
-    min-width: 0;
-    
-}
-ul li:nth-last-child(3) {
-    background-color: #ccc;
-    width: 400px;
-    width: 200px;
-}
-ul li:nth-last-child(2) {
-    background-color: #f90;
-    flex: 1;
-}
-ul li:nth-last-child(1) {
-    background-color: #f40;
+.f1:hover {
+    background-color: #fff;
+    transition-property: background;
+    transition-duration: 3s;
+    transition-timing-function: steps(4,jump-start);
+    transition-delay: 2s;
 }
