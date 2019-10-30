@@ -378,7 +378,7 @@ align-content 只作用于多行容器，和 align-items 的却别是：前者�
 
 flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
-flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
+flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（文本为伸缩的盒子的子元素）（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
 ### 过渡
 
@@ -411,6 +411,7 @@ _如果有多组属性变化，需要用逗号隔开_
 |step-end||steps(1, end)|
 ```
 steps(<integer>[, [ start | end ] ]?):
+jumP-start, jump-end, jump-none, jump-both
 ```
 
 接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
