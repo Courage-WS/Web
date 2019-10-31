@@ -492,7 +492,7 @@ z里面是负数，外面是正数
 |`transform:rotateZ(180deg);` |像时钟一样旋转|
 |`transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；`|分开写只显示下面的代码，简写可一起显示|
 #### 透视
-- `transform: oerspective();  `   指定透视距离
+- `transform: perspective();  `   指定透视距离
 - `perspective-origin: ;    `          透视点位置
 
 #### 3D移动
