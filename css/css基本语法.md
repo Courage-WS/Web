@@ -424,6 +424,8 @@ __step-end与上面相反，都是以上一帧的显示效果来填充间隔动�
 
 [过渡曲线]( https://www.cnblogs.com/lcspring/p/10806951.html )
 
+[贝塞尔曲线在线取值]( https://cubic-bezier.com/#.17,.67,.83,.67 )
+
 ```
 cubic-bezier(<number>, <number>, <number>, <number>)：
 ```

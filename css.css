@@ -3,7 +3,7 @@
   padding: 0;
 }
 .f {
-  margin: 150px;
+  margin: 50px;
   /*margin-top: 100px;*/
 
   width: 300px;
@@ -20,5 +20,5 @@
   height: 100px;
   background-color: #f40;
   transform-origin: left top;
-  transform: matrix(1,1,-1,1,0,0);
+  transform: matrix(1,0,0,1,0,0);
 }
