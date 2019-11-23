@@ -620,7 +620,21 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 ```
  .sub-block__element {}.sub-block--modifier {}
 ```
+### css 命名规范
+
+- __网站头部__:                head/header(头部) top（顶部）
+- __导航__：                     nanv 导航具体区分：topnav(顶部导航)、mainnav(主导航)、mininav(迷你导航)、textnav(导航文本)、subnav(子导航/二级导航)
+- __旗帜、广告和商标__：logo（旗帜）、brand(商标)、banner(标语)
+- __搜索__：                     sreach(搜索)、sreachbox([搜索框](https://www.baidu.com/s?wd=%E6%90%9C%E7%B4%A2%E6%A1%86&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd))、sreachbtn(搜索按钮)、sreachinput（搜索输入框）
+- __注册和登录__：           login(登录)、regsiter(注册)、userbox(用户名/通行证的文本框)、password(密码)
+- __布局、分栏和框__：    layout(布局)、big[div](https://www.baidu.com/s?wd=div&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)(大div)、leftdiv(左分栏)、rightdiv(右分栏)、leftfloat(左浮动)、rightfloat(右浮动)、mainbox()、subpage(子页面/二级页面)
+- **页脚/底部**：              foot/footer(页脚/底部)、copyright(版权信息)、sitemap(网站地图)
+- __其他__：                      content(内容)、skin(皮肤)、title(标题)、from(表单)、pic(图片)、news(新闻)、shop(购物区)、list(列表/清单)、newslist(新闻列表)、downloadlist(下载列表)、piclist(图片列表)、dropmenv(下拉菜单)、cor/corner(圆角)、[homepage](https://www.baidu.com/s?wd=homepage&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)(首页)、crumb(当前位置导航)
+
+可以使用"in"的写法做子 div 的命名，写法 in + 父 div,这样可以避免前面命名过了后面 div 不知道怎么去命名。比如 intop、inbox、infrom、inlogin等等。
+
 ### css书写顺序
+
 1. 位置属性(position, top, right, z-index, display, float等)
 2. 大小(width, height, padding, margin)
 3. 文字系列(font, line-height, letter-spacing, color- text-align等)

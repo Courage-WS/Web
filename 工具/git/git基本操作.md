@@ -9,7 +9,7 @@ git是世界上先进的分布式版本控制系统
 
 ### 更新
 
-  打开命令提示符CMD，输入“git -- version"查看当前git版本后，输入命令”git update-git-for-windows"进行升级，输入“y“并回车，开始下载并自动打开安装。
+  打开命令提示符CMD，输入“git --version"查看当前git版本后，输入命令”git update-git-for-windows"进行升级，输入“y“并回车，开始下载并自动打开安装。
 
 ## 初步配置
 
