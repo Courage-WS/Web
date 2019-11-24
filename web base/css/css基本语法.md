@@ -110,13 +110,13 @@ property-value pairs        名值对
 ### 插入样式
 代入样式的三种方法：
 1. 行内样式表：`<p style="color: #ccc"></p>`
-2. 内部样式表：`<style rel="stylesheet"></style>
+2. 内部样式表：`<style rel="stylesheet"></style>`
 
 在内部样式表插入样式：`@impot url{...} screen`(指定设备)
 
 必须放在样式表开头，放在其他内容后会被忽略
 
-3. 外部样式表：`<link style="text/css" />
+3. 外部样式表：`<link style="text/css" />`
 #### ico
 ```
 <link rel="shortcut icon" href="http://example.com/favicon.ico" type="image/vnd.microsoft.icon" />
