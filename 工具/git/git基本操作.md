@@ -48,7 +48,7 @@ git config --global color.ui true
   检查规则：git check-ignore -v name,提交文件时，遇到被忽略的文件
 
 ## 本地仓库
-![本地仓库](images/0.jpg)
+![本地仓库](../images/0.jpg)
 ### 基本
 |代码|说明|
 |-|-|
