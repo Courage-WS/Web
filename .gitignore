@@ -3,6 +3,7 @@
 /book/*
 /.idea/*
 /practce/*
+/练习/*
 
 .idea
 *.pdf
