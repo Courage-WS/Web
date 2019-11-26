@@ -219,15 +219,15 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 
 ### background
 
-**`background-position:`**   仅规定一个关键字，那么第二个的值是 center_
+**`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
 
-**(相对于左上角x，y轴)只给一个百分数意味着垂直定位于50%，(容器宽度-照片宽度)*百分比=像素值**
+百分比： **(container width - image width) * (position x%) = (x offset value)** ；同理 Y。
 
 **`background-size:`**_指定一个尺寸，另一个为width height自动
 
 cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超出
 
-可以设置多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
+**`background-image:`**    多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
 
 ### border
 
