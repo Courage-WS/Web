@@ -358,11 +358,21 @@ top / bottom / left / right：200px;
 
 ### 定位
 
-相对定位，绝对定位，固定定位，粘性定位，正常流；子绝父相
+相对定位，绝对定位，固定定位，粘性定位，正常流；
 
-absolute element 未设置width，同时设置 top bottom时，element 会水平充满可用空间；同样可以充满垂直空间
+子绝父相
+
+`sticky` : 在父元素内相当于相对定位，阈值超过父元素边界，相当于固定定位
+
+HTML中定位元素位置靠后，会覆盖位置靠前的元素
+
+absolute element 和 fixed element 未设置height，同时设置 top bottom时，element 会水平充满可用空间；同样可以充满垂直空间
 
 **z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
+
+- 当页面放大以增加文本大小时，用`absolute`或`fixed`值定位的元素可能遮挡其他内容 ，[解决]( https://developer.mozilla.org/en-US/docs/Web/CSS/position )
+
+-  包含`fixed`或`sticky`内容的滚动元素可能会导致性能和可访问性问题  方案是[`will-change: transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)在定位的元素上添加元素以在其自己的图层中渲染 
 
 ### 剪裁
 
@@ -375,6 +385,8 @@ absolute element 未设置width，同时设置 top bottom时，element 会水平
 ### 布局
 
 流体（适应页面）、冻结（固定）、凝胶（内容固定，外边距随机）
+
+`display`: [布局]( https://developer.mozilla.org/en-US/docs/Web/CSS/display#Guides_and_Examples  )
 
 ### 溢出和隐藏
 ```
