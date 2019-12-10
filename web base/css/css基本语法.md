@@ -334,6 +334,8 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 ### 浮动
 
+目的：多个块级元素一行内显示
+
 让元素在某元素后面浮动，就把元素移动到那个元素下面
 
 `.id { float：right / left / none }`    _多个同级元素在同一行显示需要都设置float_
@@ -629,9 +631,12 @@ float的优点：可以让元素环绕，低版本ie支持比较好，不用处�
 margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 ### 清除浮动
+
+本质：解决父元素因为子元素浮动引起高度为 0 的问题
+
 1. 在浮动元素后：添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
 2. 为父元素：添加属性：overflow: hidden;（触发bfc：5、6，父元素不能设置 height）
-3. 为父元素：添加伪元素：.clarfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
+3. 为父元素：添加伪元素：.clearfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
 4. 为父元素：用双伪元素清除浮动： 
    - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清除浮动*
    - .clearfix:after{clear: both;}
@@ -704,11 +709,13 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 ### css书写顺序
 
-1. 位置属性(position, top, right, z-index, display, float等)
-2. 大小(width, height, padding, margin)
-3. 文字系列(font, line-height, letter-spacing, color- text-align等)
-4. 背景(background, border等)
-5. 其他(animation, transition等)
+ **目的**：减少浏览器reflow（回流），提升浏览器渲染dom的性能 
+
+1. 布局定位属性：display / position / float / clear / visibility / overflow（建议 display 第一个写，毕竟关系到模式）
+2. 盒子自身属性：width / height / margin / padding / background / border
+3. 文字属性：color / font / 
+4. 文本属性：text / vertical-align / white- space / break-word / letter-spacing  / word-spacing 
+5. 其他属性（CSS3）：content/ border-radius / box-shadow / text-shadow / cursor  / animation, transition / background:linear-gradient …
 
 - -ms-（私有属性）；//IE
 - -moz-（私有属性）；//Firefox 
@@ -719,7 +726,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 先写带有浏览器私有标志的，后写W3C标准的。
 
-参考网址：[web规范](http://nec.netease.com/standard)
+参考网址：[web规范](http://nec.netease.com/standard) [说明]( https://blog.csdn.net/qq_36060786/article/details/79311244 )
 
 ### 布局流程
 1. 确定版心（可视区或者网页主体），常见宽度960，980，1000，1200
