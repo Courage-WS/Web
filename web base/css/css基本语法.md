@@ -181,7 +181,15 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     url("文件位置");
 }
 ```
-#### 添加[字体图标](http://icomoon.io)
+#### [字体图标](http://icomoon.io)
+
+[]
+
+1. 设计
+2. 上传
+3. 下载
+4. 使用
+
 ```
 @font-face {
     font-family: 'icomoon';
@@ -231,6 +239,8 @@ cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超�
 
 ### border
 
+_**可点击图像可能有边框，边框设为none**_
+
 | 属性                 | 值   | 描述                                                        |
 | -------------------- | ---- | ----------------------------------------------------------- |
 | `border-radius`      |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
@@ -238,17 +248,15 @@ cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超�
 
 ![slice](images\border-image-slice.png)
 
-
-
 ### boxes
 
 根据盒子布局的稳定性，建议 width > padding > margin
 
-- `**border-radius:**`     _**如果提欧共三个值，第一个用于上，第二个用于左-右，第三个用于下**_
-
-_**可点击图像可能有边框，边框设为none**_
+1. 加了浮动和定位的盒子需要添加 100%，或者给宽度
+2. 盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
 
 - **padding:**   _不可以是负数_
+
 - **margin:** 0 auto;    在ie6中可能有双倍边距的bug
 - `**box-shadow:**`        外部阴影可以影响其他盒子
 
