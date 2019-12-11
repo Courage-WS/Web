@@ -139,7 +139,7 @@ ctrl + shift + p 选择 install package
 
 - ctrl+f 查找内容
 
-- ctrl+g 定位行
+- ctrl+g 快速定位行
 
 - ctrl+h 替换 
 

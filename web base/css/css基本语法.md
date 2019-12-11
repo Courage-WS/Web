@@ -151,7 +151,7 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 3. 字体有先后顺序，符号用英文的，多个用逗号隔开
 4. 英文字体必须在中文字体前面
 5. 字体是中文，或者有特殊符号：空格，#，$等，需要加英文引号
-6. 尽量使用系统默认字体
+6. 尽量使用系统默认字体，中文推荐使用宋体和微软雅黑
 
 可以通过escape()来测试属于什么字体。
 
@@ -196,10 +196,10 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 ```
 ### color
 
-| 属性      | 值                              | 描述                                |
-| --------- | ------------------------------- | ----------------------------------- |
-| `color`   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数 |
-| `opacity` | 0.0~1.0                         | 不透明度                            |
+| 属性      | 值                              | 描述                                                         |
+| --------- | ------------------------------- | ------------------------------------------------------------ |
+| `color`   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数。使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，**必须写为0%**。 |
+| `opacity` | 0.0~1.0                         | 不透明度                                                     |
 
 ### text
 
@@ -415,7 +415,7 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 
 - **vertical-align:**      _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于**_行内元素和表单元格_**
 - **text-overflow:**    _clip / ellipsis_  文本溢出overflow需要设置为**_非visible_**
-- **cursor:** url()   _default, pointer, move, text;
+- **cursor:** url()   _default, pointer, move, text，not-allowed;
 - **resize:**     _none / both / vertical / horizontal_
 ```
 <a href="#">shopcmd</a> |  
@@ -584,7 +584,7 @@ translatez()：
 在HTML5与CSS3中，DIV标签中的图片也就是IMG标签的默认vertical-align属性为baseline，文字分为顶线，中线，基线，底线。图片的下边缘是基线，所以在下方会留出基线和底线这一段距离的空白
 
 1. display：block
-2. vertical-align: middle/bottom/top；
+2. vertical-align: middle / bottom / top；
 3. 负外边距
 4. 父元素font-size：0；
 5. 父元素line-height: 0；
@@ -707,15 +707,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 可以使用"in"的写法做子 div 的命名，写法 in + 父 div,这样可以避免前面命名过了后面 div 不知道怎么去命名。比如 intop、inbox、infrom、inlogin等等。
 
-### css书写顺序
-
- **目的**：减少浏览器reflow（回流），提升浏览器渲染dom的性能 
-
-1. 布局定位属性：display / position / float / clear / visibility / overflow（建议 display 第一个写，毕竟关系到模式）
-2. 盒子自身属性：width / height / margin / padding / background / border
-3. 文字属性：color / font / 
-4. 文本属性：text / vertical-align / white- space / break-word / letter-spacing  / word-spacing 
-5. 其他属性（CSS3）：content/ border-radius / box-shadow / text-shadow / cursor  / animation, transition / background:linear-gradient …
+### 私有属性
 
 - -ms-（私有属性）；//IE
 - -moz-（私有属性）；//Firefox 
@@ -727,14 +719,6 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 先写带有浏览器私有标志的，后写W3C标准的。
 
 参考网址：[web规范](http://nec.netease.com/standard) [说明]( https://blog.csdn.net/qq_36060786/article/details/79311244 )
-
-### 布局流程
-1. 确定版心（可视区或者网页主体），常见宽度960，980，1000，1200
-2. 分析页面中的行模块，和行模块中的列模块
-3. 制作html结构
-4. css初始化，运用盒子模型原理，通过div + css控制网页模块
-
-html需要设置最小尺寸，浏览器放大或缩小时会改变html尺寸
 
 ### 浏览器标准模式和兼容模式区别
 1. width不同
@@ -765,3 +749,4 @@ body{text-align:center};#content{text-align:left}
 |message-box|对话框|
 |small-caption|小控件|
 |status-bar|窗口状态条|
+
