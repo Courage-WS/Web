@@ -1,4 +1,5 @@
-# css层叠样式表
+css层叠样式表
+
 - [验证工具](http://jigsaw.w3.org/css-vallidator/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
 - [MDN手册](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)；[W3C手册](https://www.w3.org/TR/CSS22/about.html)
@@ -218,6 +219,7 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 | `text-shadow` | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
 ##### 火焰文字效果
+
 ```
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
@@ -248,7 +250,7 @@ _**可点击图像可能有边框，边框设为none**_
 
 ![slice](images\border-image-slice.png)
 
-### boxes
+### box
 
 根据盒子布局的稳定性，建议 width > padding > margin
 
@@ -256,7 +258,7 @@ _**可点击图像可能有边框，边框设为none**_
 2. 盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
 
 - **padding:**   _不可以是负数_
-
+- **margin:**   必须是块级元素
 - **margin:** 0 auto;    在ie6中可能有双倍边距的bug
 - `**box-shadow:**`        外部阴影可以影响其他盒子
 
@@ -296,31 +298,31 @@ _**box-shadow 添加一个或多个阴影。该属性是由逗号分隔的阴影
   5. 前一个元素为 reset ，后一个元素为 increment 时，把前一个元素移下来，并且把最后一个值加上 increment 的增加值
   6. 前一个为 increment ，后一个为 reset 时，把前一个元素移下来，后面加上 string，再跟上 reset 的重置值
 
-| css                                                          | 显示                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![img](file://F:/web/web%20base/css/images/cc%202.png?lastModify=1574871519) | ![img](file://F:/web/web%20base/css/images/cx%202.png?lastModify=1574871519) |
+| css                                             | 显示                                            |
+| ----------------------------------------------- | ----------------------------------------------- |
+| ![img](images/cc%202.png?lastModify=1574871519) | ![img](images/cx%202.png?lastModify=1574871519) |
 
 - 父子元素都设置 counter-increment 时，
   1. 不区分父子级，合并为单计数序列
   2. 每一级都参与计数，不管他是否显示
 
-| css                             | 显示                                                 |
-| ------------------------------- | ---------------------------------------------------- |
-| ![counter css](images/cc 1.png) | ![counter 显示](F:\web\web base\css\images\cx 1.png) |
+| css                             | 显示                             |
+| ------------------------------- | -------------------------------- |
+| ![counter css](images/cc 1.png) | ![counter 显示](images\cx 1.png) |
 
 - 父子元素都设置 counter-reset
   1. counters 中，reset 才能调用 string，
   2. 每多一层，多一个值，不管是否显示，中间用 string 隔开
 
-| css                                                          | 显示                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![img](file://F:/web/web%20base/css/images/cc%203.png?lastModify=1574872849) | ![img](file://F:/web/web%20base/css/images/cx%203.png?lastModify=1574872849) |
+| css                                             | 显示                                            |
+| ----------------------------------------------- | ----------------------------------------------- |
+| ![img](images/cc%203.png?lastModify=1574872849) | ![img](images/cx%203.png?lastModify=1574872849) |
 
 - 父元素设置 counter-increment，子元素设置 counter-reset
 
 | css                                                          | 显示                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![img](file://F:/web/web%20base/css/images/cc%204.png?lastModify=1574872849?lastModify=1574872849) | ![img](file://F:/web/web%20base/css/images/cx%204.png?lastModify=1574872849?lastModify=1574872849) |
+| ![img](/images/cc%204.png?lastModify=1574872849?lastModify=1574872849) | ![img](images/cx%204.png?lastModify=1574872849?lastModify=1574872849) |
 
 ## 布局
 
@@ -344,19 +346,17 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 目的：多个块级元素一行内显示
 
-让元素在某元素后面浮动，就把元素移动到那个元素下面
+显示：类似行内块，大小取决于定义的大小或者内容的多少
 
-`.id { float：right / left / none }`    _多个同级元素在同一行显示需要都设置float_
+不影响前面的元素
 
-_**float可以让元素默认转换为 inline-block（元素的大小取决于定义的大小或者内容的多少）**_
+`.id { float：right / left / none }`  
 
-_**块元素不会考虑浮动元素的右边界，内联元素会避开 一般用于多个块元素在同行显示（意思是块元素会隐藏进浮动元素，内联元素会包围浮动元素，不会隐藏进去）**_
-
-_**浮动会使元素脱离正常流，隐藏进正常流元素给浮动元素加个父元素设置 height 可以取消隐藏，因为父元素在正常流中有占位。**_
+_**块元素会隐藏进浮动元素，内联元素会包围浮动元素，不会隐藏进去**_
 
 _**特别注意：浮动元素需要和正常流父元素搭配使用**_
 
-解决包裹问题，设置外边距
+解决包裹问题（内联元素会包裹浮动元素），设置外边距
 
 所有浮动元素必须有一个宽度，不能设为auto（系统自定义）
 
