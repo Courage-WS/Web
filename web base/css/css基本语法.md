@@ -1,9 +1,10 @@
-css层叠样式表
+# css层叠样式表
 
-- [验证工具](http://jigsaw.w3.org/css-vallidator/)
+- [验证工具](http://jigsaw.w3.org/css-validator/) / [验证]( https://validator.w3.org/unicorn/ )；[验证2](http://www.cssstats.com/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
 - [MDN手册](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)；[W3C手册](https://www.w3.org/TR/CSS22/about.html)
 - [兼容性测试](https://caniuse.com/#search=word-wrap)
+- [代码压缩](http://tool.chinaz.com/Tools/CssFormat.aspx)
 
 
 注释：/\*...\*/
@@ -90,7 +91,7 @@ property-value pairs        名值对
 
 伪元素必须放在出现该伪元素的选择器后面
 
-伪元素必须有 `content`
+伪元素必须有 `content`，否则伪元素就不起作用
 
 |选择器|说明|
 |-|-|
@@ -119,6 +120,9 @@ property-value pairs        名值对
 
 3. 外部样式表：`<link style="text/css" />`
 #### ico
+
+[转换 ico 图标]( http://www.bitbug.net/)
+
 ```
 <link rel="shortcut icon" href="http://example.com/favicon.ico" type="image/vnd.microsoft.icon" />
 ```
@@ -137,7 +141,7 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     }
 }
 ```
-### font
+### 字体
 
 | 属性          | 值                                                          | 描述                                                       |
 | ------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
@@ -182,9 +186,26 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     url("文件位置");
 }
 ```
-#### [字体图标](http://icomoon.io)
+#### 字体格式
 
-[]
+不同浏览器所支持的字体格式是不一样的，我们有必要了解一下有关字体格式的知识。
+
+- TureType(.ttf)格式
+  - .ttf字体是Windows和Mac的最常见的字体，是一种RAW格式，支持这种字体的浏览器有IE9+、Firefox3.5+、Chrome4+、Safari3+、Opera10+、iOS Mobile、Safari4.2+；
+
+- OpenType(.otf)格式
+  - .otf字体被认为是一种原始的字体格式，其内置在TureType的基础上，支持这种字体的浏览器有Firefox3.5+、Chrome4.0+、Safari3.1+、Opera10.0+、iOS Mobile、Safari4.2+；
+
+- Web Open Font Format(.woff)格式
+  - woff字体是Web字体中最佳格式，他是一个开放的TrueType/OpenType的压缩版本，同时也支持元数据包的分离，支持这种字体的浏览器有IE9+、Firefox3.5+、Chrome6+、Safari3.6+、Opera11.1+；
+
+- Embedded Open Type(.eot)格式
+  - .eot字体是IE专用字体，可以从TrueType创建此格式字体，支持这种字体的浏览器有IE4+；
+
+- SVG(.svg)格式
+  - .svg字体是基于SVG字体渲染的一种格式，支持这种字体的浏览器有Chrome4+、Safari3.1+、Opera10.0+、iOS Mobile Safari3.2+；
+
+#### 字体图标
 
 1. 设计
 2. 上传
@@ -203,6 +224,13 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     font-style: normal;
 }
 ```
+- [icomoon字库]( http://icomoon.io)
+- [阿里icon font字库](http://www.iconfont.cn/)
+- [fontello](http://fontello.com/)
+- [Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
+- [Glyphicon Halflings](http://glyphicons.com/)
+- [Icons8](https://icons8.com/)
+
 ### color
 
 | 属性      | 值                              | 描述                                                         |
@@ -227,7 +255,7 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 | -------------- | ------------------------------- | -------------------------- |
 | `unicode-bidi` | normal / embed  / bidi-override | 重新排序 / 强调direction值 |
 
-### background
+### 背景
 
 **`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
 
@@ -238,6 +266,8 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超出
 
 **`background-image:`**    多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
+
+多组背景也用逗号隔开，前面的会覆盖后面的。
 
 ### border
 
@@ -585,6 +615,12 @@ translatez()：
 ```
 - `backface-visibility`      属性定义当元素不是正面对向屏幕时是否可见。
 
+- - 
+
+### 字体图标
+
+- 
+
 ### 框架
 
 ### 解决img下方空白
@@ -655,13 +691,21 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 block formatting context （块级格式化上下文）规定了内部的block-level box如何布局，并且与这个区域外部毫不相干。是一个独立的渲染区域
 
-一般用于自适应两栏式布局，解决高度塌陷，处理外边距合并，清除浮动。
+容器里面的子元素不会影响到外面的元素。反之也如此
+
+用途：
+
+- 自适应两栏式布局
+  - 普通流体元素BFC后，为了和浮动元素不产生任何交集，顺着浮动边缘形成自己的封闭上下文
+- 解决高度塌陷
+- 处理外边距合并
+- 清除浮动。
 
 #### 创建条件
 1. 浮动元素(`float: left|right`)
 2. 定位元素(`position: absolute|fixed`)不包含relative
 3. `overflow`特性不为visible的元素（除非该值已经传播到viewport）
-4. 行内块元素(`display: inline-block`)
+4. 行内块元素(`display: inline-block,flex`)
 5. 表格的单元格(`display: table-cells,td,th`)
 6. 表格的标题(`display: tabel-captions,caption`)
 7. 表格元素创建的匿名框
@@ -671,12 +715,12 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 **_注意，是这些元素创建了块格式化上下文，它们本身不是块格式化上下。_**
 
 #### bfc布局规则
-1. 内部的box会在垂直方向，一个接一个得放置。
-2. box垂直方向的距离由margin决定。属于同一个bfc的两个相邻box的margin会发生重叠
-3. 每个元素的margin box的左边，与包含块border box 的左边相接处（对从左向右的格式化，否则相反）。及时存在浮动也是如此。
-4. bfc的区域不会与float box重叠
+1. 内部的 box 会在垂直方向，一个接一个得放置。
+2. box 垂直方向的距离由 margin 决定。属于同一个 bfc 的两个相邻 box 的 margin 会发生重叠
+3. 每个元素的 margin-box 的左边，与包含块 border-box 的左边相接处（对从左向右的格式化，否则相反）。即使存在浮动也是如此。
+4. bfc的区域不会与float-box重叠，紧贴浮动边缘。（不会外边距塌陷）
 5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
-6. 计算bfc的高度时，浮动元素也参与计算
+6. 计算bfc的高度时，浮动或者定位元素也参与计算
 
 ### BEM命名规范
 #### 什么是BEM命名规范
