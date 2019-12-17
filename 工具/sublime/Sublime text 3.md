@@ -146,3 +146,7 @@ ctrl + shift + p 选择 install package
 - ctrl+p 查找文件
 - alt+shift+num 分栏显示(num=1，一栏，2两栏，3三栏，4四栏，5四宫格，8两横栏)
 - 自动保存：设置里面找save_on_focus_lost，在user里改成true，但是只能失焦保存，没法儿像phpstorm那样停止输入就保存
+
+### 显示菜单栏
+
+按住**Ctrl+Shifp+p**,出现一个框，在框里输入“**view:**”，选择：“**View:Toggle Menu**”
