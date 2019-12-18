@@ -129,3 +129,15 @@ textarea {
 .clearfix {
 	*zoom: 1;
 }
+
+/*定位*/
+
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.pf {
+  position: fixed;
+}
