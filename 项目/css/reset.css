@@ -58,7 +58,7 @@ button,
 input,
 select,
 textarea {
-  font: 12px;
+  font-size: 12px;
 }
 
 /*去除轮廓*/
