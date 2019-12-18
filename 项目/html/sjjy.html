@@ -13,102 +13,159 @@
 </head>
 
 <body>
-	<div class="article">
-		<div class="aside">
-			<img src="../image/sjjy/logo.jpeg" alt="logo">
-			<div class="aside-y"></div>
-			<div class="aside-ad"></div>
-		</div>
-
-		<div class="regsiter">
-			<h2>青春不常在，抓紧谈恋爱</h2>
-			<p>花点时间填写真实信息，我们会让结果更合您的心意。</p>
-
-			<form>
-				<table>
-					<tr>
-						<th>我是</th>
-						<td></td>
-						<td class="default">* 注册后修改需联系客服</td>
-					</tr>
-					<tr>
-						<th>生日</th>
-						<td></td>
-						<td class="default">* 注册后修改需联系客服</td>
-					</tr>
-					<tr>
-						<th>常住地</th>
-						<td></td>
-						<td class="errorTip">请选择省、市（区）</td>
-					</tr>
-					<tr>
-						<th>婚姻状况</th>
-						<td></td>
-						<td class="default">* 注册后修改需联系客服</td>
-					</tr>
-					<tr>
-						<th>身高</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>学历</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>月薪</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>手机号码</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>验证码</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>创建密码</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>昵称</th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>自我介绍</th>
-						<td colspan="2"></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>我承诺年满18岁、单身、抱着积极的态度，真诚交友</td>
-						<td></td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
+  <div class="pr article">
+    <div class="pa aside">
+      <a href="#"><img src="../image/sjjy/logo.jpeg" alt="logo"></a>
+      <div class="aside-y"></div>
+      <div class="aside-ad"></div>
+    </div>
+    <div class="pa regsiter">
+      <h3>青春不常在，抓紧谈恋爱</h3>
+      <p>花点时间填写真实信息，我们会让结果更合您的心意。</p>
+      <form base="_self">
+        <table>
+          <tr>
+            <th>我是</th>
+            <td><input type="radio" name="xingbie" id="man" value="man"><label for="man"><span>男</span></label><input type="radio" name="xingbie" id="woman" value="woman"><label for="woman"><span>女</span></label></td>
+            <td class="default">* 注册后修改需联系客服</td>
+          </tr>
+          <tr>
+            <th>生日</th>
+            <td class="birthday">
+              <div>
+                <input type="text" name="year" value="请选择"><span>年</span>
+              </div>
+              <div>
+                <input type="text" name="year" value="请选择"><span>年</span>
+              </div>
+              <div>
+                <input type="text" name="year" value="请选择"><span>年</span>
+              </div>
+            </td>
+            <td class="default">* 注册后修改需联系客服</td>
+          </tr>
+          <tr>
+            <th>常住地</th>
+            <td class="address"><input type="text" name="address" value="请选择" required="required"></td>
+            <td class="errorTip">请选择省、市（区）</td>
+          </tr>
+          <tr>
+            <th>婚姻状况</th>
+            <td><input type="radio" name="marriage" value="未婚" id="weihun"><label for="weihun"><span>未婚</span></label><input type="radio" name="marriage" value="未婚" id="weihun"><label for="weihun"><span>未婚</span></label><input type="radio" name="marriage" value="未婚" id="weihun"><label for="weihun"><span>未婚</span></label>
+            </td>
+            <td class="default">* 注册后修改需联系客服</td>
+          </tr>
+          <tr>
+            <th>身高</th>
+            <td class="address"><input type="text" name="address" value="请选择" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>学历</th>
+            <td class="address"><input type="text" name="address" value="请选择" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>月薪</th>
+            <td class="address"><input type="text" name="address" value="请选择" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><a href="#">全国人大常委会关于加强网络信息保护的决定</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>手机号码</th>
+            <td>
+            	<div class="tel"><span>中国+86</span><input type="text" name="tel" required="required"><span></span></div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>验证码</th>
+            <td><input type="text" name="number" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>创建密码</th>
+            <td class="address"><input type="password" name="address" value="请选择" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>昵称</th>
+            <td class="address"><input type="text" name="address" value="请选择" required="required"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>自我介绍</th>
+            <td colspan="2">
+            	<div>
+            		<a href="#">看别人怎么写</a>
+            		<ul>
+            			<li>贴标签</li>
+            			<li>贴标签</li>
+            			<li>贴标签</li>
+            		</ul>
+            		<div>
+            			<p>请至少选择3个标签，别担心，你可以稍后进行修改！</p>
+            			<ul>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            				<li>憨厚</li>
+            				<li>狂吃不胖</li>
+            			</ul>
+            		</div>
+            	</div>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="submit" name="submit" value="免费注册" base="_self"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="checkbox" name="checkbox" value="checkbox" required="required"><span>我同意<a href="#">注册条款</a>和<a href="#">会有加入标准</a></span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>我承诺年满18岁、单身、抱着积极的态度，真诚交友</td>
+            <td></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <footer>中文实名：世纪佳缘 ICP证书：沪B2-20100074 Copyright © 2003-2016 版权所有</footer>
+    <div class="login">
+    	<p><a href="#">会员登录</a></p>
+    	<p>其他账号登录</p>
+    	<ul>
+    		<li><a href="#"></a></li>
+    		<li><a href="#"></a></li>
+    		<li><a href="#"></a></li>
+    	</ul>
+    </div>
+  </div>
 </body>
 
 </html>
