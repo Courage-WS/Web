@@ -141,7 +141,67 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
     }
 }
 ```
-### 字体
+## 布局属性
+
+### display
+
+`display`:  none / inline / block / inline-block / flex
+
+### position
+
+相对定位，绝对定位，固定定位，粘性定位，正常流；
+
+子绝父相
+
+`sticky` : 在父元素内相当于相对定位，阈值超过父元素边界，相当于固定定位
+
+HTML中定位元素位置靠后，会覆盖位置靠前的元素
+
+absolute element 和 fixed element 未设置height，同时设置 top bottom时，element 会水平充满可用空间；同样可以充满垂直空间
+
+**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
+
+- 当页面放大以增加文本大小时，用`absolute`或`fixed`值定位的元素可能遮挡其他内容 ，[解决]( https://developer.mozilla.org/en-US/docs/Web/CSS/position )
+- 包含`fixed`或`sticky`内容的滚动元素可能会导致性能和可访问性问题  方案是[`will-change: transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)在定位的元素上添加元素以在其自己的图层中渲染 
+
+### float
+
+目的：多个块级元素一行内显示
+
+显示：类似行内块，大小取决于定义的大小或者内容的多少
+
+不影响前面的元素
+
+`.id { float：right / left / none }`  
+
+_**块元素会隐藏进浮动元素，内联元素会包围浮动元素，不会隐藏进去**_
+
+_**特别注意：浮动元素需要和正常流父元素搭配使用**_
+
+解决包裹问题（内联元素会包裹浮动元素），设置外边距
+
+所有浮动元素必须有一个宽度，不能设为auto（系统自定义）
+
+```
+top / bottom / left / right：200px;
+```
+
+`clear: left / right / both / none`元素某边不允许有浮动内容（只能指定左右两边)
+
+### overflow 和 visibility
+
+```
+display: none/block/inline-block/table/table-cell/table-caption;
+```
+
+元素隐藏后不保留原有位置
+
+_**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使用负外边距，但是需要调整 font-size；3.父元素设置font-size：0；4. 运用jQuery （Safari：letter-spacing： -4px。根据不同字体调整）**_
+
+- **overflow:**     _溢出  visible / scroll / hidden / auto_
+- **visibility:**    _元素可见性  visible / hidden / collapse   元素隐藏后保留原有位置_
+
+### font
 
 | 属性          | 值                                                          | 描述                                                       |
 | ------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
@@ -176,7 +236,7 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 为了照顾不同电脑的字体安装问题，我们尽量只用宋体和微软雅黑中文字体
 
-在 CSS 中设置字体名称，直接写中文是可以的。但是在文件编码（GB2312、UTF-8 等）不匹配时会产生乱码的错误。xp 系统不支持 类似微软雅黑的中文。_**尽量使用英文名称或Unicode编码**_
+在 CSS 中设置字体名称，直接写中文是可以的。但是在文件编码（GB2312、UTF-8 等）不匹配时会产生乱码的错误。xp 系统不支持 类似微软雅黑的中文。_**尽量使用英文名称或 Unicode 编码**_
 #### 添加字体
 
 ```
@@ -240,21 +300,18 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 ### text
 
-| 属性          | 值                                            | 描述                                                         |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| `line-height` |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
-| `text-align`  | center / left / right                         | 对齐仅用作块元素                                             |
-| `text-shadow` | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
+| 属性           | 值                                            | 描述                                                         |
+| -------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| `line-height`  |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
+| `text-align`   | center / left / right                         | 对齐仅用作块元素                                             |
+| `unicode-bidi` | normal / embed  / bidi-override               | 重新排序 / 强调direction值                                   |
+| `text-shadow`  | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
 ##### 火焰文字效果
 
 ```
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
-| 属性           | 值                              | 描述                       |
-| -------------- | ------------------------------- | -------------------------- |
-| `unicode-bidi` | normal / embed  / bidi-override | 重新排序 / 强调direction值 |
-
 ### 背景
 
 **`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
@@ -372,48 +429,6 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 盒子的对齐方式为基线对齐，没有文本的盒子，基线为盒子内容区底部，有文本的盒子基线为最下方文本的基线，_**父盒子A里有文本B但是font-size: 0;（文本B不显示了）并且有浮动元素C，当浮动元素C有正常流父元素D时，基线为浮动元素C的父元素D的内容区底部，当浮动元素C没有父元素D时，基线为父盒子A的内容区顶部。**_当同时有浮动元素C的父元素D和文本时，以下面的基线为准（基线可超出父盒子A的内容区底部）。为需要对齐的盒子设置**vertical-align**，即可解决
 
-### 浮动
-
-目的：多个块级元素一行内显示
-
-显示：类似行内块，大小取决于定义的大小或者内容的多少
-
-不影响前面的元素
-
-`.id { float：right / left / none }`  
-
-_**块元素会隐藏进浮动元素，内联元素会包围浮动元素，不会隐藏进去**_
-
-_**特别注意：浮动元素需要和正常流父元素搭配使用**_
-
-解决包裹问题（内联元素会包裹浮动元素），设置外边距
-
-所有浮动元素必须有一个宽度，不能设为auto（系统自定义）
-
-```
-top / bottom / left / right：200px;
-```
-
-`clear: left / right / both / none`元素某边不允许有浮动内容（只能指定左右两边)
-
-### 定位
-
-相对定位，绝对定位，固定定位，粘性定位，正常流；
-
-子绝父相
-
-`sticky` : 在父元素内相当于相对定位，阈值超过父元素边界，相当于固定定位
-
-HTML中定位元素位置靠后，会覆盖位置靠前的元素
-
-absolute element 和 fixed element 未设置height，同时设置 top bottom时，element 会水平充满可用空间；同样可以充满垂直空间
-
-**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
-
-- 当页面放大以增加文本大小时，用`absolute`或`fixed`值定位的元素可能遮挡其他内容 ，[解决]( https://developer.mozilla.org/en-US/docs/Web/CSS/position )
-
--  包含`fixed`或`sticky`内容的滚动元素可能会导致性能和可访问性问题  方案是[`will-change: transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)在定位的元素上添加元素以在其自己的图层中渲染 
-
 ### 剪裁
 
 `clip:rect(top,right,bottom,left);`      -_四个数值都是从上边边缘和左边边缘算起的_
@@ -426,21 +441,12 @@ absolute element 和 fixed element 未设置height，同时设置 top bottom时�
 
 流体（适应页面）、冻结（固定）、凝胶（内容固定，外边距随机）
 
-`display`: [布局]( https://developer.mozilla.org/en-US/docs/Web/CSS/display#Guides_and_Examples  )
+`
 
-### 溢出和隐藏
-```
-display: none/block/inline-block/table/table-cell/table-caption;
-```
+- 
 
-元素隐藏后不保留原有位置
+#### 溢出显示省略号
 
-_**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使用负外边距，但是需要调整 font-size；3.父元素设置font-size：0；4. 运用jQuery （Safari：letter-spacing： -4px。根据不同字体调整）**_
-
-- **overflow:**     _溢出  visible / scroll / hidden / auto_
-- **visibility:**    _元素可见性  visible / hidden / collapse   元素隐藏后保留原有位置_
-
-####溢出显示省略号
 1. `white-space: nowrap;`  文字一行显示不换行
 2. `overfolow: hidden;`  溢出部分隐藏
 3. `text-overflow: ellipsis;`  超出的部分以省略号显示

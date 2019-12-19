@@ -7,6 +7,8 @@
 
 html需要设置最小尺寸，浏览器放大或缩小时会改变html尺寸
 
+### `display`: [布局]( https://developer.mozilla.org/en-US/docs/Web/CSS/display#Guides_and_Examples  )
+
 ### 导航栏
 
 ``` css
