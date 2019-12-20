@@ -186,7 +186,7 @@ _**特别注意：浮动元素需要和正常流父元素搭配使用**_
 top / bottom / left / right：200px;
 ```
 
-`clear: left / right / both / none`元素某边不允许有浮动内容（只能指定左右两边)
+`clear:`  left / right / both / none元素某边不允许有浮动内容（只能指定左右两边)
 
 ### overflow 和 visibility
 
@@ -201,7 +201,81 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 - **overflow:**     _溢出  visible / scroll / hidden / auto_
 - **visibility:**    _元素可见性  visible / hidden / collapse   元素隐藏后保留原有位置_
 
+## 盒子属性
+
+根据盒子布局的稳定性，建议 width > padding > margin
+
+### width 和 height
+
+width: 100%;      和父元素一样宽
+
+- 仅适用于块元素
+- 加了浮动和定位的盒子需要添加 `width: 100%`，或者给宽度
+
+### padding 和 margin
+
+盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
+
+- **padding:**   _不可以是负数_，内联元素：dir：ltr，边框会在水平方向占有位置，垂直方向会覆盖前后文本
+- **margin:**   必须是块级元素，内联元素：dir：ltr，边框会在水平方向占有位置，垂直方向没有效果
+- **margin:** 0 auto;    在ie6中可能有双倍边距的bug
+
+### border
+
+_**可点击图像可能有边框，边框设为none**_
+
+| 属性                 | 值   | 描述                                           |
+| -------------------- | ---- | ---------------------------------------------- |
+| `border-image-slice` |      | 值用来表示切片的厚度，由1--4个值觉定，上右下左 |
+
+![slice](images\border-image-slice.png)
+
+为内联元素设置边框
+
+- dir：ltr，边框会在水平方向占有位置，垂直方向会覆盖前后文本，上面完全覆盖，下面透明状态
+- 没有文本的话，width=边距+边框，height=边距+边框+字体高度。
+
+虽然外边距，边框和内边距的填充不会进入线框（行内或行内元素）计算，但它们仍然围绕内联框呈现。**如果“line-height”小于内容高度，本行内容会压到上面一行**。
+
+因为用户代理应按文档顺序呈现框。这将导致后续行上的边框在前一行的边框和文本上绘制。
+
+### background
+
+**`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
+
+百分比： **(container width - image width) * (position x%) = (x offset value)** ；同理 Y。
+
+**`background-size:`**_指定一个尺寸，另一个为width height自动
+
+- cover：等比缩放，超出部分剪裁；
+- contain：等比缩放，不会超出
+
+**`background-image:`**    多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
+
+多组背景也用逗号隔开，前面的会覆盖后面的。
+
+适用于内联元素
+
+### box-sizing
+
+- `box-sizing:`    _content-box / border-box_
+  - content-box：盒子大小为 width + padding + border；默认值，其让元素维持W3C的标准Box Mode
+  - border-box：盒子大小为width；就是说 padding 和 border 是包含到width里面的
+
+## 文本属性
+
+### color
+
+| 属性      | 值                              | 描述                                                         |
+| --------- | ------------------------------- | ------------------------------------------------------------ |
+| `color`   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数。使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，**必须写为0%**。 |
+| `opacity` | 0.0~1.0                         | 不透明度                                                     |
+
 ### font
+
+```
+表单元素并不继承父级 font 
+```
 
 | 属性          | 值                                                          | 描述                                                       |
 | ------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
@@ -291,70 +365,42 @@ _**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使
 - [Glyphicon Halflings](http://glyphicons.com/)
 - [Icons8](https://icons8.com/)
 
-### color
-
-| 属性      | 值                              | 描述                                                         |
-| --------- | ------------------------------- | ------------------------------------------------------------ |
-| `color`   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数。使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，**必须写为0%**。 |
-| `opacity` | 0.0~1.0                         | 不透明度                                                     |
-
 ### text
 
-| 属性           | 值                                            | 描述                                                         |
-| -------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| `line-height`  |                                               | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
-| `text-align`   | center / left / right                         | 对齐仅用作块元素                                             |
-| `unicode-bidi` | normal / embed  / bidi-override               | 重新排序 / 强调direction值                                   |
-| `text-shadow`  | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
+基线：大写字母“X”的底部
 
-##### 火焰文字效果
+| 属性            | 值                              | 描述                                                         |
+| --------------- | ------------------------------- | ------------------------------------------------------------ |
+| `line-height`   |                                 | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
+| `text-align`    | center / left / right           | 对齐仅用作块元素                                             |
+| `text-overflow` | _clip / ellipsis_               | 文本溢出overflow需要设置为**_非visible_**                    |
+| `unicode-bidi`  | normal / embed  / bidi-override | 重新排序 / 强调direction值                                   |
+
+line-height一般设置比font-size大7 8个字号就好
+
+line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。line-height < height时，**下对齐**，可以向上溢出
+
+CSS有条规则，要求关闭text-decoration，而使用边框建立链接下划线
+
+### vertical-align
+
+`vertical-align`:     _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于**_行内元素和表单元格_**
+
+- 盒子默认**上对齐**，行内元素默认**基线对齐**，img 为基线对齐
+- 应用于行内元素（行内，行内块）和表单元格
+
+baseline在css2的文档中有这么一句解释，翻译过来也就是一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
 
 ```
-text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+盒子A  里面有 文本B、 浮动元素C
+
+盒子的对齐方式为基线对齐，没有文本的盒子，基线为盒子内容区底部，有文本的盒子基线为最下方文本的基线，父盒子A里有文本B但是font-size: 0;（文本B不显示了）并且有浮动元素C，当浮动元素C有正常流父元素D时，基线为浮动元素C的父元素D的内容区底部，当浮动元素C没有父元素D时，基线为父盒子A的内容区顶部。当同时有浮动元素C的父元素D和文本时，以下面的基线为准（基线可超出父盒子A的内容区底部）。为需要对齐的盒子设置vertical-align，即可解决
+
 ```
-### 背景
 
-**`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
+## 其他属性
 
-百分比： **(container width - image width) * (position x%) = (x offset value)** ；同理 Y。
-
-**`background-size:`**_指定一个尺寸，另一个为width height自动
-
-cover：等比缩放，超出部分剪裁；contain：等比缩放，不会超出
-
-**`background-image:`**    多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
-
-多组背景也用逗号隔开，前面的会覆盖后面的。
-
-### border
-
-_**可点击图像可能有边框，边框设为none**_
-
-| 属性                 | 值   | 描述                                                        |
-| -------------------- | ---- | ----------------------------------------------------------- |
-| `border-radius`      |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
-| `border-image-slice` |      | 值用来表示切片的厚度，由1--4个值觉定，上右下左              |
-
-![slice](images\border-image-slice.png)
-
-### box
-
-根据盒子布局的稳定性，建议 width > padding > margin
-
-1. 加了浮动和定位的盒子需要添加 100%，或者给宽度
-2. 盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
-
-- **padding:**   _不可以是负数_
-- **margin:**   必须是块级元素
-- **margin:** 0 auto;    在ie6中可能有双倍边距的bug
-- `**box-shadow:**`        外部阴影可以影响其他盒子
-
-_**box-shadow 添加一个或多个阴影。该属性是由逗号分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。**_
-
-- `**box-sizing:** _content-box / border-box_`
-   - content-box：盒子大小为 width + padding + border；默认值，其让元素维持W3C的标准Box Mode
-   - border-box：盒子大小为width；就是说 padding 和 border 是包含到width里面的
-### 计数器
+### counter
 
  `counter-increment`: <custom-ident> <integer>;     名称或名称-添加的值对之间用空格分隔，默认值是 1
 
@@ -411,23 +457,174 @@ _**box-shadow 添加一个或多个阴影。该属性是由逗号分隔的阴影
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![img](/images/cc%204.png?lastModify=1574872849?lastModify=1574872849) | ![img](images/cx%204.png?lastModify=1574872849?lastModify=1574872849) |
 
-## 布局
+### border-radius
 
-_**浮动用来布局，定位用来做特效**_
+| 属性            | 值   | 描述                                                        |
+| --------------- | ---- | ----------------------------------------------------------- |
+| `border-radius` |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
 
-		浮动布局、凝胶布局、绝对布局、表格显示布局
-### 文本对齐
-- **`vertical-align:`**     _垂直对齐  inherit  baseline  sub  super  top  middle  bottom  text-bottom_
+### box-shadow
 
-应用于行内元素（行内，行内块）和表单元格
+- `box-shadow:`        外部阴影可以影响其他盒子
 
-baseline在css2的文档中有这么一句解释，翻译过来也就是一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
+box-shadow 添加一个或多个阴影。该属性是由 _**逗号**_ 分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。
 
-#### 盒子错位
+### text-shadow
 
-盒子A  里面有 文本B、 浮动元素C
+| 属性          | 值                                            | 说明                                                         |
+| ------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| `text-shadow` | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
-盒子的对齐方式为基线对齐，没有文本的盒子，基线为盒子内容区底部，有文本的盒子基线为最下方文本的基线，_**父盒子A里有文本B但是font-size: 0;（文本B不显示了）并且有浮动元素C，当浮动元素C有正常流父元素D时，基线为浮动元素C的父元素D的内容区底部，当浮动元素C没有父元素D时，基线为父盒子A的内容区顶部。**_当同时有浮动元素C的父元素D和文本时，以下面的基线为准（基线可超出父盒子A的内容区底部）。为需要对齐的盒子设置**vertical-align**，即可解决
+##### 火焰文字效果
+
+```
+text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+```
+
+### cursor
+
+**cursor:** url()   _default, pointer, move, text，not-allowed;
+
+### resize
+
+`resize`:     _none / both / vertical / horizontal_
+
+### transition
+
+**`transition`:要过渡的属性  花费时间  运动曲线  何时开始;**
+
+_如果有多组属性变化，需要用逗号隔开_
+
+| 属性                       | 描述                                         |
+| -------------------------- | -------------------------------------------- |
+| transition                 | 简写属性，用于在一个属性中设置四个过渡属性。 |
+| transition-property        | 规定应用过渡的 CSS 属性的名称，逗号分隔。    |
+| transition-duration        | 定义过渡效果花费的时间。默认是 0。           |
+| transition-timing-function | 规定过渡效果的时间曲线。默认是 "ease"。      |
+| transition-delay           | 规定过渡效果何时开始。默认是 0。             |
+
+过渡的属性一般为距离（如：线粗细，间距）、颜色、文本阴影、可见性、垂直对齐。
+
+要所有的属性都变化过渡，写一个all
+
+时间的单位必须写 s秒 ms毫秒
+
+| 值          | 说明           | 等同于                             |
+| ----------- | -------------- | ---------------------------------- |
+| linear      | 线性过渡       | cubic-bezier(0.0, 0.0, 1.0, 1.0)   |
+| ease        | 平滑过渡       | cubic-bezier(0.25, 0.1, 0.25, 1.0) |
+| ease-in     | 由慢到快       | cubic-bezier(0.42, 0, 1.0, 1.0)    |
+| ease-out    | 由快到慢       | cubic-bezier(0, 0, 0.58, 1.0)      |
+| ease-in-out | 由慢到快再到慢 | cubic-bezier(0.42, 0, 0.58, 1.0)   |
+| step-start  |                | steps(1, start)                    |
+| step-end    |                | steps(1, end)                      |
+
+```
+steps(<integer>[, [ start | end ] ]?):
+jumP-start, jump-end, jump-none, jump-both
+```
+
+接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
+
+__timing-function 作用于每两个关键帧之间，而不是整个动画 __
+
+__step-start在变化过程中，都是以下一帧的显示效果来填充间隔动画，所以跳过0% __
+
+__step-end与上面相反，都是以上一帧的显示效果来填充间隔动画，所以跳过100% __ 
+
+[过渡曲线]( https://www.cnblogs.com/lcspring/p/10806951.html )
+
+[贝塞尔曲线在线取值]( https://cubic-bezier.com/#.17,.67,.83,.67 )
+
+```
+cubic-bezier(<number>, <number>, <number>, <number>)：
+```
+
+特定的贝塞尔曲线类型，两个坐标的4个数值需在[0, 1]区间内
+
+#### 2D转换
+
+`transform-style: ;`    /*  **_flat   preserve-3d_ ***/      转换类型
+
+`transform-origin: ;`                                                原点
+
+如果提供两个，第一个用于横坐标，第二个用于纵坐标；如果只提供一个，该值将用于横坐标，纵坐标默认为50%。
+
+`transform:matrix(a,b,c,d,e,f);`搞不懂 https://www.cnblogs.com/Ivy-s/p/6786622.html
+
+##### 2D平移
+
+```
+transform: translate(-50%,-50%);
+           translatex();
+           translatey();
+```
+
+##### 2D缩放
+
+```
+transform: scale(0.8,1);
+           scalex();
+           scalex();
+```
+
+##### 2D旋转
+
+
+```
+transform: rotate(45deg);
+```
+
+单位是：deg度数；正值为顺时针，负值为逆时针。
+
+##### 倾斜
+
+```
+transform: skew(30deg,0deg);
+```
+
+第二个参数不写默认为0。
+
+X正值：下边往右拉伸，上边往左拉伸，倾斜30度；
+
+Y正值：右边往下拉伸，左边往上拉伸，倾斜30度；负数方向相反。
+
+#### 3D变形
+
+![3d](images/3d.png)
+
+x左边是负的，右边是正数
+
+y上面是负数，下面是正数
+
+z里面是负数，外面是正数
+
+- `maerix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
+
+##### 3D旋转
+
+| 名值对                                                       | 说明                                   |
+| ------------------------------------------------------------ | -------------------------------------- |
+| `transform:rotateX(180deg);`                                 | 前后翻着旋转                           |
+| `transform:rotateY(180deg);`                                 | 左右翻着旋转                           |
+| `transform:rotateZ(180deg);`                                 | 像时钟一样旋转                         |
+| `transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；` | 分开写只显示下面的代码，简写可一起显示 |
+
+##### 透视
+
+- `transform: perspective();  `   指定透视距离
+- `perspective-origin: ;    `          透视点位置
+
+##### 3D移动
+
+```
+transform:translate3d(X，Y，Z); 
+translatex()： 
+translatey()： 
+translatez()：
+```
+
+- `backface-visibility`      属性定义当元素不是正面对向屏幕时是否可见。
 
 ### 剪裁
 
@@ -437,36 +634,7 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 文本回绕
 
-### 布局
-
-流体（适应页面）、冻结（固定）、凝胶（内容固定，外边距随机）
-
-`
-
-- 
-
-#### 溢出显示省略号
-
-1. `white-space: nowrap;`  文字一行显示不换行
-2. `overfolow: hidden;`  溢出部分隐藏
-3. `text-overflow: ellipsis;`  超出的部分以省略号显示
-
-使用 __text-indent__ 时，文本是先变成省略号再缩进，所以可能会把省略号剪裁掉。
-
-### 文本
-
-基线：大写字母“X”的底部
-
-- **vertical-align:**      _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于**_行内元素和表单元格_**
-- **text-overflow:**    _clip / ellipsis_  文本溢出overflow需要设置为**_非visible_**
-- **cursor:** url()   _default, pointer, move, text，not-allowed;
-- **resize:**     _none / both / vertical / horizontal_
-```
-<a href="#">shopcmd</a> |  
-<a href="#">首页</a>
-```
-
-“|”后面换行会合成一个空格空格 前面也需要加个空格
+## 布局
 
 ### 伸缩盒
 
@@ -495,155 +663,7 @@ flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置
 
 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（文本为伸缩的盒子的子元素）（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
-### 过渡
-
-**`transition`:要过渡的属性  花费时间  运动曲线  何时开始;**
-
-_如果有多组属性变化，需要用逗号隔开_
-
-|属性|描述|
-|-|-|
-|transition|简写属性，用于在一个属性中设置四个过渡属性。|
-|transition-property|规定应用过渡的 CSS 属性的名称，逗号分隔。|
-|transition-duration|定义过渡效果花费的时间。默认是 0。|
-|transition-timing-function|规定过渡效果的时间曲线。默认是 "ease"。|
-|transition-delay|规定过渡效果何时开始。默认是 0。|
-
-过渡的属性一般为距离（如：线粗细，间距）、颜色、文本阴影、可见性、垂直对齐。
-
-要所有的属性都变化过渡，写一个all
-
-时间的单位必须写 s秒 ms毫秒
-
-|值|说明|等同于|
-|-|-|-|
-|linear|线性过渡|cubic-bezier(0.0, 0.0, 1.0, 1.0)|
-|ease|平滑过渡|cubic-bezier(0.25, 0.1, 0.25, 1.0)|
-|ease-in|由慢到快|cubic-bezier(0.42, 0, 1.0, 1.0)|
-|ease-out|由快到慢|cubic-bezier(0, 0, 0.58, 1.0)|
-|ease-in-out|由慢到快再到慢|cubic-bezier(0.42, 0, 0.58, 1.0)|
-|step-start||steps(1, start)|
-|step-end||steps(1, end)|
-```
-steps(<integer>[, [ start | end ] ]?):
-jumP-start, jump-end, jump-none, jump-both
-```
-
-接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
-
-__timing-function 作用于每两个关键帧之间，而不是整个动画 __
-
-__step-start在变化过程中，都是以下一帧的显示效果来填充间隔动画，所以跳过0% __
-
-__step-end与上面相反，都是以上一帧的显示效果来填充间隔动画，所以跳过100% __ 
-
-[过渡曲线]( https://www.cnblogs.com/lcspring/p/10806951.html )
-
-[贝塞尔曲线在线取值]( https://cubic-bezier.com/#.17,.67,.83,.67 )
-
-```
-cubic-bezier(<number>, <number>, <number>, <number>)：
-```
-
-特定的贝塞尔曲线类型，两个坐标的4个数值需在[0, 1]区间内
-
-### 2D转换
-
-`transform-style: ;`    /*  **_flat   preserve-3d_ ***/      转换类型
-
-`transform-origin: ;`                                                原点
-
-如果提供两个，第一个用于横坐标，第二个用于纵坐标；如果只提供一个，该值将用于横坐标，纵坐标默认为50%。
-
-`transform:matrix(a,b,c,d,e,f);`搞不懂 https://www.cnblogs.com/Ivy-s/p/6786622.html
-
-#### 2D平移
-```
-transform: translate(-50%,-50%);
-           translatex();
-           translatey();
-```
-#### 2D缩放
-```
-transform: scale(0.8,1);
-           scalex();
-           scalex();
-```
-#### 2D旋转
-
-
-```
-transform: rotate(45deg);
-```
-
-单位是：deg度数；正值为顺时针，负值为逆时针。
-
-#### 倾斜
-
-```
-transform: skew(30deg,0deg);
-```
-
-第二个参数不写默认为0。
-
-X正值：下边往右拉伸，上边往左拉伸，倾斜30度；
-
-Y正值：右边往下拉伸，左边往上拉伸，倾斜30度；负数方向相反。
-
-### 3D变形
-![3d](images/3d.png)
-
-x左边是负的，右边是正数
-
-y上面是负数，下面是正数
-
-z里面是负数，外面是正数
-
-- `maerix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
-
-#### 3D旋转
-|名值对|说明|
-|-|-|
-|`transform:rotateX(180deg);` |前后翻着旋转|
-|`transform:rotateY(180deg);`|左右翻着旋转|
-|`transform:rotateZ(180deg);` |像时钟一样旋转|
-|`transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；`|分开写只显示下面的代码，简写可一起显示|
-#### 透视
-- `transform: perspective();  `   指定透视距离
-- `perspective-origin: ;    `          透视点位置
-
-#### 3D移动
-```
-transform:translate3d(X，Y，Z); 
-translatex()： 
-translatey()： 
-translatez()：
-```
-- `backface-visibility`      属性定义当元素不是正面对向屏幕时是否可见。
-
-- - 
-
-### 字体图标
-
-- 
-
-### 框架
-
-### 解决img下方空白
-
-在HTML5与CSS3中，DIV标签中的图片也就是IMG标签的默认vertical-align属性为baseline，文字分为顶线，中线，基线，底线。图片的下边缘是基线，所以在下方会留出基线和底线这一段距离的空白
-
-1. display：block
-2. vertical-align: middle / bottom / top；
-3. 负外边距
-4. 父元素font-size：0；
-5. 父元素line-height: 0；
-
-### input空间和button上下不对齐的原因
-
-button在高度计算上始终使用了Quirks模式。在Quirks模式下，边框的计算是在元素的宽度内的，而不像标准模式一样计算在外部（button的高度包含边框的高度
-
-由于【button元素】在浏览器中属性默认为inline-block，因此代码中空格会被显示为的空白
+## 疑难解答
 
 ### inline-block和float的区别
 
@@ -808,3 +828,4 @@ body{text-align:center};#content{text-align:left}
 |small-caption|小控件|
 |status-bar|窗口状态条|
 
+## 框架
