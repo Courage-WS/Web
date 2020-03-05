@@ -1,0 +1,18 @@
+       
+ 
+
+  
+  
+  FTP文件传输协议，传送至web服务器
+ （输入ftp www.….com连接服务器
+   用户名，密码
+   ..                         上一层目录
+   cd starbuzz                目录切换至starbuzz
+   put index.html（filename） 传送文件到目标目录
+   mkdir images               创建新目录images
+   get index.html（filename） 获取目录
+   dir                        得到当前目录的文件列表
+   pwd                        显示当前目录
+   bye                        退出命令）
+
+               空格用%20表示   

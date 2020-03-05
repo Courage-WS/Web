@@ -1,4 +1,4 @@
-# css层叠样式表
+# css语法
 
 - [验证工具](http://jigsaw.w3.org/css-validator/) / [验证]( https://validator.w3.org/unicorn/ )；[验证2](http://www.cssstats.com/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
@@ -19,12 +19,12 @@ property-value pairs        名值对
 三大特性：
 1. [继承](https://www.cnblogs.com/thislbq/p/5882105.html)，一般text font line开头的元素和color具有继承性
 2. 层叠
-3. 优先级，内部样式表和外部样式表之间没有优先级，后出现的样式优先级更高
+3. 优先级，内部样式表和外部样式表之间没有优先级，后出现的样式优先级更高(html 相反，是先出现的级别更高)，长江后浪推前浪，就近优先
 
 三大重点：
-1. 盒模型
-2. 浮动
-3. 定位
+1. 浮动
+2. 定位
+3. 盒模型
 
 ### 权重
 
@@ -32,7 +32,7 @@ property-value pairs        名值对
 
   样式优先顺序：读者重要声明，作者重要声明，作者声明，读者声明，用户代理
 
-  带有!important声明的读者样式权重最高
+  分号前带有!important声明的读者样式权重最高
 
   0 0 0 0 内联样式特殊性都是1000 每个id加100；每个类、伪类、属性加10；每个元素、伪元素加1。 *  0，继承 0。256进制
 
@@ -71,8 +71,10 @@ property-value pairs        名值对
 |选择器|说明||
 |-|-|-|
 |:lang()|静态伪类|语言选择器。类似\|=|
-|p:first-child {...}|父元素的第一个p元素|必须要满足第一个和p元素|
-|:last-child {...}|父元素的最后一个元素||
+|p:first-child {...}|父元素的第一个子元素p元素|必须要满足第一个和p元素。下同|
+|p:first-of-type {...}|父元素的第一个p元素|第一个 p 元素，甭管第几位。下同|
+|:last-child {...}|父元素的最后一个子元素||
+|:only-child|唯一一个子元素|父元素只有一个子元素|
 |:nth-child(n) {...}|父元素的第n个子元素||
 |:nth-last-child(n) {...}|父元素的倒数第n个子元素|父元素的孙子span是倒数第一个子元素，孙子q是倒数第二个子元素|
 |E:not(s) {...}|不包含s选择符的元素E||
@@ -119,7 +121,7 @@ property-value pairs        名值对
 必须放在样式表开头，放在其他内容后会被忽略
 
 3. 外部样式表：`<link style="text/css" />`
-#### ico
+### ico
 
 [转换 ico 图标]( http://www.bitbug.net/)
 
@@ -149,7 +151,11 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 ### position
 
+**_标准流在下面，浮动在中间，定位元素在上面_**
+
 相对定位，绝对定位，固定定位，粘性定位，正常流；
+
+_**定位的盒子一般需要单写宽度**_
 
 子绝父相
 
@@ -159,10 +165,10 @@ HTML中定位元素位置靠后，会覆盖位置靠前的元素
 
 absolute element 和 fixed element 未设置height，同时设置 top bottom时，element 会水平充满可用空间；同样可以充满垂直空间
 
-**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
-
 - 当页面放大以增加文本大小时，用`absolute`或`fixed`值定位的元素可能遮挡其他内容 ，[解决]( https://developer.mozilla.org/en-US/docs/Web/CSS/position )
 - 包含`fixed`或`sticky`内容的滚动元素可能会导致性能和可访问性问题  方案是[`will-change: transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change)在定位的元素上添加元素以在其自己的图层中渲染 
+
+**z-index: 1;**       _值越大，显示越高，可通过工具检测值（适用于定位元素）_
 
 ### float
 
@@ -176,7 +182,7 @@ absolute element 和 fixed element 未设置height，同时设置 top bottom时�
 
 _**块元素会隐藏进浮动元素，内联元素会包围浮动元素，不会隐藏进去**_
 
-_**特别注意：浮动元素需要和正常流父元素搭配使用**_
+_**特别注意：浮动元素需要和正常流父元素搭配使用，子盒子浮动参照父盒子对齐**_
 
 解决包裹问题（内联元素会包裹浮动元素），设置外边距
 
@@ -216,7 +222,7 @@ width: 100%;      和父元素一样宽
 
 盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
 
-- **padding:**   _不可以是负数_，内联元素：dir：ltr，边框会在水平方向占有位置，垂直方向会覆盖前后文本
+- **padding:**   _不可以是负数_，内联元素：dir：ltr，边框会在水平方向占有位置，垂直方向不会撑开盒子，覆盖前后文本
 - **margin:**   必须是块级元素，内联元素：dir：ltr，边框会在水平方向占有位置，垂直方向没有效果
 - **margin:** 0 auto;    在ie6中可能有双倍边距的bug
 
@@ -241,7 +247,7 @@ _**可点击图像可能有边框，边框设为none**_
 
 ### background
 
-**`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；
+**`background-position:`**   仅规定一个值，那么第二个的值是 center ；规定两个值，分别为 X 轴和 Y 轴；三个值或四个值 ，数值为前一个值的偏移量；（设置为百分比时，基数为：盒子宽度 - 背景宽度）
 
 百分比： **(container width - image width) * (position x%) = (x offset value)** ；同理 Y。
 
@@ -251,6 +257,12 @@ _**可点击图像可能有边框，边框设为none**_
 - contain：等比缩放，不会超出
 
 **`background-image:`**    多个背景图片，用逗号隔开；前面的背景图会覆盖后面的背景图，避免背景色覆盖背景图，背景色定义在最后一组
+
+url 后面需要加单引号，
+
+从安全角度来讲是要加上的...
+否则容易被xss
+因为`""`意味着是字符串...但是不加引号的话..传过来的万一是`);url("http://www.xss.xss")`就把cookie什么的可能泄露出去了
 
 多组背景也用逗号隔开，前面的会覆盖后面的。
 
@@ -272,6 +284,18 @@ _**可点击图像可能有边框，边框设为none**_
 | `opacity` | 0.0~1.0                         | 不透明度                                                     |
 
 ### font
+
+谷歌默认最小字体：12px
+
+```
+ .small-font{
+            font-size: 12px;
+            -webkit-transform-origin-x: 0;
+            -webkit-transform: scale(0.90);
+        }
+```
+
+
 
 ```
 表单元素并不继承父级 font 
@@ -342,9 +366,9 @@ _**可点击图像可能有边框，边框设为none**_
 #### 字体图标
 
 1. 设计
-2. 上传
-3. 下载
-4. 使用
+2. [上传](<https://icomoon.io/app/#/select>)，设计的 svg 或下载的 selection.json 
+3. 下载(generate font)
+4. 使用，使用的时候用单引号
 
 ```
 @font-face {
@@ -371,21 +395,22 @@ _**可点击图像可能有边框，边框设为none**_
 
 | 属性            | 值                              | 描述                                                         |
 | --------------- | ------------------------------- | ------------------------------------------------------------ |
-| `line-height`   |                                 | 指定最小距离，原始数字值指定了一个缩放因子，后代元素会继承这个缩放因子而不是计算值(0.9em)。行距比字号大7.8像素左右 |
+| `line-height`   |                                 | 指定最小距离。指定一个 __%__ 或 __em__，后代元素会继承计算值；指定一个数字，后代会继承这个数字。 |
 | `text-align`    | center / left / right           | 对齐仅用作块元素                                             |
 | `text-overflow` | _clip / ellipsis_               | 文本溢出overflow需要设置为**_非visible_**                    |
 | `unicode-bidi`  | normal / embed  / bidi-override | 重新排序 / 强调direction值                                   |
 
 line-height一般设置比font-size大7 8个字号就好
 
-line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。line-height < height时，**下对齐**，可以向上溢出
+line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。line-height > height时，**下对齐**，可以向上溢出
 
 CSS有条规则，要求关闭text-decoration，而使用边框建立链接下划线
 
 ### vertical-align
 
-`vertical-align`:     _baseline / sub / super / top / middeen / bottom / text-bottom_  垂直对齐文本，应用于**_行内元素和表单元格_**
+`vertical-align`:     _baseline / sub / super / top / middeen / bottom / text-bottom_ / number  垂直对齐文本，应用于**_行内元素和表单元格_**
 
+- 可以用数字进行微调，一般用于调整背景图片
 - 盒子默认**上对齐**，行内元素默认**基线对齐**，img 为基线对齐
 - 应用于行内元素（行内，行内块）和表单元格
 
@@ -463,17 +488,21 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 | --------------- | ---- | ----------------------------------------------------------- |
 | `border-radius` |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径 |
 
+**矩形正半圆，值为直径的一半（圆的半径）**
+
 ### box-shadow
 
 - `box-shadow:`        外部阴影可以影响其他盒子
 
 box-shadow 添加一个或多个阴影。该属性是由 _**逗号**_ 分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。
 
+（小米的影子）
+
 ### text-shadow
 
-| 属性          | 值                                            | 说明                                                         |
-| ------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| `text-shadow` | 水平偏移  垂直偏移  模糊距离 外延值  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
+| 属性          | 值                                                        | 说明                                                         |
+| ------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
+| `text-shadow` | 水平偏移  垂直偏移  模糊距离 外延值（影子大小）  阴影颜色 | 可以设定多组效果，每组参数以逗号分隔；第一个阴影在最上面，以此类推 |
 
 ##### 火焰文字效果
 
@@ -492,6 +521,8 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 ### transition
 
 **`transition`:要过渡的属性  花费时间  运动曲线  何时开始;**
+
+过渡需要写在元素本身，因为例如：过渡到 hover 时，如果 transition 写在 hover 上，移开鼠标时属性会瞬间恢复，如果写在元素本身，则移开时会同样过渡恢复
 
 _如果有多组属性变化，需要用逗号隔开_
 
@@ -542,7 +573,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 特定的贝塞尔曲线类型，两个坐标的4个数值需在[0, 1]区间内
 
-#### 2D转换
+### 2D转换
 
 `transform-style: ;`    /*  **_flat   preserve-3d_ ***/      转换类型
 
@@ -552,7 +583,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 `transform:matrix(a,b,c,d,e,f);`搞不懂 https://www.cnblogs.com/Ivy-s/p/6786622.html
 
-##### 2D平移
+#### 2D平移
 
 ```
 transform: translate(-50%,-50%);
@@ -560,7 +591,7 @@ transform: translate(-50%,-50%);
            translatey();
 ```
 
-##### 2D缩放
+#### 2D缩放
 
 ```
 transform: scale(0.8,1);
@@ -568,7 +599,7 @@ transform: scale(0.8,1);
            scalex();
 ```
 
-##### 2D旋转
+#### 2D旋转
 
 
 ```
@@ -577,7 +608,7 @@ transform: rotate(45deg);
 
 单位是：deg度数；正值为顺时针，负值为逆时针。
 
-##### 倾斜
+#### 倾斜
 
 ```
 transform: skew(30deg,0deg);
@@ -589,7 +620,7 @@ X正值：下边往右拉伸，上边往左拉伸，倾斜30度；
 
 Y正值：右边往下拉伸，左边往上拉伸，倾斜30度；负数方向相反。
 
-#### 3D变形
+### 3D变形
 
 ![3d](images/3d.png)
 
@@ -601,7 +632,7 @@ z里面是负数，外面是正数
 
 - `maerix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
 
-##### 3D旋转
+#### 3D旋转
 
 | 名值对                                                       | 说明                                   |
 | ------------------------------------------------------------ | -------------------------------------- |
@@ -610,12 +641,12 @@ z里面是负数，外面是正数
 | `transform:rotateZ(180deg);`                                 | 像时钟一样旋转                         |
 | `transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；` | 分开写只显示下面的代码，简写可一起显示 |
 
-##### 透视
+#### 透视
 
 - `transform: perspective();  `   指定透视距离
 - `perspective-origin: ;    `          透视点位置
 
-##### 3D移动
+#### 3D移动
 
 ```
 transform:translate3d(X，Y，Z); 
@@ -657,13 +688,15 @@ flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
 flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) * 差额空间 = 收缩宽度，比率占比和基准值有关
 
-align-content 只作用于多行容器，和 align-items 的却别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
+flex-basis 和width有关，如：box-sizing: content-box; basis 是内容宽度（width），和边框无关。但是差额空间和剩余空间要减去padding 和 border 等。
+
+align-content 只作用于多行容器，和 align-items 的区别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
 
 flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（文本为伸缩的盒子的子元素）（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
-## 疑难解答
+# 疑难解答
 
 ### inline-block和float的区别
 
@@ -682,7 +715,7 @@ float的优点：可以让元素环绕，低版本ie支持比较好，不用处�
 浏览器垂直方向默认靠上对齐
 
 - margin: 0 auto;      盒子必须有宽度
-- position: absolute;   left: 50%;    margin-left: -(box/2)     子绝父相
+- position: absolute;   left: 50%;    margin-left: -(box/2)     子绝父相（如果父盒子没有高度，relative 无法垂直居中）
 
 ### 外边距重叠
 
@@ -705,13 +738,39 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
 本质：解决父元素因为子元素浮动引起高度为 0 的问题
 
 1. 在浮动元素后：添加空白标签设置属性 ：clear: both;   *这个方法有个非常大且致命的bug，margin失效*
+
 2. 为父元素：添加属性：overflow: hidden;（触发bfc：5、6，父元素不能设置 height）
-3. 为父元素：添加伪元素：.clearfix:after{content: ""; display: block; height: 0; clear: both; visibility: hidden;} .clearfix{\*zoom: 1;}       IE6、7专属。触发haslayout
-4. 为父元素：用双伪元素清除浮动： 
-   - .clearfix:before, .clearfix:after{content: ""; display: table;}  *display: table;可以触发BFC清除浮动*
-   - .clearfix:after{clear: both;}
-   - .clearfix{\*zoom: 1;}
-### BFC
+
+3. 为父元素：添加伪元素：
+
+4. ```
+   .clearfix:after {
+   	content: ""; 
+   	display: block; 
+   	height: 0; 
+   	clear: both; 
+   	visibility: hidden;
+   } 
+   .clearfix {
+   	\*zoom: 1;
+   }       /*IE6、7专属。触发haslayout*/
+   ```
+
+5. 为父元素：用双伪元素清除浮动： 
+   ```
+   .clearfix:before,
+   .clearfix:after {
+   	content: ""; 
+   	display: table;
+   }  /*display: table;可以触发BFC清除浮动*/
+   .clearfix:after {
+   	clear: both;
+   }
+   .clearfix {
+   	\*zoom: 1;
+   }
+   ```
+## BFC
 
 浅析css中的BEC、IFC、GFC和FFC
 
@@ -736,9 +795,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 6. 表格的标题(`display: tabel-captions,caption`)
 7. 表格元素创建的匿名框
 
-**_注意，"display:table" 本身并不产生"block formatting contexts"。但是，它可以产生匿名框，其中包含"display:table-cell" 的框会产生块格式化上下文。总之，对于"display:table" 的元素，产生块格式化上下文的是匿名框而不是"display:table"。_**
-
-**_注意，是这些元素创建了块格式化上下文，它们本身不是块格式化上下。_**
+注意：_"display:table" 本身并不产生"block formatting contexts"。但是，它可以产生**匿名框**，其中包含"display:table-cell" 的框会产生**块格式化上下文**。总之，对于"display:table" 的元素，产生**块格式化上下文的是匿名框**而不是"display:table"。_
 
 #### bfc布局规则
 1. 内部的 box 会在垂直方向，一个接一个得放置。
@@ -748,7 +805,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
 6. 计算bfc的高度时，浮动或者定位元素也参与计算
 
-### BEM命名规范
+## BEM命名规范
 #### 什么是BEM命名规范
 
 bem是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
@@ -772,7 +829,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 ```
  .sub-block__element {}.sub-block--modifier {}
 ```
-### css 命名规范
+## css 命名规范
 
 - __网站头部__:                head/header(头部) top（顶部）
 - __导航__：                     nanv 导航具体区分：topnav(顶部导航)、mainnav(主导航)、mininav(迷你导航)、textnav(导航文本)、subnav(子导航/二级导航)
@@ -785,7 +842,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 可以使用"in"的写法做子 div 的命名，写法 in + 父 div,这样可以避免前面命名过了后面 div 不知道怎么去命名。比如 intop、inbox、infrom、inlogin等等。
 
-### 私有属性
+## 私有属性
 
 - -ms-（私有属性）；//IE
 - -moz-（私有属性）；//Firefox 
@@ -798,7 +855,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 参考网址：[web规范](http://nec.netease.com/standard) [说明]( https://blog.csdn.net/qq_36060786/article/details/79311244 )
 
-### 浏览器标准模式和兼容模式区别
+## 浏览器标准模式和兼容模式区别
 1. width不同
 
 在严格模式中：width是内容宽度，元素真正的宽度 = margin-left + border-left-width + padding-left + width + padding-right + border-right- width +  margin-right;
@@ -827,5 +884,17 @@ body{text-align:center};#content{text-align:left}
 |message-box|对话框|
 |small-caption|小控件|
 |status-bar|窗口状态条|
+
+## css精灵图
+
+新建单位改为 像素
+
+分辨率  72 （基本上一像素就是一点）
+
+颜色 RGB 8位
+
+背景  改成背景色
+
+打开需要放入的背景图，用ps移动十字架选中图片，拉到新建图片上(移动到新建图片的上面标题上会自动跳到新建图片上，不要松手，继续移动到图片上合适的位置松手即可)。最后把背景取消，保存为 png 格式
 
 ## 框架

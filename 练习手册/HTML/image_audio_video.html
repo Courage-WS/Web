@@ -62,6 +62,20 @@
             <embed width="320" height="240" src="../image/movie.swf" />
         </object>
     </video>
-	
+	   <!-- 视频 -->
+            <video poster=“video.jpg”
+                     id="...">
+            <!-- 浏览器从上往下选格式 -->
+<!-- 视频容器文件包含视频、音频、元数据，流行容器格式：MP4(主流）、ogg（开源）、webm（谷歌） -->
+                <source src="....mp4">   
+                <source src="....webm">
+            <!-- type属性单引号  mime类型  指定视频和音频编解码器（常用：h.264;vp8;theora） -->
+        <!-- codecs参数 -->
+                <source src="....ogg"  
+         type='video/ogg; codecs="theora,vorbis"'>
+        <!-- flash视频 -->
+                <object>...</object>
+                  <p>浏览器不支持视频显示这个</p>   
+              </video>
 </body>
 </html>

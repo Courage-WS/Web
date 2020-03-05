@@ -137,14 +137,13 @@ ctrl + shift + p 选择 install package
 
 ## 快捷键
 
-- ctrl+f 查找内容
-
-- ctrl+g 快速定位行
-
-- ctrl+h 替换 
-
-- ctrl+p 查找文件
-- alt+shift+num 分栏显示(num=1，一栏，2两栏，3三栏，4四栏，5四宫格，8两横栏)
+- 按住鼠标滚轮下拉选择    选中不同行同竖列等宽字符
+- ctrl + n 新建文件
+- ctrl + f 查找内容
+- ctrl + g 快速定位行
+- ctrl + h 替换 
+- ctrl + p 查找文件
+- alt + shift + num 分栏显示(num = 1，一栏，2两栏，3三栏，4四栏，5四宫格，8两横栏)
 - 自动保存：设置里面找save_on_focus_lost，在user里改成true，但是只能失焦保存，没法儿像phpstorm那样停止输入就保存
 
 ### 显示菜单栏
