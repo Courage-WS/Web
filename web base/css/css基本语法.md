@@ -38,6 +38,55 @@ property-value pairs        名值对
 
   【：not】否定伪类在优先级计算中不会被看做是伪类，但是，会把:not里面的选择器当普通选择器计数。这句话有点不好理解，其实就是忽略掉:not，其他伪类(如:hover)参与css优先级的计算，但是「:not」不参与计算。
 
+### 插入样式
+
+代入样式的三种方法：
+
+1. 行内样式表：`<p style="color: #ccc"></p>`
+2. 内部样式表：`<style rel="stylesheet"></style>`
+
+在内部样式表插入样式：`@impot url{...} screen`(指定设备)
+
+必须放在样式表开头，放在其他内容后会被忽略
+
+3. 外部样式表：`<link style="text/css" />`
+
+### @规则
+
+1. @charset            设置样式编码
+
+   - @charset 'UTF-8';
+
+2. @import              导入其他样式文件
+
+   - @import 'reset.css';
+
+3. @media              媒体查询（用于移动端）
+
+   ```
+   @media screen and(min-device-width: 481px) {
+       #guarantee {...}
+   }
+   @media screen and(max-device-width: 480px){
+       #guarantee {...}
+       @media print {
+           body {...}
+       }
+   }
+   ```
+
+4. @font-face          添加自定义字体
+
+   ```
+   @font-face {	一般放在上面
+       font-family:"字体名"
+       src:url("文件位置"),
+       url("文件位置");
+   }
+   ```
+
+5. 
+
 ### 选择器
 
 类的第一个字符不能是数字，在HTML中多个类用空格隔开
@@ -65,7 +114,8 @@ property-value pairs        名值对
 注意：
 - a:hover必须跟在a:link和a:visited后面
 - a:active必须跟在a:hover后面
-`img:hover .arr {...}`  鼠标经过类img时，后代类arr的样式
+  `img:hover .arr {...}`  鼠标经过类img时，后代类arr的样式
+- a 和 a:hover 属于同一属性，设置样式时看权重
 
 ##### 结构（位置）伪类
 |选择器|说明||
@@ -111,16 +161,6 @@ property-value pairs        名值对
 |[class$=value]|以指定值结尾的每个元素||
 |class\*=value]|包含指定词汇的每个元素||
 |[class\|=value]|带有指定词汇开头的属性值的元素||
-### 插入样式
-代入样式的三种方法：
-1. 行内样式表：`<p style="color: #ccc"></p>`
-2. 内部样式表：`<style rel="stylesheet"></style>`
-
-在内部样式表插入样式：`@impot url{...} screen`(指定设备)
-
-必须放在样式表开头，放在其他内容后会被忽略
-
-3. 外部样式表：`<link style="text/css" />`
 ### ico
 
 [转换 ico 图标]( http://www.bitbug.net/)
@@ -131,20 +171,9 @@ property-value pairs        名值对
 
 ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用image/x-icon。然而最好使用IANA注册的MIME类型，因为多数主流浏览器现在支持它）
 
-### 指定设备类型
-```
-@media screen and(min-device-width: 481px) {
-    #guarantee {...}
-}
-@media screen and(max-device-width: 480px){
-    #guarantee {...}
-    @media print {
-        body {...}
-    }
-}
-```
-## 布局属性
+某些浏览器特别是ie，不支持本地协议的图标（即网页通过”file:///“协议打开），必须通过服务器环境打开	
 
+### 布局属性
 ### display
 
 `display`:  none / inline / block / inline-block / flex
@@ -218,6 +247,10 @@ width: 100%;      和父元素一样宽
 - 仅适用于块元素
 - 加了浮动和定位的盒子需要添加 `width: 100%`，或者给宽度
 
+`width: calc(100% - 190px);`
+
+用于动态计算长度值，' + - * / ' 运算符前后需要加空格，100%为父级宽度；
+
 ### padding 和 margin
 
 盒子居中对齐：`margin: 0 auto;`在ie6中可能有双倍边距的bug，或者`-margin`
@@ -283,6 +316,12 @@ url 后面需要加单引号，
 | `color`   | transparent，#000，rgb()256进制 | 透明度安全色：20% 51,16进制33的倍数。使用RGB代码的百分比颜色值，取值为0时也不能省略百分号，**必须写为0%**。 |
 | `opacity` | 0.0~1.0                         | 不透明度                                                     |
 
+rgba()，支持 ie9+
+
+background-color：#000\9;      /* 仅支持 ie9 以下 */
+
+filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）  */
+
 ### font
 
 谷歌默认最小字体：12px
@@ -335,15 +374,6 @@ url 后面需要加单引号，
 为了照顾不同电脑的字体安装问题，我们尽量只用宋体和微软雅黑中文字体
 
 在 CSS 中设置字体名称，直接写中文是可以的。但是在文件编码（GB2312、UTF-8 等）不匹配时会产生乱码的错误。xp 系统不支持 类似微软雅黑的中文。_**尽量使用英文名称或 Unicode 编码**_
-#### 添加字体
-
-```
-@font-face {	一般放在上面
-    font-family:"字体名"
-    src:url("文件位置"),
-    url("文件位置");
-}
-```
 #### 字体格式
 
 不同浏览器所支持的字体格式是不一样的，我们有必要了解一下有关字体格式的知识。
@@ -380,6 +410,16 @@ url 后面需要加单引号，
     url('fonts/icomoon.svg?7kkyc2#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+/* format  作用是提前告知浏览器这个文件的格式，不识别的格式浏览器就不会加载，可以提高性能的优化 */
+.icomoon {
+    font-family: "icomoon",sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    
+    /* 抗锯齿优化 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 ```
 - [icomoon字库]( http://icomoon.io)
@@ -665,9 +705,28 @@ translatez()：
 
 文本回绕
 
+### 渐变色
+
+linear-gradient(direction, color-stop1, color-stop2, ...)
+
+例：
+
+```
+/* 兼容ie10+ */
+background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
+/* background: linear-gradient(45deg,transparent 52px,#ff5000 0) top left */
+
+/* ie6+ 专属 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
+```
+
+
+
 ## 布局
 
 ### 伸缩盒
+
+兼容性：ie10+
 
 | 属性              | 值                                                           | 描述         |
 | ----------------- | ------------------------------------------------------------ | ------------ |

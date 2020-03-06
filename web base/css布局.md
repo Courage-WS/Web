@@ -32,6 +32,15 @@ html需要**设置最小尺寸**，浏览器放大或缩小时会改变html尺�
 - p，dt 和 h1里面不可以放块级元素，
 - a 元素里可以放块元素
 
+### html页面权重
+
+- title 最高
+- 标题次之
+  - h1 一半用作页面标题或 logo
+  - h2 一般用作页面副标题
+  - h3 一般用作板块标题
+  - h4 一般用作板块标题之后的副标题
+
 ### `display`: [布局]( https://developer.mozilla.org/en-US/docs/Web/CSS/display#Guides_and_Examples  )
 
 ### 浮动盒子一排放不下
@@ -191,6 +200,55 @@ button在高度计算上始终使用了Quirks模式。在Quirks模式下，边�
 3. 负外边距
 4. 父元素font-size：0；
 5. 父元素line-height: 0；
+
+### 图片居中
+
+1. 图片的父元素设置：{ display：flex；align-items：center；justify-align：space-around；}
+2. 图片的父元素设置：{ display：table-cell；vertical-align：middle；text-align：center；}
+3. 绝对定位，（在不清楚盒子尺寸的情况下，可以设置：上下左右 0，margin：auto；，或者左上 50%，transform：translate（-50%，-50%）；
+
+### 解决 webkit 最小字体限制
+
+html{
+    -webkit-text-size-adjust: none;
+}
+
+### 因换行产生的空白间隙
+
+- 设置font-size: 0; 用于消除换行符、tab（制表符）、空格等字符造成的影响，但需注意以下几点：
+
+1. IE6，IE7浏览器当设置font-size：0时，换行符、tab（制表符）、空格始终存在1px的空隙；
+2.  最新版本的Safari浏览器，Chrome浏览器不支持font-size: 0;；
+
+　　　解决方法如下：
+
+1. 针对IE6、7浏览器，使用word-spacing 修复 IE6、7 中始终存在的 1px 空隙，减少单词间的空白（即字间隔），即： word-spacing:-1px;；
+2. 使用webkit的私有属性，让字体大小不受设备终端的调整，可定义字体大小小于12px, html{-webkit-text-size-adjust:none;}
+
+　　　css代码如下：
+
+```
+html{
+    -webkit-text-size-adjust: none;
+    /* 使用webkit的私有属性，让字体大小不受设备终端的调整，可定义字体大小小于12px */
+}
+div {
+    font-size: 0;              /* 所有浏览器 */
+    
+    *word-spacing: -1px;
+    /* 使用word-spacing 修复 IE6、7 中始终存在的 1px 空隙，减少单词间的空白（即字间隔） */
+ }
+span {
+    font-size: 12px;
+    letter-spacing: normal; 
+    /* 设置字母、字间距为0 */
+    
+    word-spacing: normal; 
+    /* 设置单词、字段间距为0 */
+ }
+```
+
+
 
 ### 溢出显示省略号
 
