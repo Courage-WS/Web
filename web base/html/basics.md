@@ -13,13 +13,31 @@
 | Opera | presto  / chromium / blink |  |
 ### 浏览器模式
 - 标准模式   浏览器根据标准规约来渲染页面
-- 兼容模式
+- 兼容模式（混杂模式）
   - 向前兼容：应用发展超前系统 应用发展超前系统了
   - 向后兼容：系统发展超越应用 系统发展超越应用
+
+#### 区别：
+
+兼容模式：
+
+- 盒模型 = width
+- 一个块元素div中包含的内容只有图片时，图片底部没有空白
+- span等行内元素设置 width 和 height 会生效
+- 若父元素没有设置高度，子元素设置一个百分比的高度是无效的。
+- margin：0 auto设置水平居中在IE下会失效，可以用：text-align
+- table的自提属性不能继承上层的设置
+- white-space：pre会失效
 
 h4.01基于SGML,引用DTD.   有三种声明:Strict ,  Transitional , Frameset
 
 ## 网页
+
+### 声明
+
+告知浏览器的解析器，用什么文档类型规范解析这个文档
+
+未设置 DOCTYPE 会以兼容模式呈现
 
 ### 组成
 1. 图片，
@@ -95,7 +113,15 @@ img、input
 时间           <time datetime="2012-02-08">2/08/2012</time> 官方格式：2012-02-08 05:00
 内容用官方格式就不需要datetime；时间或日期后加z表示UTC时间（UTC=GMT）
 
-### <a href="https://dev.w3.org/html5/html-author/charref">实体字符大全</a>
+### <a href="https://dev.w3.org/html5/html-author/charref">
+
+### H5 标签
+
+多用于移动端
+
+header、nav、article、section、aside、footer、figure、figcaption    在 ie9 中需要转换为块级元素
+
+### 实体字符大全</a>
 
 | 结果 | 描述               | 实体名称 | 实体编号 |
 | :--- | :----------------- | :------- | :------: |

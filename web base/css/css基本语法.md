@@ -157,10 +157,10 @@ property-value pairs        名值对
 |[class]|指定属性的元素||
 |[class=value]|指定属性和值的元素||
 |[class~=value]|包含指定值的元素||
-|[class^=value]|以指定值开头的每个元素||
-|[class$=value]|以指定值结尾的每个元素||
-|class\*=value]|包含指定词汇的每个元素||
-|[class\|=value]|带有指定词汇开头的属性值的元素||
+|[class^=value]|以指定字符串开头的每个元素||
+|[class$=value]|以指定字符串结尾的每个元素||
+|class\*=value]|包含指定字符串的每个元素||
+|[class\|=value]| 以指定字符串开头并用连接符"-"分隔的元素，或者属性值仅为val ||
 ### ico
 
 [转换 ico 图标]( http://www.bitbug.net/)
@@ -715,6 +715,7 @@ linear-gradient(direction, color-stop1, color-stop2, ...)
 /* 兼容ie10+ */
 background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
 /* background: linear-gradient(45deg,transparent 52px,#ff5000 0) top left */
+/* X 轴方向为0度，逆时针为正度数 */
 
 /* ie6+ 专属 */
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
