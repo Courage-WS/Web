@@ -128,6 +128,10 @@ property-value pairs        名值对
 |:nth-child(n) {...}|父元素的第n个子元素||
 |:nth-last-child(n) {...}|父元素的倒数第n个子元素|父元素的孙子span是倒数第一个子元素，孙子q是倒数第二个子元素|
 |E:not(s) {...}|不包含s选择符的元素E||
+n 可以是关键词：even、odd；也可以是公式：2n + 1、n + 4。
+
+s 可以是元素 或者属性值
+
 ##### 目标伪类
 
 `:target` 目标伪类选择器：可用于选取当前活动的目标元素。比如：当点击A链接时，地址B的样式。
@@ -144,6 +148,8 @@ property-value pairs        名值对
 伪元素必须放在出现该伪元素的选择器后面
 
 伪元素必须有 `content`，否则伪元素就不起作用
+
+属于行内元素
 
 |选择器|说明|
 |-|-|
@@ -580,6 +586,8 @@ _如果有多组属性变化，需要用逗号隔开_
 
 时间的单位必须写 s秒 ms毫秒
 
+##### timing-function 
+
 | 值          | 说明           | 等同于                             |
 | ----------- | -------------- | ---------------------------------- |
 | linear      | 线性过渡       | cubic-bezier(0.0, 0.0, 1.0, 1.0)   |
@@ -587,8 +595,8 @@ _如果有多组属性变化，需要用逗号隔开_
 | ease-in     | 由慢到快       | cubic-bezier(0.42, 0, 1.0, 1.0)    |
 | ease-out    | 由快到慢       | cubic-bezier(0, 0, 0.58, 1.0)      |
 | ease-in-out | 由慢到快再到慢 | cubic-bezier(0.42, 0, 0.58, 1.0)   |
-| step-start  |                | steps(1, start)                    |
-| step-end    |                | steps(1, end)                      |
+| step-start  | 步进函数       | steps(1, start)                    |
+| step-end    | 一步一步显示   | steps(1, end)                      |
 
 ```
 steps(<integer>[, [ start | end ] ]?):
@@ -596,6 +604,10 @@ jumP-start, jump-end, jump-none, jump-both
 ```
 
 接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
+
+ie 苹果 欧鹏等浏览器不支持 jump- 关键字的 steps
+
+步进函数可以用作打字机效果
 
 __timing-function 作用于每两个关键帧之间，而不是整个动画 __
 
@@ -613,17 +625,23 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 特定的贝塞尔曲线类型，两个坐标的4个数值需在[0, 1]区间内
 
-### 2D转换
+### transform
 
-`transform-style: ;`    /*  **_flat   preserve-3d_ ***/      转换类型
+缩写：transform：translate(x, y) rotate(deg) scale(x, y)；
 
-`transform-origin: ;`                                                原点
+缩写时，旋转和移动的位置不一样时，结果也不一样。先旋转在移动会改变坐标轴方向（比如一个图片的z轴正方向是正前方，旋转之后图片的正前方还是z轴正方向 ）
+
+只能转换由盒模型定位的元素，不能定位行内元素
+
+`transform-origin: x y;`                                        原点（默认元素的中心点（50% 50%））
 
 如果提供两个，第一个用于横坐标，第二个用于纵坐标；如果只提供一个，该值将用于横坐标，纵坐标默认为50%。
 
+#### 2D transform
+
 `transform:matrix(a,b,c,d,e,f);`搞不懂 https://www.cnblogs.com/Ivy-s/p/6786622.html
 
-#### 2D平移
+##### 2D translate
 
 ```
 transform: translate(-50%,-50%);
@@ -631,16 +649,24 @@ transform: translate(-50%,-50%);
            translatey();
 ```
 
-#### 2D缩放
+最大的优点是不会影响其他元素布局
+
+单位为百分比时，是相对于元素本身
+
+对行内元素没有效果
+
+###### 水平垂直居中
 
 ```
-transform: scale(0.8,1);
-           scalex();
-           scalex();
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 ```
 
-#### 2D旋转
 
+
+##### 2D rotate
 
 ```
 transform: rotate(45deg);
@@ -648,7 +674,26 @@ transform: rotate(45deg);
 
 单位是：deg度数；正值为顺时针，负值为逆时针。
 
-#### 倾斜
+##### 2D scale
+
+```
+transform: scale(0.8,1);
+           scalex();
+           scaley();
+```
+
+如果两个参数一样，可以只写一个参数
+
+缩放时，边框阴影等都会一起缩放
+
+###### 水平垂直居中放大（width，height，scale）
+
+- 水平垂直居中时用 translate，放大用 wdith，height 时，会向四周扩散
+- 水平垂直居中时用 translate，放大用 scale 时，会根据 translate 作用之前的位置向四周扩散
+- 水平垂直居中时用 -margin，放大用 scale 时，会向四周扩散
+- 水平垂直居中时用 -margin，放大用 wdith，height 时，会向右下方扩散
+
+##### 倾斜
 
 ```
 transform: skew(30deg,0deg);
@@ -656,11 +701,11 @@ transform: skew(30deg,0deg);
 
 第二个参数不写默认为0。
 
-X正值：下边往右拉伸，上边往左拉伸，倾斜30度；
+X正值：上边往左拉伸，下边往右拉伸，倾斜30度；
 
-Y正值：右边往下拉伸，左边往上拉伸，倾斜30度；负数方向相反。
+Y正值：左边往上拉伸，右边往下拉伸，倾斜30度；负数方向相反。
 
-### 3D变形
+#### 3D变形
 
 ![3d](images/3d.png)
 
@@ -672,21 +717,57 @@ z里面是负数，外面是正数
 
 - `maerix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
 
-#### 3D旋转
+缩写：transform：perspective()  translate3d(x, y)  rotate3d(deg)  scale3d(x, y)；   透视距离要放在前面 否则没有效果
 
-| 名值对                                                       | 说明                                   |
-| ------------------------------------------------------------ | -------------------------------------- |
-| `transform:rotateX(180deg);`                                 | 前后翻着旋转                           |
-| `transform:rotateY(180deg);`                                 | 左右翻着旋转                           |
-| `transform:rotateZ(180deg);`                                 | 像时钟一样旋转                         |
-| `transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；` | 分开写只显示下面的代码，简写可一起显示 |
+##### 转换类型
 
-#### 透视
+默认子元素不开启 3D 模式，父盒子转换时，一定要开启子盒子的 3D 模式
 
-- `transform: perspective();  `   指定透视距离
+`transform-style: ;`    /*  **_flat   preserve-3d_ ***/      
+
+##### 透视
+
+使网页产生 3D 效果
+
+<img src="F:/web/web%20base/css/images/perspective.png">
+
+缩放比例与d /（d - Z）成比例  d 为透视值，z为轴距离
+
+**表示用户和z=0平面之间的距离，使具有三维位置变换的元素产生透视效果。** 
+
+- `perspective：;  `   指定透视距离
 - `perspective-origin: ;    `          透视点位置
 
-#### 3D移动
+这两个值作用于被透视元素的父元素，透视值越大，视角越远，元素显得越小（进大远小）。子元素透视时父元素一定要有宽度，不然会有背面阴影效果
+
+- transform：perspective（）；另一种透视方法作用于元素本身
+
+一般把 perspective  写在父盒子上，用 Z 轴调整大小
+
+透视矩阵计算如下:
+
+1. 从单位矩阵开始。
+2. 通过计算透视原点的X和Y值来平移
+3. 乘以从perspective()转换函数得到的矩阵，其中长度由perspective属性的值提供
+4. 通过计算出的负的透视原点的X和Y值来转换
+
+##### 3D旋转
+
+| 名值对                                                       | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `transform:rotateX(180deg);`                                 | 前后翻着旋转                                                 |
+| `transform:rotateY(180deg);`                                 | 左右翻着旋转                                                 |
+| `transform:rotateZ(180deg);`                                 | 像时钟一样旋转                                               |
+| `transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；` | 分开写只显示下面的代码，简写可一起显示，旋转各轴的顺序不同，结果就不一样 |
+| `transform:rotate3d(x, y, z, a)`                             | x,y,z 定义选中轴，a 定义旋转角度，                           |
+
+从矢量的末端向原点看，旋转是顺时针的。
+
+<img src="images/left-hand.png">
+
+左手法则：大拇指与其他四个手指成90度，四指弯曲，大拇指与坐标轴平行，指向正轴方向(X右，Y下，Z前)，其他四指弯曲的方向就是正度数旋转的方向
+
+##### 3D移动
 
 ```
 transform:translate3d(X，Y，Z); 
@@ -695,7 +776,42 @@ translatey()：
 translatez()：
 ```
 
+##### 背面可见性
+
 - `backface-visibility`      属性定义当元素不是正面对向屏幕时是否可见。
+
+### animation
+
+多个动画用逗号隔开
+
+| 属性                      | 描述         | 值                         |
+| ------------------------- | ------------ | -------------------------- |
+| @keyframes                | 规定动画     |                            |
+| animation-name            | 动画名称     |                            |
+| animation-duration        | 持续时间     |                            |
+| animation-timing-function | 时间函数     |                            |
+| animation-delay           | 推迟时间     |                            |
+| animation-iteration-count | 播放次数     | number，infinite           |
+| animation-direction       | 是否反向运动 | normal，reverse，alternate |
+| animation-fill-mode       | 结束状态     | forwrads，backwards        |
+| animation-play-state      | 动画状态     | running，paused            |
+
+```css
+@keyframes {
+    0% {
+        width: 40px;
+        opacity: 1;
+    }
+    100%{
+        width: 70px;
+        opacity: 0;
+    }
+}
+```
+
+伪元素动画支持的不好
+
+练习：百度浏览器首页动画
 
 ### 剪裁
 
@@ -715,7 +831,7 @@ linear-gradient(direction, color-stop1, color-stop2, ...)
 /* 兼容ie10+ */
 background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
 /* background: linear-gradient(45deg,transparent 52px,#ff5000 0) top left */
-/* X 轴方向为0度，逆时针为正度数 */
+/* X 轴方向为0度，正度数为逆时针 */
 
 /* ie6+ 专属 */
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
