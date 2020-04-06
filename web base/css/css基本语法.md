@@ -128,13 +128,13 @@ property-value pairs        名值对
 |:nth-child(n) {...}|父元素的第n个子元素||
 |:nth-last-child(n) {...}|父元素的倒数第n个子元素|父元素的孙子span是倒数第一个子元素，孙子q是倒数第二个子元素|
 |E:not(s) {...}|不包含s选择符的元素E||
-n 可以是关键词：even、odd；也可以是公式：2n + 1、n + 4。
+n 可以是关键词：even、odd；也可以是公式：2n + 1、n + 4。（2n 是偶数，2n +1 是奇数，-n + 3 是前三个，n + 4 是从第四个开始）
 
 s 可以是元素 或者属性值
 
 ##### 目标伪类
 
-`:target` 目标伪类选择器：可用于选取当前活动的目标元素。比如：当点击A链接时，地址B的样式。
+`:target` 目标伪类选择器：可用于选取当前活动的目标元素。比如：当点击A链接时，目标B的样式。
 
 ```
 :target {
@@ -166,7 +166,7 @@ s 可以是元素 或者属性值
 |[class^=value]|以指定字符串开头的每个元素||
 |[class$=value]|以指定字符串结尾的每个元素||
 |class\*=value]|包含指定字符串的每个元素||
-|[class\|=value]| 以指定字符串开头并用连接符"-"分隔的元素，或者属性值仅为val ||
+|[class\|=value]| 以指定字符串开头并用连接符"-"分隔的元素，或者属性值仅为val（空格分开也不行）。 ||
 ### ico
 
 [转换 ico 图标]( http://www.bitbug.net/)
@@ -330,6 +330,17 @@ filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）
 
 ### font
 
+```
+表单元素并不继承父级 font 
+```
+
+| 属性          | 值                                                          | 描述                                                       |
+| ------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
+| `font`        | style / variant / weight / stretch / size / height / family | 简写不能变更顺序，必须有**`font-size`**和**`font-family`** |
+| `font-family` | serif sans-serif cursive fantasy monospace                  |                                                            |
+
+#### 字体尺寸
+
 谷歌默认最小字体：12px
 
 ```
@@ -340,17 +351,56 @@ filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）
         }
 ```
 
+##### em
 
+- 任意浏览器的默认字体高都是16px。
+- 单位为 em 时继承计算值
+- 为了简化font-size的换算，需要在css中的body选择器中声明 Font-size=62.5%，这就使em值变为 16px\*62.5%=10px, 
+- 只需要将你的原来的px数值除以10，然后换上em作为单位就行了。
+- 重新计算那些被放大的字体的em数值。避免字体大小的重复声明。
+
+##### rem
+
+相对单位（root em，根em）
+
+集相对大小和绝对大小的优点于一身，rem 也是相对单位，但是只相对于 HTML 根元素，em 则相对于父级元素。
+
+用法：
 
 ```
-表单元素并不继承父级 font 
+html{font-size:62.5%;} 
+body{font-size:12px;font-size:1.2rem ;} 
+p{font-size:14px;font-size:1.4rem;}
 ```
 
-| 属性          | 值                                                          | 描述                                                       |
-| ------------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| `font`        | style / variant / weight / stretch / size / height / family | 简写不能变更顺序，必须有**`font-size`**和**`font-family`** |
-| `font-family` | serif sans-serif cursive fantasy monospace                  |                                                            |
+移动端例子：
 
+```
+@media only screen and (min-width: 320px){
+  html {
+    font-size: 62.5% !important;
+  }
+}
+@media only screen and (min-width: 640px){
+  html {
+    font-size: 125% !important;
+  }
+}
+@media only screen and (min-width: 750px){
+  html {
+    font-size: 150% !important;
+  }
+}
+@media only screen and (min-width: 1242px){
+  html {
+    font-size: 187.5% !important;
+  }
+}
+```
+
+
+
+除了IE8及更早版本外，所有浏览器均已支持rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明 `p {font-size:14px; font-size:.875rem;}`
 
 无衬线用于计算机屏幕，有衬线用于报纸文字，等宽用于代码示例，手写字体用于标题，装饰性文字
 
@@ -451,6 +501,10 @@ line-height一般设置比font-size大7 8个字号就好
 line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。line-height > height时，**下对齐**，可以向上溢出
 
 CSS有条规则，要求关闭text-decoration，而使用边框建立链接下划线
+
+word-break: keep-all    break-all
+
+overflow-wrap: break-word
 
 ### vertical-align
 
@@ -825,13 +879,35 @@ translatez()：
 
 linear-gradient(direction, color-stop1, color-stop2, ...)
 
+方向 起始颜色 结束颜色
+
+direction：值可选，to top 值会被转换成角度0度，以向顶部中央方向为起点顺时针增加。渐变线的结束点与其起点中心对称。默认 to bottom。关键字前应该加 to
+
+color-stop：
+
+- 首颜色不指定位置默认为 0%，末颜色不指定位置默认为 100%。
+- 一个可以指定两个位置，起点和终点。
+- 一个颜色起点和终点之间的颜色为指定颜色。
+- 两个颜色之间有距离的话，颜色为两个颜色的过渡色
+- 两个颜色之间没有距离的话，两个颜色之间会创建一个硬转换，即从一个颜色生硬的过渡到另一个颜色
+
+如果后面的颜色终止点小于前面颜色的终止点则后面的会被覆盖，从而创建一个硬转换。
+
+```css
+linear-gradient(red 40%, yellow 30%, blue 65%);
+/* 红色的终止点在40% */
+```
+
+如果所有点和长度都使用固定单位（而不是相对于background-size的值指定的百分比或关键字），则渐变背景不受 [`background-size`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size) 的影响。
+
+方向为起始方向的关键字时，必须添加浏览器的私有前缀：-webkit-linear-gradient（）
+
 例：
 
 ```
 /* 兼容ie10+ */
 background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
 /* background: linear-gradient(45deg,transparent 52px,#ff5000 0) top left */
-/* X 轴方向为0度，正度数为逆时针 */
 
 /* ie6+ 专属 */
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
@@ -843,22 +919,26 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', en
 
 ### 伸缩盒
 
+父元素设置为：display： flex；
+
+子元素的 float、clear 和 vertical-align 都会失效
+
 兼容性：ie10+
 
-| 属性              | 值                                                           | 描述         |
-| ----------------- | ------------------------------------------------------------ | ------------ |
-| `flex`            |                                                              | 缩写         |
-| `flex-grow`       |                                                              | 扩展比率     |
-| `flex-shrink`     |                                                              | 收缩比率     |
-| `flex-basis`      |                                                              | 基准值       |
-| `flex-flow`       |                                                              | 缩写         |
-| `flex-direction`  | row、column-reverse                                          | 主轴排列方式 |
-| `flex-wrap`       | nowrap                                                       | 主轴是否换行 |
-| `justify-content` | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式 |
-| `align-items`     | flex-start、flex-end、center、baseline、stretch              | 单行侧轴对齐 |
-| `align-content`   | flex-start、flex-end、center、space-between、space-around、stretch | 多行侧轴对齐 |
-| `align-self`      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐 |
-| `order`           |                                                              | 排列顺序     |
+| 属性              | 值                                                           | 描述                                       |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
+| `flex`            |                                                              | 缩写                                       |
+| `flex-grow`       | 0                                                            | 扩展比率                                   |
+| `flex-shrink`     | 1                                                            | 收缩比率                                   |
+| `flex-basis`      | auto                                                         | 基准值                                     |
+| `flex-flow`       |                                                              | 缩写                                       |
+| `flex-direction`  | row（从左到右）、column-reverse（从下到上）                  | 主轴（用来多个盒子水平或垂直显示）         |
+| `flex-wrap`       | nowrap （默认不换行）                                        | 主轴是否换行                               |
+| `justify-content` | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式                               |
+| `align-items`     | flex-start、flex-end、center、baseline、stretch              | 每行侧轴对齐（多行时先把父元素平分再对齐） |
+| `align-content`   | flex-start、flex-end、center、space-between、space-around、stretch | 只能多行整体侧轴对齐                       |
+| `align-self`      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐                               |
+| `order`           | 0                                                            | 排列顺序                                   |
 
 flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
@@ -866,7 +946,7 @@ flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) *
 
 flex-basis 和width有关，如：box-sizing: content-box; basis 是内容宽度（width），和边框无关。但是差额空间和剩余空间要减去padding 和 border 等。
 
-align-content 只作用于多行容器，和 align-items 的区别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。
+align-content 只作用于多行容器，和 align-items 的区别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。默认都是：stretch
 
 flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
@@ -981,7 +1061,52 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
 6. 计算bfc的高度时，浮动或者定位元素也参与计算
 
+## 移动端
+
+切图用 ps 的 cutterman
+
+多倍图 与物理像素和物理像素比
+
+多倍图需要准备的像素是实际需要的 n 倍，倍数为物理像素比
+
+### 调试方法
+
+- 谷歌浏览器模拟
+- 搭建 web 服务器，手机访问
+- 使用外网服务器，ip 或域名访问
+
+### 常见特殊样式
+
+- 盒模型
+  - box-sizing: border-box;
+  - -webkit-box- sizing: border-box;
+- 清除默认 链接点击的时候高亮 (透明)
+  - -webkit-tap-highlight-color: transparent;
+- 清除 按钮和输入框 的默认样式，ios 上添加这个属性才能自定义样式
+  - -webkit-appearance: none;
+- 禁止长按页面时弹出菜单（类似 pc 端的右击）
+  - img, a { -webkit-touch-callout: none; }
+
+### 二倍精灵图
+
+- 在 ps 把精灵图缩放为原来的一半
+- 然后测量坐标
+- background-size 写为原图的一半
+
+### 媒体查询
+
+有层叠性 后面会覆盖前面 一般是从小到大写
+
+`media = "mediatype and | not | only (media feature)"`
+
+all    print    scree
+
+`@media mediatype and | not | only (media feature){ }`
+
+min- 从小到大，max- 从大到小
+
 ## BEM命名规范
+
 #### 什么是BEM命名规范
 
 bem是块（block）、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种前端 CSS 命名方法论。
@@ -1072,5 +1197,9 @@ body{text-align:center};#content{text-align:left}
 背景  改成背景色
 
 打开需要放入的背景图，用ps移动十字架选中图片，拉到新建图片上(移动到新建图片的上面标题上会自动跳到新建图片上，不要松手，继续移动到图片上合适的位置松手即可)。最后把背景取消，保存为 png 格式
+
+### 图片格式
+
+<img src="images/webp.png">
 
 ## 框架

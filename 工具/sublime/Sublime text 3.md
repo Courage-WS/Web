@@ -35,6 +35,24 @@ E627DDBA 960A2153 69A2D98A C87C0607
 2. 升级“upgrade packages”
 3. 删除“remove package”
 
+### 插件无法安装
+
+下载channels.json文件，地址：<https://pan.baidu.com/s/13KvDl96Hkg588IXh-TxpRA>，下载完成后解压
+
+选择Preference(首选项)> Package Settings(插件-用户) > Settings-User，点击 进入
+
+然后添加以下代码
+
+```
+"channels":
+	[
+		"E://Sublime Text/channel_v3.json"
+	],
+	// 路径自行修改
+```
+
+
+
 [配色方案](http://tmtheme-editor.herokuapp.com/)
 
 [配置规则](http://echizen.github.io/tech/2016/08-07-code-space-standard)
@@ -121,15 +139,15 @@ ctrl + shift + p 选择 install package
 
 17. **less**
 
-    - 安装 [node.js](https://nodejs.org/zh-cn/).打开命令行（ win+R  输入cmd 回车）
+    - 安装 [node.js](https://nodejs.org/zh-cn/download/).打开命令行（ win+R  输入cmd 回车）
+
+    - 检查配置是否完成：node -v
 
     - 安装cnpm。在命令行输入：`npm install -g cnpm --registry=https://registry.npm.taobao.org`
 
       npm安装失败可以尝试使用 [cnpm](https://npm.taobao.org/)
 
     - 全局安装 Less。命令行输入：npm install less -g。检查less环境是否配置完成：lessc -v
-
-      npm安装失败，请尝试使用cnpm
 
     - 命令行输入：npm install less-plugin-clean-css -g。安装完成后重启sublime。
 
