@@ -153,6 +153,10 @@ ctrl + shift + p 选择 install package
 
     - 安装sublime插件 Less2Css 
 
+    - 安装 LESS 插件 用于语法高亮
+
+      - 没有高亮：右下角显示文件类型的地方显示的是Plaint Text，这时 ctrl + shift + p调出面板，然后输入less，就能高亮显示了
+
 ## 快捷键
 
 - 按住鼠标滚轮下拉选择    选中不同行同竖列等宽字符

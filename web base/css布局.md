@@ -292,3 +292,9 @@ span {
 
 推荐：[normalize.css](http://necolas.github.io/normalize.css)
 
+### logo
+
+移动端有时候 logo 盒子大于图片，要设置 max-width 而不是 width
+
+`max-width: 100%;`
+

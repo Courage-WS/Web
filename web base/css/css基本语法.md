@@ -63,7 +63,7 @@ property-value pairs        名值对
 
 3. @media              媒体查询（用于移动端）
 
-   ```
+   ```css
    @media screen and(min-device-width: 481px) {
        #guarantee {...}
    }
@@ -77,7 +77,7 @@ property-value pairs        名值对
 
 4. @font-face          添加自定义字体
 
-   ```
+   ```css
    @font-face {	一般放在上面
        font-family:"字体名"
        src:url("文件位置"),
@@ -231,7 +231,7 @@ top / bottom / left / right：200px;
 
 ### overflow 和 visibility
 
-```
+```css
 display: none/block/inline-block/table/table-cell/table-caption;
 ```
 
@@ -343,7 +343,7 @@ filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）
 
 谷歌默认最小字体：12px
 
-```
+```css
  .small-font{
             font-size: 12px;
             -webkit-transform-origin-x: 0;
@@ -367,7 +367,7 @@ filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）
 
 用法：
 
-```
+```css
 html{font-size:62.5%;} 
 body{font-size:12px;font-size:1.2rem ;} 
 p{font-size:14px;font-size:1.4rem;}
@@ -375,7 +375,7 @@ p{font-size:14px;font-size:1.4rem;}
 
 移动端例子：
 
-```
+```css
 @media only screen and (min-width: 320px){
   html {
     font-size: 62.5% !important;
@@ -397,8 +397,6 @@ p{font-size:14px;font-size:1.4rem;}
   }
 }
 ```
-
-
 
 除了IE8及更早版本外，所有浏览器均已支持rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明 `p {font-size:14px; font-size:.875rem;}`
 
@@ -456,18 +454,18 @@ p{font-size:14px;font-size:1.4rem;}
 3. 下载(generate font)
 4. 使用，使用的时候用单引号
 
-```
+```css
 @font-face {
     font-family: 'icomoon';
     src:  url('fonts/icomoon.eot?7kkyc2');
-    src:  url('fonts/icomoon.eot?7kkyc2#iefix') format('embedded-opentype'),
+    src:  url('fonts/icomoon.eot?7kkyc2#iefix')
+/* format  作用是提前告知浏览器这个文件的格式，不识别的格式浏览器就不会加载，可以提高性能的优化 */ format('embedded-opentype'),
     url('fonts/icomoon.ttf?7kkyc2') format('truetype'),
     url('fonts/icomoon.woff?7kkyc2') format('woff'),
     url('fonts/icomoon.svg?7kkyc2#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
-/* format  作用是提前告知浏览器这个文件的格式，不识别的格式浏览器就不会加载，可以提高性能的优化 */
 .icomoon {
     font-family: "icomoon",sans-serif;
     font-size: 16px;
@@ -516,7 +514,7 @@ overflow-wrap: break-word
 
 baseline在css2的文档中有这么一句解释，翻译过来也就是一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
 
-```
+```html
 盒子A  里面有 文本B、 浮动元素C
 
 盒子的对齐方式为基线对齐，没有文本的盒子，基线为盒子内容区底部，有文本的盒子基线为最下方文本的基线，父盒子A里有文本B但是font-size: 0;（文本B不显示了）并且有浮动元素C，当浮动元素C有正常流父元素D时，基线为浮动元素C的父元素D的内容区底部，当浮动元素C没有父元素D时，基线为父盒子A的内容区顶部。当同时有浮动元素C的父元素D和文本时，以下面的基线为准（基线可超出父盒子A的内容区底部）。为需要对齐的盒子设置vertical-align，即可解决
@@ -535,7 +533,7 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 用计数器多个值，赋值嵌套父子元素：
 
-```
+```html
 <ol>
     <li>
       <ol>
@@ -606,7 +604,7 @@ box-shadow 添加一个或多个阴影。该属性是由 _**逗号**_ 分隔的�
 
 ##### 火焰文字效果
 
-```
+```css
 text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
 ```
 
@@ -652,7 +650,7 @@ _如果有多组属性变化，需要用逗号隔开_
 | step-start  | 步进函数       | steps(1, start)                    |
 | step-end    | 一步一步显示   | steps(1, end)                      |
 
-```
+```css
 steps(<integer>[, [ start | end ] ]?):
 jumP-start, jump-end, jump-none, jump-both
 ```
@@ -673,7 +671,7 @@ __step-end与上面相反，都是以上一帧的显示效果来填充间隔动�
 
 [贝塞尔曲线在线取值]( https://cubic-bezier.com/#.17,.67,.83,.67 )
 
-```
+```css
 cubic-bezier(<number>, <number>, <number>, <number>)：
 ```
 
@@ -697,7 +695,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 ##### 2D translate
 
-```
+```css
 transform: translate(-50%,-50%);
            translatex();
            translatey();
@@ -711,18 +709,16 @@ transform: translate(-50%,-50%);
 
 ###### 水平垂直居中
 
-```
+```css
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 ```
 
-
-
 ##### 2D rotate
 
-```
+```css
 transform: rotate(45deg);
 ```
 
@@ -730,7 +726,7 @@ transform: rotate(45deg);
 
 ##### 2D scale
 
-```
+```css
 transform: scale(0.8,1);
            scalex();
            scaley();
@@ -749,7 +745,7 @@ transform: scale(0.8,1);
 
 ##### 倾斜
 
-```
+```css
 transform: skew(30deg,0deg);
 ```
 
@@ -904,7 +900,7 @@ linear-gradient(red 40%, yellow 30%, blue 65%);
 
 例：
 
-```
+```css
 /* 兼容ie10+ */
 background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
 /* background: linear-gradient(45deg,transparent 52px,#ff5000 0) top left */
@@ -999,7 +995,7 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 3. 为父元素：添加伪元素：
 
-4. ```
+4. ```css
    .clearfix:after {
    	content: ""; 
    	display: block; 
@@ -1013,7 +1009,7 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
    ```
 
 5. 为父元素：用双伪元素清除浮动： 
-   ```
+   ```css
    .clearfix:before,
    .clearfix:after {
    	content: ""; 
@@ -1061,7 +1057,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
 6. 计算bfc的高度时，浮动或者定位元素也参与计算
 
-## 移动端
+# 移动端
 
 切图用 ps 的 cutterman
 
@@ -1077,15 +1073,15 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 
 ### 常见特殊样式
 
-- 盒模型
-  - box-sizing: border-box;
-  - -webkit-box- sizing: border-box;
-- 清除默认 链接点击的时候高亮 (透明)
-  - -webkit-tap-highlight-color: transparent;
-- 清除 按钮和输入框 的默认样式，ios 上添加这个属性才能自定义样式
-  - -webkit-appearance: none;
-- 禁止长按页面时弹出菜单（类似 pc 端的右击）
-  - img, a { -webkit-touch-callout: none; }
+1. CSS3 盒模型
+   - `box-sizing: border-box;`
+   - `-webkit-box-sizing: border-box;`
+2. 清除链接点击高亮
+   - `-webkit-tap-highlight-color: transparent;`
+3. 在 ios 上给按钮和输入框自定义样式
+   - `-webkit-appearance: none;`
+4. 禁用长按时弹出菜单（类似 pc 端的右击）
+   - `img，a { -webkit-touch-callout: none;`
 
 ### 二倍精灵图
 
@@ -1097,13 +1093,29 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 
 有层叠性 后面会覆盖前面 一般是从小到大写
 
-`media = "mediatype and | not | only (media feature)"`
+```css
+@media meidatype and|not|only (media feature) {
+    css-code;
+}
+/* mediatype：all / print / scree */
+```
 
-all    print    scree
+# 其他
 
-`@media mediatype and | not | only (media feature){ }`
+## less
 
-min- 从小到大，max- 从大到小
+安装 node
+
+### less 变量
+
+`@变量名：值；`
+
+### 命名规范
+
+- 以 @ 为前缀
+- 不能包含特殊字符
+- 不能以数字开头
+- 区分大小写
 
 ## BEM命名规范
 
@@ -1114,7 +1126,7 @@ bem是块（block）、元素（element）、修饰符（modifier）的简写，
 BEM 是一个简单又非常有用的命名约定。让你的前端代码更容易阅读和理解，更容易协作，更容易控制，更加健壮和明确，而且更加严密。
 
 #### BEM命名模式
-```
+```css
  .block {}
  .block__element {}
  .block--modifier {} 
@@ -1127,7 +1139,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
  .block--modifier代表.block的不同状态或不同版本。
 
  使用两个连字符和下划线而不是一个，是为了让你自己的块可以用单个连字符来界定
-```
+```css
  .sub-block__element {}.sub-block--modifier {}
 ```
 ## css 命名规范
