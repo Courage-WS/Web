@@ -16,20 +16,20 @@ BOM浏览器对象类型，提供与浏览器交互的方法和接口
 
 ## 联入
 
-```
+```html
    <script type=”text/javascript”>     </script>
    <script type=”text/javascript” src=”ecma.js”> </script>
 ```
 
 属性：async 异步脚本，立即下载，不影响其他加载，加载顺序不一定
 
-```
+```html
    <script type+”text/javascript” src=”url” async></script>
 ```
 
 defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，加载顺序不一定
 
-```
+```html
    <script type=”text/javascript” src=”url” defer></script>
 ```
 
@@ -45,7 +45,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 ### 兼容XHTML
 
-```
+```js
    <script type=”text/javascript”>
     //<![CDATA[
     …]
@@ -61,7 +61,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 使用代码块 
 
-```
+```js
     if （test） {
     test = false;
     }
@@ -99,7 +99,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 “use strict” 切换为严格模式
 
-```
+```js
     function doSomething() {
     “us strict”;
     //函数体
@@ -110,7 +110,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 解析错误，代码块无法加载
 
-```
+```js
    var a=19;
     document.write(a);
 ```
@@ -131,11 +131,40 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 类似于酒店的房间
 
+### 局部变量和全局变量
+
+```js
+    var a = 1;
+    function b(){
+        a = 2;  // 有函数相当于赋值给函数a()
+        console.log(a);
+        //有函数，a不变；没函数，a变2
+        function a(){};
+    }
+    b();//输出2
+    console.log(a);//输出1
+```
+
+```js
+var a = 1;
+
+function test(a) {
+    a=100;
+    console.log(a);//打印结果为100
+    return a;        // 会输出函数结果，如果没有这句话，函数结果为 undefined
+}     
+test(a);   // 会输出一遍函数a()
+a=test(a); // 会输出一遍函数a(),并把函数结果赋值给变量 a
+console.log(a);//打印结果为1
+```
+
+
+
 ### var 操作符
 
 在函数内定义的变量属于该函数中的局部变量。函数退出后就会被销毁
 
-```
+```js
     function test() {
         var message = "hi"; // 局部变量
     }
@@ -146,7 +175,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 将var去除即为全局变量，有意忽略 var 操作符，会因为变量不会马上有定义导致不必要的混乱。未声明在严格模式中会抛出 ReferenceErroror 错误
 
-```
+```js
     function test() {
         message = "hi"; // 全局变量
     }
@@ -155,7 +184,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 定义多个变量，用逗号隔开
 
-```
+```js
     var message = “hi”,
         found = false,
         age = 29;
@@ -181,13 +210,13 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 - undefined  变量未初始化。接受的函数没有明确返回值
 
-  ```
+  ```js
   var x
   ```
 
 - null  值为空。
 
-  ```
+  ```js
   var x=null
   ```
 
@@ -195,7 +224,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 - boolean  布尔值
 
-  ```
+  ```js
   var x=true   var x=false
   ```
 
@@ -211,7 +240,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 - number  数值
 
-  ```
+  ```js
   var x=2
   ```
 
@@ -219,7 +248,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
   最大值和最小值
 
-  ```
+  ```js
       conlose.log(Number.MAN_VALUE);
       console.log(Number.MIN_VALUE);
   ```
@@ -254,16 +283,16 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 - string  字符串
 
-  ```
+  ```js
   var x="2";
   x=x+”4”         //输出”24”
   ```
 
   转义字符
 
-  | 代码 | \ '    | \ "    | \ &  | \\     | \n     | \r     | \t     | \b     | \f     |
-  | ---- | ------ | ------ | ---- | ------ | ------ | ------ | ------ | ------ | ------ |
-  | 输出 | 单引号 | 双引号 | 和号 | 反斜杠 | 换行符 | 回车符 | 制表符 | 退格符 | 换页符 |
+  | 代码 | \ '    | \ "    | \ &  | \\   | \n     | \r     | \t     | \b     | \f     |
+  | ---- | ------ | ------ | ---- | ---- | ------ | ------ | ------ | ------ | ------ |
+  | 输出 | 单引号 | 双引号 | 和号 | 斜杠 | 换行符 | 回车符 | 制表符 | 退格符 | 换页符 |
 
   转成字符串
 
@@ -309,14 +338,14 @@ Object有的对象和方法会存在更具体的对象里
 
 #### 递增、递减
 
-```
+```js
 ++age;     age=age+1
 age--;     age=age-1
 ```
 
 **前置**
 
-```
+```js
 Var age=34;
 Var dse=2
 Var cde = --age + dse      //等于35
@@ -325,7 +354,7 @@ Var esd = age + dse       //等于35
 
 **后置**
 
-```
+```js
 Var age=34;
 Var dse=2
 Var cde= age-- + dse      //等于36
@@ -334,7 +363,7 @@ Var esd = age + dse       //等于35
 
 #### 加、减操作符
 
-```
+```js
 var num = 25;
 num = +num;      //仍然是25
 var num = 25;
@@ -357,7 +386,7 @@ num = -num;      //值为-25
 
    由波浪线（~）表示，结果是返回数值的反码。一位操作数
 
-   ```
+   ```js
    var num1=25;
    var num2=~num1;         //输出-26
    ```
@@ -415,13 +444,13 @@ num = -num;      //值为-25
 7. NaN，返回true
 8. undefined，返回true
 
-```
+```js
 alert(!false);      //true
 ```
 
 同时使用两个逻辑非操作符，相当于模拟Boolean()转型函数行为。
 
-```
+```js
 alert(!!false);     //false
 ```
 
@@ -557,7 +586,7 @@ alert(!!false);     //false
 
 ### 条件操作符（三元运算符）
 
-```
+```js
 var max = (num1 > num2) ? num1 : num2;
 ```
 
@@ -569,7 +598,7 @@ var max = (num1 > num2) ? num1 : num2;
 
 复合赋值操作。使用它们不会带来任何性能的提升。
 
-```
+```js
 var num = 10;
 num = num + 10;
 var num = 10;
@@ -589,13 +618,13 @@ num += 10;
 
 用于声明多个变量
 
-```
+```js
 var num1=1, num2=2, num3=3;
 ```
 
 用于赋值，会返回表达式中的最后一项
 
-```
+```js
 var num = (5, 1, 4, 8, 0); // num 的值为 0
 ```
 
@@ -605,13 +634,13 @@ var num = (5, 1, 4, 8, 0); // num 的值为 0
 
 ### if语句
 
-```
+```js
 if (condition1) statement1 else if (condition2) statement2 else statement3
 ```
 
 最常用的分支语句，条件可以是任意表达式，自动调用 Boolean()转换函数将这个表达式的结果转换为一个布尔值。结果是true，执行语句1，结果是false，执行语句2。
 
-```
+```js
 if (i > 25) {
     alert("Greater than 25.");
 } else if (i < 0) {
@@ -625,7 +654,7 @@ if (i > 25) {
 
 是分支语句，也是在其他语言中普遍使用的一种流控制语句,一般判断值
 
-```
+```js
 switch (expression) {
  case value: statement
  break;
@@ -643,7 +672,7 @@ switch (expression) {
 
 是一种后测试循环语句，即只有在循环体中的代码执行之后，才会测试出口条件
 
-```
+```js
 do {
     statement
 } while (expression); 
@@ -660,7 +689,7 @@ alert(i);
 
 前测试循环语句，也就是说，在循环体内的代码被执行之前，就会对出口条件求值。
 
-```
+```js
 while(expression) statement
 var i = 0;
 while (i < 10) {
@@ -672,7 +701,7 @@ while (i < 10) {
 
 for 语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力，在 for 循环的变量初始化表达式中，也可以不使用 var 关键字。该变量的初始化可以在外部执行
 
-```
+```js
 for (initialization; expression; post-loop-expression) statement
 var count = 10;
 for (var i = 0; i < count; i++){
@@ -682,7 +711,7 @@ for (var i = 0; i < count; i++){
 
 这个 for 循环语句与下面的 while 语句的功能相同。使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关 的代码集中在了一个位置。
 
-```
+```js
 var count = 10;
 var i = 0;
 while (i < count){
@@ -693,7 +722,7 @@ while (i < count){
 
 ECMAScript 中不存在块级作用 域，因此在循环内部定义的变量也可以在外部访问到
 
-```
+```js
 var count = 10;
 for (var i = 0; i < count; i++){
     alert(i);
@@ -705,7 +734,7 @@ alert(i); //10
 
 是一种精准的迭代语句，可以用来枚举对象的属性
 
-```
+```js
 for (property in expression) statement
 for (var propName in window) {
     document.write(propName);
@@ -720,7 +749,7 @@ for (var propName in window) {
 
 可以在代码中添加标签，以便将来使用
 
-```
+```js
 label: statement
 start: for (var i=0; i < count; i++) {
     alert(i);
@@ -733,7 +762,7 @@ start: for (var i=0; i < count; i++) {
 
 用于在循环中精确地控制代码的执行。break 语句会立即退出循环， 强制继续执行循环后面的语句。而 continue 语句虽然也是立即退出循环，但退出循环后会从循环的顶部继续执行
 
-```
+```js
 var num = 0;
 for (var i=1; i < 10; i++) {
     if (i % 5 == 0) {
@@ -750,13 +779,13 @@ for 循环会将变量 i 由 1 递增至 10。在循环体内，有一个 if 语
 
 将代码的作用域设置到特定的对象中。
 
-```
+```js
 with (expression) statement; 
 ```
 
 主要是为了简化多次编写同一个对象的工作
 
-```
+```js
 var qs = location.search.substring(1);
 var hostName = location.hostname;
 var url = location.href; 
@@ -764,7 +793,7 @@ var url = location.href;
 
 使用 with 语句
 
-```
+```js
 with(location){
  var qs = search.substring(1);
  var hostName = hostname;
@@ -776,7 +805,7 @@ with(location){
 
 使用 function 关键字来声明，后跟一组参数以及函数体
 
-```
+```js
 function functionName(arg0, arg1,...,argN) {
  statements
 } 
@@ -784,18 +813,20 @@ function functionName(arg0, arg1,...,argN) {
 
 示例：
 
-```
+```js
 function sayHi(name, message) {
  alert("Hello " + name + "," + message);
 }
         sayHi("Nicholas", "how are you today?");
 ```
 
+### return
+
 函数在任何时候都可以通过 return 语句后跟要返回的值来实现返回值
 
 示例：
 
-```
+```js
 function sum(num1, num2) {
  return num1 + num2;
 }
@@ -806,19 +837,13 @@ function sum(num1, num2) {
 
 ### 参数
 
-在函数体内可以通过 arguments 对象来访问这个参数数组，从而获取传递给函数的每一个参数
-
-位于 return 语句之后结束大括号之前的任何代码 都永远不会执行
-
-第一个元素是 arguments[0]，第二个元素是 argumetns[1]
-
-arguments 对象的长度是由传入的参数个数决定的，不是由定义函数时的命名 参数的个数决定的
-
-没有传递值的命名参数将自动被赋予 undefined 值
-
-#### ECMAScript 中的所有参数传递的都是值，不可能通过引用传递参数。
-
-重写 arguments 的值会导致语法错误
+1. 在函数体内可以通过 arguments 对象来访问这个参数数组，从而获取传递给函数的每一个参数
+2. 位于 return 语句之后结束大括号之前的任何代码 都永远不会执行
+3. 第一个元素是 arguments[0]，第二个元素是 argumetns[1]
+4. arguments 对象的长度是由传入的参数个数决定的，不是由定义函数时的 命名参数 的个数决定的
+5. 没有传递值的命名参数将自动被赋予 undefined 值
+6. ECMAScript 中的所有参数传递的都是值，不可能通过引用传递参数。
+7. 重写 arguments 的值会导致语法错误
 
 ### 没有重载
 
