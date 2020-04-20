@@ -14,20 +14,22 @@
 ### 浏览器模式
 - 标准模式   浏览器根据标准规约来渲染页面
 - 兼容模式（混杂模式）
-  - 向前兼容：应用发展超前系统 应用发展超前系统了
-  - 向后兼容：系统发展超越应用 系统发展超越应用
+  - 向前兼容：应用发展超前系统
+  - 向后兼容：系统发展超越应用
 
 #### 区别：
 
 兼容模式：
 
-- 盒模型 = width
-- 一个块元素div中包含的内容只有图片时，图片底部没有空白
-- span等行内元素设置 width 和 height 会生效
-- 若父元素没有设置高度，子元素设置一个百分比的高度是无效的。
-- margin：0 auto设置水平居中在IE下会失效，可以用：text-align
-- table的自提属性不能继承上层的设置
-- white-space：pre会失效
+1. 盒宽 = width
+2. 图片：
+   1. padding 会失效
+   2. 一个块元素div中包含的内容只有图片时，图片底部没有空白
+3. span等行内元素设置 width 和 height 会生效
+4. 若父元素没有设置高度，子元素设置一个百分比的高度是无效的。
+5. margin：0 auto设置水平居中在IE下会失效，可以用：`body{text-align:center};#content{text-align:left}`
+6. table的字体属性不能继承上层的设置
+7. white-space：pre会失效
 
 h4.01基于SGML,引用DTD.   有三种声明:Strict ,  Transitional , Frameset
 
