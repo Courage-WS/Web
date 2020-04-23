@@ -61,7 +61,7 @@ UTF-8
 #### name
 
 - description                 简介
-- keyword                     关键词
+- keywords                    关键词
 - author                        作者姓名
 - application-name       定义了在网页中运行的应用程序的名称，浏览器可以使用它来识别应用程序
 - generator                  包含生成页面的软件的标识符
