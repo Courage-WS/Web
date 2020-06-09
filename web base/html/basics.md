@@ -1,6 +1,6 @@
 ## HTML浏览器
 
-   w3c验证工具http://validator.w3.org
+   <a href="http://validator.w3.org">w3c验证工具</a>
 
 默认文件名,通常为index.com/default.com
 
@@ -55,28 +55,30 @@ UTF-8
 
 #### http-equiv
 
-- content-security-policy   允许的服务器来源和脚本终结点，以帮助防范跨站点脚本攻击。
-- refresh  重定向到另一个页面的秒数，`content`属性包含一个正整数，后跟字符串' `;url=`'和有效URL
+- content-security-policy-report-only         只报告，不禁止，必须与`report-uri`配合使用
+- content-security-policy    (内容安全策略) 允许的服务器来源和脚本终结点，以帮助防范跨站点脚本攻击。
+- refresh                             重载到另一个页面的秒数，`content`属性包含一个正整数，后跟字符串' `;url=`'和有效URL
+- default-style                     默认样式
 
 #### name
 
 - description                 简介
 - keywords                    关键词
 - author                        作者姓名
-- application-name       定义了在网页中运行的应用程序的名称，浏览器可以使用它来识别应用程序
+- application-name      （慎用） 定义了在网页中运行的应用程序的名称，浏览器可以使用它来识别应用程序
 - generator                  包含生成页面的软件的标识符
-- creator      （*）        文档创建者的名称
-- publisher   （*）        文档发布者的名称
+- creator      （*）        文档创建机构的名称
+- publisher   （*）        文档发布机构的名称
 - viewport                    窗口初始大小（仅作用于移动设备）
-  - width                        设备宽度（device-width）
-  - initial-scale              窗口比例（`0.0`与10.0之间的正数）
-  - maximum-scale       放大最大量
-  - minimum-scale      （`0.0`与10.0之间的正数）
-  - user-scalable           允许用户调整（yes / no）
+  - width                          设备宽度（device-width）
+  - initial-scale                 窗口比例（`0.0`与10.0之间的正数）
+  - maximum-scale          放大最大量
+  - minimum-scale         （`0.0`与10.0之间的正数）
+  - user-scalable              允许用户调整（yes / no）
   - viewport-fit
     - auto	  不影响初始布局视口，并且整个网页都是可见的。
-    - contain      缩放以适合显示在显示屏上的最大矩形。
-    - cover        缩放以填充设备显示。强烈建议使用[安全区域插入](https://developer.mozilla.org/en-US/docs/Web/CSS/env)变量，以确保重要内容不会出现在显示屏之外。
+    - contain      缩小以适合显示在显示屏上的最大矩形。
+    - cover        放大以填充设备显示。强烈建议使用[安全区域插入](https://developer.mozilla.org/en-US/docs/Web/CSS/env)变量，以确保重要内容不会出现在显示屏之外。
 
 ### 注意事项
 
@@ -89,7 +91,7 @@ id：以数字或字母开头，不能纯数字。都不能有空格
 用两空格，不建议使用tab
 
 推荐：
-```
+```html
 <body>
 
 <h1>标题</h1>
@@ -115,15 +117,17 @@ img、input
 时间           <time datetime="2012-02-08">2/08/2012</time> 官方格式：2012-02-08 05:00
 内容用官方格式就不需要datetime；时间或日期后加z表示UTC时间（UTC=GMT）
 
-### <a href="https://dev.w3.org/html5/html-author/charref">
-
 ### H5 标签
 
 多用于移动端
 
 header、nav、article、section、aside、footer、figure、figcaption    在 ie9 中需要转换为块级元素
 
-### 实体字符大全</a>
+video：webm mpeg4 ogg
+
+audio：wav  mpeg  ogg
+
+### <a href="https://dev.w3.org/html5/html-author/charref">实体字符大全</a>
 
 | 结果 | 描述               | 实体名称 | 实体编号 |
 | :--- | :----------------- | :------- | :------: |

@@ -139,7 +139,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 - **confirm()** 弹出带取消对话框，用于if
 - **prompt()** 接受用户信息
 - **console.log()** 在网页中控台输出消息
-- **document.write()** 在页面输出消息，可输入HTML标签
+- **document.write()** 在页面输出消息，可输入HTML标签，加载后用会覆盖页面
 
 ## 作用域
 
@@ -151,7 +151,7 @@ JavaScript（es6前）中的作用域有两种：
 
   - 严格模式需要在函数外声明函数
 
-    将var去除即为全局变量，有意忽略 var 操作符，会因为变量不会马上有定义导致不必要的混乱。未声明在严格模式中会抛出 ReferenceErroror 错误
+    省略var操作符会创建全局变量，只要调用过一次，就可以在函数外访问。会因为变量不会马上有定义导致不必要的混乱。未声明在严格模式中会抛出 ReferenceErroror 错误
 
     ```js
         var text = "1";   // 全局变量
@@ -221,7 +221,16 @@ fn();
 
 ## 变量(保存一个值)
 
-变量是程序在内存中申请一块空间，用来存放数据的。
+在 __stack（栈）__内存中开辟一个空间存放变量值，名字就叫变量名。
+
+```js
+// 改变变量值是新开辟一个空间存放值，名字也指向它，原空间的值是不可变的
+var str = '';
+for (var i = 0; i < 100000; i++) {
+ str += i;
+}
+console.log(str); // 在大量拼接字符串时，会有效率问题，因为需要不断开辟空间
+```
 
 可以看作一种被命名的分类容器，类似于酒店的房间
 
@@ -237,7 +246,7 @@ fn();
 赋值： `mess=1;mess=2;`销毁一个变量原来的值，并赋予一个新值，相当于改变了一个变量的状态。有变量名和值
 ```
 
-注意：应注意区分初始化和赋值，在初始化之前不应该允许对变量进行赋值操作,变量初始化之后不建议改变数据类型
+注意：**应注意区分初始化和赋值，在初始化之前不允许对变量进行赋值操作（意思就是声明的时候就要初始化，赋值就要销毁原来的变量）,变量初始化之后不改变数据类型**
 
 定义多个变量，用逗号隔开
 
@@ -249,11 +258,11 @@ fn();
 
 ### 特殊情况
 
-| 情况                       | 说明           | 结果      |
-| -------------------------- | -------------- | --------- |
-| var are; console.log(are); | 不赋值         | undefined |
-| console.log(are);          | 不声明，不赋值 | 报错      |
-| are = 10; console.log(are) | 不声明         | 10        |
+| 情况                       | 说明             | 结果      |
+| -------------------------- | ---------------- | --------- |
+| var are; console.log(are); | 不初始化         | undefined |
+| console.log(are);          | 不声明，不初始化 | 报错      |
+| are = 10; console.log(are) | 不声明           | 10        |
 
 定义多个变量，用逗号隔开
 
@@ -268,9 +277,50 @@ fn();
 JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型，在程序运行过程中，类型会
 被自动确定 
 
-### 简单数据类型
+- 返回数据类型
 
-在 __stack（栈）__内存中开辟一个空间存放变量值，名字就叫变量名。改变变量值是新开辟一个空间存放值，名字也指向它。原空间的值是不可变的
+  *typeof()* 返回数据类型:`typeof(...) / typeof ...`
+
+- 判断数据类型
+
+  instanceof 运算符
+
+  ```js
+  var arr = [1, 23];
+  console.log(arr instanceof Array); // true
+  ```
+
+### 区别
+
+- 简单类型：在存储时变量中存储的是值本身，因此叫做值类型
+- 复杂类型：在存储时变量中存储的仅仅是地址（引用），因此叫做引用数据类型。
+
+堆栈空间分配区别：（：JavaScript中实际上没有堆栈的概念）
+
+1. 1、栈（操作系统）：由操作系统自动分配释放存放函数的参数值、局部变量的值等。其操作方式类似于数据结构中的栈；**简单数据类型存放到栈里面**
+2. 堆（操作系统）：存储复杂类型(对象)，一般由程序员分配释放，若程序员不释放，由垃圾回收机制回收。**复杂数据类型存放到堆里面**
+
+- 值类型变量的数据直接存放在变量（栈空间）中<img src="../image/简单类型传参.png">
+
+- 引用类型变量（栈空间）里存放的是地址，真正的对象实例存放在堆空间中<img src="../image/复杂类型传参.png">
+
+  ```js
+  function Person(name) {
+      this.name = name;
+  }
+  
+  function f1(x) { // x = p 
+      x.name = "张学友";  // 3.把堆里的 name 改为“张学友”，   
+  }
+  
+  var p = new Person("刘德华");
+  // 1.在堆里存放函数，同时在栈里生成一个地址指向这个堆，p变量指向这个地址
+  console.log(p.name);    // 1.此时 name 是“刘德华”
+  f1(p); // 2.x = p；把 p 在栈里的地址赋值给 x ，指向堆里同一个对象
+  console.log(p.name);    // 4.因为 x、p 指向同一地址，所以 name 一起改变 \u
+  ```
+
+### 简单数据类型
 
 | 简单数据类型 | 说明                                                 | 默认值    |
 | ------------ | ---------------------------------------------------- | --------- |
@@ -290,16 +340,6 @@ null  值为空。
 var x=true   var x=false
 ```
 
-boolean()  转布尔值
-
-| 数据类型  | 结果为 ture             | 结果为 false |
-| --------- | ----------------------- | ------------ |
-| boolean   | ture                    | false        |
-| string    | 非空字符串              | 空字符串     |
-| number    | 任何非0数值，包括无穷大 | 0和NaN       |
-| Object    | 任何对象                | null         |
-| undefined | N/A（不适用）           | undefined    |
-
 #### number
 
 浮点数：最高精确小数点后17位，（注意：不要测试特定的浮点数值`0.1+0.2 == 0.3`）
@@ -315,7 +355,7 @@ var x=2
 - 最大值和最小值
 
   ```
-  conlose.log(Number.MAN_VALUE); // 1.7976931348623157e+308
+  conlose.log(Number.MAX_VALUE); // 1.7976931348623157e+308
   console.log(Number.MIN_VALUE); // 5e-324
   ```
 
@@ -337,6 +377,16 @@ x=x+”4”         //输出”24”
 | 输出 | 单引号 | 双引号 | 和号 | 斜杠 | 换行符 | 回车符 | 制表符 | 退格符 | 换页符 |
 
 #### 类型转换
+
+##### boolean() 
+
+| 数据类型  | 结果为 ture             | 结果为 false |
+| --------- | ----------------------- | ------------ |
+| boolean   | ture                    | false        |
+| string    | 非空字符串              | 空字符串     |
+| number    | 任何非0数值，包括无穷大 | 0和NaN       |
+| Object    | 任何对象                | null         |
+| undefined | N/A（不适用）           | undefined    |
 
 ##### string
 
@@ -399,68 +449,6 @@ x=x+”4”         //输出”24”
 
 引用值heap（堆）
 
-#### 数组(保存多个值)
-
-创建方式：
-
-1. 利用字面量创建
-
-   ```js
-   var 数组名 = new Array() ； // A 要大写
-   var arr = new Array(); // 创建一个新的空数组
-   ```
-
-2. 利用数组字面量创建数组（常用）
-
-   ```js
-   //1. 使用数组字面量方式创建空的数组
-   var 数组名 = []；
-   //2. 使用数组字面量方式创建带初始值的数组
-   var 数组名 = ['小白','小黑','大黄','瑞奇'];
-   ```
-
-索引 (下标) ：用来访问数组元素的序号（数组下标从 0 开始）。数组可以通过索引来访问、设置、修改对应的数组元素，
-
-访问：我们可以通过“数组名[索引]”的形式来获取数组中的元素
-
-```js
-// 定义数组
-var arrStus = [1,2,3];
-// 获取数组中的第2个元素
-alert(arrStus[1]); 
-```
-
-数组的长度：“数组名.length”
-
-```js
-var arrStus = [1,2,3];
-alert(arrStus.length); // 3
-```
-
-##### 新增数组元素
-
-1. 修改数组索引新增数组元素（ 常用）
-
-   - 可以通过修改数组索引的方式追加数组元素
-   - 不能直接给数组名赋值，否则会覆盖掉以前的数据
-
-   ```js
-   var arr = ['red', 'green', 'blue', 'pink'];
-   arr[4] = 'hotpink';
-   console.log(arr);
-   ```
-
-2. 修改 length 长度新增数组元素
-
-   ```js
-   var arr = ['red', 'green', 'blue', 'pink'];
-   arr.length = 7;
-   ```
-
-   索引号是 4，5，6 的空间没有给值，就是声明变量未给值，默认值就是 undefined。
-
-**遍历数组用 `for` 循环**
-
 #### Object
 
 对象有时候被叫做关联数组
@@ -471,64 +459,283 @@ alert(arrStus.length); // 3
 对象是由属性和方法组成的。
 
 - 属性：事物的特征，在对象中用属性来表示（常用名词），属性包含一个键（名）和一个值
-- 方法：事物的行为，在对象中用方法来表示（常用动词）
+- 方法：事物的行为，在对象中用方法来表示（常用动词），是储存对象属性的函数
 
-*New*操作符
+1. 创建对象
+   1. new Object()
+      
+      ```js
+      var o = new Object ();  // new操作符后面跟创建的对象类型的名称，
+      ```
 
-##### 创建对象
+   2. 字面量
+      ```js
+      var star = {...}  // 可以直接写属性和方法，用“:”连接属性和值
+      ```
+   3. 构造函数创建
+      对象的属性和方法封装成的函数叫构造函数，用来初始化对象，这个过程叫做`对象实例化`
+      ```js
+      function Person(name, age, sex) {
+      this.name = name;  // 2. this指向对象   3. 给对象添加属性和方法 
+      this.age = age;
+      this.sex = sex;
+      this.sayHi = function() {
+      alert('Hi！我的名字叫：' + this.name + '，年龄：' + this.age + '，性别：' + this.sex);
+      }
+      }  // 4. 返回对象 不需要return
+      var bigbai = new Person('大白', 100, '男');  // 1. 创建空对象
+      var smallbai = new Person('小白', 21, '男');
+      console.log(bigbai.name);
+      console.log(smallbai.name);
+      ```
 
-1. new Object()
+      - 构造函数约定首字母大写。
+      - 函数内的属性和方法前面需要添加 this ，表示当前对象的属性和方法。
+      - 构造函数中不需要 return 返回结果。
+      - 必须用 new 来调用构造函数，来创建对象
 
-   - ` var o = new Object ();` new操作符后面跟创建的对象类型的名称，
+2. 调用
 
-2. 字面量
+   - 属性调用：
 
-   - `var star = {...}` 可以直接写属性和方法
+      1. 对象 . 属性
+      
+         ```js
+         console.log(star.name); // 调用名字属性
+         ```
 
-3. 构造函数创建
+      2. 对象 [ ' 属性 ' ]
+
+         ```js
+         console.log(star['name']); // 括号里的属性名是字符串必须加引号
+         ```
+
+   - 方法调用：
+
+      对象 . 方法名 ();   `star.sayHi(); `          方法名后面要加括号
+
+对象分三种：自定义对象 、内置对象、 浏览器对象（前面两种对象是JS 基础 内容，属于 ECMAScript； 第三个浏览器对象属于JS 独有的）
+
+3. 特殊情况
+
+   Object有的属性和方法会存在更具体的对象里
+
+   - **constructor**：保存着用于创建当前对象的函数。对于前面的例子而言，构造函数   （constructor）就是 Object()。
+   - **hasOwnProperty(propertyName)**：用于检查给定的属性在当前对象实例中（而不是在实例的原   型中）是否存在。其中，作为参数的属性名（propertyName）必须以字符串形式指定（例如：   o.hasOwnProperty("name")）。
+   - **isPrototypeOf(object)**：用于检查传入的对象是否是传入对象的原型
+   - **propertyIsEnumerable(propertyName)**：用于检查给定的属性是否能够使用 for-in 语句来枚举。   与 hasOwnProperty()方法一样，作为参数的属性名必须以字符 串形式指定。
+   - **toLocaleString()**：返回对象的字符串表示，该字符串与执行环境的地区对应。
+   - **toString()**：返回对象的字符串表示。
+   - **valueOf()**：返回对象的字符串、数值或布尔值表示。通常与 toString()方法的返回值 相同。
+
+##### 自定义对象
+
+```js
+var a = {
+    name = "mu";
+}
+
+var b = a;
+a.name = "mumu";
+console.log(b); //b 和 a 指向同一个地址 b = a
+
+a = {
+    name = "haha";
+}
+// a 整个对象改变，因为复杂数据类型的大小具有不确定性，所以开辟一个新的内存块储存对象，
+
+console.log(b); // 因为内存块不同，b 不变
+```
+
+
+
+##### 内置对象
+
+Math、Date、Array、基本包装类型
+
+1. Math
+
+   Math 不是构造器，它的属性和方法都是静态的。
 
    ```js
-   function Person(name, age, sex) {
-   this.name = name;
-   this.age = age;
-   this.sex = sex;
-   this.sayHi = function() {
-   alert('我的名字叫：' + this.name + '，年龄：' + this.age + '，性别：' + this.sex);
-   }
-   }
-   var bigbai = new Person('大白', 100, '男');
-   var smallbai = new Person('小白', 21, '男');
-   console.log(bigbai.name);
-   console.log(smallbai.name);
+   Math.PI() // 圆周率
+   Math.floor() // 向下取整
+   Math.ceil() // 向上取整
+   Math.round() // 四舍五入版 就近取整 注意 -3.5 结果是 -3
+   Math.abs() // 绝对值
+   Math.max()/Math.min() // 求最大和最小值
+   Math.random() // 随机数
+   
+   // 这些方法必须带 “()"
    ```
 
-   - 构造函数约定首字母大写。
-   - 函数内的属性和方法前面需要添加 this ，表示当前对象的属性和方法。
-   - 构造函数中不需要 return 返回结果。
-   - 当我们创建对象的时候，必须用 new 来调用构造函数
+   随机数：[0，1) === 左闭右开区间（即从0（包含0）到...1但不包括1（排除1）。）
 
-##### 调用
+   ```js
+   // 两个数之间的随机数
+   function getRandomArbitrary(min, max) {
+       return Math.floor(Math.random() * (max - min)) + min // 不包含最大值
+       return Math.floor(Math.random() * (max - min + 1)) + min // 包含这两个数
+   }
+   ```
 
-属性调用：
+2. Date
 
-1. 对象 . 属性
-   - `console.log(star.name)` // 调用名字属性
-2. 对象 [ ' 属性 ' ]
-   - `console.log(star['name']) `// 括号里必须加引号
+   日期是构造函数，需要实例化
 
-方法调用：
+   Date 对象是基于1970年1月1日（世界标准时间）起的毫秒数
 
-对象 . 方法名 ();   `star.sayHi(); `          方法名后面要加括号
+   ```js
+   var now = new Date(); // 不写参数，就返回当前时间；写参数就返回输入的时间
+   ```
 
-Object有的对象和方法会存在更具体的对象里
+   基本方法：<img src="../image/日期方法.png">
 
-- **constructor**：保存着用于创建当前对象的函数。对于前面的例子而言，构造函数（constructor）就是 Object()。
-- **hasOwnProperty(propertyName)**：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。其中，作为参数的属性名（propertyName）必须以字符串形式指定（例如：o.hasOwnProperty("name")）。
-- **isPrototypeOf(object)**：用于检查传入的对象是否是传入对象的原型
-- **propertyIsEnumerable(propertyName)**：用于检查给定的属性是否能够使用 for-in 语句来枚举。与 hasOwnProperty()方法一样，作为参数的属性名必须以字符 串形式指定。
-- **toLocaleString()**：返回对象的字符串表示，该字符串与执行环境的地区对应。
-- **toString()**：返回对象的字符串表示。
-- **valueOf()**：返回对象的字符串、数值或布尔值表示。通常与 toString()方法的返回值 相同。
+   **获取时间戳：**
+
+   ```js
+   // 实例化Date对象
+   var now = new Date();
+   // 1. 用于获取对象的原始值的2种方法
+   console.log(date.valueOf())
+   console.log(date.getTime())
+   // 2. 简单写可以这么做 (最常用)
+   var now = + new Date();
+   // 3. HTML5中提供的方法，有兼容性问题
+   var now = Date.now();
+   ```
+
+3. Array
+
+   保存多个值
+
+   **创建：**
+
+   1. 利用 new Array 创建
+
+      ```js
+      var 数组名 = new Array() ； // A 要大写，值可以直接写在小括号里
+      var arr = new Array(); // 创建一个新的空数组
+      ```
+
+   2. 利用数组字面量创建数组（常用）
+
+      ```js
+      //1. 使用数组字面量方式创建空的数组
+      var 数组名 = []；
+      //2. 使用数组字面量方式创建带初始值的数组
+      var 数组名 = ['小白','小黑','大黄','瑞奇'];
+      ```
+
+   索引 (下标) ：用来访问数组元素的序号（数组下标从 0 开始）。数组可以通过索引来访问、设置、   修改对应的数组元素，
+
+   访问：我们可以通过“数组名[索引]”的形式来获取数组中的元素
+
+   ```js
+   // 定义数组
+   var arrStus = [1,2,3];
+   // 获取数组中的第2个元素
+   alert(arrStus[1]); 
+   ```
+
+   数组的长度：“数组名.length”
+
+   ```js
+   var arrStus = [1,2,3];
+   alert(arrStus.length); // 3
+   ```
+
+   **新增数组元素：**
+
+   1. 修改数组索引新增数组元素（ 常用）
+
+      - 可以通过修改数组索引的方式追加数组元素
+      - 不能直接给数组名赋值，否则会覆盖掉以前的数据
+
+      ```js
+      var arr = ['red', 'green', 'blue', 'pink'];
+      arr[4] = 'hotpink';
+      console.log(arr);
+      ```
+
+   2. 修改 length 长度新增数组元素
+
+      ```js
+      var arr = ['red', 'green', 'blue', 'pink'];
+      arr.length = 7;  // 索引号是 4，5，6 的空间没有给值，就是声明变量未给值，默认值就是    undefined。
+      ```
+
+   **基本方法**
+
+   - **修改数组元素**<img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%84.png">   <img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%842.png">
+   - **索引查找：**<img src="F:/web/web%20base/image/%E7%B4%A2%E5%BC%95%E6%90%9C%E7%B4%A2.png">
+   - **转换为字符串**<img src="F:/web/web%20base/image/%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2.png">
+   - **数组排序：**<img src="../image/数组排序.png">
+   - **截取数组：**<img src="../image/截取数组.png">
+
+   关于返回值：push() 的返回值的意思是：`console.log(arr.push(3,2));`
+
+   **判断是否为数组：**
+
+   ```js
+   Array.isArray(arr) // H5新增 Array.isArray() 可以检测 iframes，优于 instanceof
+   ```
+
+   **遍历数组用 `for` 循环**
+
+4. 基本包装类型
+
+   把简单的数据类型包装成复杂数据类型，
+
+   - String
+
+     ```js
+     var str = "hi!";
+     // 1. 把简单数据类型包装成 临时复杂数据类型
+     var temp = new String("hi!");
+     // 2. 把临时变量的值给 str
+     str = temp;
+     // 3. 销毁这个临时变量
+     temp = null;
+     ```
+
+     基本方法：
+
+     - 查找索引<img src="../image/string对象查找索引.png">
+
+     - 查找字符（重点）<a href="https://tool.oschina.net/commons?type=4">ASCII 编码对照表</a><img src="../image/string对象查找字符.png">           
+
+     - 字符串操作方法（重点）<img src="../image/string 操作方法.png">
+
+     - replace()方法
+
+       ```js
+       // 于在字符串中用一些字符替换另一些字符
+       replace(被替换的字符串， 要替换为的字符串)；
+       ```
+
+     -  split()方法
+
+       ```js
+       // 以将字符串切分为数组。在切分完毕之后，返回的是一个新数组
+       var str = 'a,b,c,d';
+       console.log(str.split(',')); // 返回的是一个数组 [a, b, c, d]
+       ```
+
+     - 其他
+
+       ```js
+       toUpperCase() //转换大写 
+       toLowerCase() //转换小写
+       ```
+
+   - Number
+
+   - boolean
+
+##### 浏览器对象
+
+- 
 
 #### 函数
 
@@ -566,22 +773,6 @@ function sayHi(name, message) {
 
 没有函数签名的概念,在 ECMAScript 中定义了两个名字相同的函数，则该名字只属于后定义的函数
 
-##### return
-
-函数在任何时候都可以通过 return 语句后跟要返回的值来实现返回值
-
-示例：
-
-```js
-function sum(num1, num2) {
- return num1 + num2;
-}
-        var result = sum(5, 10); 
-```
-
-- 未指定返回值的函数返回的是一个特殊的 undefined 值
-- 位于 return 语句之后结束大括号之前的任何代码 都永远不会执行
-
 ##### 参数
 
 它是当前函数的一个内置对象，存储了传递的所有实参。
@@ -597,6 +788,31 @@ function sum(num1, num2) {
 3. ECMAScript 中的所有参数传递的都是值，不可能通过引用传递参数。
 4. 重写 arguments 的值会导致语法错误
 
+##### 调用
+
+```js
+  var a = 1;
+    function b(){
+        console.log(a);
+    }
+    b(); // 调用函数
+```
+
+##### return
+
+函数在任何时候都可以通过 return 语句后跟要返回的值来实现返回值
+
+示例：
+
+```js
+var result = 0;
+function sum(num1, num2) {
+    console.log(num1 + num2);
+    return num1 + num2;  // return 语句之后结束大括号之前的任何代码 都永远不会执行
+}
+console.log(sum(5, 10)); // 调用函数并输出函数值，未指定返回值的函数,返回的是 undefined 值
+```
+
 ##### 匿名函数
 
 ```js
@@ -604,40 +820,22 @@ function sum(num1, num2) {
 var fn = function(){...}；
 // 匿名函数调用必须写到函数体下面
 fn();
-
 ```
 
-##### 调用
+##### 基本点
 
 ```js
   var a = 1;
     function b(){
-        a = 2;  // 有函数相当于赋值给函数a()
+        a = 2;  // 把函数变量a()重新赋值成数字变量，因为 a() 是局部变量,所以 a 也是局部变量
         console.log(a);
         //有函数，a不变；没函数，a变2
         function a(){};
     }
-    b();//会返回函数b()的 console.log
-    console.log(b()); // 1. 会返回函数b()的 console.log。2. 输出函数为 undifinde 。因为函数没有返回值，如果后面没有（）会输出这个函数的代码
+    b();// 调用函数，会输出函数的 模态对话框
+    console.log(b()); // 1. 调用函数，会输出函数的模态对话框。2. 输出函数结果为 undifinde 。因为函数没有返回值，?:如果后面没有（）会输出这个函数的代码
     console.log(a);//输出1
 ```
-
-```js
-var a = 1;
-
-function test(a) {
-    a=100;
-    console.log(a);//打印结果为100
-    return a;        // 会返回函数结果，如果没有这句话，函数结果为 undefined
-}     
-test(a);   // 会返回函数a()的 console.log
-a=test(a); // 会返回函数a()的 console.log。并把函数结果赋值给变量 a，如果不加括号，就把函数的代码赋值给变量 a 了。
-console.log(a);//打印结果为100，
-```
-
-### 返回数据类型
-
-*typeof()* 返回数据类型:typeof(...) / typeof ...
 
 ## 操作符
 
@@ -829,7 +1027,7 @@ alert(!!false);     //false
 
 由一个星号表示(*),计算两个数值的乘积。
 
-1. 超过表示范围用Infinity或-Infinity
+1. 超过表示**范围**用Infinity或-Infinity
 2. 有一个是NaN，结果是NaN
 3. Infinity与0相乘，结果是NaN
 4. Infinity与非0相乘，结果是Infinity
@@ -843,7 +1041,7 @@ alert(!!false);     //false
 1. 超过表示范围用Infinity或-Infinity
 2. 有一个是NaN，结果是NaN
 3. Infinity被Infinity除，结果是NAN
-4. 非0的有限数被0除，结果是Infinite
+4. 非0的有限数被0除，结果是Infinity
 5. 0被0除，结果是NaN
 6. Infinity被任何非0数值除，结果是Infinity
 7. 如果有操作数不是数值，则调用Number()
@@ -1164,7 +1362,7 @@ alert(i); //10
 是一种精准的迭代语句，可以用来枚举（遍历）对象的属性
 
 ```js
-for (变量 in 对象名) 代码
+for (变量 in 对象名) 代码  // 变量一般用“k”或“key”
 
 for (var k in obj) {
 	console.log(k); // 这里的 k 是属性名
@@ -1231,10 +1429,6 @@ with(location){
  var url = href;
 } 
 ```
-
-
-
-
 
 ## DOM
 
