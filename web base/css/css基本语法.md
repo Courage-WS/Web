@@ -92,7 +92,7 @@ property-value pairs        名值对
 
 ### 选择器
 
-类的第一个字符不能是数字，在HTML中多个类用空格隔开
+类的第一个字符不能是数字，建议用分隔符`-`连接，在HTML中多个类用空格隔开
 
 #### 关系选择器
 |选择器|说明||
@@ -242,7 +242,11 @@ display: none/block/inline-block/table/table-cell/table-caption;
 
 元素隐藏后不保留原有位置
 
-_**解决inline-block元素因换行产生的空白：1.调整HTML换行；2.使用负外边距，但是需要调整 font-size；3.父元素设置font-size：0；4. 运用jQuery （Safari：letter-spacing： -4px。根据不同字体调整）**_
+_**解决inline-block元素因换行产生的空白：**_
+
+1. 调整HTML换行；
+2. 父元素设置font-size：0；
+3.  运用jQuery （Safari：letter-spacing： -4px。根据不同字体调整）
 
 - **overflow:**     _溢出  visible / scroll / hidden / auto_
 - **visibility:**    _元素可见性  visible / hidden / collapse   元素隐藏后保留原有位置_
@@ -257,6 +261,7 @@ width: 100%;      和父元素一样宽
 
 - 仅适用于块元素
 - 加了浮动和定位的盒子需要添加 `width: 100%`，或者给宽度
+- `dir:ltr;`默认起始方向为`top left`
 
 `width: calc(100% - 190px);`
 
@@ -274,9 +279,9 @@ width: 100%;      和父元素一样宽
 
 _**可点击图像可能有边框，边框设为none**_
 
-| 属性                          | 值   | 描述                                           |
-| ----------------------------- | ---- | ---------------------------------------------- |
-| `border-image-slice`（ie11+） |      | 值用来表示切片的厚度，由1--4个值觉定，上右下左 |
+| 属性                          | 值   | 描述                                                         |
+| ----------------------------- | ---- | ------------------------------------------------------------ |
+| `border-image-slice`（ie11+） |      | 值用来表示切片的厚度，由1--4个值决定，上右下左（）前提有 border-style |
 
 ![slice](images\border-image-slice.png)
 
@@ -327,7 +332,8 @@ filter: alpha(opcity=30);             /* 透明度 0~100 （等同于 0.0~1.0）
 
 ### font
 
-```
+```css
+{font: font-style  font-weight  font-size/line-height  font-family;}  /*必须按语法格式中的顺序书写*/
 表单元素并不继承父级 font 
 ```
 
@@ -493,17 +499,17 @@ p{font-size:14px;font-size:1.4rem;}
 
 line-height一般设置比font-size大7 8个字号就好
 
-line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。line-height > height时，**下对齐**，可以向上溢出
+line-height == height 垂直居中，**line-height越大，文本越往下偏移**，先确定上间距。
 
 CSS有条规则，要求关闭text-decoration，而使用边框建立链接下划线
 
-word-break: keep-all    break-all
+word-break: break-all   keep-all   （中文等，遇到标点符号或者空格才会换行，否则不会换行）
 
 overflow-wrap: break-word
 
 ### vertical-align
 
-`vertical-align`:     _baseline / sub / super / top / middeen / bottom / text-bottom_ / number  垂直对齐文本，应用于**_行内元素和表单元格_**
+`vertical-align`:     _baseline / sub / super / top / middle / bottom / text-bottom_ / number  垂直对齐文本，应用于**_行内元素和表单元格_**
 
 - 可以用数字进行微调，一般用于调整背景图片
 - 盒子默认**上对齐**，行内元素默认**基线对齐**，img 为基线对齐
@@ -511,16 +517,12 @@ overflow-wrap: break-word
 
 baseline在css2的文档中有这么一句解释，翻译过来也就是一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
 
-```html
+```
 盒子A  里面有 文本B、 浮动元素C
 
 盒子的对齐方式为基线对齐，没有文本的盒子，基线为盒子内容区底部，有文本的盒子基线为最下方文本的基线，父盒子A里有文本B但是font-size: 0;（文本B不显示了）并且有浮动元素C，当浮动元素C有正常流父元素D时，基线为浮动元素C的父元素D的内容区底部，当浮动元素C没有父元素D时，基线为父盒子A的内容区顶部。当同时有浮动元素C的父元素D和文本时，以下面的基线为准（基线可超出父盒子A的内容区底部）。为需要对齐的盒子设置vertical-align，即可解决
 
 ```
-
-### word-break
-
-特别注意：keep-all（中文等，遇到标点符号或者空格才会换行，否则不会换行）
 
 ## 其他属性
 
@@ -534,7 +536,7 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 `counter-reset`: ; 默认值是 0
 
-`counters( <custom-ident>, <string>, <counter-style>? )`;
+`counters( <计数器们的名字>, <计数器们的分隔符>, <计数器们的样式>? )`;          counters()适合使用在需要继承的章节上，而counter()更适合用在独立的计数场景上。
 
 用计数器多个值，赋值嵌套父子元素：
 
@@ -552,12 +554,13 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 ```
 
 - 常用，父元素设置 counter-reset，子元素设置 counter-increment
-  1. 父元素为一层，子元素为两层，以此类推
-  2. 每一级都参与计数，不管他是否显示
-  3. counter 变换值的基数为上一个元素（不分父子级）
-  4. counters 中，reset 才能调用 string
-  5. 前一个元素为 reset ，后一个元素为 increment 时，把前一个元素移下来，并且把最后一个值加上 increment 的增加值
-  6. 前一个为 increment ，后一个为 reset 时，把前一个元素移下来，后面加上 string，再跟上 reset 的重置值
+  1. 以 dom 树为准，每一级都参与计数，不管他是否显示
+  2. counter 对象的上一个元素为  父元素或同级时，变换基数为上一个元素（不分父子级）
+  3. counter 对象的上一个元素为  子元素时，变换基数为上一个同级元素。
+  4. 元素为 increment 时，把变换基数的最后一个值加上 increment 的增加值
+  5. 子元素为 reset 时，把前一个元素移下来，后面加上 string，再跟上 reset 的重置值
+  6. reset 同级元素相同
+  7. counters 中，reset 才能调用 string
 
 | css                                             | 显示                                            |
 | ----------------------------------------------- | ----------------------------------------------- |
@@ -627,7 +630,10 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 
 **`transition`:要过渡的属性  花费时间  运动曲线  何时开始;**
 
-过渡需要写在元素本身，因为例如：过渡到 hover 时，如果 transition 写在 hover 上，移开鼠标时属性会瞬间恢复，如果写在元素本身，则移开时会同样过渡恢复
+过渡需要写在元素本身，
+
+1. 写在 hover 时，如果 transition 写在 hover 上，移开鼠标时属性会**瞬间恢复**，
+2. 写在元素本身，则移开时会同样**过渡恢复**
 
 _如果有多组属性变化，需要用逗号隔开_
 
@@ -686,7 +692,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 ## transform（ie x）
 
-缩写：transform：translate(x, y) rotate(deg) scale(x, y)；
+缩写：transform：translate(x, y) rotate(deg) scale(x, y) skew(x, y)；// 指定多个参数时必须缩写，否则最后出现的属性会覆盖掉前面的
 
 缩写时，旋转和移动的位置不一样时，结果也不一样。先旋转在移动会改变坐标轴方向（比如一个图片的z轴正方向是正前方，旋转之后图片的正前方还是z轴正方向 ）
 
@@ -703,7 +709,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 ##### 2D translate
 
 ```css
-transform: translate(-50%,-50%);
+transform: translate(-50%,-50%);  /* 第二个参数不写默认为 0 */
            translatex();
            translatey();
 ```
@@ -734,12 +740,10 @@ transform: rotate(45deg);
 ##### 2D scale
 
 ```css
-transform: scale(0.8,1);
+transform: scale(0.8,1);  /* 只写一个参数表示两个参数一样 */
            scalex();
            scaley();
 ```
-
-如果两个参数一样，可以只写一个参数
 
 缩放时，边框阴影等都会一起缩放
 
@@ -753,14 +757,19 @@ transform: scale(0.8,1);
 ##### 倾斜
 
 ```css
-transform: skew(30deg,0deg);
+transform: skew(30deg,0deg);  /* 第二个参数不写默认为 0 */
 ```
 
 第二个参数不写默认为0。
 
-X正值：上边往左拉伸，下边往右拉伸，倾斜30度；
+X正值：上边往左拉伸，下边往右拉伸，倾斜30度；（垂直方向沿 X 轴逆时针倾斜）
 
-Y正值：左边往上拉伸，右边往下拉伸，倾斜30度；负数方向相反。
+Y正值：左边往上拉伸，右边往下拉伸，倾斜30度；负数方向相反。（水平方向沿 Y 轴顺时针倾斜）
+
+```
+左手四指并拢，大拇指和它平行成 u 型。
+正值：大拇指指向坐标轴负方向，四指指的方向为与坐标轴平行且远的那个边拉的方向。
+```
 
 #### 3D变形（ie10+）
 
@@ -772,9 +781,9 @@ y上面是负数，下面是正数
 
 z里面是负数，外面是正数
 
-- `maerix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
+- `matrix3d(): ;`    以一个4*4矩阵的形式指定一个3D变换
 
-缩写：transform：perspective()  translate3d(x, y)  rotate3d(deg)  scale3d(x, y)；   透视距离要放在前面 否则没有效果
+缩写：`transform：translate3d(x, y, z)  rotate3d(x, y, z, deg)  scale3d(x, y, z)；`   透视距离要放在前面 否则没有效果
 
 ##### 转换类型
 
@@ -793,7 +802,7 @@ z里面是负数，外面是正数
 **表示用户和z=0平面之间的距离，使具有三维位置变换的元素产生透视效果。** 
 
 - `perspective：;  `   指定透视距离
-- `perspective-origin: ;    `          透视点位置
+- `perspective-origin: ;    `          透视点位置（0 0 为 left top）
 
 这两个值作用于被透视元素的父元素，透视值越大，视角越远，元素显得越小（进大远小）。子元素透视时父元素一定要有宽度，不然会有背面阴影效果
 
@@ -805,7 +814,7 @@ z里面是负数，外面是正数
 
 1. 从单位矩阵开始。
 2. 通过计算透视原点的X和Y值来平移
-3. 乘以从perspective()转换函数得到的矩阵，其中长度由perspective属性的值提供
+3. 乘以从 perspective() 转换函数得到的矩阵，其中长度由perspective属性的值提供
 4. 通过计算出的负的透视原点的X和Y值来转换
 
 ##### 3D旋转
@@ -841,25 +850,25 @@ translatez()：
 
 多个动画用逗号隔开
 
-| 属性                      | 描述         | 值                         |
-| ------------------------- | ------------ | -------------------------- |
-| @keyframes                | 规定动画     |                            |
-| animation-name            | 动画名称     |                            |
-| animation-duration        | 持续时间     |                            |
-| animation-timing-function | 时间函数     |                            |
-| animation-delay           | 推迟时间     |                            |
-| animation-iteration-count | 播放次数     | number，infinite           |
-| animation-direction       | 是否反向运动 | normal，reverse，alternate |
-| animation-fill-mode       | 结束状态     | forwrads，backwards        |
-| animation-play-state      | 动画状态     | running，paused            |
+| 属性                      | 描述     | 值                         |
+| ------------------------- | -------- | -------------------------- |
+| @keyframes                | 规定动画 |                            |
+| animation-name            | 动画名称 |                            |
+| animation-duration        | 持续时间 |                            |
+| animation-timing-function | 时间函数 |                            |
+| animation-delay           | 推迟时间 |                            |
+| animation-iteration-count | 播放次数 | number，infinite           |
+| animation-direction       | 运动方向 | normal，reverse，alternate |
+| animation-fill-mode       | 结束状态 | forwrads，backwards        |
+| animation-play-state      | 动画状态 | running，paused            |
 
 ```css
 @keyframes {
-    0% {
+    from {
         width: 40px;
         opacity: 1;
     }
-    100%{
+    to {
         width: 70px;
         opacity: 0;
     }
@@ -884,17 +893,13 @@ translatez()：
 |               | <polygpn()>   | view-box       |
 |               | <path()>      |                |
 
-
-
-文本回绕
-
 ### 渐变色
 
 linear-gradient(direction, color-stop1, color-stop2, ...)
 
 方向 起始颜色 结束颜色
 
-direction：值可选，to top 值会被转换成角度0度，以向顶部中央方向为起点顺时针增加。渐变线的结束点与其起点中心对称。默认 to bottom。关键字前应该加 to
+direction：值可选，to top 值会被转换成角度0度，以底部中央方向为起点顺时针向上 增加。渐变线的结束点与其起点中心对称。默认 to bottom。关键字前应该加 to
 
 color-stop：
 
@@ -926,9 +931,7 @@ background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
 ```
 
-
-
-## 布局
+## 布局 
 
 ### 伸缩盒
 
@@ -946,7 +949,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', en
 | `flex-basis`      | auto                                                         | 基准值                                     |
 | `flex-flow`       |                                                              | 缩写                                       |
 | `flex-direction`  | row（从左到右）、column-reverse（从下到上）                  | 主轴（用来多个盒子水平或垂直显示）         |
-| `flex-wrap`       | nowrap （默认不换行）                                        | 主轴是否换行                               |
+| `flex-wrap`       | nowrap （默认不换行）wrap-reverse (以行为单位反转)           | 主轴是否换行                               |
 | `justify-content` | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式                               |
 | `align-items`     | flex-start、flex-end、center、baseline、stretch              | 每行侧轴对齐（多行时先把父元素平分再对齐） |
 | `align-content`   | flex-start、flex-end、center、space-between、space-around、stretch | 只能多行整体侧轴对齐                       |
@@ -988,11 +991,11 @@ float的优点：可以让元素环绕，低版本ie支持比较好，不用处�
 
 ### 外边距重叠
 
-只有普通文档流中快框的垂直外边距才会发生外边距合并。*行内框、浮动框或绝对定位之间的外边距不会合并*
+只有普通文档流中块框的垂直外边距才会发生外边距合并。*行内框、浮动框或绝对定位之间的外边距不会合并*
 
 1. 全部为正值，外边距取最大值
-2. 不全是正值，外边距为两个值的和
-3. 没有正值，外边距取最小值
+2. 没有正值，外边距取最小值
+3. 不全是正值，外边距为两个值的和
 
 #### 解决外边距合并
 - 上下级：float   position: absolute;   display: inline-block;  overflow: hidden;      设置BFC
@@ -1014,11 +1017,11 @@ margin-top绝不会和他的块级父元素的margin-bottom折叠
 
 4. ```css
    .clearfix:after {
-   	content: ""; 
    	display: block; 
-   	height: 0; 
-   	clear: both; 
    	visibility: hidden;
+   	clear: both; 
+   	height: 0; 
+   	content: "";
    } 
    .clearfix {
    	\*zoom: 1;
@@ -1052,7 +1055,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 - 自适应两栏式布局
   - 普通流体元素BFC后，为了和浮动元素不产生任何交集，顺着浮动边缘形成自己的封闭上下文
 - 解决高度塌陷
-- 处理外边距合并
+  - 处理外边距合并
 - 清除浮动。
 
 #### 创建条件
@@ -1061,7 +1064,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 3. `overflow`特性不为visible的元素（除非该值已经传播到viewport）
 4. 行内块元素(`display: inline-block,flex`)
 5. 表格的单元格(`display: table-cells,td,th`)
-6. 表格的标题(`display: tabel-captions,caption`)
+6. 表格的标题(`display: tabel-caption,caption`)
 7. 表格元素创建的匿名框
 
 注意：_"display:table" 本身并不产生"block formatting contexts"。但是，它可以产生**匿名框**，其中包含"display:table-cell" 的框会产生**块格式化上下文**。总之，对于"display:table" 的元素，产生**块格式化上下文的是匿名框**而不是"display:table"。_
@@ -1072,7 +1075,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 3. 每个元素的 margin-box 的左边，与包含块 border-box 的左边相接处（对从左向右的格式化，否则相反）。即使存在浮动也是如此。
 4. bfc的区域不会与float-box重叠，紧贴浮动边缘。（不会外边距塌陷）
 5. bfc就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之亦是如此
-6. 计算bfc的高度时，浮动或者定位元素也参与计算
+6. 计算bfc的高度时，浮动也参与计算
 
 # 移动端
 
@@ -1098,7 +1101,7 @@ block formatting context （块级格式化上下文）规定了内部的bloc
 3. 在 ios 上给按钮和输入框自定义样式
    - `-webkit-appearance: none;`
 4. 禁用长按时弹出菜单（类似 pc 端的右击）
-   - `img，a { -webkit-touch-callout: none;`
+   - `img，a { -webkit-touch-callout: none;}`
 
 ### 二倍精灵图
 
@@ -1181,7 +1184,7 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 
 如：-moz-column-count:4;（分成4块显示） // Firefox
 
-先写带有浏览器私有标志的，后写W3C标准的。
+先写带有浏览器私有标志的，W3C标准语法必须放在最后。
 
 参考网址：[web规范](http://nec.netease.com/standard) [说明]( https://blog.csdn.net/qq_36060786/article/details/79311244 )
 

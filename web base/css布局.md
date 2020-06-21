@@ -18,7 +18,7 @@ html需要**设置最小尺寸**，浏览器放大或缩小时会改变html尺�
 
 对齐是排版最重要的因素, **别让什么都居中**
 
-开发时，最后压缩代码后所有的空格都会被清除，所以使用 -margin 清除空格间隙不合适
+开发时，最后压缩代码后所有的空格都会被清除
 
 ### html
 
@@ -57,7 +57,7 @@ html需要**设置最小尺寸**，浏览器放大或缩小时会改变html尺�
 
 h1 h2 等加文字是为了搜索引擎优化
 
-#### css不可用时，logo背景图片不显示显示文字
+#### css不可用时，logo背景图片不显示，显示文字
 
 1. 把文字缩进溢出盒子，再隐藏，（淘宝）
 2. font-size：0；                           （京东）
@@ -86,7 +86,7 @@ a:hover {  /* 鼠标经过 给我们的链接添加背景图片*/
 
 ### 轮播图 (绝对定位)
 
-![轮播](images\轮播.png)
+![轮播](CSS/images/轮播.png)
 
 轮播盒子，两个链接左右两边定位，有序列表是下方的定位点，无序列表的可点击链接是图片
 
@@ -152,7 +152,6 @@ a:hover span {
  div {
 
  	width: 0; 
-
     height: 0;
     line-height:0；
     font-size: 0;
@@ -209,10 +208,12 @@ button在高度计算上始终使用了Quirks模式。在Quirks模式下，边�
 2. 图片的父元素设置：{ display：table-cell；vertical-align：middle；text-align：center；}
 3. 绝对定位，（在不清楚盒子尺寸的情况下，可以设置：上下左右 0，margin：auto；，或者左上 50%，transform：translate（-50%，-50%）；
 
+行内块元素不能直接 `margin: auto;`
+
 ### 解决 webkit 最小字体限制
 
 html{
-    -webkit-text-size-adjust: none;
+    -webkit-text-size-adjust: none; // 或 100%
 }
 
 ### 因换行产生的空白间隙

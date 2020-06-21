@@ -4,7 +4,17 @@
 
 与之相对应的是后端（服务器端脚本语言）
 
+从语言特性上讲，JS是一个基于原型继承的语言
+
 ### JS 引擎机制
+
+1. JSON格式的语法（ + - {} [] 等）是引擎直接解释，效率高。
+
+   （使用`String() Array()`等会调用构造器(Builder或Buffer)再解释，多加一层对象包裹）
+
+2. 使用正则表达式，写的速度更快。
+
+3. 尽可能的少定义、使用全局变量
 
 js 是单线程。所有的任务需要排队处理，当前任务结束，才能执行下一个任务
 
@@ -12,6 +22,7 @@ js 是单线程。所有的任务需要排队处理，当前任务结束，才�
 2. 在主线程外有一个 task queue ，只要异步任务有了运行结果，就在 task queue 中放置一个事件，进入等待状态等待状态
 3. 当前执行栈所有同步任务执行结束后，系统会读取 task queue，这些异步任务结束等待状态，进入执行栈，开始执行
 4. 主线程不断重复第三步
+5. 
 
 ### 组成
 
@@ -22,14 +33,15 @@ ECMAScript，由ECMA-262定义，提供核心语言功能
 ### 联入
 
 ```html
-   <script type=”text/javascript”>     </script>
-   <script type=”text/javascript” src=”ecma.js”> </script>
+<script type=”text/javascript”>     </script>
+<script type=”text/javascript” src=”ecma.js”> </script>
 ```
 
 属性：async 异步脚本，立即下载，不影响其他加载，加载顺序不一定
 
 ```html
-   <script type+”text/javascript” src=”url” async></script>
+<script type=”text/javascript” src=”url” async=”async></script>
+<!-- type 默认载入，可以不写 -->
 ```
 
 defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，加载顺序不一定
@@ -88,7 +100,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 第一个字符是：字母，下划线 _，美元字符 $。 后面可以有数字 一般采取驼峰式
 
-不能用：关键字、保留字、true、false、null
+不能用：关键字、保留字、true、false、null、undefined
 
 1. 关键字
 
@@ -101,12 +113,13 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 2. 保留字
 
-   |          |           |         |             |         |           |            |        |
-   | -------- | --------- | ------- | ----------- | ------- | --------- | ---------- | ------ |
-   | abstract | boolean   | byte    | char        | class   | const     | debugger   | double |
-   | enum     | export    | extends | final       | float   | goto      | implements | import |
-   | int      | interface | long    | native      | package | private   | protected  | public |
-   | short    | static    | super   | synchroized | throws  | transient | volatile   |        |
+   |          |           |         |             |           |           |
+   | -------- | --------- | ------- | ----------- | --------- | --------- |
+   | abstract | boolean   | byte    | char        | class     | const     |
+   | enum     | export    | extends | final       | float     | goto      |
+   | int      | interface | long    | native      | package   | private   |
+   | short    | static    | super   | synchroized | throws    | transient |
+   | let      | yield     |         | eval        | arguments |           |
 
 
 ### 严格模式
@@ -115,30 +128,30 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 
 ```js
     function doSomething() {
-    “us strict”;
+    “use strict”;
     //函数体
     }
 ```
 
-### 语法错误
+### JS 异常
 
-解析错误，代码块无法加载
+语法错误，代码块无法加载
 
 ```js
    var a=19;
-    document.write(a);
+    document.write(a;
 ```
 
-逻辑错误，错误代码后的内容不显示，不影响其他代码块，ps:不影响其他script标签里的内容。其他script标签内容可以引用错误代码后的内容
+运行错误，错误代码后的内容不显示，不影响其他代码块，ps:不影响其他script标签里的内容。其他script标签内容可以引用错误代码后的内容
 
 ## 输出消息的五种方法
 
 模态对话框：在用户单击“OK”按钮之前，页面上是不能进行其他任何操作的
 
-- **window.alert()** 弹出对话框
+- **window.alert()** 弹出对话框（父对象是 window 时 可以省略）
 - **confirm()** 弹出带取消对话框，用于if
 - **prompt()** 接受用户信息
-- **console.log()** 在网页中控台输出消息
+- **console.log()** 在网页中控台输出消息，同行输出多个用 `,` 隔开
 - **document.write()** 在页面输出消息，可输入HTML标签，加载后用会覆盖页面
 
 ## 作用域
@@ -149,9 +162,9 @@ JavaScript（es6前）中的作用域有两种：
 
   - 作用于所有代码执行的环境(整个 script 标签内部)或者一个独立的 js 文件。
 
-  - 严格模式需要在函数外声明函数
+  - 严格模式需要在函数外声明变量
 
-    省略var操作符会创建全局变量，只要调用过一次，就可以在函数外访问。会因为变量不会马上有定义导致不必要的混乱。未声明在严格模式中会抛出 ReferenceErroror 错误
+    省略var操作符会创建全局变量，只要调用过一次，就可以在函数外访问。会因为变量不会马上有定义导致不必要的混乱。未声明在严格模式中会抛出 ReferenceError 错误
 
     ```js
         var text = "1";   // 全局变量
@@ -232,16 +245,12 @@ for (var i = 0; i < 100000; i++) {
 console.log(str); // 在大量拼接字符串时，会有效率问题，因为需要不断开辟空间
 ```
 
-可以看作一种被命名的分类容器，类似于酒店的房间
-
-变量名区分大小写，一般只使用字母、数字、美元符号（$）和下画线。
-
 ### var 操作符
 
 ```
 声明： `var mess`在 环境/上下文 中指定一个变量的名字。有var和变量名
 
-初始化： `var mess=1,found=2,age=3;`给一个声明后尚未初始化的变量一个有意义的初始值,多个变量用“ ，“隔开。有var,变量名和值
+初始化： `var mess=1,age=3;`给一个声明后尚未初始化的变量一个有意义的初始值。有var,变量名和值
 
 赋值： `mess=1;mess=2;`销毁一个变量原来的值，并赋予一个新值，相当于改变了一个变量的状态。有变量名和值
 ```
@@ -251,9 +260,9 @@ console.log(str); // 在大量拼接字符串时，会有效率问题，因为�
 定义多个变量，用逗号隔开
 
 ```js
-    var message = “hi”,
-        found = false,
-        age = 29;
+var message = “hi”,
+    found = false,
+    age = 29;
 ```
 
 ### 特殊情况
@@ -293,11 +302,11 @@ JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声
 ### 区别
 
 - 简单类型：在存储时变量中存储的是值本身，因此叫做值类型
-- 复杂类型：在存储时变量中存储的仅仅是地址（引用），因此叫做引用数据类型。
+- 复杂类型：在存储时变量中存储的仅仅是地址（引用），因此叫做引用类型。
 
-堆栈空间分配区别：（：JavaScript中实际上没有堆栈的概念）
+堆栈空间分配区别：（JavaScript中实际上没有堆栈的概念）
 
-1. 1、栈（操作系统）：由操作系统自动分配释放存放函数的参数值、局部变量的值等。其操作方式类似于数据结构中的栈；**简单数据类型存放到栈里面**
+1. 栈（操作系统）：由操作系统自动分配释放存放函数的参数值、局部变量的值等。其操作方式类似于数据结构中的栈；**简单数据类型存放到栈里面**
 2. 堆（操作系统）：存储复杂类型(对象)，一般由程序员分配释放，若程序员不释放，由垃圾回收机制回收。**复杂数据类型存放到堆里面**
 
 - 值类型变量的数据直接存放在变量（栈空间）中<img src="../image/简单类型传参.png">
@@ -326,18 +335,16 @@ JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声
 | ------------ | ---------------------------------------------------- | --------- |
 | undefined    | 变量未初始化：`var x;`，或者接受的函数没有明确返回值 | undefined |
 | null         | 值为空：`var x=null;`                                | null      |
-| boolean      | 布尔值类型：ture、false，等价于 0 和 1               | false     |
+| boolean      | 布尔值类型：true、false，等价于 0 和 1               | false     |
 | number       | 数字型：包括整数和浮点数                             | 0         |
 | string       | 字符串                                               | ""        |
 
-null  值为空。
-
-如果变量用于保存对象，将变量初始化为null，明确的让该变量保存null值
+如果变量用于保存对象，将变量初始化为null
 
 #### boolean
 
 ```js
-var x=true   var x=false
+var x=true;   var x=false;
 ```
 
 #### number
@@ -345,12 +352,14 @@ var x=true   var x=false
 浮点数：最高精确小数点后17位，（注意：不要测试特定的浮点数值`0.1+0.2 == 0.3`）
 
 ```js
-var x=2
+var x=2;
 ```
 
 进制： 十进制，八进制（前面加0，严格模式下无效），十六进制（前面加0x）
 
-科学记数法：3.125e5 = 312500 0.000003=3e-6
+八进制：标准模式下，变量为数字，看作八进制；变量为**字符串，忽略前导 0 **，看作十进制。
+
+科学记数法：3.125e+5 = 312500 / 0.000003 = 3e-6（符合为正数时可省略）
 
 - 最大值和最小值
 
@@ -367,91 +376,130 @@ var x=2
 
 ```js
 var x="2";
-x=x+”4”         //输出”24”
+x = x+”4”;         //输出”24”
 ```
 
 转义字符
 
-| 代码 | \ '    | \ "    | \ &  | \\   | \n     | \r     | \t     | \b     | \f     |
-| ---- | ------ | ------ | ---- | ---- | ------ | ------ | ------ | ------ | ------ |
-| 输出 | 单引号 | 双引号 | 和号 | 斜杠 | 换行符 | 回车符 | 制表符 | 退格符 | 换页符 |
+| 代码 | \ '    | \ "    | \ &  | \\   | \n     | \r     | \t            | \b     | \f     |
+| ---- | ------ | ------ | ---- | ---- | ------ | ------ | ------------- | ------ | ------ |
+| 输出 | 单引号 | 双引号 | 和号 | 斜杠 | 换行符 | 回车符 | 制表符（Tab） | 退格符 | 换页符 |
 
 #### 类型转换
 
-##### boolean() 
+- boolean()   
+  | 数据类型  | 结果为 ture             | 结果为 false |
+  | --------- | ----------------------- | ------------ |
+  | string    | 非空字符串              | 空字符串     |
+  | number    | 任何非0数值，包括无穷大 | 0和NaN       |
+  | Object    | 任何对象                | null         |
+  | undefined | N/A（不适用）           | undefined    |
 
-| 数据类型  | 结果为 ture             | 结果为 false |
-| --------- | ----------------------- | ------------ |
-| boolean   | ture                    | false        |
-| string    | 非空字符串              | 空字符串     |
-| number    | 任何非0数值，包括无穷大 | 0和NaN       |
-| Object    | 任何对象                | null         |
-| undefined | N/A（不适用）           | undefined    |
+- string
 
-##### string
+  - 数字转字符串**不用声明转换前的进制**，会自动识别
+  - 转换前先转换为十进制
 
-1. .toString()
+  1. .toString()    
 
-   后面可以写基数，不支持null和undefined
+     用来转换数字，后面可以写转换后的基数（进制），
 
-   ```js
-   var num = 1;
-   alert(num.toString(10));
-   ```
+     不支持null和undefined
 
-2. String()
+     注意：`.toString`前面不能直接写10进制数字，八进制和十六进制或者变量等可以
 
-   几乎所有值都可以 ,有toString()方法，调用该方法, Null返回”null”,undefined返回”undefined”
+     ```js
+     var num = 1;
+     alert(num.toString(10));
+     ```
 
-   ```js
-   var num = 1;
-   alert(String(num));
-   ```
+  2. String()
 
-3. "+" 拼接字符串
+     几乎所有值都可以 ,有toString()方法，调用该方法, 
 
-   ```js
-   var num = 1;
-   alert(num + "");
-   ```
+     Null返回”null”,undefined返回”undefined”
 
-##### numer
+     ```js
+     var num = 1;
+     alert(String(num));
+     ```
 
-1. Number()
+  3. "+" 拼接字符串
 
-   | undefined | null | boolean,ture and false | number | string                                                       | 对象                                                 |
-   | --------- | ---- | ---------------------- | ------ | ------------------------------------------------------------ | ---------------------------------------------------- |
-   | NaN       | 0    | 1 and 0                | 不变   | 纯数字转化为数值，16进制转化为10进制，（保留符号-+及小数，忽略前导0） 。包含其他字符，转化为NaN 。空字符串转化为0 | 调用valueOf()方法，如果结果是NaN，调用toString()方法 |
+     ```js
+     var num = 1;
+     alert(num + "");
+     // 效率最高，但是不支持 Symbol('123') 类型转换
+     ```
 
-2. ParseInt() （重点）
+- numer
 
-   处理整数字符串，不识别空字符串
+  string 转 number 默认忽略前导 0
 
-   从第一个字符开始到第一个非数字字符结束，（认识符号，不认识小数，认识整数格式（各种进制）） 。空字符串和第一个字符非数字的字符串返回NaN
+  处理整数字符串转换为 10 进制数字
 
-   ```js
-   var str = "0x329382";
-   alert(parseint(str, 16));  // 后一个参数为转换基数（进制）
-   ```
+  1. Number()
 
-3. ParseFloat()（重点）
+     | undefined | null | boolean,true and false | number               | string                                                       | 对象                                                 |
+     | --------- | ---- | ---------------------- | -------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+     | NaN       | 0    | 1 and 0                | 不变（识别进制写法） | 纯数字转化为数值，（保留符号-+及小数） 。包含其他字符，转化为NaN 。空字符串和空格转化为0 | 调用valueOf()方法，如果结果是NaN，调用toString()方法 |
 
-   和parseInt()类似，区别：1 识别有效浮点数字字符，2 只解析10进制
+  2. parseInt() （重点）
 
-4. （ - * / ）隐式转换
+     ，非数字转换为NaN，不识别空字符串
 
-   ```js
-   var str = 12;
-   str -= 0;
-   ```
+     从第一个字符（首位是空格时会忽略）开始到第一个非数字字符结束，（认识符号，不认识小数，认识整数格式（各种进制）） 。空字符串和第一个字符非数字的字符串返回NaN
+
+     ```js
+     var str = "0x329382";
+     alert(parseInt(str, 16));  // 后一个参数为被转换前的基数（进制）
+     // 没有字母转换（包括没有16进制写法），不带基数速度最快
+     ```
+
+  3. parseFloat()（重点）
+
+     和parseInt()类似，区别：1 识别有效浮点数字字符，2 只解析10进制
+
+  4. （ - * / ）隐式转换
+
+     ```js
+     var str = 12;
+     str -= 0;
+     // 速度和 Number 差不多
+     ```
 
 ### 复杂数据类型
 
 引用值heap（堆）
 
+#### new
+
+使用`new`操作符可以创建引用类型，
+
+基本类型和引用类型的区别：
+
+- 基本类型在执行代码的**瞬间**会创建基本包装类型，方法执行完毕，对象被立即销毁，（不能为正在运行的基本类型添加属性和方法）
+
+  ```js
+  var s1 = "some text";
+  alert(s1.substring(0)); //some text
+  s1.color = "red";
+  alert(s1.color);    //undefined
+  ```
+
+- 引用类型在执行流离开当前作用域前**一直保存**在内存中
+
+  ```js
+  var s2 = new String("another text");
+  s2.color = 'blue';
+  alert(s2.color);    //blue
+  ```
+
 #### Object
 
 对象有时候被叫做关联数组
+
+`typeof Object` 返回的是 function 
 
 对象：是一组无序的相关属性和方法的集合，所有的事物都是对象，例如字符串、数值、数组、
 函数等。
@@ -460,20 +508,26 @@ x=x+”4”         //输出”24”
 
 - 属性：事物的特征，在对象中用属性来表示（常用名词），属性包含一个键（名）和一个值
 - 方法：事物的行为，在对象中用方法来表示（常用动词），是储存对象属性的函数
+  - javascript的方法可以分为三类：
+    1. 类方法
+    2. 对象方法
+    3. 原型方法
 
 1. 创建对象
-   1. new Object()
-      
+   1. new Object()  在初始化大数组时，性能更加优异
+
       ```js
       var o = new Object ();  // new操作符后面跟创建的对象类型的名称，
+      //使用 new 会调用构造器，多加一层对象包裹，但是更符合对象化继承的概念
       ```
 
-   2. 字面量
+   2. 字面量 
       ```js
-      var star = {...}  // 可以直接写属性和方法，用“:”连接属性和值
+      var star = {...}  // 可以直接写属性和方法，用“:”连接属性和值，
       ```
    3. 构造函数创建
       对象的属性和方法封装成的函数叫构造函数，用来初始化对象，这个过程叫做`对象实例化`
+
       ```js
       function Person(name, age, sex) {
       this.name = name;  // 2. this指向对象   3. 给对象添加属性和方法 
@@ -501,7 +555,7 @@ x=x+”4”         //输出”24”
       1. 对象 . 属性
       
          ```js
-         console.log(star.name); // 调用名字属性
+         console.log(star.name); // 调用 name 属性
          ```
 
       2. 对象 [ ' 属性 ' ]
@@ -736,6 +790,42 @@ Math、Date、Array、基本包装类型
 ##### 浏览器对象
 
 - 
+
+##### 对象化
+
+可以不使用`new`实现对象化，比如使用`function`作为一个基类：
+
+```js
+function foo () {  //没有对象化
+  var name = 'name'
+}
+foo.prototype.getName = function () { console.log(1) }
+var t = foo()  // undefined，不是想要继承getName方法的对象
+```
+
+解决方法：
+
+1. ```js
+   // 在 function 中添加代码
+   function foo()
+   {
+      // 如果用户没有使用new进行调用 则静默调用new
+      if ( !(this instanceof foo) )
+         return new foo();
+   
+      // 构造函数逻辑如下...
+   }
+   ```
+
+2. ```js
+   // 更通用代码
+   function foo()
+   {
+      // 如果用户没有使用new进行调用 则静默调用new
+      if ( !(this instanceof arguments.callee) )  // 在这里不再使用foo来判定，而是通过callee来进行
+      throw new Error("作为函数调用的构造函数");
+   }
+   ```
 
 #### 函数
 
@@ -1325,7 +1415,7 @@ for (var i = 0; i < count; i++){
 }
 ```
 
-执行过程：初始化变量 》 执行条件表达式（ture 继续执行，否则结束循环） 》 执行循环体语句 》 执行操作表达式
+执行过程：初始化变量 》 执行条件表达式（true 继续执行，否则结束循环） 》 执行循环体语句 》 执行操作表达式
 
 这个 for 循环语句与下面的 while 语句的功能相同。使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关 的代码集中在了一个位置。
 
@@ -1444,7 +1534,7 @@ BOM浏览器对象类型（也叫 0 级 DOM），提供与浏览器交互的方�
 
 <img src="../image/dom.jpg" alt="dom树">
 
-window 是 Dom树 中的顶层，有时也被称为“全局对象”，可以不明确书写window.
+window 是 Dom树 中的顶层，有时也被称为“全局对象”，可以省略 window.
 
 body 是 document 的一个子对象。object 后面可以跟属性和方法
 
@@ -1489,3 +1579,9 @@ body 是 document 的一个子对象。object 后面可以跟属性和方法
 ### onMouseOver和onMouseOut事件处理器
 
 当鼠标进入页面上被某个元素所占据的区域时，会触发onMouseOver事件。而onMouserOut事件，很显然是在鼠标离开这一区域时触发的。
+
+# 不懂
+
+1. 包装类型
+2. 闭包
+3. prototype原型对象

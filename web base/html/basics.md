@@ -2,7 +2,7 @@
 
    <a href="http://validator.w3.org">w3c验证工具</a>
 
-默认文件名,通常为index.com/default.com
+默认文件名,通常为index.html/default.html
 
 | 主流浏览器 | 内核 | JS引擎 |
 |-----|----|----|
@@ -107,7 +107,7 @@ id：以数字或字母开头，不能纯数字。都不能有空格
 div、p、h1、ol、ul、dl、table、address、blockquote、form
 
 常见的内联元素：（width，height 全无效。margin 上下无效，padding 有效 但是上下不会撑开内容）
-a、span、br、em、strong、label、q、var、cite、code
+a、span、em、strong、label、q、var、cite、code
 
 常见的内联块元素2项：
 img、input
@@ -136,17 +136,50 @@ audio：wav  mpeg  ogg
 | <    | less-than          | \&lt;    |  \&#60;  |
 | >    | greater-than       | \&gt;    |  \&#62;  |
 
-### 属性顺序
-HTML属性应该按照特定的顺序出现，以保证易读性
-1. class
-2. id
-3. name
-4. data-*
-5. src, for, type, value, max-length, max, min, pattern
-6. placeholder, title, alt
-7. aria-*, role
-8. required, readonly, disbled
+## src和href的区别
 
-第一序列标签名称，第二序列标签资源，第三序列标签说明，第四序列标签状态
+src和href之间存在区别，能混淆使用。src：用于替换当前元素，href：用于在当前温度和引用资源之间确立联系。
 
-class是为高可复用组件设计的，应放在第一位，id更加具体而且尽量少用，所以放在第二位。
+src是source的缩写，直线外部资源的位置，指向的内容将会嵌入到文档中当前表情所在的位置；在请求src资源时，会将其指向的资源下载，并应用到文档内。例如js脚本，img图片和frame等元素。
+` <script src = "js.js"></script> `
+当浏览器解析到该元素时，会暂停其他志愿的下载和处理，直到将该资源加载、变异、执行完毕，图片和框架等元素也如此，类似于将所指向资源嵌入当前标签内。这也是为什么 js脚本放在底部而不是头部。
+
+href是Hypertext Reference的缩写，指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，如果我们在文档中添加
+` <link href = "common.css" rel = "stylesheet" /> `
+那么浏览器会识别该文档为CSS文件，就会并行下载资源并且不会停止对当前文档的处理。这也是为什么建议用link方式来加载CSS，而不是使用@import方式。
+link标签本身并不包含十几单元素意义来做内容，他需要rel明确的表示被链接的文档是做什么的。至于说为什么当初就觉得外部样式表用link href来链接，而不是用style src来载入，可能是先贤认为样式表更符合外部链接资源的特征，他更接近附属的资源，而不是内嵌的内容。
+
+## url
+
+uniform resource locator
+
+相对路径：www/1.jpg      ../1.jpg       1.jpg
+绝对路径：D:\www\1.jpg   http://www.1.jpg
+file:///***
+localhost：***
+磁盘绝对路径用反斜线
+URL统一资源定位符/web地址 绝对路径 文件URL有三个斜线
+  HTTP超文本传输协议
+
+URL 只能使用 ASCII 字符集，用 "%" 其后跟随两位的十六进制数来替换非 ASCII 字符。
+http://www.w3school.com.cn:80/html/index.asp
+acheme://host.domain:port/path/filename
+acheme   -因特网服务类型（常见：http）
+host     -域主机（http默认主机：www)
+domain   -因特网域名
+:port    -主机上的端口号（http默认：80）
+path     -服务器上的路径
+filename -文档/资源名称
+
+主流acheme：
+http      超文本传输协议（不加密）
+https     安全超文本传输协议（加密）
+ftp       文件传输协议（文件传输）
+file      计算机上的文件
+
+
+
+在使用webstorm过程中，使用某张图片的绝对路径始终显示不出来，各种百度无果，貌似根本就没有人出现过这个问题。。。
+比如：<img src="file://D:\Pictures\holo.jpg" >   显示不出来，设置相对路径就可以显示了。但是绝对路径不管怎么样都显示不出来。
+
+在webstorm中，它帮你虚拟了一个服务器（可以认为在此虚拟服务器外的文件相当于在另一个电脑里），因此你点击webstorm右上角的浏览器图标打开网页时，网页路径是localhost:****而你的图片也显示不出来；你可以摁住Shift再点击右上浏览器图标使用本地打开的方式，此时打开的网页路径是file:///****，这时候你的图片应该就能显示出来了。
