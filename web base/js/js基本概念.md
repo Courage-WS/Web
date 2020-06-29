@@ -286,18 +286,9 @@ var message = “hi”,
 JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型，在程序运行过程中，类型会
 被自动确定 
 
-- 返回数据类型
+**返回数据类型**
 
-  *typeof()* 返回数据类型:`typeof(...) / typeof ...`
-
-- 判断数据类型
-
-  instanceof 运算符
-
-  ```js
-  var arr = [1, 23];
-  console.log(arr instanceof Array); // true
-  ```
+*typeof()* 返回数据类型:`typeof(...) / typeof ...`
 
 ### 区别
 
@@ -325,8 +316,24 @@ JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声
   var p = new Person("刘德华");
   // 1.在堆里存放函数，同时在栈里生成一个地址指向这个堆，p变量指向这个地址
   console.log(p.name);    // 1.此时 name 是“刘德华”
-  f1(p); // 2.x = p；把 p 在栈里的地址赋值给 x ，指向堆里同一个对象
+  f1(p); // 2.x = p = Person；把 p 在栈里的地址（Person）赋值给 x ，指向堆里同一个对象
   console.log(p.name);    // 4.因为 x、p 指向同一地址，所以 name 一起改变 \u
+  ```
+
+  ```js
+  var a = {
+      name = "mu";
+  }
+  var b = a;
+  a.name = "mumu";
+  console.log(b); //b 和 a 指向同一个地址 b = a
+  
+  a = {
+      name = "haha";
+  }
+  // a 整个对象改变，因为复杂数据类型的大小具有不确定性，所以开辟一个新的内存块储存对象，
+  
+  console.log(b); // 因为内存块不同，b 不变
   ```
 
 ### 简单数据类型
@@ -472,6 +479,15 @@ x = x+”4”;         //输出”24”
 
 引用值heap（堆）
 
+**判断对象类型**
+
+instanceof 运算符
+
+```js
+var arr = [1, 23];
+console.log(arr instanceof Array); // true
+```
+
 #### new
 
 使用`new`操作符可以创建引用类型，
@@ -504,8 +520,6 @@ x = x+”4”;         //输出”24”
 对象：是一组无序的相关属性和方法的集合，所有的事物都是对象，例如字符串、数值、数组、
 函数等。
 
-对象是由属性和方法组成的。
-
 - 属性：事物的特征，在对象中用属性来表示（常用名词），属性包含一个键（名）和一个值
 - 方法：事物的行为，在对象中用方法来表示（常用动词），是储存对象属性的函数
   - javascript的方法可以分为三类：
@@ -513,29 +527,47 @@ x = x+”4”;         //输出”24”
     2. 对象方法
     3. 原型方法
 
+对象分三种：自定义对象 、内置对象、 浏览器对象（前面两种对象是JS 基础 内容，属于 ECMAScript； 第三个浏览器对象属于JS 独有的）
+
+##### 自定义对象
+
 1. 创建对象
+
    1. new Object()  在初始化大数组时，性能更加优异
 
       ```js
       var o = new Object ();  // new操作符后面跟创建的对象类型的名称，
+      com.name = "x8";
+      com.play = function() {
+          alert("看电影");
+      }
       //使用 new 会调用构造器，多加一层对象包裹，但是更符合对象化继承的概念
       ```
 
    2. 字面量 
+
       ```js
-      var star = {...}  // 可以直接写属性和方法，用“:”连接属性和值，
+      var star = {
+          name: 'pink',
+          sayHi: function() {
+              alert('大家好啊~');
+          }
+      }
+      
+      }  // 可以直接写属性和方法，用“:”连接属性和值，
       ```
+
    3. 构造函数创建
       对象的属性和方法封装成的函数叫构造函数，用来初始化对象，这个过程叫做`对象实例化`
 
       ```js
       function Person(name, age, sex) {
-      this.name = name;  // 2. this指向对象   3. 给对象添加属性和方法 
-      this.age = age;
-      this.sex = sex;
-      this.sayHi = function() {
-      alert('Hi！我的名字叫：' + this.name + '，年龄：' + this.age + '，性别：' + this.sex);
-      }
+          this.name = name;  // 2. this指向对象   3. 给对象添加属性和方法 
+          this.age = age;
+          this.sex = sex;
+          this.sayHi = function() {
+          alert('Hi！我的名字叫：' + this.name + '，年龄：' + this.age + '，性别：' + this.sex);
+          }
       }  // 4. 返回对象 不需要return
       var bigbai = new Person('大白', 100, '男');  // 1. 创建空对象
       var smallbai = new Person('小白', 21, '男');
@@ -552,56 +584,33 @@ x = x+”4”;         //输出”24”
 
    - 属性调用：
 
-      1. 对象 . 属性
-      
-         ```js
-         console.log(star.name); // 调用 name 属性
-         ```
+     1. 对象 . 属性
 
-      2. 对象 [ ' 属性 ' ]
+        ```js
+        console.log(star.name); // 调用 name 属性
+        ```
 
-         ```js
-         console.log(star['name']); // 括号里的属性名是字符串必须加引号
-         ```
+     2. 对象 [ ' 属性 ' ]
+
+        ```js
+        console.log(star['name']); // 括号里的属性名是字符串必须加引号
+        ```
 
    - 方法调用：
 
-      对象 . 方法名 ();   `star.sayHi(); `          方法名后面要加括号
-
-对象分三种：自定义对象 、内置对象、 浏览器对象（前面两种对象是JS 基础 内容，属于 ECMAScript； 第三个浏览器对象属于JS 独有的）
+     对象 . 方法名 ();   `star.sayHi(); `          方法名后面要加括号
 
 3. 特殊情况
 
    Object有的属性和方法会存在更具体的对象里
 
-   - **constructor**：保存着用于创建当前对象的函数。对于前面的例子而言，构造函数   （constructor）就是 Object()。
-   - **hasOwnProperty(propertyName)**：用于检查给定的属性在当前对象实例中（而不是在实例的原   型中）是否存在。其中，作为参数的属性名（propertyName）必须以字符串形式指定（例如：   o.hasOwnProperty("name")）。
-   - **isPrototypeOf(object)**：用于检查传入的对象是否是传入对象的原型
-   - **propertyIsEnumerable(propertyName)**：用于检查给定的属性是否能够使用 for-in 语句来枚举。   与 hasOwnProperty()方法一样，作为参数的属性名必须以字符 串形式指定。
-   - **toLocaleString()**：返回对象的字符串表示，该字符串与执行环境的地区对应。
-   - **toString()**：返回对象的字符串表示。
-   - **valueOf()**：返回对象的字符串、数值或布尔值表示。通常与 toString()方法的返回值 相同。
-
-##### 自定义对象
-
-```js
-var a = {
-    name = "mu";
-}
-
-var b = a;
-a.name = "mumu";
-console.log(b); //b 和 a 指向同一个地址 b = a
-
-a = {
-    name = "haha";
-}
-// a 整个对象改变，因为复杂数据类型的大小具有不确定性，所以开辟一个新的内存块储存对象，
-
-console.log(b); // 因为内存块不同，b 不变
-```
-
-
+   - **.constructor**：保存着用于创建当前对象的函数。对于前面的例子而言，构造函数   （constructor）就是 Object()。
+   - **.hasOwnProperty(propertyName)**：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。其中，作为参数的属性名（propertyName）必须以字符串形式指定（例如：   o.hasOwnProperty("name")）。
+   - **.isPrototypeOf(object)**：用于检查传入的对象是否是传入对象的原型
+   - **.propertyIsEnumerable(propertyName)**：用于检查给定的属性是否能够使用 for-in 语句来枚举。   与 hasOwnProperty()方法一样，作为参数的属性名必须以字符 串形式指定。
+   - **.toLocaleString()**：返回对象的字符串表示，该字符串与执行环境的地区对应。
+   - **.toString()**：返回对象的字符串表示。
+   - **.valueOf()**：返回对象的字符串、数值或布尔值表示。通常与 toString()方法的返回值 相同。
 
 ##### 内置对象
 
@@ -615,15 +624,17 @@ Math、Date、Array、基本包装类型
    Math.PI() // 圆周率
    Math.floor() // 向下取整
    Math.ceil() // 向上取整
-   Math.round() // 四舍五入版 就近取整 注意 -3.5 结果是 -3
+   Math.round() // 四舍五入版 就近取整 
    Math.abs() // 绝对值
    Math.max()/Math.min() // 求最大和最小值
    Math.random() // 随机数
    
-   // 这些方法必须带 “()"
+   // 这些方法必须带 “()"，否则得到的是函数本身而非结果
    ```
 
-   随机数：[0，1) === 左闭右开区间（即从0（包含0）到...1但不包括1（排除1）。）
+   四舍五入：注意：-0.5 结果是 -0，0.5 结果是 1
+
+   随机数：[0，1) === 左闭右开区间。即从0（包含0）到...1但不包括1（排除1）。
 
    ```js
    // 两个数之间的随机数
@@ -637,7 +648,7 @@ Math、Date、Array、基本包装类型
 
    日期是构造函数，需要实例化
 
-   Date 对象是基于1970年1月1日（世界标准时间）起的毫秒数
+   Date 对象是基于1970年1月1日（世界标准时间）起的毫秒数(1000ms = 1s)
 
    ```js
    var now = new Date(); // 不写参数，就返回当前时间；写参数就返回输入的时间
@@ -645,19 +656,47 @@ Math、Date、Array、基本包装类型
 
    基本方法：<img src="../image/日期方法.png">
 
-   **获取时间戳：**
+   **获取指定时间的时间戳：**
 
    ```js
    // 实例化Date对象
-   var now = new Date();
+   var now = new Date("2020-6-22 00:00:00");
    // 1. 用于获取对象的原始值的2种方法
-   console.log(date.valueOf())
-   console.log(date.getTime())
+   console.log(now.valueOf())
+   console.log(now.getTime())
    // 2. 简单写可以这么做 (最常用)
    var now = + new Date();
    // 3. HTML5中提供的方法，有兼容性问题
    var now = Date.now();
    ```
+
+   **时间戳转换小时，会比本地时间早八小时（相差八个时区）**
+
+   ```js
+    $.renderDateTime = function (jsondate) {
+       var timeStamp = parseInt(jsondate.replace(/\D/igm, ""));
+       timeStamp = timeStamp - 8 * 60 * 60 * 1000; //（本地时间）东八区减去8小时
+       var date = new Date(timeStamp);
+   
+       var year = date.getFullYear();
+       var month = date.getMonth() + 1;
+       var day = date.getDate();
+       var hour = date.getHours();
+       var minute = date.getMinutes();
+       var second = date.getSeconds();
+       return year
+           + "-" + (month < 10 ? "0" + month : month)
+           + "-" + (day < 10 ? "0" + day : day)
+           + " " + (hour < 10 ? "0" + hour : hour)
+           + ":" + (minute < 10 ? "0" + minute : minute)
+           + ":" + (second < 10 ? "0" + second : second);
+   };
+   
+   链接：https://juejin.im/post/5caee550e51d456e3b70185b
+   来源：掘金
+   ```
+
+   
 
 3. Array
 
@@ -668,7 +707,7 @@ Math、Date、Array、基本包装类型
    1. 利用 new Array 创建
 
       ```js
-      var 数组名 = new Array() ； // A 要大写，值可以直接写在小括号里
+      var 数组名 = new Array(varlue, value1) ； // A 要大写，值可以直接写在小括号里
       var arr = new Array(); // 创建一个新的空数组
       ```
 
@@ -721,7 +760,7 @@ Math、Date、Array、基本包装类型
 
    **基本方法**
 
-   - **修改数组元素**<img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%84.png">   <img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%842.png">
+   - **修改数组元素**<img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%84.png">   
    - **索引查找：**<img src="F:/web/web%20base/image/%E7%B4%A2%E5%BC%95%E6%90%9C%E7%B4%A2.png">
    - **转换为字符串**<img src="F:/web/web%20base/image/%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2.png">
    - **数组排序：**<img src="../image/数组排序.png">

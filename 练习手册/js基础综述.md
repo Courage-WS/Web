@@ -181,7 +181,7 @@ function f1(x) {
 }
 var p = new Person("刘德华");
 console.log(p.name);
-f1(p);
+f1(p); 
 console.log(p.name);
 ```
 

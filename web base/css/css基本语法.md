@@ -1,4 +1,4 @@
-# css语法
+#  css语法
 
 - [验证工具](http://jigsaw.w3.org/css-validator/) / [验证]( https://validator.w3.org/unicorn/ )；[验证2](http://www.cssstats.com/)
 - [参考手册](http://css.doyoe.com/)；[手册2](http://css.cuishifeng.cn/index.html)
@@ -61,16 +61,21 @@ property-value pairs        名值对
 
 2. @import              导入其他样式文件
 
+   - 必须写在其他语法前面，@charset 规则除外
    - 要实现仅为打印的媒体效果，使用带有媒体语法的`@import`规则;
    - `@import "print-main.css" print;`
+   - 和 link 的区别：
+     - link 和文档同步加载；@import 等页面加载完最后加载
+     - link 可以定义RSS等其他事务；@import 只可以加载CSS
+     - link支持使用Javascript控制DOM改变样式；而@import不支持
 
 3. @media              媒体查询（ie9+ 用于移动端）
 
    ```css
-   @media screen and(min-device-width: 481px) {
+   @media screen and (min-device-width: 481px) {/* and 后面必须加空格 */
        #guarantee {...}
    }
-   @media screen and(max-device-width: 480px){
+   @media screen and (max-device-width: 480px){
        #guarantee {...}
        @media print {
            body {...}
@@ -162,7 +167,7 @@ s 可以是元素 或者属性值
 |::first-line {...}|首行样式|
 |::before {...}|第一个子元素之前|
 |p::after {...}|p元素的最后一个子元素之后|
-#### 属性选择器
+#### 属性选择器（加引号）
 |选择器|说明||
 |-|-|-|
 |[class]|指定属性的元素||
@@ -492,7 +497,7 @@ p{font-size:14px;font-size:1.4rem;}
 
 | 属性            | 值                              | 描述                                                         |
 | --------------- | ------------------------------- | ------------------------------------------------------------ |
-| `line-height`   |                                 | 指定最小距离。指定一个 __%__ 或 __em__，后代元素会继承计算值；指定一个数字，后代会继承这个数字。 |
+| `line-height`   |                                 | 指定最小距离。指定一个 __%__ 或 __em__，后代元素会继承计算值；指定一个数字（乘积因子），后代会继承这个因子。 |
 | `text-align`    | center / left / right           | 对齐仅用作块元素                                             |
 | `text-overflow` | _clip / ellipsis_               | 文本溢出overflow需要设置为**_非visible_**                    |
 | `unicode-bidi`  | normal / embed  / bidi-override | 重新排序 / 强调direction值                                   |
@@ -514,6 +519,8 @@ overflow-wrap: break-word
 - 可以用数字进行微调，一般用于调整背景图片
 - 盒子默认**上对齐**，行内元素默认**基线对齐**，img 为基线对齐
 - 应用于行内元素（行内，行内块）和表单元格
+
+middle：用父元素 baseline 高度加上父元素中 x-height 的一半的高度来对齐当前元素的垂直方向的中点
 
 baseline在css2的文档中有这么一句解释，翻译过来也就是一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
 
@@ -592,9 +599,9 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 | 属性            | 值   | 描述                                                         |
 | --------------- | ---- | ------------------------------------------------------------ |
-| `border-radius` |      | 参数间以`/`分隔，第一个参数表示水平半径，第二个表示垂直半径，没有 / 则单独设置四个角 |
+| `border-radius` |      | 参数间以`/`分隔，前四个参数表示水平半径，后四 个表示垂直半径，没有 / 则单独设置四个角 |
 
-极限为：**_50%，长宽的一半，圆的半径_**
+极限为：**_50%，（长宽 + padding + border）的一半，圆的半径_**
 
 ### box-shadow（ie9+）
 
@@ -632,7 +639,7 @@ text-shadow: 0 0 5px #fff, 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20
 
 过渡需要写在元素本身，
 
-1. 写在 hover 时，如果 transition 写在 hover 上，移开鼠标时属性会**瞬间恢复**，
+1. 写在 hover 时，移开鼠标时属性会**瞬间恢复**，
 2. 写在元素本身，则移开时会同样**过渡恢复**
 
 _如果有多组属性变化，需要用逗号隔开_
@@ -694,7 +701,7 @@ cubic-bezier(<number>, <number>, <number>, <number>)：
 
 缩写：transform：translate(x, y) rotate(deg) scale(x, y) skew(x, y)；// 指定多个参数时必须缩写，否则最后出现的属性会覆盖掉前面的
 
-缩写时，旋转和移动的位置不一样时，结果也不一样。先旋转在移动会改变坐标轴方向（比如一个图片的z轴正方向是正前方，旋转之后图片的正前方还是z轴正方向 ）
+缩写时，**旋转和移动的位置不一样时，结果也不一样**。先旋转在移动会改变坐标轴方向，**元素会转动坐标轴不会转动**（比如一个图片的z轴正方向是正前方，旋转之后图片的正前方还是z轴正方向 ）
 
 只能转换由盒模型定位的元素，不能定位行内元素
 
@@ -787,7 +794,7 @@ z里面是负数，外面是正数
 
 ##### 转换类型
 
-默认子元素不开启 3D 模式，父盒子转换时，一定要开启子盒子的 3D 模式
+默认子元素不开启 3D 模式，父盒子转换时，一定要在父盒子开启子盒子的 3D 模式
 
 `transform-style: ;`    /*  **_flat   preserve-3d_ ***/      (ie不支持3d)
 
@@ -1162,19 +1169,6 @@ BEM 是一个简单又非常有用的命名约定。让你的前端代码更容�
 ```css
  .sub-block__element {}.sub-block--modifier {}
 ```
-## css 命名规范
-
-- __网站头部__:                head/header(头部) top（顶部）
-- __导航__：                     nanv 导航具体区分：topnav(顶部导航)、mainnav(主导航)、mininav(迷你导航)、textnav(导航文本)、subnav(子导航/二级导航)
-- __旗帜、广告和商标__：logo（旗帜）、brand(商标)、banner(标语)
-- __搜索__：                     sreach(搜索)、sreachbox([搜索框](https://www.baidu.com/s?wd=%E6%90%9C%E7%B4%A2%E6%A1%86&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd))、sreachbtn(搜索按钮)、sreachinput（搜索输入框）
-- __注册和登录__：           login(登录)、regsiter(注册)、userbox(用户名/通行证的文本框)、password(密码)
-- __布局、分栏和框__：    layout(布局)、big[div](https://www.baidu.com/s?wd=div&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)(大div)、leftdiv(左分栏)、rightdiv(右分栏)、leftfloat(左浮动)、rightfloat(右浮动)、mainbox()、subpage(子页面/二级页面)
-- **页脚/底部**：              foot/footer(页脚/底部)、copyright(版权信息)、sitemap(网站地图)
-- __其他__：                      content(内容)、skin(皮肤)、title(标题)、from(表单)、pic(图片)、news(新闻)、shop(购物区)、list(列表/清单)、newslist(新闻列表)、downloadlist(下载列表)、piclist(图片列表)、dropmenv(下拉菜单)、cor/corner(圆角)、[homepage](https://www.baidu.com/s?wd=homepage&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)(首页)、crumb(当前位置导航)
-
-可以使用"in"的写法做子 div 的命名，写法 in + 父 div,这样可以避免前面命名过了后面 div 不知道怎么去命名。比如 intop、inbox、infrom、inlogin等等。
-
 ## 私有属性
 
 - -ms-（私有属性）；//IE
