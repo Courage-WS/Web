@@ -57,45 +57,6 @@ for     do while  while
    - 如果显示余额，就输出余额
    - 如果退出，弹出退出信息提示框
 
-### 函数
-
-1. 两种方式创建函数
-
-2. 利用函数封装方式，翻转任意一个数组
-
-3. 利用函数封装方式，对数组排序 -- 冒泡排序
-
-4. 用户输入年份，输出当前年份2月份的天数
-
-5. 做一个简易计算器
-
-6. ```js
-   var a = 1;
-   
-   function b(){
-       a = 2;  
-       console.log(a);
-       function a(){};
-   }
-   
-   b();
-   console.log(b());
-   console.log(a);
-   ```
-
-7. ```js
-   var a = 1;
-   
-   function test(a) {
-       a=100;
-       console.log(a);
-       return a;        
-   }     
-   
-   a=test(a); 
-   console.log(a);
-   ```
-
 ### 作用域
 
 ```js
@@ -138,6 +99,45 @@ function f1() {
 	console.log(c);
 }
 ```
+
+### 函数
+
+1. 两种方式创建函数
+
+2. 利用函数封装方式，翻转任意一个数组
+
+3. 利用函数封装方式，对数组排序 -- 冒泡排序
+
+4. 用户输入年份，输出当前年份2月份的天数
+
+5. 做一个简易计算器
+
+6. ```js
+   var a = 1;
+   
+   function b(){
+       a = 2;  
+       console.log(a);
+       function a(){};
+   }
+   
+   b();
+   console.log(b());
+   console.log(a);
+   ```
+
+7. ```js
+   var a = 1;
+   
+   function test(a) {
+       a=100;
+       console.log(a);
+       return a;        
+   }     
+   
+   a=test(a); 
+   console.log(a);
+   ```
 
 ### 对象
 

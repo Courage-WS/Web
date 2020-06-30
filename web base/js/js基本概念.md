@@ -8,7 +8,7 @@
 
 ### JS 引擎机制
 
-1. JSON格式的语法（ + - {} [] 等）是引擎直接解释，效率高。
+1. **JSON**格式的语法（ + - {} [] 等）是引擎直接解释，效率高。
 
    （使用`String() Array()`等会调用构造器(Builder或Buffer)再解释，多加一层对象包裹）
 
@@ -53,8 +53,8 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 ### 注释
 
 - //开头，用于一行代码上
-- /*……*/多行，用于函数或一段代码上
-- /**……*/，用于系统
+- /\*……*/多行，用于函数或一段代码上
+- /**……\*/，用于系统
 
 一般放在页面内容后面，</body>之前，按先后执行
 
@@ -281,6 +281,589 @@ var message = “hi”,
         age = 29;
 ```
 
+## 操作符
+
+用于操作数据值：算术操作符、位操作符、关系操作符、相等操作符
+
+### 一元操作符
+
+只能操作一个值
+
+#### 递增、递减
+
+```js
+++age;     age=age+1
+age--;     age=age-1
+```
+
+**前置**
+
+```js
+Var age=34;
+Var dse=2
+Var cde = --age + dse      //等于35
+Var esd = age + dse       //等于35
+```
+
+**后置**
+
+```js
+Var age=34;
+Var dse=2
+Var cde= age-- + dse      //等于36
+Var esd = age + dse       //等于35
+```
+
+#### 一元加、减
+
+```js
+var num = 25;
+num = +num;      //仍然是25
+var num = 25;
+num = -num;      //值为-25
+```
+
+其他数据类型运用Number()转化为数值变量，如数字值或NaN
+
+### 位操作符
+
+数值以64位格式储存。位操作符将64位转换位32位操作，再将值转换为64位。NaN和Infinity会被转化成0，非数值用Number()函数转换
+
+有符号整数：前31位表示数值，第32位为符号位，0为正，1为负
+
+无符号整数：32位数值，只有正数。
+
+正数用纯二进制格式，负数用二进制补码:1 求绝对值 2 求反码 3 加1
+
+1. 按位非(NOT)
+
+   由波浪线（~）表示，结果是返回数值的反码。一位操作数
+
+   ```js
+   var num1=25;
+   var num2=~num1;         //输出-26
+   ```
+
+   本质：操作数的负值减1。
+
+2. 按位与(AND)
+
+   由和号字符表示(&)。两位操作数
+
+   将两个数的每一位对齐，同为1时返回1，否则返回0。
+
+3. 按位或(OR)
+
+   由竖线符号表示（|）。两位操作数
+
+   至少有一位是1，返回1，否则返回零
+
+4. 按位异或(XOR)
+
+   由一个插入符号表示（^）。两位操作数
+
+   只有一位是1，返回1，两位都是1或0，返回0
+
+5. 左移
+
+   由两个小于号表示（<<），一位操作数
+
+   所有位向左移动指定位数，不会影响符号位，空白用0填充。
+
+6. 有符号右移
+
+   由两个大于号表示（>>）,一位操作数
+
+   所有位向右移动指定位数，不会影响符号位，空白用0填充。
+
+7. 无符号右移
+
+   由三个大于号表示（>>>）
+
+   所有位向右移动指定位数，（包括符号位），空白用0填充。
+
+### 布尔操作符
+
+#### 逻辑非
+
+(NOT)：由一个叹号（!）表示，将操作数转换成布尔值，再对其求反。
+
+1. 对象，返回false
+2. 空字符串，返回true
+3. 非空字符串，返回false
+4. 数值0，返回true
+5. 非0数值（包括Infinity），返回false
+6. null，返回true
+7. NaN，返回true
+8. undefined，返回true
+
+```js
+alert(!false);      //true
+```
+
+同时使用两个逻辑非操作符，相当于模拟Boolean()转型函数行为。
+
+```js
+alert(!!false);     //false
+```
+
+#### 逻辑与
+
+(AND)：由两个和号(&&)表示，有两个操作数。
+
+同为true,返回true；否则返回false。
+
+有一个数不是布尔值，结果不一定返回布尔值
+
+1. 第一个操作数是对象，返回第二个操作数
+2. 第二个操作数是对象，只有在第一个操作数值为true时返回对象
+3. 两个操作数都是对象，返回第二个操作数
+4. 有一个null，返回null
+5. 有一个NaN，返回NaN
+6. 有一个undefined，返回undefined
+
+属于**短路操作**
+
+#### 逻辑或
+
+(OR)：由两个竖线符号表示（||），有两个操作数
+
+同为false，返回false，否则返回true。
+
+有一个数不是布尔值，结果不一定返回布尔值
+
+1. 第一个操作数是对象，返回第一个操作数
+2. 第一个操作数结果为false，返回第二个操作数
+3. 两个都是对象，返回第一个操作数
+4. 两个都是null，返回null
+5. 两个都是NaN，返回NaN
+6. 两个都是undefined，返回undefined
+
+属于**短路操作**
+
+#### 短路操作
+
+短路运算的原理：当有多个表达式（值）时,左边的表达式值可以确定结果时,就不再继续运算右边的表达式的值;
+
+- 逻辑与
+
+  1. 语法：表达式1 && 表达式2
+  2. 如果第一个表达式为真，则返回 表达式2
+  3. 否则返回 表达式1
+
+  ```js
+  console.log( 123 && 456 ); // 456
+  ```
+
+- 逻辑或
+
+  1. 语法：表达式1 || 表达式2
+  2. 如果第一个表达式为真，则返回 表达式1
+  3. 否则返回 表达式2
+
+  ```js
+  console.log( 123 || 456 || 789 ); // 123
+  ```
+
+### 乘性操作符
+
+#### 乘法
+
+由一个星号表示(*),计算两个数值的乘积。
+
+1. 超过表示**范围**用Infinity或-Infinity
+2. 有一个是NaN，结果是NaN
+3. ……**Infinity** 与 **0** 相乘，结果是 **NaN**……
+4. **Infinity** 与 **非0** 相乘，结果是 **Infinity**
+5. **Infinity** 与 **Infinity** 相乘，结果是 **Infinity**
+6. 如果有操作数不是数值，则调用 **Number()**
+
+#### 除法
+
+由一个斜线符号表示(/)
+
+1. 超过表示范围用 Infinity 或 -Infinity
+2. 有一个是 NaN，结果是 NaN
+3. ……**Infinity** 被 **Infinity** 除，结果是 **NAN**……
+4. **Infinity** 被 **非Infinity数** 除，结果是 **Infinity**
+5. **非Infinity数** 被 **Infinity** 除，结果是 **0**
+6. ……**0** 被 **0** 除，结果是 **NaN**……
+7. **非0数** 被 **0** 除，结果是 **Infinity**
+8. 如果有操作数不是数值，则调用 **Number()**
+
+#### 求模
+
+（余数）由一个百分号表示(%)
+
+1. 都是数值正常计算
+2. ……任何数 被 **0** 除，结果是 **NaN**……
+3. ……**Infinity** 被任何数 除，结果是 **NaN**……
+4. **非Infinity数** 被 **Infinity**除，结果是 **被除数**
+5. **0** 被 **非0数** 除，结果是**0**
+6. 有一个不是数值，调用Number()
+
+### 加性操作符
+
+"(",")"括号可以改变算术顺序
+
+#### 加法
+
+1. 两个都是数值，有一个是NaN，结果是NaN
+2. -Infinity 加 -Infinity，结果是 -Infinity
+3. \- 0加 - 0，结果是 - 0
+4. 有一个操作数是字符串，将另一个操作数转换成字符串,拼接起来
+
+#### 减法
+
+1. 有一个是NaN，返回NaN
+2. **Infinity** 减 **Infinity**，结果是 **NaN**
+3. 0-0，结果是0
+4. 有一个是其他类型，调用Number()函数
+5. 有一个是对象，调用对象的valueOf()方法，如果没有，调用toString()方法
+
+### 关系操作符
+
+**"<" ">" "<=" ">="**
+
+1. 两个数都是字符串，比较两个字符串每个字符的字符编码值，位置越靠后越大
+2. 只有一个是数值，将另一个转换为数值
+3. 有一个是对象，先调用valueOf()方法，没有则调用toString()方法
+4. 有一个是布尔值，先转化为数值
+
+### 相等操作符
+
+#### == 和 !=
+
+（比较前强制转型）
+
+1. 有一个操作数是布尔值，比较前转换为数值
+2. 有一个是字符串，另一个是数值，先将字符串转换为数值
+3. 有一个是对象，另一个不是，先调用valueOf()
+
+比较中
+
+1. 不能将null和undefined转换为其他值
+2. null和undefined是相等的
+3. 有一个是NaN，相等返回false，不相等返回true
+4. 两个都是对象，是同一个对象，返回true，否则返回false
+
+__*不要直接判断两个浮点数是否相等*__
+
+#### ===和 !==
+
+在比较之前不转换操作数
+
+### 条件操作符
+
+也叫三元运算符
+
+```js
+var max = (num1 > num2) ? num1 : num2;
+```
+
+如果 num1 大于 num2（关 系表达式返回 true），则将 num1 的值赋给 max；如果 num1 小于或等于 num2（关系表达式返回 false）， 则将 num2 的值赋给 max。
+
+### 赋值操作符
+
+由等于号表示(=)
+
+复合赋值操作。使用它们不会带来任何性能的提升。
+
+```js
+var num = 10;
+num = num + 10;
+var num = 10;
+num += 10; 
+```
+
+1. *=
+2. /=
+3. %=
+4. +=
+5. -=
+6. <<=
+7. \>>=
+8. \>>>=
+
+### 逗号操作符
+
+用于声明多个变量
+
+```js
+var num1=1, num2=2, num3=3;
+```
+
+用于赋值，会返回表达式中的最后一项
+
+```js
+var num = (5, 1, 4, 8, 0); // num 的值为 0
+```
+
+### 优先级
+
+从最高（21）到最低（1）优先顺序排列
+
+| 优先顺序 | 操作员类型                                                   | 关联性 | 操作符           |
+| :------- | :----------------------------------------------------------- | :----- | :--------------- |
+| 21       | [`圆括号`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Grouping) | 不适用 | `( … )`          |
+| 20       | [`属性访问器`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors#Dot_notation) | 左到右 | `… . …`          |
+|          | [`需计算的属性访问器`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Property_Accessors#%E6%8B%AC%E5%8F%B7%E8%A1%A8%E7%A4%BA%E6%B3%95) | 左到右 | `… [ … ]`        |
+|          | [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) （带有参数列表） | 不适用 | `new … ( … )`    |
+|          | [`函数调用`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) | 左到右 | `… ( … )`        |
+|          | [可选链接](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) | 左到右 | `?.`             |
+| 19       | [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) （没有参数列表） | 右到左 | `new …`          |
+| 18       | [后缀增量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment) | 不适用 | `… ++`           |
+|          | [后缀递减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Decrement) |        | `… --`           |
+| 17       | [`逻辑非`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_NOT) | 右到左 | `! …`            |
+|          | [按位非](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) |        | `~ …`            |
+|          | [一元加](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) |        | `+ …`            |
+|          | [一元减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_negation) |        | `- …`            |
+|          | [前缀增量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment) |        | `++ …`           |
+|          | [前缀递减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Decrement) |        | `-- …`           |
+|          | [`typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) |        | `typeof …`       |
+|          | [`void`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void) |        | `void …`         |
+|          | [`delete`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete) |        | `delete …`       |
+|          | [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) |        | `await …`        |
+| 16       | [求幂](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Exponentiation) | 右到左 | `… ** …`         |
+| 15       | [乘法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Multiplication) | 左到右 | `… * …`          |
+|          | [除](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Division) |        | `… / …`          |
+|          | [余](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder) |        | `… % …`          |
+| 14       | [加法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Addition) | 左到右 | `… + …`          |
+|          | [减法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Subtraction) |        | `… - …`          |
+| 13       | [按位左移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) | 左到右 | `… << …`         |
+|          | [按位右移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) |        | `… >> …`         |
+|          | [按位无符号右移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) |        | `… >>> …`        |
+| 12       | [少于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Less_than_operator) | 左到右 | `… < …`          |
+|          | [小于或等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Less_than__or_equal_operator) |        | `… <= …`         |
+|          | [大于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Greater_than_operator) |        | `… > …`          |
+|          | [大于等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Greater_than_or_equal_operator) |        | `… >= …`         |
+|          | [`in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in) |        | `… in …`         |
+|          | [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) |        | `… instanceof …` |
+| 11       | [等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Equality) | 左到右 | `… == …`         |
+|          | [不等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Inequality) |        | `… != …`         |
+|          | [全等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Identity) |        | `… === …`        |
+|          | [不全等](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Nonidentity) |        | `… !== …`        |
+| 10       | [按位与](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_AND) | 左到右 | `… & …`          |
+| 9        | [按位异或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_XOR) | 左到右 | `… ^ …`          |
+| 8        | [按位或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_OR) | 左到右 | `… | …`          |
+| 7        | [空位合并运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) | 左到右 | `… ?? …`         |
+| 6        | [逻辑与](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_AND) | 左到右 | `… && …`         |
+| 5        | [逻辑或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_OR) | 左到右 | `… || …`         |
+| 4        | [有条件的](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) | 右到左 | `… ? … : …`      |
+| 3        | [赋值](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Assignment_Operators) | 右到左 | `… = …`          |
+|          |                                                              |        | `… += …`         |
+|          |                                                              |        | `… -= …`         |
+|          |                                                              |        | `… **= …`        |
+|          |                                                              |        | `… *= …`         |
+|          |                                                              |        | `… /= …`         |
+|          |                                                              |        | `… %= …`         |
+|          |                                                              |        | `… <<= …`        |
+|          |                                                              |        | `… >>= …`        |
+|          |                                                              |        | `… >>>= …`       |
+|          |                                                              |        | `… &= …`         |
+|          |                                                              |        | `… ^= …`         |
+|          |                                                              |        | `… |= …`         |
+| 2        | [`yield`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield) | 右到左 | `yield …`        |
+|          | [`yield*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*) |        | `yield* …`       |
+| 1        | [展开运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_operator) | n/a    | `...` …          |
+| 0        | [逗号/序列](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_Operator) | 左到右 | `… , …`          |
+
+## 流程控制
+
+流程控制语句通常使用一或多个关键字来完成给定任务
+
+有三种结构：**顺序结构**、**分支结构**和**循环结构**
+
+<img src="F:/web/web%20base/image/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6.png" alt="流程控制">
+
+### if 分支语句
+
+常用于范围判断，适用于分支少的语句
+
+```js
+if (condition1) statement1 else if (condition2) statement2 else statement3
+```
+
+最常用的分支语句，条件可以是任意表达式，自动调用 Boolean()转换函数将这个表达式的结果转换为一个布尔值。结果是true，执行语句1，结果是false，执行语句2。
+
+```js
+if (i > 25) {
+    alert("Greater than 25.");
+} else if (i < 0) {
+    alert("Less than 0.");
+} else {
+    alert("Between 0 and 25, inclusive.");
+} 
+```
+
+### switch 分支语句
+
+是分支语句，也是在其他语言中普遍使用的一种流控制语句,
+
+一般用于判断确定的值（通常是个变量），适用于分支较多的语句
+
+```js
+switch (expression) {
+ case value: statement
+ break;
+ case value: statement
+ break;
+ case value: statement
+ break;
+ case value: statement
+ break;
+ default: statement
+} 
+```
+
+### do-while 后测试循环语句
+
+是一种后测试循环语句，即只有在循环体中的代码执行之后，才会测试出口条件
+
+```js
+do {
+    statement
+} while (expression); 
+var i = 0;
+do {
+    i += 2;
+} while (i < 10);
+alert(i); 
+```
+
+后测试循环语句最常用于循环体中的代码至少要被执行一次的情形
+
+### while 循环语句
+
+前测试循环语句，也就是说，在循环体内的代码被执行之前，就会对出口条件求值。
+
+**注意：必须要有退出条件，否则会成为死循环**
+
+```js
+while(expression) statement
+var i = 0;
+while (i < 10) {
+    i += 2;
+} 
+```
+
+### for 循环语句
+
+for 语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力，在 for 循环的变量初始化表达式中，也可以不使用 var 关键字。该变量的初始化可以在外部执行
+
+```js
+for (initialization; expression; post-loop-expression) statement
+var count = 10;
+for (var i = 0; i < count; i++){
+    alert(i);
+}
+```
+
+执行过程：初始化变量 》 执行条件表达式（true 继续执行，否则结束循环） 》 执行循环体语句 》 执行操作表达式
+
+这个 for 循环语句与下面的 while 语句的功能相同。使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关 的代码集中在了一个位置。
+
+```js
+var count = 10;
+var i = 0;
+while (i < count){
+    alert(i);
+    i++;
+}
+```
+
+ECMAScript 中不存在块级作用 域，因此在循环内部定义的变量也可以在外部访问到
+
+```js
+var count = 10;
+for (var i = 0; i < count; i++){
+    alert(i);
+}
+alert(i); //10 
+```
+
+#### 断点调试
+
+```
+断点调试的流程：
+1、浏览器中按 F12--> sources -->找到需要调试的文件-->在程序的某一行设置断点
+2、Watch: 监视，通过watch可以监视变量的值的变化，非常的常用。
+3、摁下F11，程序单步执行，让程序一行一行的执行，这个时候，观察watch中变量的值的变化。
+```
+
+### for-in语句
+
+是一种精准的迭代语句，可以用来枚举（遍历）对象的属性
+
+```js
+for (变量 in 对象名) 代码  // 变量一般用“k”或“key”
+
+for (var k in obj) {
+	console.log(k); // 这里的 k 是属性名
+	console.log(obj[k]); // 这里的 obj[k] 是属性值
+}
+```
+
+使用 for-in 循环来显示了 BOM 中 window 对象的所有属性。每次执行循环 时，都会将 window 对象中存在的一个属性名赋值给变量 propName。这个过程会一直持续到对象中的 所有属性都被枚举一遍为止。与 for 语句类似，这里控制语句中的 var 操作符也不是必需的。但是， 为了保证使用局部变量，我们推荐上面例子中的这种做法
+
+**在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined**
+
+### label语句
+
+可以在代码中添加标签，以便将来使用
+
+```js
+label: statement
+start: for (var i=0; i < count; i++) {
+    alert(i);
+} 
+```
+
+定义的 start 标签可以在将来由 break 或 continue 语句引用。加标签的语句一般都 要与 for 语句等循环语句配合使用
+
+### break和continue语句
+
+用于在循环中精确地控制代码的执行。break 语句会立即退出循环， 强制继续执行循环后面的语句。而 continue 语句虽然也是立即跳出本次循环，继续下一次循环
+
+```js
+var num = 0;
+for (var i=1; i < 10; i++) {
+    if (i % 5 == 0) {
+        break;
+    }
+    num++;
+}
+alert(num); //4
+```
+
+for 循环会将变量 i 由 1 递增至 10。在循环体内，有一个 if 语句检查 i 的值是否 可以被 5 整除（使用求模操作符）。如果是，则执行 break 语句退出循环。另一方面，变量 num 从 0 开 始，用于记录循环执行的次数。在执行 break 语句之后，要执行的下一行代码是 alert()函数，结果 显示 4。也就是说，在变量 i 等于 5 时，循环总共执行了 4 次
+
+### with语句
+
+将代码的作用域设置到特定的对象中。
+
+```js
+with (expression) statement; 
+```
+
+主要是为了简化多次编写同一个对象的工作
+
+```js
+var qs = location.search.substring(1);
+var hostName = location.hostname;
+var url = location.href; 
+```
+
+使用 with 语句
+
+```js
+with(location){
+ var qs = search.substring(1);
+ var hostName = hostname;
+ var url = href;
+} 
+```
+
 ## 数据类型
 
 JavaScript 是一种弱类型或者说动态语言。这意味着不用提前声明变量的类型，在程序运行过程中，类型会
@@ -394,6 +977,8 @@ x = x+”4”;         //输出”24”
 
 #### 类型转换
 
+**基数（进制）声明全部说的是字符串**
+
 - boolean()   
   | 数据类型  | 结果为 ture             | 结果为 false |
   | --------- | ----------------------- | ------------ |
@@ -409,7 +994,7 @@ x = x+”4”;         //输出”24”
 
   1. .toString()    
 
-     用来转换数字，后面可以写转换后的基数（进制），
+     用来转换数字，
 
      不支持null和undefined
 
@@ -417,7 +1002,7 @@ x = x+”4”;         //输出”24”
 
      ```js
      var num = 1;
-     alert(num.toString(10));
+     alert(num.toString(10)); // 后面可以写转换后的基数（进制），
      ```
 
   2. String()
@@ -453,9 +1038,9 @@ x = x+”4”;         //输出”24”
 
   2. parseInt() （重点）
 
-     ，非数字转换为NaN，不识别空字符串
+     **Null、Undefined**转换为NaN
 
-     从第一个字符（首位是空格时会忽略）开始到第一个非数字字符结束，（认识符号，不认识小数，认识整数格式（各种进制）） 。空字符串和第一个字符非数字的字符串返回NaN
+     从第一个字符（首位是空格时会忽略）开始到第一个非数字字符结束，（认识符号，不认识小数，认识整数格式（各种进制）） 。**空字符串和第一个字符非数字**的字符串返回NaN
 
      ```js
      var str = "0x329382";
@@ -548,7 +1133,7 @@ console.log(arr instanceof Array); // true
 
       ```js
       var star = {
-          name: 'pink',
+          name: 'pink',  // 注意冒号和逗号
           sayHi: function() {
               alert('大家好啊~');
           }
@@ -577,8 +1162,8 @@ console.log(arr instanceof Array); // true
 
       - 构造函数约定首字母大写。
       - 函数内的属性和方法前面需要添加 this ，表示当前对象的属性和方法。
-      - 构造函数中不需要 return 返回结果。
       - 必须用 new 来调用构造函数，来创建对象
+      - 构造函数中不需要 return 返回结果。
 
 2. 调用
 
@@ -876,6 +1461,8 @@ var t = foo()  // undefined，不是想要继承getName方法的对象
 
 通常我们将函数名命名为**动词**
 
+**注意：函数后面不加分号**
+
 ```js
 function functionName(arg0, arg1,...,argN) {
  statements
@@ -964,599 +1551,6 @@ fn();
     b();// 调用函数，会输出函数的 模态对话框
     console.log(b()); // 1. 调用函数，会输出函数的模态对话框。2. 输出函数结果为 undifinde 。因为函数没有返回值，?:如果后面没有（）会输出这个函数的代码
     console.log(a);//输出1
-```
-
-## 操作符
-
-用于操作数据值：算术操作符、位操作符、关系操作符、相等操作符
-
-### 一元操作符
-
-只能操作一个值
-
-#### 递增、递减
-
-```js
-++age;     age=age+1
-age--;     age=age-1
-```
-
-**前置**
-
-```js
-Var age=34;
-Var dse=2
-Var cde = --age + dse      //等于35
-Var esd = age + dse       //等于35
-```
-
-**后置**
-
-```js
-Var age=34;
-Var dse=2
-Var cde= age-- + dse      //等于36
-Var esd = age + dse       //等于35
-```
-
-#### 一元加、减
-
-```js
-var num = 25;
-num = +num;      //仍然是25
-var num = 25;
-num = -num;      //值为-25
-```
-
-其他数据类型运用Number()转化为数值变量，如数字值或NaN
-
-### 位操作符
-
-数值以64位格式储存。位操作符将64位转换位32位操作，再将值转换为64位。NaN和Infinity会被转化成0，非数值用Number()函数转换
-
-有符号整数：前31位表示数值，第32位为符号位，0为正，1为负
-
-无符号整数：32位数值，只有正数。
-
-正数用纯二进制格式，负数用二进制补码:1 求绝对值 2 求反码 3 加1
-
-1. 按位非(NOT)
-
-   由波浪线（~）表示，结果是返回数值的反码。一位操作数
-
-   ```js
-   var num1=25;
-   var num2=~num1;         //输出-26
-   ```
-
-   本质：操作数的负值减1。
-
-2. 按位与(AND)
-
-   由和号字符表示(&)。两位操作数
-
-   将两个数的每一位对齐，同为1时返回1，否则返回0。
-
-3. 按位或(OR)
-
-   由竖线符号表示（|）。两位操作数
-
-   至少有一位是1，返回1，否则返回零
-
-4. 按位异或(XOR)
-
-   由一个插入符号表示（^）。两位操作数
-
-   只有一位是1，返回1，两位都是1或0，返回0
-
-5. 左移
-
-   由两个小于号表示（<<），一位操作数
-
-   所有位向左移动指定位数，不会影响符号位，空白用0填充。
-
-6. 有符号右移
-
-   由两个大于号表示（>>）,一位操作数
-
-   所有位向右移动指定位数，不会影响符号位，空白用0填充。
-
-7. 无符号右移
-
-   由三个大于号表示（>>>）
-
-   所有位向右移动指定位数，（包括符号位），空白用0填充。
-
-### 布尔操作符
-
-#### 逻辑非
-
-(NOT)：由一个叹号（!）表示，将操作数转换成布尔值，再对其求反。
-
-1. 对象，返回false
-2. 空字符串，返回true
-3. 非空字符串，返回false
-4. 数值0，返回true
-5. 非0数值（包括Infinity），返回false
-6. null，返回true
-7. NaN，返回true
-8. undefined，返回true
-
-```js
-alert(!false);      //true
-```
-
-同时使用两个逻辑非操作符，相当于模拟Boolean()转型函数行为。
-
-```js
-alert(!!false);     //false
-```
-
-#### 逻辑与
-
-(AND)：由两个和号(&&)表示，有两个操作数。
-
-同为true,返回true；否则返回false。
-
-有一个数不是布尔值，结果不一定返回布尔值
-
-1. 第一个操作数是对象，返回第二个操作数
-2. 第二个操作数是对象，只有在第一个操作数值为true时返回对象
-3. 两个操作数都是对象，返回第二个操作数
-4. 有一个null，返回null
-5. 有一个NaN，返回NaN
-6. 有一个undefined，返回undefined
-
-属于**短路操作**
-
-#### 逻辑或
-
-(OR)：由两个竖线符号表示（||），有两个操作数
-
-同为false，返回false，否则返回true。
-
-有一个数不是布尔值，结果不一定返回布尔值
-
-1. 第一个操作数是对象，返回第一个操作数
-2. 第一个操作数结果为false，返回第二个操作数
-3. 两个都是对象，返回第一个操作数
-4. 两个都是null，返回null
-5. 两个都是NaN，返回NaN
-6. 两个都是undefined，返回undefined
-
-属于**短路操作**
-
-#### 短路操作
-
-短路运算的原理：当有多个表达式（值）时,左边的表达式值可以确定结果时,就不再继续运算右边的表达式的值;
-
-- 逻辑与
-
-  1. 语法：表达式1 && 表达式2
-  2. 如果第一个表达式为真，则返回 表达式2
-  3. 否则返回 表达式1
-
-  ```js
-  console.log( 123 && 456 ); // 456
-  ```
-
-- 逻辑或
-
-  1. 语法：表达式1 || 表达式2
-  2. 如果第一个表达式为真，则返回 表达式1
-  3. 否则返回 表达式2
-
-  ```js
-  console.log( 123 || 456 || 789 ); // 123
-  ```
-
-### 乘性操作符
-
-#### 乘法
-
-由一个星号表示(*),计算两个数值的乘积。
-
-1. 超过表示**范围**用Infinity或-Infinity
-2. 有一个是NaN，结果是NaN
-3. Infinity与0相乘，结果是NaN
-4. Infinity与非0相乘，结果是Infinity
-5. Infinity与Infinity相乘，结果是Infinity
-6. 如果有操作数不是数值，则调用Number()
-
-#### 除法
-
-由一个斜线符号表示(/)
-
-1. 超过表示范围用Infinity或-Infinity
-2. 有一个是NaN，结果是NaN
-3. Infinity被Infinity除，结果是NAN
-4. 非0的有限数被0除，结果是Infinity
-5. 0被0除，结果是NaN
-6. Infinity被任何非0数值除，结果是Infinity
-7. 如果有操作数不是数值，则调用Number()
-
-#### 求模
-
-（余数）由一个百分号表示(%)
-
-1. 都是数值正常计算
-2. 被除数是Infinity，除数是有限数值，结果是NaN
-3. 被除数是有限大，除数是0，结果是NaN
-4. Infinity被Infinity除，结果是NaN
-5. 被除数是有限大，除数是Infinity，结果是被除数
-6. 被除数是0，结果是0
-7. 有一个不是数值，调用Number()
-
-### 加性操作符
-
-"(",")"括号可以改变算术顺序
-
-#### 加法
-
-1. 两个都是数值，有一个是NaN，结果是NaN
-2. Infinity加Infinity，结果是Infinity
-3. \- Infinity加 - Infinity，结果是 - infinity
-4. INfinity加 - Infinity，结果是NaN
-5. 0加0，结果是0
-6. \- 0加 - 0，结果是 - 0
-7. 0加 - 0，结果是0
-8. 两个都是字符串，就拼接起来
-9. 有一个操作数是字符串，将另一个操作数转换成字符串
-
-#### 减法
-
-1. 有一个是NaN，返回NaN
-2. Infinity减Infinity，结果是NaN
-3. \- Infinity减 - Infinity，结果是NaN
-4. Infinity减 - Infinity，结果是Infinity
-5. \- Infinity减Infinity，结果是 - Infinity
-6. 0-0，结果是0
-7. 0-(-0），结果是0
-8. -0-(0)，结果是0
-9. 有一个是其他类型，调用Number()函数
-10. 有一个是对象，调用对象的valueOf()方法，如果没有，调用toString()方法
-
-### 关系操作符
-
-**"<" ">" "<=" ">="**
-
-1. 两个数都是字符串，比较两个字符串每个字符的字符编码值，位置越靠后越大
-2. 只有一个是数值，将另一个转换为数值
-3. 有一个是对象，先调用valueOf()方法，没有则调用toString()方法
-4. 有一个是布尔值，先转化为数值
-
-### 相等操作符
-
-#### == 和 !=
-
-（比较前强制转型）
-
-1. 有一个操作数是布尔值，比较前转换为数值
-2. 有一个是字符串，另一个是数值，先将字符串转换为数值
-3. 有一个是对象，另一个不是，先调用valueOf()
-
-比较中
-
-1. 不能将null和undefined转换为其他值
-2. null和undefined是相等的
-3. 有一个是NaN，相等返回false，不相等返回true
-4. 两个都是对象，是同一个对象，返回true，否则返回false
-
-__*不要直接判断两个浮点数是否相等*__
-
-#### ===和 !==
-
-在比较之前不转换操作数
-
-### 条件操作符
-
-也叫三元运算符
-
-```js
-var max = (num1 > num2) ? num1 : num2;
-```
-
-如果 num1 大于 num2（关 系表达式返回 true），则将 num1 的值赋给 max；如果 num1 小于或等于 num2（关系表达式返回 false）， 则将 num2 的值赋给 max。
-
-### 赋值操作符
-
-由等于号表示(=)
-
-复合赋值操作。使用它们不会带来任何性能的提升。
-
-```js
-var num = 10;
-num = num + 10;
-var num = 10;
-num += 10; 
-```
-
-1. *=
-2. /=
-3. %=
-4. +=
-5. -=
-6. <<=
-7. \>>=
-8. \>>>=
-
-### 逗号操作符
-
-用于声明多个变量
-
-```js
-var num1=1, num2=2, num3=3;
-```
-
-用于赋值，会返回表达式中的最后一项
-
-```js
-var num = (5, 1, 4, 8, 0); // num 的值为 0
-```
-
-### 优先级
-
-从最高（21）到最低（1）优先顺序排列
-
-| 优先顺序 | 操作员类型                                                   | 关联性 | 操作符           |
-| :------- | :----------------------------------------------------------- | :----- | :--------------- |
-| 21       | [`圆括号`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Grouping) | 不适用 | `( … )`          |
-| 20       | [`属性访问器`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors#Dot_notation) | 左到右 | `… . …`          |
-|          | [`需计算的属性访问器`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Property_Accessors#%E6%8B%AC%E5%8F%B7%E8%A1%A8%E7%A4%BA%E6%B3%95) | 左到右 | `… [ … ]`        |
-|          | [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) （带有参数列表） | 不适用 | `new … ( … )`    |
-|          | [`函数调用`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) | 左到右 | `… ( … )`        |
-|          | [可选链接](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) | 左到右 | `?.`             |
-| 19       | [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) （没有参数列表） | 右到左 | `new …`          |
-| 18       | [后缀增量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment) | 不适用 | `… ++`           |
-|          | [后缀递减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Decrement) |        | `… --`           |
-| 17       | [`逻辑非`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_NOT) | 右到左 | `! …`            |
-|          | [按位非](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) |        | `~ …`            |
-|          | [一元加](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) |        | `+ …`            |
-|          | [一元减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_negation) |        | `- …`            |
-|          | [前缀增量](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Increment) |        | `++ …`           |
-|          | [前缀递减](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Decrement) |        | `-- …`           |
-|          | [`typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) |        | `typeof …`       |
-|          | [`void`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void) |        | `void …`         |
-|          | [`delete`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete) |        | `delete …`       |
-|          | [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) |        | `await …`        |
-| 16       | [求幂](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Exponentiation) | 右到左 | `… ** …`         |
-| 15       | [乘法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Multiplication) | 左到右 | `… * …`          |
-|          | [除](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Division) |        | `… / …`          |
-|          | [余](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder) |        | `… % …`          |
-| 14       | [加法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Addition) | 左到右 | `… + …`          |
-|          | [减法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Subtraction) |        | `… - …`          |
-| 13       | [按位左移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) | 左到右 | `… << …`         |
-|          | [按位右移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) |        | `… >> …`         |
-|          | [按位无符号右移](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) |        | `… >>> …`        |
-| 12       | [少于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Less_than_operator) | 左到右 | `… < …`          |
-|          | [小于或等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Less_than__or_equal_operator) |        | `… <= …`         |
-|          | [大于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Greater_than_operator) |        | `… > …`          |
-|          | [大于等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Greater_than_or_equal_operator) |        | `… >= …`         |
-|          | [`in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in) |        | `… in …`         |
-|          | [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) |        | `… instanceof …` |
-| 11       | [等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Equality) | 左到右 | `… == …`         |
-|          | [不等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Inequality) |        | `… != …`         |
-|          | [全等于](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Identity) |        | `… === …`        |
-|          | [不全等](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Nonidentity) |        | `… !== …`        |
-| 10       | [按位与](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_AND) | 左到右 | `… & …`          |
-| 9        | [按位异或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_XOR) | 左到右 | `… ^ …`          |
-| 8        | [按位或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_OR) | 左到右 | `… | …`          |
-| 7        | [空位合并运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) | 左到右 | `… ?? …`         |
-| 6        | [逻辑与](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_AND) | 左到右 | `… && …`         |
-| 5        | [逻辑或](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_OR) | 左到右 | `… || …`         |
-| 4        | [有条件的](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) | 右到左 | `… ? … : …`      |
-| 3        | [赋值](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Assignment_Operators) | 右到左 | `… = …`          |
-|          |                                                              |        | `… += …`         |
-|          |                                                              |        | `… -= …`         |
-|          |                                                              |        | `… **= …`        |
-|          |                                                              |        | `… *= …`         |
-|          |                                                              |        | `… /= …`         |
-|          |                                                              |        | `… %= …`         |
-|          |                                                              |        | `… <<= …`        |
-|          |                                                              |        | `… >>= …`        |
-|          |                                                              |        | `… >>>= …`       |
-|          |                                                              |        | `… &= …`         |
-|          |                                                              |        | `… ^= …`         |
-|          |                                                              |        | `… |= …`         |
-| 2        | [`yield`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield) | 右到左 | `yield …`        |
-|          | [`yield*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield*) |        | `yield* …`       |
-| 1        | [展开运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_operator) | n/a    | `...` …          |
-| 0        | [逗号/序列](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_Operator) | 左到右 | `… , …`          |
-
-## 流程控制
-
-流程控制语句通常使用一或多个关键字来完成给定任务
-
-有三种结构：**顺序结构**、**分支结构**和**循环结构**
-
-<img src="../image/流程控制.png" alt="流程控制">
-
-### if 分支语句
-
-常用于范围判断，适用于分支少的语句
-
-```js
-if (condition1) statement1 else if (condition2) statement2 else statement3
-```
-
-最常用的分支语句，条件可以是任意表达式，自动调用 Boolean()转换函数将这个表达式的结果转换为一个布尔值。结果是true，执行语句1，结果是false，执行语句2。
-
-```js
-if (i > 25) {
-    alert("Greater than 25.");
-} else if (i < 0) {
-    alert("Less than 0.");
-} else {
-    alert("Between 0 and 25, inclusive.");
-} 
-```
-
-### switch 分支语句
-
-是分支语句，也是在其他语言中普遍使用的一种流控制语句,
-
-一般用于判断确定的值（通常是个变量），适用于分支较多的语句
-
-```js
-switch (expression) {
- case value: statement
- break;
- case value: statement
- break;
- case value: statement
- break;
- case value: statement
- break;
- default: statement
-} 
-```
-
-### do-while 后测试循环语句
-
-是一种后测试循环语句，即只有在循环体中的代码执行之后，才会测试出口条件
-
-```js
-do {
-    statement
-} while (expression); 
-var i = 0;
-do {
-    i += 2;
-} while (i < 10);
-alert(i); 
-```
-
-后测试循环语句最常用于循环体中的代码至少要被执行一次的情形
-
-### while 循环语句
-
-前测试循环语句，也就是说，在循环体内的代码被执行之前，就会对出口条件求值。
-
-**注意：必须要有退出条件，否则会成为死循环**
-
-```js
-while(expression) statement
-var i = 0;
-while (i < 10) {
-    i += 2;
-} 
-```
-
-### for 循环语句
-
-for 语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力，在 for 循环的变量初始化表达式中，也可以不使用 var 关键字。该变量的初始化可以在外部执行
-
-```js
-for (initialization; expression; post-loop-expression) statement
-var count = 10;
-for (var i = 0; i < count; i++){
-    alert(i);
-}
-```
-
-执行过程：初始化变量 》 执行条件表达式（true 继续执行，否则结束循环） 》 执行循环体语句 》 执行操作表达式
-
-这个 for 循环语句与下面的 while 语句的功能相同。使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关 的代码集中在了一个位置。
-
-```js
-var count = 10;
-var i = 0;
-while (i < count){
-    alert(i);
-    i++;
-}
-```
-
-ECMAScript 中不存在块级作用 域，因此在循环内部定义的变量也可以在外部访问到
-
-```js
-var count = 10;
-for (var i = 0; i < count; i++){
-    alert(i);
-}
-alert(i); //10 
-```
-
-#### 断点调试
-
-```
-断点调试的流程：
-1、浏览器中按 F12--> sources -->找到需要调试的文件-->在程序的某一行设置断点
-2、Watch: 监视，通过watch可以监视变量的值的变化，非常的常用。
-3、摁下F11，程序单步执行，让程序一行一行的执行，这个时候，观察watch中变量的值的变化。
-```
-
-### for-in语句
-
-是一种精准的迭代语句，可以用来枚举（遍历）对象的属性
-
-```js
-for (变量 in 对象名) 代码  // 变量一般用“k”或“key”
-
-for (var k in obj) {
-	console.log(k); // 这里的 k 是属性名
-	console.log(obj[k]); // 这里的 obj[k] 是属性值
-}
-```
-
-使用 for-in 循环来显示了 BOM 中 window 对象的所有属性。每次执行循环 时，都会将 window 对象中存在的一个属性名赋值给变量 propName。这个过程会一直持续到对象中的 所有属性都被枚举一遍为止。与 for 语句类似，这里控制语句中的 var 操作符也不是必需的。但是， 为了保证使用局部变量，我们推荐上面例子中的这种做法
-
-**在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined**
-
-### label语句
-
-可以在代码中添加标签，以便将来使用
-
-```js
-label: statement
-start: for (var i=0; i < count; i++) {
-    alert(i);
-} 
-```
-
-定义的 start 标签可以在将来由 break 或 continue 语句引用。加标签的语句一般都 要与 for 语句等循环语句配合使用
-
-### break和continue语句
-
-用于在循环中精确地控制代码的执行。break 语句会立即退出循环， 强制继续执行循环后面的语句。而 continue 语句虽然也是立即跳出本次循环，继续下一次循环
-
-```js
-var num = 0;
-for (var i=1; i < 10; i++) {
-    if (i % 5 == 0) {
-        break;
-    }
-    num++;
-}
-alert(num); //4
-```
-
-for 循环会将变量 i 由 1 递增至 10。在循环体内，有一个 if 语句检查 i 的值是否 可以被 5 整除（使用求模操作符）。如果是，则执行 break 语句退出循环。另一方面，变量 num 从 0 开 始，用于记录循环执行的次数。在执行 break 语句之后，要执行的下一行代码是 alert()函数，结果 显示 4。也就是说，在变量 i 等于 5 时，循环总共执行了 4 次
-
-### with语句
-
-将代码的作用域设置到特定的对象中。
-
-```js
-with (expression) statement; 
-```
-
-主要是为了简化多次编写同一个对象的工作
-
-```js
-var qs = location.search.substring(1);
-var hostName = location.hostname;
-var url = location.href; 
-```
-
-使用 with 语句
-
-```js
-with(location){
- var qs = search.substring(1);
- var hostName = hostname;
- var url = href;
-} 
 ```
 
 ## DOM
