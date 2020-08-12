@@ -41,6 +41,12 @@ html需要**设置最小尺寸**，浏览器放大或缩小时会改变html尺�
   - h3 一般用作板块标题
   - h4 一般用作板块标题之后的副标题
 
+### IE 中乱码问题
+
+- `<meta http-equiv=Content-Type content="text/html; charset=utf-8">`
+  - 放在**任何标签**之前
+  - 当IE右键不勾选自动选择编码的时候，IE是优先解析页面标签，然后是http header信息，而其他浏览器刚好相反。由于这个原因，title里如果包含了中文字符，就会导致编码自动选择成gb2312导致页面乱码或者空白。（由于UTF-8为3个字节表示一个汉字，而普通的GB2312或BIG5是两个）
+
 ### `display`: [布局]( https://developer.mozilla.org/en-US/docs/Web/CSS/display#Guides_and_Examples  )
 
 ### 浮动盒子一排放不下

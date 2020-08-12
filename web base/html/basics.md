@@ -41,6 +41,44 @@ h4.01基于SGML,引用DTD.   有三种声明:Strict ,  Transitional , Frameset
 
 未设置 DOCTYPE 会以兼容模式呈现
 
+- DTD 声明4种方式
+
+  1. 过渡的（transitional）：
+
+     - ```html
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+       ```
+
+     - 一般的情况下网页中会使用这个，它允许你继续使用HTML4.01的标识(但是要符合xhtml 的写法)
+
+  2. 严格的（strict）：
+
+     - ```html
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+       ```
+
+     - 页面里几乎不准使用 inline-style 的 CSS 样式
+
+  3. 框架的（frameset）：
+
+     - ```html
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd" >
+       ```
+
+     - 页面中包含有框架，需要采用这种DTD
+
+  4. 移动端的（）：
+
+     - ```html
+       <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN"
+       "http://www.wapforum.org/DTD/xhtml-mobile10.dtd" >
+       ```
+
+     - 针对移动端
+
 ### 组成
 1. 图片，
 2. 文字，
@@ -108,11 +146,17 @@ id：以数字或字母开头，不能纯数字。都不能有空格
 
 ```
 ### 常见元素
+
+[HTML 元素和有效的 DTD](<https://www.w3school.com.cn/html5/html5_ref_dtd.asp>)
+
 常见的块元素8项：
 div、p、h1、ol、ul、dl、table、address、blockquote、form
 
 常见的内联元素：（width，height 全无效。margin 上下无效，padding 有效 但是上下不会撑开内容）
 a、span、em、strong、label、q、var、cite、code
+
+- textarea 不能设置value
+- autocomplete on 必须有 name
 
 常见的内联块元素2项：
 img、input
@@ -121,6 +165,8 @@ img、input
 
 时间           <time datetime="2012-02-08">2/08/2012</time> 官方格式：2012-02-08 05:00
 内容用官方格式就不需要datetime；时间或日期后加z表示UTC时间（UTC=GMT）
+
+阻止链接跳转需要添加 javascript:void(0); 或者 javascript:;
 
 ### H5 标签
 

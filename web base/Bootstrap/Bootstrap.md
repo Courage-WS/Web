@@ -10,7 +10,7 @@
 
 在不同屏幕下，通过媒体查询来改变这个布局容器的大小，再改变里面子元素的排列方式和大小，从而实现不同屏幕下，看到不同的页面布局和样式变化。
 
-## Bootstrap 框架
+## CSS 框架
 
 [中文网](http://www.bootcss.com/)  [官网](lhttp://getbootstrap.com/)  [推荐网站](http://bootstrap.css88.com/)
 
@@ -134,3 +134,7 @@ Bootstrap 需要为页面内容和栅格系统包裹一个 .container 或者.con
 | .hidden-lg | 可见   | 可见 | 可见 | 隐藏 |
 
 与之相反的是 `visible` 显示某内容
+
+## JS框架
+
+bootstrap 框架也是依赖于 jQuery 开发的，因此里面的 js插件使用 ，也必须引入jQuery 文件。

@@ -2,27 +2,40 @@
 
 客户端脚本语言
 
-与之相对应的是后端（服务器端脚本语言）
+后端：服务器端脚本语言
 
 从语言特性上讲，JS是一个基于原型继承的语言
 
 ### JS 引擎机制
 
-1. **JSON**格式的语法（ + - {} [] 等）是引擎直接解释，效率高。
+js 是单线程。所有的任务需要排队处理，当前任务结束，才能执行下一个任务。（比如我们对某个 DOM 元素进行添加和删除操作，不能同时进行。 应该先进行添加，之后再删除）
+
+利用多核 CPU 的计算能力，HTML5 提出 Web Worker 标准，允许 JavaScript 脚本创建多个线程。
+
+1. 所有同步任务都会在主线程上形成一个 执行栈
+2. 在主线程外有一个 task queue ，只要异步任务有了运行结果，就在 task queue 中放置一个事件，进入等待状态。所以异步任务执行顺序按照运行速度排列，越快越先执行
+3. 当前执行栈所有同步任务执行结束后，系统会读取 task queue，这些异步任务结束等待状态，进入执行栈，开始执行
+4. 主线程不断重复第三步，获取任务，执行任务。这种机制被称为事件循环（ event loop）。
+
+JS 的异步是通过回调函数实现的。一般而言，异步任务有三种类型：
+
+1. 普通事件，如 click、resize 等
+2. 资源加载，如 load、error 等
+3. 定时器，包括 setInterval、setTimeout 等
+
+异步任务相关回调函数添加到任务队列中（任务队列也称为消息队列）
+
+他们的本质区别： 这条流水线上各个流程的执行顺序不同。
+
+注意：
+
+1. **[JSON](<https://blog.csdn.net/u014071328/article/details/77672189>)**格式的语法（ + - {} [] 等）是引擎直接解释，效率高。
 
    （使用`String() Array()`等会调用构造器(Builder或Buffer)再解释，多加一层对象包裹）
 
 2. 使用正则表达式，写的速度更快。
 
-3. 尽可能的少定义、使用全局变量
-
-js 是单线程。所有的任务需要排队处理，当前任务结束，才能执行下一个任务
-
-1. 所有同步任务都会在主线程上形成一个 执行栈
-2. 在主线程外有一个 task queue ，只要异步任务有了运行结果，就在 task queue 中放置一个事件，进入等待状态等待状态
-3. 当前执行栈所有同步任务执行结束后，系统会读取 task queue，这些异步任务结束等待状态，进入执行栈，开始执行
-4. 主线程不断重复第三步
-5. 
+3. 尽可能的少 定义、使用 全局变量
 
 ### 组成
 
@@ -109,7 +122,7 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
    | break      | case | catch   | continue | debugger* | default | delete |
    | do         | else | finally | for      | function  | if      | in     |
    | instanceof | new  | return  | switch   | this      | throw   | try    |
-   | trpeof     | var  | void    | while    | with      |         |        |
+   | typeof     | var  | void    | while    | with      |         |        |
 
 2. 保留字
 
@@ -152,7 +165,9 @@ defer 延迟脚本，立即下载，延迟到页面加载和显示后执行，�
 - **confirm()** 弹出带取消对话框，用于if
 - **prompt()** 接受用户信息
 - **console.log()** 在网页中控台输出消息，同行输出多个用 `,` 隔开
-- **document.write()** 在页面输出消息，可输入HTML标签，加载后用会覆盖页面
+  - `console.dir()`可以显示一个对象的所有属性和方法
+  - console.log、dir 等的发放输出对象时会显示该对象在内存中的最新状态；内存地址上是原始值，不能修改，所以输出对象的值已经被修改成最新的值。（动态建议使用：debug）
+- **document.write()** 在页面输出消息，可输入HTML标签，加载后会覆盖页面
 
 ## 作用域
 
@@ -310,7 +325,7 @@ Var esd = age + dse       //等于35
 ```js
 Var age=34;
 Var dse=2
-Var cde= age-- + dse      //等于36
+Var cde= age-- + age      //第一个等于 34 第二个等于 33
 Var esd = age + dse       //等于35
 ```
 
@@ -356,7 +371,7 @@ num = -num;      //值为-25
 
    由竖线符号表示（|）。两位操作数
 
-   至少有一位是1，返回1，否则返回零
+   至少有一位是1，返回1 ，否则返回零
 
 4. 按位异或(XOR)
 
@@ -388,14 +403,8 @@ num = -num;      //值为-25
 
 (NOT)：由一个叹号（!）表示，将操作数转换成布尔值，再对其求反。
 
-1. 对象，返回false
-2. 空字符串，返回true
-3. 非空字符串，返回false
-4. 数值0，返回true
-5. 非0数值（包括Infinity），返回false
-6. null，返回true
-7. NaN，返回true
-8. undefined，返回true
+1. 对象，非空字符串，非0数值（包括Infinity），返回false
+2. undefined，null，空字符串，数值0，NaN，返回true
 
 ```js
 alert(!false);      //true
@@ -415,12 +424,8 @@ alert(!!false);     //false
 
 有一个数不是布尔值，结果不一定返回布尔值
 
-1. 第一个操作数是对象，返回第二个操作数
-2. 第二个操作数是对象，只有在第一个操作数值为true时返回对象
-3. 两个操作数都是对象，返回第二个操作数
-4. 有一个null，返回null
-5. 有一个NaN，返回NaN
-6. 有一个undefined，返回undefined
+1. 第一个操作数为 true，返回第二个操作数
+2. 第二个操作数为 false，返回第一个操作数
 
 属于**短路操作**
 
@@ -432,18 +437,14 @@ alert(!!false);     //false
 
 有一个数不是布尔值，结果不一定返回布尔值
 
-1. 第一个操作数是对象，返回第一个操作数
-2. 第一个操作数结果为false，返回第二个操作数
-3. 两个都是对象，返回第一个操作数
-4. 两个都是null，返回null
-5. 两个都是NaN，返回NaN
-6. 两个都是undefined，返回undefined
+1. 第一个操作数是 true，返回第一个操作数
+2. 第一个操作数是 false，返回第二个操作数
 
 属于**短路操作**
 
 #### 短路操作
 
-短路运算的原理：当有多个表达式（值）时,左边的表达式值可以确定结果时,就不再继续运算右边的表达式的值;
+短路运算的原理：当有多个表达式（值）时,左边的表达式值可以确定结果时,就不再继续运算右边的表达式（即使它是错误的）;
 
 - 逻辑与
 
@@ -475,8 +476,7 @@ alert(!!false);     //false
 2. 有一个是NaN，结果是NaN
 3. ……**Infinity** 与 **0** 相乘，结果是 **NaN**……
 4. **Infinity** 与 **非0** 相乘，结果是 **Infinity**
-5. **Infinity** 与 **Infinity** 相乘，结果是 **Infinity**
-6. 如果有操作数不是数值，则调用 **Number()**
+5. 如果有操作数不是数值，则调用 **Number()**
 
 #### 除法
 
@@ -485,10 +485,10 @@ alert(!!false);     //false
 1. 超过表示范围用 Infinity 或 -Infinity
 2. 有一个是 NaN，结果是 NaN
 3. ……**Infinity** 被 **Infinity** 除，结果是 **NAN**……
-4. **Infinity** 被 **非Infinity数** 除，结果是 **Infinity**
-5. **非Infinity数** 被 **Infinity** 除，结果是 **0**
-6. ……**0** 被 **0** 除，结果是 **NaN**……
-7. **非0数** 被 **0** 除，结果是 **Infinity**
+4. ……**0** 被 **0** 除，结果是 **NaN**……
+5. **非0数** 被 **0** 除，结果是 **Infinity**
+6. **Infinity** 被 **非Infinity数** 除，结果是 **Infinity**
+7. **非Infinity数** 被 **Infinity** 除，结果是 **0**
 8. 如果有操作数不是数值，则调用 **Number()**
 
 #### 求模
@@ -499,8 +499,7 @@ alert(!!false);     //false
 2. ……任何数 被 **0** 除，结果是 **NaN**……
 3. ……**Infinity** 被任何数 除，结果是 **NaN**……
 4. **非Infinity数** 被 **Infinity**除，结果是 **被除数**
-5. **0** 被 **非0数** 除，结果是**0**
-6. 有一个不是数值，调用Number()
+5. 有一个不是数值，调用Number()
 
 ### 加性操作符
 
@@ -511,7 +510,7 @@ alert(!!false);     //false
 1. 两个都是数值，有一个是NaN，结果是NaN
 2. -Infinity 加 -Infinity，结果是 -Infinity
 3. \- 0加 - 0，结果是 - 0
-4. 有一个操作数是字符串，将另一个操作数转换成字符串,拼接起来
+4. 有一个操作数是字符串，将另一个操作数调用 String() 函数,拼接起来
 
 #### 减法
 
@@ -525,7 +524,7 @@ alert(!!false);     //false
 
 **"<" ">" "<=" ">="**
 
-1. 两个数都是字符串，比较两个字符串每个字符的字符编码值，位置越靠后越大
+1. 两个数都是字符串，比较两个字符串每个字符的(字符编码值)，位置越靠后越大
 2. 只有一个是数值，将另一个转换为数值
 3. 有一个是对象，先调用valueOf()方法，没有则调用toString()方法
 4. 有一个是布尔值，先转化为数值
@@ -544,7 +543,7 @@ alert(!!false);     //false
 
 1. 不能将null和undefined转换为其他值
 2. null和undefined是相等的
-3. 有一个是NaN，相等返回false，不相等返回true
+3. NaN 不等于任何数
 4. 两个都是对象，是同一个对象，返回true，否则返回false
 
 __*不要直接判断两个浮点数是否相等*__
@@ -712,8 +711,21 @@ switch (expression) {
  break;
  case value: statement
  break;
- default: statement
+ default: statement   // 可以写在任何值前面，只有找不到匹配项时，才会跳到 default 上
 } 
+```
+
+```js
+switch (a) {
+	case '1':
+		b = prompt('存鸡毛钱') - 0;
+		c += b;
+		a = prompt();  // 判断到 值1 会把 break 之前的代码依次输出
+	case '2':
+		b = prompt('取鸡毛钱') - 0;
+		c -= b;
+		a = prompt();
+}
 ```
 
 ### do-while 后测试循环语句
@@ -757,6 +769,9 @@ var count = 10;
 for (var i = 0; i < count; i++){
     alert(i);
 }
+
+// 里面的条件可以不相关
+for (var t = 1; i < 36; t++)
 ```
 
 执行过程：初始化变量 》 执行条件表达式（true 继续执行，否则结束循环） 》 执行循环体语句 》 执行操作表达式
@@ -1122,8 +1137,8 @@ console.log(arr instanceof Array); // true
 
       ```js
       var o = new Object ();  // new操作符后面跟创建的对象类型的名称，
-      com.name = "x8";
-      com.play = function() {
+      o.name = "x8";
+      o.play = function() {
           alert("看电影");
       }
       //使用 new 会调用构造器，多加一层对象包裹，但是更符合对象化继承的概念
@@ -1137,12 +1152,10 @@ console.log(arr instanceof Array); // true
           sayHi: function() {
               alert('大家好啊~');
           }
-      }
-      
-      }  // 可以直接写属性和方法，用“:”连接属性和值，
+      }// 可以直接写属性和方法，用“:”连接属性和值，
       ```
 
-   3. 构造函数创建
+   3. ##### 构造函数创建
       对象的属性和方法封装成的函数叫构造函数，用来初始化对象，这个过程叫做`对象实例化`
 
       ```js
@@ -1167,7 +1180,7 @@ console.log(arr instanceof Array); // true
 
 2. 调用
 
-   - 属性调用：
+   - 获取属性值：
 
      1. 对象 . 属性
 
@@ -1175,11 +1188,32 @@ console.log(arr instanceof Array); // true
         console.log(star.name); // 调用 name 属性
         ```
 
+        - 原理是：在对象的 keys 中找字符串为 name 的 key
+        - 点后面跟的不是变量。
+
      2. 对象 [ ' 属性 ' ]
 
         ```js
         console.log(star['name']); // 括号里的属性名是字符串必须加引号
         ```
+
+        - [ ]运算符可以使用字符串变量的内容作为属性名，点运算符不能
+
+          ```js
+          var obj = {
+              s = 12,
+          }
+          for (var k in obj) {
+              obj[k]    // 12
+              obj.k     // undefined
+          }
+          var ss = 's';
+          console.log(data[ss])   // 12
+          ```
+
+        -  [ ]运算符可以用纯数字作为属性名，点运算符不能
+
+        - [ ]运算符可以用js关键字和保留字作为属性名，点运算符不能
 
    - 方法调用：
 
@@ -1196,6 +1230,17 @@ console.log(arr instanceof Array); // true
    - **.toLocaleString()**：返回对象的字符串表示，该字符串与执行环境的地区对应。
    - **.toString()**：返回对象的字符串表示。
    - **.valueOf()**：返回对象的字符串、数值或布尔值表示。通常与 toString()方法的返回值 相同。
+   - **Object.keys()**：方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和正常循环遍历该对象时返回的顺序一致 
+
+```js
+// 添加对象的语句会提到 console 语句的前面
+console.log(obj);
+   obj.a = [2];
+
+// 等同于
+   obj.a = [2];
+console.log(obj);
+```
 
 ##### 内置对象
 
@@ -1206,7 +1251,7 @@ Math、Date、Array、基本包装类型
    Math 不是构造器，它的属性和方法都是静态的。
 
    ```js
-   Math.PI() // 圆周率
+   Math.PI // 圆周率,不加括号
    Math.floor() // 向下取整
    Math.ceil() // 向上取整
    Math.round() // 四舍五入版 就近取整 
@@ -1252,7 +1297,9 @@ Math、Date、Array、基本包装类型
    // 2. 简单写可以这么做 (最常用)
    var now = + new Date();
    // 3. HTML5中提供的方法，有兼容性问题
-   var now = Date.now();
+   var now = Date.now();  // 此时的时间戳
+   // 4. 精确到 seconds
+   var now = Date.parse(new Date() + ' GMT +8')
    ```
 
    **时间戳转换小时，会比本地时间早八小时（相差八个时区）**
@@ -1260,7 +1307,7 @@ Math、Date、Array、基本包装类型
    ```js
     $.renderDateTime = function (jsondate) {
        var timeStamp = parseInt(jsondate.replace(/\D/igm, ""));
-       timeStamp = timeStamp - 8 * 60 * 60 * 1000; //（本地时间）东八区减去8小时
+       timeStamp = timeStamp + 8 * 60 * 60 * 1000; //（本地时间）东八区加上8小时
        var date = new Date(timeStamp);
    
        var year = date.getFullYear();
@@ -1280,8 +1327,6 @@ Math、Date、Array、基本包装类型
    链接：https://juejin.im/post/5caee550e51d456e3b70185b
    来源：掘金
    ```
-
-   
 
 3. Array
 
@@ -1346,10 +1391,40 @@ Math、Date、Array、基本包装类型
    **基本方法**
 
    - **修改数组元素**<img src="F:/web/web%20base/image/%E4%BF%AE%E6%94%B9%E6%95%B0%E7%BB%84.png">   
+
    - **索引查找：**<img src="F:/web/web%20base/image/%E7%B4%A2%E5%BC%95%E6%90%9C%E7%B4%A2.png">
+
    - **转换为字符串**<img src="F:/web/web%20base/image/%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2.png">
+
    - **数组排序：**<img src="../image/数组排序.png">
+
    - **截取数组：**<img src="../image/截取数组.png">
+
+     slice()：从第几个索引号开始，到第几个索引号结束（左闭右开，不包括结束位置）
+
+     splice()：从第几个索引号开始（负值是倒数 == arr.length - n），删除的个数（从删除的第一个数字算起，往后算）
+
+     ```js
+     arr.splice(-2, 0, 'a', 'b');
+     // 从 arr.length - 2 的位置算起，删除 0 个元素，并且在 arr.length - 2 的前面添加（任意多个） 'a','b'（不管正负值，前面都是 0 方向）
+     ```
+
+   - `map()`：创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。
+
+     ```js
+     var map = arr.map(function callback(currentValue[, index[, array]]) {
+      // Return element for new_array 
+     }[, thisArg])
+     
+     // 示例
+     const map = arr.map(x => x * 2);
+     ```
+
+     - `currentValue`：数组中正在处理的当前元素
+     - index：数组中正在处理的当前元素的索引   （可选）
+     - `map` 方法调用的数组  （可选）
+     - thisArg：执行 `callback` 函数时值被用作`this`  （可选）
+     - 返回值：一个由原数组每个元素执行回调函数的结果组成的新数组
 
    关于返回值：push() 的返回值的意思是：`console.log(arr.push(3,2));`
 
@@ -1359,13 +1434,15 @@ Math、Date、Array、基本包装类型
    Array.isArray(arr) // H5新增 Array.isArray() 可以检测 iframes，优于 instanceof
    ```
 
-   **遍历数组用 `for` 循环**
-
 4. 基本包装类型
 
    把简单的数据类型包装成复杂数据类型，
 
    - String
+
+     **空格也占位置**
+
+     `'123'[0] == ['123'][0]`
 
      ```js
      var str = "hi!";
@@ -1415,7 +1492,7 @@ Math、Date、Array、基本包装类型
 
 - 
 
-##### 对象化
+##### 构造函数对象化
 
 可以不使用`new`实现对象化，比如使用`function`作为一个基类：
 
@@ -1451,9 +1528,75 @@ var t = foo()  // undefined，不是想要继承getName方法的对象
    }
    ```
 
+##### 拷贝对象
+
+- 浅拷贝（只拷贝一层，拷贝对象的属性和方法的地址）
+
+  1. ```js
+     var obj = {
+         name: 'add';
+         age: {
+             agg: 2;
+         }
+     }
+     var b = {};
+     for (var k in obj) {
+         b[k] = obj[k];
+     }
+     ```
+
+  2. `Object.assign(接受对象, 被拷贝对象)`    ES6
+
+     ```js
+     var obj = {
+         name: 'add'，
+         age: {
+             agg: 2，
+         }
+     }
+     var b = {}
+     Object.assign(b, obj);
+     ```
+
+- 深拷贝 
+
+  1. ```js
+     var obj = {
+         name: 'add'，
+         age: {
+             agg: 2，
+         }
+     }
+     var o = {}
+     // 封装函数
+     function copy(newo, old) { // 两个参数为接受的函数和被拷贝的函数
+         for (var k in old) {
+             // 获取属性值
+             var item = old[k];
+             // 判断值是否为数组
+             if（item instanceof Array) {
+     	        newo[k] = []; 
+                 // 再次调用这个函数，把 item 数组的每一项赋值给 newo[k] 数组
+                 copy(newo[k], item)  
+             } else if (item instanceof Object) {
+     	        newo[k] = {};  // 这个值存储对象
+                 copy(newo[k], item)
+             } else {
+                 // 属于简单数据类型
+                 newo[k] = item;
+             }
+         }
+     }
+     copy(o, obj)
+     ```
+
+  2. 
+
 #### 函数
 
-函数：就是封装了一段可被重复调用执行的代码块
+- 函数：就是封装了一段可被重复调用执行的代码块
+- 所有函数都是 Function 的实例(对象) 
+- 函数也属于对象
 
 函数在使用时分为两步：声明函数和调用函数。
 
@@ -1462,6 +1605,10 @@ var t = foo()  // undefined，不是想要继承getName方法的对象
 通常我们将函数名命名为**动词**
 
 **注意：函数后面不加分号**
+
+在自动执行函数前加分号：避免压缩时前一个脚本没有写最后一个分号而导致压缩后脚本不能使用，所以要在开始加一个分号
+
+`(function(){})()`：闭包模拟作用域块
 
 ```js
 function functionName(arg0, arg1,...,argN) {
@@ -1478,7 +1625,7 @@ function sayHi(name, message) {
         sayHi("Nicholas", "how are you today?");
 ```
 
-调用函数：functionName();
+<img src="../image/function.jpg">
 
 - 形参
   - 在函数名称后面的小括号中添加一些参数
@@ -1491,7 +1638,7 @@ function sayHi(name, message) {
 
 ##### 参数
 
-它是当前函数的一个内置对象，存储了传递的所有实参。
+它是当前函数的一个内置对象，存储了传递的所有实参。参数都必须是字符串格式
 
 通过 arguments 对象来访问这个参数数组，从而获取传递给函数的每一个参数
 
@@ -1504,41 +1651,192 @@ function sayHi(name, message) {
 3. ECMAScript 中的所有参数传递的都是值，不可能通过引用传递参数。
 4. 重写 arguments 的值会导致语法错误
 
+函数可以作为参数或者返回值传递
+
 ##### 调用
 
-```js
-  var a = 1;
-    function b(){
-        console.log(a);
-    }
-    b(); // 调用函数
-```
+this 指向函数的调用者
 
-##### return
+1. 普通函数
 
-函数在任何时候都可以通过 return 语句后跟要返回的值来实现返回值
+   - ```js
+     function b(){ }
+     window.b(); // 调用函数
+     
+     // this 指向 window
+     ```
 
-示例：
+2. 对象的方法
 
-```js
-var result = 0;
-function sum(num1, num2) {
-    console.log(num1 + num2);
-    return num1 + num2;  // return 语句之后结束大括号之前的任何代码 都永远不会执行
-}
-console.log(sum(5, 10)); // 调用函数并输出函数值，未指定返回值的函数,返回的是 undefined 值
-```
+   - ```js
+     var o = {
+         say: function() {}
+     }
+     o.say();
+     
+     // this 指向 对象
+     ```
+
+3. 构造函数
+
+   - ```js
+     function Hi(){ }
+     new Hi();
+     
+     // 构造函数或者原型对象 this 指向 实例对象
+     ```
+
+4. 绑定事件函数
+
+   - ```js
+     // 事件触发就调用
+     btn.onclick = function {}
+     
+     // this 指向 函数调用者
+     ```
+
+5. 定时器函数
+
+   - ```js
+     // 每个一秒调用一次
+     window.setInterval(function() {}, 1000)
+     
+     // this 指向函数的调用者 window
+     ```
+
+6. 立即执行函数
+
+   - ```js
+     (function () {
+     })()
+     
+     // this 指向 window
+     ```
+
+##### 关键字
+
+1. return  返回函数值
+
+   ```js
+   var result = 0;
+     function sum(num1, num2) {
+         console.log(num1 + num2);
+         return num1 + num2;  // return 语句之后结束大括号之前的任何代码 都永远不会执行
+     }
+     console.log(sum(5, 10)); // 调用函数并输出函数值，未指定返回值的函数,返回的是 undefined 值
+   ```
+
+   - 函数在任何时候都可以通过 return 语句后跟要返回的值来实现返回值 
+
+2. this
+
+   -  全局作用域或者普通函数中this指向全局对象window（注意定时器里面的this指向window）
+
+     ```js
+     var a = 1;
+     function b(){
+         console.log(a);
+     }
+     window.b(); // 普通函数中调用是指向 window 的，但是平时都省略掉了
+     ```
+
+   - 方法调用中谁调用this指向谁
+
+   - 构造函数中this指向构造函数的实例
 
 ##### 匿名函数
 
+普通函数是语句，匿名函数是表达式
+
 ```js
 // 这是函数表达式写法，匿名函数后面跟分号结束
-var fn = function(){...}；
+var fn = function(){
+    console.log(this);   // this 指向 window
+}；
 // 匿名函数调用必须写到函数体下面
-fn();
+window.fn();
 ```
 
+##### 回调函数
+
+回调：将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，     （干了某件事，再回头调用这个函数）
+
+```js
+// 里面的调用函数是回调函数，属于异步任务，会在主线程执行完后再执行
+window.setTimeout(调用函数, [延迟的毫秒数]);
+// 
+element.onclick = function(){}； 
+// 或者 
+element.addEventListener(“click”, fn);  // 回调函数不加括号
+```
+
+##### 立即执行函数
+
+- ```js
+  // 声明一个匿名函数，用括号包起来，后面的括号调用这个函数
+  (function (j) {
+  })(i)
+  // 或者
+  (function (j) {}(i))
+  // 或者...
+  ```
+
+  - 为什么不能直接写 function 
+    - JS引擎规定，如果function出现在行首，一律解析成语句。因此JS引擎看到行首是function关键字以后，认为这一段都是函数定义，不应该以原括号结尾，所以就报错了。
+  - 参数：（`i`就是一个全局变量，`i`代表的是实参，`j`是`i`在立即执行函数中的形参）
+    - 如果立即执行函数中需要全局变量，全局变量会被作为一个参数传递给立即执行函数
+
+作用：
+
+1. 不必为函数命名，避免了污染全局变量
+2. 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量
+3. 封装临时变量
+
+使用场景：
+
+1. 你的代码在页面加载完成之后，不得不执行一些设置工作，比如时间处理器，创建对象等等。
+2. 所有的这些工作只需要执行一次，比如只需要显示一个时间
+3. 但是这些代码也需要一些临时的变量，但是初始化过程结束之后，就再也不会被用到
+
+##### 闭包
+
+一个作用域可以访问另外一个函数内部的局部变量。
+
+- 闭包（closure）指有权访问另一个函数作用域中变量的函数
+
+  ```js
+  function fn1(){ // fn1 就是闭包函数
+     var num = 10;
+     function fn2(){
+         console.log(num); // 10
+     }
+     fn2()
+  }
+     fn1();
+  ```
+
+  - 闭包作用：延伸变量的作用范围。
+
+##### 递归函数
+
+- 如果一个函数在内部可以调用其本身，那么这个函数就是递归函数。
+
+  ```js
+  function fn() {
+      if(a > b) {
+          return;
+      }
+      fn();
+  }
+  fn();
+  ```
+
+  - 递归函数的作用和循环效果一样
+  - 由于递归很容易发生“栈溢出”错误（stack overflow），所以必须要加退出条件 return。
+
 ##### 基本点
+
+funName.name = funName
 
 ```js
   var a = 1;
@@ -1553,68 +1851,1133 @@ fn();
     console.log(a);//输出1
 ```
 
+```js
+var a = 0,
+    b = 0;
+function A(a) {
+    // 执行变量A，因为函数未调用所以略过，执行alert
+    A = function(b) {   // 如果这个函数是普通声明的函数，就不可以在父函数外调用
+        alert(a + b++);
+    }
+    alert(a++); 
+}
+// 调用函数A，然后执行函数内的代码
+A(1);
+// 调用匿名函数，
+A(2);
+```
+
+```js
+// 这个函数返回一个匿名函数
+function compose(f, g) {
+    return function(x) {
+        return f(g(x))
+    }
+}
+function toUp(str) {
+    return str.toUpperCase()
+}
+function add(str) {
+    return str + '!'
+}
+// 调用第一个函数，f=add(),g=toUp()，p = 返回值
+var p = compose(add, toUp);
+// 调用匿名函数，x = 'time'
+p('time');   //TIME!
+```
+
+```js
+var arr = [];
+for (var i = 0; i < 2; i++) {
+    arr[i] = function() {
+        // 在循环的时候，因为函数没有调用，所有变量 i 保持不变
+        console.log(i);
+    }
+}
+// 调用函数的时候整个循环 i = 2 已经结束，
+arr[0]();
+arr[1]();
+```
+
+## 事件侦听器
+
+#### 操作事件
+
+1. 传统注册方式方式
+
+   - on 开头。 
+
+   - 监听只会在冒泡阶段生效
+
+   - 同一个元素且同一个事件，只能传统注册一次侦听器（设置一个处理函数），后面注册的事件会覆盖前面的
+
+     - 同一个元素且同一个事件，可以传统注册和方法注册一起使用，不能多次传统注册
+
+   - ```js
+     // 方法1
+     function hei() {
+         alert("hei");
+     }
+     me.onclick = hei; 
+     
+     // 方法2
+     mo.onclick = function() {
+         alert('你好')
+     }
+     mo.onclick = function() { // 后面的语句会覆盖前面的代码
+         alert('hei')
+     }
+     ```
+
+2. 方法侦听 注册方式 （推荐 IE9+）
+
+   - `eventTarget.addEventListener(type, listener[, useCapture]) `
+
+     - eventTarget     侦听对象
+
+     - type                 事件类型字符串，不加 on
+
+     - listener             事件处理函数
+
+     - useCapture     可选，默认： false。同 `options - capture`
+
+       - 如果是 true，表示在事件捕获阶段调用事件处理程序；
+       - 如果是 false，表示在事件冒泡阶段调用事件处理程序。
+
+     - `options`: 可选. 可用的选项如下
+
+       - `capture`: Boolean, 如果是 true, 表示 listener 会在捕获阶段触发. 默认是 false. 冒泡触发. 
+
+         - 目标元素（点击的元素）有多个事件，其中一个设置 true
+           - 在 chrome 中会按照加载先后顺序触发，不会进行 `capture` 的判断
+           - 在 Safari 中，会进行 `capture` 的判断
+
+       - `once`: Boolean, 如果是 true, 表示 listener 在添加之后最多只调用一次
+
+         - ```js
+           outer.addEventListener('click', onceHandler, once);
+           once = { once: true };
+           ```
+
+       - `passive`: 。Boolean，如果是 true, 表示 listener 永远不会调用 `preventDefault()`. 如果 listener 仍然调用了这个函数, 客户端将会忽略它并抛出一个控制台警告
+
+         - ```js
+           inner2.addEventListener('click', nonePassive, { passive: true });
+           ```
+
+   - 同一个元素且同一个事件，可以注册多个侦听器
+
+   - ```js
+     // 两个事件都会执行
+     mo.addEventListener('click', function(){
+         alert('你好');
+     })
+     // 建议使用普通函数，匿名函数无法解绑事件
+     mo.addEventListener('click', fn);
+     function fn(){
+         alert('你好');
+     }
+     ```
+
+   - ```js
+     // 注册事件兼容性解决方案
+     function addEventListener(element, eventName, fn) {
+      // 判断当前浏览器是否支持 addEventListener 方法
+      if (element.addEventListener) {
+      element.addEventListener(eventName, fn); // 第三个参数 默认是false
+      } else if (element.attachEvent) {
+      element.attachEvent('on' + eventName, fn);  // 可以直接省略 仅作了解
+      } else {
+      // 相当于 element.onclick = fn;
+      element['on' + eventName] = fn;
+     } 
+     ```
+
+   - 兼容性处理的原则： 首先照顾大多数浏览器，再处理特殊浏览器
+
+3. 针对 IE 9 以前的IE 浏览器
+
+   - `eventTarget.attachEvent(eventNameWithOn, callback) `
+
+   - eventTarget                  目标对象
+
+   - eventNameWithOn      事件类型字符串，加 on
+
+   - callback                        事件处理函数
+
+   - ```js
+     // 仅作了解，处理兼容性问题直接使用前两种即可
+     var mo = document.getElementById('hi');
+     mo.addEvent('onclick', function(){
+         alert('你好');
+     })
+     ```
+
+4. 传统注册方式 **解绑事件**
+
+   - `eventTarget.onclick = null;`
+
+   ```js
+   // 解绑事件
+   mo.onclick = function() {
+       alert('你好');
+       mo.onclick = null;
+   }
+   ```
+
+   ```js
+   // 这个事件不会调用函数，因为在主线程的时候事件已经删除了
+   mo.onclick = function() {};
+   mo.onclick = null;  
+   ```
+
+   
+
+5. 方法注册方式 **解绑事件**
+
+   - `eventTarget.removeEventListener(type, listener[, useCapture]);`
+
+     ```js
+     // 匿名函数无法解绑
+     div.addEventListener('click', fun)
+     function fun() {
+         alert('你好');
+         div.removeEventListener('click', fun)
+     }
+     ```
+
+   - ```js
+     // 兼容性方案
+     function removeEventListener(element, eventName, fn) {
+      // 判断当前浏览器是否支持 removeEventListener 方法
+      if (element.removeEventListener) {
+      element.removeEventListener(eventName, fn); // 第三个参数 默认是false
+      } else if (element.detachEvent) {
+      element.detachEvent('on' + eventName, fn);  // 可以直接省略 仅作了解
+      } else {
+      element['on' + eventName] = null;
+     } 
+     ```
+
+   - `eventTarget.detachEvent(eventNameWithOn, callback);`   了解
+
+     ```js
+     // 了解
+     div.attachEvent('click', fun)
+     function fun() {
+         alert('你好');
+         div.datachEvent('click', fun);
+     }
+     ```
+
 ## DOM
 
-DOM文档对象类型，是对文档及其内容的抽象表述。提供访问和操作网页内容的方法和接口
+```
+- 关于dom操作，我们主要针对于元素的操作。主要有创建、增、删、改、查、属性操作、事件操作。
+```
+
+DOM文档对象类型，是对文档及其内容的抽象表述。提供访问和操作网页内容的方法和接口，标准化组织是 W3C
+
+### 基础
 
 扩点表示法：`object1.object2.object3`，表示 object3，父对象是 object2
 
 DOM视图、DOM事件、DOM样式、DOM遍历和范围、SVG、MathML、SMIL
 
-BOM浏览器对象类型（也叫 0 级 DOM），提供与浏览器交互的方法和接口
+- `document`：文档，表示一个页面
+- `element`：元素，所有的标签都是元素
+- `node`：节点，所有的内容都是节点（标签，属性，文本注释）
 
+**以上内容都是对象**
+
+body 是 document 的一个子对象。object 后面可以跟属性和方法
+
+**操作元素属性、节点的语句会提前到 console.log alert 等的前面**
+
+```js
+console.log(input.removeAttribute('data-index')); 
+console.log(input));
+input.style = 'background-color: #333;';
+
+// 等同于
+input.removeAttribute('data-index');
+input.style = 'background-color: #333;'
+console.log(input.removeAttribute('data-index'));
+console.log(input));
+// 节点也是一样的
+```
+
+#### 获取元素
+
+```
+直接输出元素对象的时候，如果先 console.log 再 alter ，console.log 输出元素对象
+先 alert 再 console.log ，console.log 输出 元素值（outerHTML）
+```
+
+1. ID：**`document.getElementById('id')`**
+   - 或者：**element.getElementById('id')**
+2. 标签：**`document.getElementsByTagName('div')`**
+   - 返回指定 标签对象 的集合
+   - 标签和元素：body 是标签，元素是指 标签 + 里面的内容
+3. h5新增
+   - class：**`document.getElementsByClassName('class')`**
+     - 返回指定 class对象 的集合
+     - class 是保留字，所以是className
+   - 选择器：**`document.querySelectorAll('div')`**
+     - 参加 css 选择器，需要带符号
+   - 第一个选择器：**`document.querySelector('#id')`**
+4. 特殊元素：（不带括号）
+   - body：**`document.body`**
+   - html：**`document.documentElement`**
+
+#### 操作属性
+
+**获取属性不加等号，设置属性加等号引号，值为重设不是添加**
+
+```js
+element.innerText    // 获取元素内容，忽略里面的标签、空格和换行
+
+element.innerHTML    // 全部元素内容
+```
+
+1. HTML属性：
+
+   - src    href
+   - id  alt   title
+
+2. 表单属性：
+
+   - `type、value、checked、selected、disabled`
+
+3. 样式属性：
+
+   - **`element.style`**                 行内样式操作
+   - **`element.className`**           类名样式操作
+     - 通过修改类名达到改变样式的目的，会覆盖原先的类名
+
+
+- 自定义属性：
+
+   1. **`element.属性`         **                                 获取属性值
+
+   2. **`element.getAttribute('属性')`  **            获取自定义属性值
+
+   3. 获取自定义属性               H5新增：IE 11
+
+      - **`element.dataset.index `**
+
+      - **`element.dataset['index'] `**
+
+   4. **`element.属性 = '值'`           **                   设置属性值
+   5. **`element.setAttribute('属性'，'值')`**     设置自定义属性值
+      - H5规定自定义属性 **data-** 开头做为属性名并且赋值
+
+   6. **`element.removeAttribute('属性')` **        移除属性
+
+   为了保存并使用数据。有些数据可以保存到页面中而不用保存到数据库中
+
+```js
+// 使用循环给每一个元素都添加同样的事件 实现同一个效果
+var btn = document.getElementsByTagName('div');
+    for (var i = 0; i < btn.length; i++) {
+        // 直接该变每个元素的宽度
+        btn[i].style.width = '30px';
+        // 为每一个元素都添加一个事件，点击会变色
+        btn[i].onclick = function() {
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].style.backgroundColor = '#ccc';
+            }
+            this.style.backgroundColor = '#f90';
+        }
+    }
+```
+
+- 移动端属性
+  1.  classList 属性，操作元素的类名  IE10+
+     - `element.classList.add('class');`          添加类
+     - `element.classList.remove('class');`     删除类     
+     - `element.classList.toggle('class')`       切换类（没有就添加，有就删除）
+
+#### 获取节点
+
+基本属性：
+
+- nodeType      （节点类型）
+  1. 元素节点 nodeType 为 1 （主要）
+  2. 属性节点 nodeType 为 2
+  3. 文本节点 nodeType 为 3 （包含文字、空格、换行等）
+     - 两个元素之间有空格或者换行，就是三个节点：一个文本节点、两个元素节点
+- nodeName    （节点名称）
+- nodeValue     （节点值）
+
+1. **`node.parentNode` **                    获取最近的一个父节点
+
+   - 没有父级返回：null
+   - 节点名.parentNode
+   - 前面可以是元素
+
+2. **`parentNode.childNodes` **                   获取子节点集（标准）
+
+   - 包含了1、2、3，想单独操作1 需要处理，不常用
+
+3. **`parentNode.children`**                        获取子元素节点集（非标准）
+
+   - 只读属性，**重点使用**
+
+4. **`parentNode.firstChild`**                      第一个子节点
+
+5. **`parentNode.lastChild`**                        最后一个子节点
+
+6. `parentNode.firstElementChild`         第一个子元素节点 (IE9 +)
+
+   - 常用操作： **`parentNode.children[0]`**
+
+   - ```js
+     var getFirstElementChild = function(obj) {
+         for (var i = 0; i < obj.childNodes.length; i++) {
+             if (obj.childNodes[i].nodeType === 1) {
+                 return obj.childNodes[i];
+             }
+         }
+         return null;
+     }
+     getFirstElementChild(obj);
+     ```
+
+7. `parentNode.lastElementChild`           最后一个子元素节点  (IE 9+)
+
+   - 常用操作：**` parentNode.children[parentNode.children.length - 1] `**
+
+   - ```js
+     var getLastElementChild = function(obj) {
+         for (var i = obj.childNodes.length - 1; i >= 0; i--) {
+             if (obj.childNodes[i].nodeType === 1) {
+                 return obj.childNodes[i];
+             }
+         }
+         return null;
+     }
+     getLastElementChild(obj);
+     ```
+
+8. **`node.nextSibling`**                              下一个兄弟节点
+
+9. **` node.previousSibling`**                        上一个兄弟节点
+
+10. **`node.nextElementSibling`**                 下一个兄弟元素节点 （IE9+）
+
+    - ```js
+      // 解决兼容性问题
+      function getNextElementSibling(element) {
+          // 遍历节点
+          // 把 el 的下一个节点赋值给 el，el 就是这个下一个节点，成立就 return，如果最后不成立 el = null; 退出循环，
+          while (element = element.nextSibling) { 
+              if (element.nodeType === 1) {  // 1 为元素节点
+                  // 返回，函数内 return 之后的所有语句都不再执行，不针对循环
+                  return element;
+              }
+          }
+          return null;
+      }
+      ```
+
+11. **` node.previousElementSibling`**           上一个兄弟元素节点 （IE9+）
+
+#### 操作节点
+
+1. **`document.createElement('tagName')`**        动态创建元素节点
+   - 创建HTML元素         
+2. **` parentNode.appendChild(child) `**                         添加到指定父节点的子节点列表末尾
+   - 类似于 push
+3. **` parentNode.insertBefore(child, 指定元素) `**        添加到父节点的指定子节点前面
+4. **`parentNode.removeChild(child) `**                         删除节点
+   - 返回删除的节点
+5. **`node.cloneNode() `**                                     拷贝节点
+   - 括号参数为空或者为 false ，则是浅拷贝，即只克隆复制节点本身（包括节点元素和节点属性），不克隆里面的子节点
+   - 括号参数为 true ，则是深度拷贝，会复制节点本身以及里面所有的子节点。
+### DOM 事件流
+
+DOM 事件流：**事件**发生时会在元素节点之间按照特定的顺序**的传播过程**
+
+DOM 事件流分为3个阶段：
+
+1. 捕获阶段
+   - 事件被点击后，从顶层 DOM window对象（IE9 以前从 document）开始，传递到 HTML、body 等，一层层下沉，直到传递给注册事件的元素。所有经过的节点，都会触发这个事件。在目标元素对象本身上注册的捕获事件处理程序不会被调用。
+   - 
+   - 网景最早提出
+2. 当前目标阶段
+   - 当事件不断的传递直到目标节点具体的元素的时候，最终在最近的父元素的目标节点上触发这个事件
+3. 冒泡阶段 
+   - 事件冒泡即事件开始时，由最具体的元素（也就是事件发生所在的节点）接收，然后逐级传播到顶层 DOM window对象（IE9 以前从 document）（我们平时用的事件绑定一般利用的事件冒泡的原理）
+   - 清除冒泡就是为了防止此阶段经过的节点触发这个事件
+   - IE 最早提出
+
+**注意**
+
+- 实际开发中我们很少使用事件捕获，我们更关注事件冒泡。
+- JS 代码中只能执行捕阶或者冒泡阶段，二选一。
+
+#### 常用DOM事件
+
+[全局事件大全](<https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers>)
+
+- 常用鼠标事件
+
+  | 事件        | 触发     |
+  | ----------- | -------- |
+  | onclick     | 单击     |
+  | onmouseover | 经过     |
+  | onmouseout  | 离开     |
+  | onfocus     | 获得焦点 |
+  | onblur      | 失去焦点 |
+  | onmousemove | 移动     |
+  | onmousedown | 按下     |
+  | onmouseup   | 弹起     |
+
+  - onclick 和 attachEvent 只能得到冒泡阶段
+
+  - 有些事件是没有冒泡的，所以不能通过操作子元素触发比如 onblur、onfocus、onmouseenter、onmouseleave
+
+  - 禁止鼠标右键菜单
+
+    - `contextmenu`主要控制应该何时显示上下文菜单，主要用于程序员取消默认的上下文菜单
+
+      ```js
+      document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      })
+      ```
+
+  - 禁止鼠标选中
+
+    - `selectstart` 开始选中
+
+      ```js
+      document.addEventListener('selectstart', function(e) {
+       e.preventDefault();
+       })
+      ```
+
+- 常用鼠标事件对象
+
+  - event对象代表事件的状态，跟事件相关的一系列信息的集合。现阶段我们主要是用鼠标事件对象
+    MouseEvent 和键盘事件对象 KeyboardEvent
+
+    | 鼠标事件对象 | 说明                                      |
+    | ------------ | ----------------------------------------- |
+    | `e.clientX`  | 返回鼠标相对于浏览器窗口可视区的 X 坐标   |
+    | `e.clientY`  | 返回鼠标相对于浏览器窗口可视区的 Y 坐标   |
+    | `e.pageX`    | 返回鼠标相对于文档页面的 X 坐标      IE9+ |
+    | `e.pageY`    | 返回鼠标相对于文档页面的 Y 坐标      IE9+ |
+    | `e.screenX`  | 返回鼠标相对于电脑屏幕的 X 坐标           |
+    | `e.screenY`  | 返回鼠标相对于电脑屏幕的 Y 坐标           |
+
+- 常用键盘事件
+
+  - 注意给文档 document 添加键盘事件
+
+    | 键盘事件     | 触发条件               |
+    | ------------ | ---------------------- |
+    | `onkeyup`    | 按键被松开时触发       |
+    | `onkeydown`  | 按键被按下时触发       |
+    | `onkeyperss` | 按键被按下并弹起时触发 |
+
+  - onkeydown 和 onkeyup 不区分字母大小写，识别功能键
+
+  - onkeypress 区分字母大小写，不识别功能键，比如左右箭头，shift 等
+
+  - 三个事件的执行顺序是： keydown -- keypress --- keyup
+
+    - keydown 和 keypress 在文本框里面的特点： 他们两个事件触发的时候，文字还
+      没有落入文本框中。
+    - keyup事件触发的时候， 文字已经落入文本框里面了
+
+- 常用键盘事件对象
+
+  | 键盘事件对象 | 说明              |
+  | ------------ | ----------------- |
+  | `keyCode`    | 返回按键的ASCII值 |
+
+#### 事件对象
+
+代表事件的状态，包含跟事件相关的一系列信息数据
+
+1. 谁绑定了这个事件。
+2. 鼠标触发事件的话，会得到鼠标的相关信息，如鼠标位置。
+3. 键盘触发事件的话，会得到键盘的相关信息，如按了哪个键
+4. 等等
+
+```js
+// 当我们注册事件时， event 对象就会被系统自动创建，并依次传递给事件监听器（事件处理函数）。
+
+eventTarget.onclick = function(event) {  // 一般还喜欢写成 e 或者 evt
+ }
+ eventTarget.addEventListener('click', function(event) {  
+ }）// 这个 event 是个形参，系统帮我们设定为事件对象，不需要传递实参
+```
+
+- 事件对象的兼容性方案
+
+  ```js
+  e = e || window.event;
+  ```
+
+  - 标准浏览器中是浏览器给方法传递的参数，只需要定义形参 e 就可以获取到
+  - 在 IE6~8 中，浏览器不会给方法传递参数，，需要到 window.event 中获取查找。
+
+- 事件对象的常见属性和方法
+
+  | 属性和方法            | 说明                                                  |
+  | --------------------- | ----------------------------------------------------- |
+  | `e.target`            | 返回触发事件的对象             标准                   |
+  | `e.srcElement`        | 返回触发事件的对象       非标准 IE6-8使用             |
+  | `e.type`              | 返回事件的类型    如：click    不带 on                |
+  | `e.stopPropagation()` | 该方法阻止事件在捕获或冒泡阶段中进一步传播       标准 |
+  | `e.cancelBubble`      | 阻止冒泡        非标准   IE6-8使用                    |
+  | `e.returnValue`       | 阻止默认事件（默认行为）非标准   IE6-8使用            |
+  | `e.preventDefault()`  | 该方法默认事件（默认行为）  如：不让链接跳转          |
+
+  - e.target 和 this 的区别：
+    - this 是事件绑定的元素， 这个函数的调用者（绑定这个事件的元素）
+    - e.target 是事件触发的元素。（点击的元素）精确到被点击的最下层子元素上
+    - 
+
+- 阻止事件冒泡的兼容性解决方案
+
+  ```js
+  if(e && e.stopPropagation){
+   e.stopPropagation();                // 标准写法
+  }else{
+   window.event.cancelBubble = true;   // 非标准写法
+  }
+  ```
+
+- 事件委派
+
+  - 事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点
+  - 目的：减少 DOM 操作 提高程序性能。
+  -  
+
+
+
+#### 处理事件
+
+```js
+var li = document.getElementsByTagName('li');
+    for (var i = 0; i < 4; i++) {
+            console.log(i);  // i == 0 1 2 3
+	    // 当 js 加载完后 for 已经给每个元素添加完事件。i++ 等于 4 结束循环了。
+        li[0].onmousemove = function() {
+            // 当 i 获得悬浮效果时，i == 4
+            console.log(i); // i == 4
+        }
+    }
+```
+
+### PC 常用特效
+
+- `offset`：用来获取元素偏移量， 可以动态的得到该元素的位置（偏移）、大小等
+
+  - 获得元素距离带有定位父元素的位置
+  - 获得元素自身的大小（宽度高度），是只读属性
+  - 返回的数值都不带单位
+
+  | 属性                   | 返回值                                                |
+  | ---------------------- | ----------------------------------------------------- |
+  | `element.offsetParent` | 该元素的有定位的父级元素，如果父级都没有定位返回 body |
+  | `element.offsetTop`    | 该元素的边框到有定位的父级元素上边框的偏移            |
+  | `element.offsetLeft`   | 该元素的边框到有定位的父级元素左边框的偏移            |
+  | `element.offsetWidth`  | 自身的宽度，包含：`padding+border+width`。不带单位    |
+  | `element.offsetHeight` | 自身的高度，包含：`padding+border+width`。不带单位    |
+
+  - 与 style 区别：
+    1. offset 是边框到边框的距离，适合获取元素大小位置
+    2. style 是外边距到边框的距离，一般用来给元素更改值
+
+- `client`：用来获取元素可视区的相关信息（元素大小），可以动态的得到该元素的边框、元素大小等
+
+  | 属性                   | 返回值                                                |
+  | ---------------------- | ----------------------------------------------------- |
+  | `element.clientTop`    | 元素上边框大小                                        |
+  | `element.clientLeft`   | 元素左边框大小                                        |
+  | `element.clientWidth`  | 元素宽度，包含：`padding + width`。不含边框，不带单位 |
+  | `element.clientHeight` | 元素高度，包含：`padding + width`。不含边框，不带单位 |
+
+- `scroll`：用来获取元素滚动距离，可以动态的得到该元素的大小、滚动距离等
+
+  | 属性                   | 返回值                                   |
+  | ---------------------- | ---------------------------------------- |
+  | `element.scrollTop`    | 元素被卷去的上侧距离                     |
+  | `element.scrollLetf`   | 元素被卷去的左侧距离                     |
+  | `element.scrollWidth`  | 元素宽度（超出盒子范围的也算），不含边框 |
+  | `element.scrollHeight` | 元素高度（超出盒子范围的也算），不含边框 |
+
+  - 滚动条在滚动时会触发 onscroll 事件
+
+  - 页面被卷去的头部
+
+    1. 声明了 DTD（文档声明，包括 H5），使用 `document.documentElement.scrollTop`
+
+    2. 未声明 DTD，使用 `document.body.scrollTop`
+
+    3. 新方法`window.pageYOffset`（卷去的上侧）和`window.pageXOffset`（卷去的左侧），IE9 +
+
+       兼容性解决方案：
+
+       ```js
+       function getScroll() {
+           return {
+               left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+               top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+           };
+       }
+       getScroll().left;    // 使用的时候 
+       ```
+
+       ```js
+       // MDN 给出的解决办法
+       var x = (window.pageXOffset !== undefined)
+         ? window.pageXOffset
+         : (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+       
+       var y = (window.pageYOffset !== undefined)
+         ? window.pageYOffset
+         : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+       ```
+
+  - `window.scroll(x, y)`    滚动窗口至页面指定位置（指定左上角）
+
+- 动画封装
+
+  ```js
+  var div = document.querySelector('div'),
+      btn = document.querySelector('button');
+  var time = setInterval(function() {
+      if (div.offsetLeft > 300) {
+          clearInteval(time);
+      }
+      div.style.left = div.offsetLeft + 1 +'px';
+  }, 1)
+  
+  // 函数封装
+  function animate(obj, target, callback) {
+      // 防止在定时器运行时多次调用定时器，导致定时器加速多次执行（未找到原因）
+      clearInteval(obj.time);  // 不能写在后面，否则会把事件直接关闭
+      
+      // 给不同元素指定不同定时器
+      obj.time = setInterval(function() {  
+          // var step = Math.ceil(step / 10);   // 匀速移动，小数取整；
+          var step = (target - obj.offsetLeft) / 10;  // 由快到慢移动
+          // 前进 >0 向上取整，到最后 一步不足 1px，要向前走，不能不动了。
+          // 后退 <0 向下取整，同理最后也要继续后退。
+          step = step > 0 ? Math.ceil(step) : Math.floor(step);
+          
+          if (obj.offsetLeft >= target) {
+              clearInteval(obj.time);
+              callback && callback();
+          } else { // 写 else 里是因为计时器停止也会把本次函数执行完
+              obj.style.left = obj.offsetLeft + step +'px';  
+          }
+      }, 100)
+  }
+  
+  btn.addEventListener('click', function() {
+      // 需要写在函数或匿名函数内，否则会不经过事件调用直接执行
+          animate(div, 3, function() {})  //第三个参数是回调函数
+      })
+  ```
+
+  - 节流阀：上一个动画执行完再执行下一个动画函数。利用回调函数锁住或解锁函数
+
+    - ```js
+      var flag = true;
+      function() {
+          if (flat) {
+              // 执行完之前不再执行里面的代码
+              flag = false;
+              ... do someting
+              // 执行完之后再执行里面的代码
+              flag = true;
+          }
+      }
+      ```
+
+    - 
+
+### 移动端特效
+
+- 触摸事件
+
+  - touch 对象代表一个触摸点，响应对屏幕或触摸板操作
+
+    | 触摸事件     | 说明                  |
+    | ------------ | --------------------- |
+    | `touchstart` | 触摸到一个DOM时触发   |
+    | `touchmove`  | 在一个DOM上滑动时触发 |
+    | `touchend`   | 在一个DOM上移开时触发 |
+
+  - TouchEvent 描述一个或多个触点，可以检测触点的移动，触点的增加和减少
+
+    | 触摸事件对象 列表 | 说明                                   |
+    | ----------------- | -------------------------------------- |
+    | `touches`         | 正在触摸屏幕的所有手指的列表           |
+    | `targetTouches`   | 正在触摸当前DOM元素上的手指的列表      |
+    | `changedTouches`  | 手指状态发生变化的列表，有和无之间变换 |
+
+  - 拖动元素三部曲
+
+    1.  触摸元素 touchstart： 获取手指初始坐标，同时获得盒子原来的位置
+    2. 移动手指 touchmove： 计算手指的滑动距离，并且移动盒子
+       - 移动会触发 滚动屏幕，要阻止默认的**屏幕滚动** `e.preventDefault()`;
+    3. 离开手指 touchend:
+
+  - click 事件会有 300ms 的延时
+
+    1. 视口标签禁止缩放页面
+
+    2. 利用touch事件自己封装这个事件
+
+       ```js
+       //封装tap，解决click 300ms 延时
+       function tap (obj, callback) {
+        var isMove = false;
+        var startTime = 0; // 记录触摸时候的时间变量
+        obj.addEventListener('touchstart', function (e) {
+        startTime = Date.now(); // 记录触摸时间
+        });
+        obj.addEventListener('touchmove', function (e) {
+        isMove = true; // 看看是否有滑动，有滑动算拖拽，不算点击
+        });
+        obj.addEventListener('touchend', function (e) {
+        if (!isMove && (Date.now() - startTime) < 150) { // 如果手指触摸和离开时间小于150ms 算点击
+        callback && callback(); // 执行回调函数
+        }
+        isMove = false; // 取反 重置
+        startTime = 0;
+        });
+       }
+       //调用
+        tap(div, function(){ // 执行代码 });
+       ```
+
+    3. 使用插件。 [fastclick 插件]( https://github.com/ftlabs/fastclick)解决 300ms 延迟
+
+       1.  引入 js 插件文件。lib 中的 js 文件
+       2. 按照规定语法使用。地址首页有
+
+  - 常用插件
+
+    1. [Swiper 插件]( https://www.swiper.com.cn/ )
+       1. 确认插件实现的功能
+       2. 去官网查看使用说明
+       3. 下载插件
+       4. 打开 demo 实例文件，在 dist 中查看需要引入的相关文件，并且引入
+       5. 复制demo实例文件中的结构html，样式css以及js代码
+       6. API文档 中了解 JS 代码参数
+    2. [superslide](http://www.superslide2.com/)
+    3. [iscroll]( https://github.com/cubiq/iscroll)
+       1. 确认插件实现的功能
+       2. 去官网查看使用说明
+       3. 下载插件
+       4. 打开demo实例文件，查看需要引入的相关文件，并且引入
+       5. 复制demo实例文件中的结构html，样式css以及js代码
+
+### 常用框架
+
+- 框架： 大而全，一整套解决方案
+- 插件： 小而专一，某个功能的解决方案
+
+- 前端常用框架（用于pc 和 移动端）
+  1. bootstrap
+     1. 引入相关js 文件
+     2. 复制HTML 结构
+     3. 修改对应样式
+     4. 修改相应JS 参数
+  2. Vue
+  3. AngUlar
+  4. React
+- 移动端常用的框架
+  1. swiper
+  2. supersliper
+  3. iscoll
+- 常见的JavaScript 库
+  1.  jQuery
+  2. Prototype
+  3. YUI
+  4. Dojo
+  5. Ext JS
+  6. 移动端的zepto
+
+## 本地储存
+
+- 特性：
+  1. 数据存储在用户浏览器中
+  2. 设置、读取方便、甚至页面刷新不丢失数据
+  3. 容量较大，sessionStorage约5M、localStorage约20M
+  4. 只能存储字符串，可以将对象JSON.stringify() 编码后存储
+
+**window.sessionStorage**
+
+1. 生命周期为关闭浏览器窗口
+2. 在同一个窗口(页面)下数据可以共享
+
+3. 以键值对的形式存储使用
+
+- 存储数据
+
+  ```js
+  sessionStorage.setItem(key, value)
+  ```
+
+- 获取数据
+
+  ```js
+  sessionStorage.getItem(key)
+  ```
+
+- 删除数据
+
+  ```js
+  sessionStorage.removeItem(key)
+  ```
+
+- 删除所有数据
+
+  ```js
+  sessionStorage.clear()
+  ```
+
+**window.localStorage**
+
+1. 声明周期永久生效，除非手动删除 否则关闭页面也会存在
+2. 可以多窗口（页面）共享（同一浏览器可以共享）
+3. 以键值对的形式存储使用
+
+- 存储数据
+
+  ```js
+  localStorage.setItem(key, value)
+  ```
+
+- 获取数据
+
+  ```js
+  localStorage.getItem(key)
+  ```
+
+- 删除数据
+
+  ```js
+  localStorage.removeItem(key)
+  ```
+
+- 删除所有数据
+
+  ```js
+  localStorage.clear()
+  ```
+
+## BOM
+
+即浏览器对象模型。提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是 window，在各浏览器上定义的，兼容性较差
+
+BOM浏览器对象类型（也叫 0 级 DOM），提供与浏览器交互的方法和接口
 浏览器窗口和框架
 
 <img src="../image/dom.jpg" alt="dom树">
 
-window 是 Dom树 中的顶层，有时也被称为“全局对象”，可以省略 window.
+window 是 浏览器的顶级对象，有时也被称为“全局对象”，可以省略 `window.` 。
 
-body 是 document 的一个子对象。object 后面可以跟属性和方法
+注意：window下的一个特殊属性 `window.name`
 
-## 事件处理器
+### 窗口加载
 
-- 内联事件（过时)：
+1. 文档完全加载完成时触发
 
-  ```html
-  <input type="text" onClick="alert('你好')" value="Click me">
-  ```
+   ```js
+   window.onload = function() { ... }     
+   // 或者 差别和上面 DOM 注册事件一样
+   window.addEventListener("load",function(){});
+   ```
 
-- DOM对象的属性的事件处理器
+2. 仅当DOM加载完成（不包括样式表，图片，flash ）时触发    IE9 以上
+
+   ```js
+   document.addEventListener('DOMContentLoaded',function(){})
+   ```
+
+3. 调整窗口大小事件
+
+   ```js
+   window.onresize = function(){}
+   window.addEventListener("resize",function(){});
+   ```
+
+   - 只要窗口大小发生像素变化，就会触发这个事件
+   - 常用来完成响应式布局。`window.innerWidth`当前屏幕的宽度
+
+### 定时器
+
+1. `setTimeout()` 定时器
+
+   ```js
+   window.setTimeout(回调函数, [延迟的毫秒数]);   
+   ```
+
+   - 该定时器在定时器到期后执行调用函数。
+
+   - 调用函数可以直接写函数，或者写函数名或者采取字符串‘函数名()'三种形式。第三种不推荐
+
+   - 延迟的毫秒数省略默认是 0
+
+   - 因为定时器可能有很多，所以我们经常给定时器赋值一个标识符。
+
+   - 停止定时器
+
+     ```js
+     window.clearTimeout(timeoutID);
+     ```
+
+2. `setInterval()` 定时器
+
+   ```js
+   window.setInterval(回调函数, [间隔的毫秒数]);
+   ```
+
+   - 重复调用一个函数，每隔这个时间，就去调用一次回调函数， 第一次执行也是间隔毫秒数之后执行
+
+   - 调用函数可以直接写函数，或者写函数名或者采取字符串 '函数名()' 三种形式
+
+   - 间隔的毫秒数省略默认是 0
+
+   - 在运行时多次点击会加速多次执行（未找到原因）
+
+   - 停止定时器，
+
+     ```js
+     // 如果写在定时器里面，会把本次执行完，下次不再执行
+     window.clearInterval(intervalID);
+     ```
+
+
+### location
+
+用于获取或设置窗体的 URL，并且可以用于解析 URL
+
+- URL：统一资源定位符 (Uniform Resource Locator, URL) 是互联网上标准资源的地址
 
   ```js
-  var me = document.getElementById('ai');
-  function hello() {
-      alert("你好");
-  }
-  function hei() {
-      alert("hei");
-  }
-  me.onclick = hello;
-  me.onclick = hei; // 后面的语句会覆盖前面的代码
+  protocol://host[:port]/path/[?query]#fragment
+  http://www.itcast.cn/index.html?name=andy&age=18#link
   ```
 
-- 使用addEventListener()（ie8+）
+  - | 组成     | 说明                                                         |
+    | -------- | ------------------------------------------------------------ |
+    | protocol | 通信协议，常用：http、ftp、maito 等                          |
+    | host     | 主机（域名）：www.itcast.cn                                  |
+    | port     | 端口号。可选，http 默认端口为：80                            |
+    | path     | 路径。由0或多个`/`隔开的字符串组成。一般用来表示主机上的目录或文件地址 |
+    | query    | 参数。以键值对的形式用`&`符合分隔开                          |
+    | fragment | 片段。`#`后面的内容，常见于链接 锚点                         |
 
-  一般用于添加多个事件处理器
+  - | 对象属性            | 返回值                           |
+    | ------------------- | -------------------------------- |
+    | `location.href`     | 获取或设置整个 URL               |
+    | `location.host`     | 返回主机（域名）                 |
+    | `location.port`     | 返回端口号，如果未写返回空字符串 |
+    | `location.pathname` | 返回路径                         |
+    | `location.search`   | 返回参数                         |
+    | `location.hash`     | 返回片段                         |
+
+    - 重点记住： href 和 search
+
+    | 对象方法             | 返回值                                                       |
+    | -------------------- | ------------------------------------------------------------ |
+    | `location.assign()`  | 重定向页面。跟 href 一样，可以跳转页面                       |
+    | `location.replace()` | 替换当前页面。因为不记录历史，所以不能后退页面               |
+    | `location.reload()`  | 重新加载页面。相当于刷新或者 f5，如果参数为 true 强制刷新 ctrl + f5 |
+
+### navigator 
+
+包含有关浏览器的信息
+
+- `navigator.userAgent`：返回由客户机发送服务器的 user-agent 头部的值
 
   ```js
-  me.addEventListener('click', hello);
-  /* 第一个参数，注册这个处理器的事件的名称；第二个参数则指定了事件处理函数，我们想要运行该函数以响应被检测到的事件。 */
-  me.addEventListener('click', hei);
+  if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|
+  Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS
+  |Symbian|Windows Phone)/i))) {
+   window.location.href = ""; //手机
+  } else {
+   window.location.href = ""; //电脑
+  }
   ```
 
-  这两个事件处理器都将会执行
+### history
 
-### onClick 事件处理器
+与浏览器历史记录进行交互。该对象包含用户（在浏览器窗口中）访问过的 URL。
 
-用户单击这个按钮时，onClick事件被激活（通常称为“被触发”），然后属性中所包含的JavaScript语句将会执行。
+| 对象方法    | 作用                         |
+| ----------- | ---------------------------- |
+| `back()`    | 后退功能                     |
+| `forward()` | 前进功能                     |
+| `go(参数)`  | 前进（n）或后退(-n) n 个页面 |
 
-### onMouseOver和onMouseOut事件处理器
+在实际开发中比较少用，但是会在一些 OA 办公系统中见到
 
-当鼠标进入页面上被某个元素所占据的区域时，会触发onMouseOver事件。而onMouserOut事件，很显然是在鼠标离开这一区域时触发的。
+## 解析
+
+### 三种创建元素的区别
+
+1. `document.write`     页面加载完再执行这句，会导致页面重绘（刷新一个只有这句代码的页面）
+
+2. `innerHTML`        采用数组方式创建效率更高
+
+   - ```js
+     // 推荐使用 效率最高
+     var arr = [];
+     for (var i = 0; i < 1000; i++) {
+         arr.push('<div></div>');
+     }
+     document.body.innerHTML = arr.join[''];
+     ```
+
+   - ```js
+     // 字符串拼接的方式效率极低
+     for (var i = 0; i < 1000; i++) {
+         document.body.innerHTML += '<div></div>'；
+     }
+     ```
+
+3. `parentNode.appendChild(child)`          结构比较清晰
+
+   - ```js
+     // 效率次于 innerHTML 数组方式
+     for (var i = 0; i < 1000; i++) {
+         var  div = document.createElement('div');
+         document.body.appendChild(div);
+     }
+     ```
+
+### 测试效率
+
+```js
+var d1 = + new Date(); // 执行这句代码时的时间戳
+
+// 被测试的代码
+for (var i = 0; i < 1000; i++) {
+    document.body.innerHTML += '<div></div>'；
+}
+
+var d2 = + new Date(); // 执行这句代码时的时间戳
+console.log(d2 - d1);  // 被测试代码执行的时间
+```
+
+
 
 # 不懂
 
 1. 包装类型
 2. 闭包
 3. prototype原型对象
+4. 回调函数

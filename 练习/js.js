@@ -1,3 +1,10 @@
-var inf = Infinity;
-var zero = 0;
-console.log(-0-0 );
+var a = 1;
+
+function test(a) {
+    a=100;
+    console.log(a);
+    return a;        
+}     
+
+a=test(a); 
+console.log(a);

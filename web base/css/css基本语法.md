@@ -55,7 +55,7 @@ property-value pairs        名值对
 
 其他语法之后的 @ 规则会被忽略
 
-1. @charset            设置样式编码
+1. @charset            设置样式编码（写在最前面）
 
    - @charset 'UTF-8';
 
@@ -93,7 +93,6 @@ property-value pairs        名值对
    }
    ```
 
-5. 
 
 ### 选择器
 
@@ -200,6 +199,8 @@ ico文件 image/vnd.microsoft.icon（或者亦可出于兼容性原因使用imag
 
 相对定位，绝对定位，固定定位，粘性定位，正常流；
 
+left、top、right、bottom ：外边框到父级定位元素边框的距离
+
 _**定位的盒子一般需要单写宽度**_
 
 子绝父相
@@ -263,6 +264,8 @@ _**解决inline-block元素因换行产生的空白：**_
 ### width 和 height
 
 width: 100%;      和父元素一样宽
+
+若父元素没有设置高度，子元素设置一个百分比的高度是无效的。解决办法：**给父元素设置 width：100%**
 
 - 仅适用于块元素
 - 加了浮动和定位的盒子需要添加 `width: 100%`，或者给宽度
@@ -562,12 +565,11 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 
 - 常用，父元素设置 counter-reset，子元素设置 counter-increment
   1. 以 dom 树为准，每一级都参与计数，不管他是否显示
-  2. counter 对象的上一个元素为  父元素或同级时，变换基数为上一个元素（不分父子级）
-  3. counter 对象的上一个元素为  子元素时，变换基数为上一个同级元素。
-  4. 元素为 increment 时，把变换基数的最后一个值加上 increment 的增加值
-  5. 子元素为 reset 时，把前一个元素移下来，后面加上 string，再跟上 reset 的重置值
-  6. reset 同级元素相同
-  7. counters 中，reset 才能调用 string
+  2. counter 对象的基数为上一个同级或父级元素。
+  3. 元素为 increment 时，把变换基数的最后一个值加上 increment 的增加值
+  4. 子元素为 reset 时，把前一个元素移下来，后面加上 string，再跟上 reset 的重置值
+  5. reset 同级元素相同
+  6. counters 中，reset 才能调用 string
 
 | css                                             | 显示                                            |
 | ----------------------------------------------- | ----------------------------------------------- |
@@ -582,8 +584,7 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 | ![counter css](images/cc 1.png) | ![counter 显示](images\cx 1.png) |
 
 - 父子元素都设置 counter-reset
-  1. counters 中，reset 才能调用 string，
-  2. 每多一层，多一个值，不管是否显示，中间用 string 隔开
+  1. 每多一层，多一个值，不管是否显示，中间用 string 隔开
 
 | css                                             | 显示                                            |
 | ----------------------------------------------- | ----------------------------------------------- |
@@ -601,7 +602,7 @@ baseline在css2的文档中有这么一句解释，翻译过来也就是一个in
 | --------------- | ---- | ------------------------------------------------------------ |
 | `border-radius` |      | 参数间以`/`分隔，前四个参数表示水平半径，后四 个表示垂直半径，没有 / 则单独设置四个角 |
 
-极限为：**_50%，（长宽 + padding + border）的一半，圆的半径_**
+如果四个值一样极限为：**_50%，（长宽 + padding + border）的一半，圆的半径_**
 
 ### box-shadow（ie9+）
 
@@ -769,14 +770,9 @@ transform: skew(30deg,0deg);  /* 第二个参数不写默认为 0 */
 
 第二个参数不写默认为0。
 
-X正值：上边往左拉伸，下边往右拉伸，倾斜30度；（垂直方向沿 X 轴逆时针倾斜）
+X正值：上边往左拉伸，下边往右拉伸，倾斜30度；（垂直方向沿 Y 轴正方向，倒向 X 轴负方向）
 
-Y正值：左边往上拉伸，右边往下拉伸，倾斜30度；负数方向相反。（水平方向沿 Y 轴顺时针倾斜）
-
-```
-左手四指并拢，大拇指和它平行成 u 型。
-正值：大拇指指向坐标轴负方向，四指指的方向为与坐标轴平行且远的那个边拉的方向。
-```
+Y正值：左边往上拉伸，右边往下拉伸，倾斜30度；负数相反（水平方向沿 X 轴正方向，倒向 Y 轴负方向）
 
 #### 3D变形（ie10+）
 
@@ -832,7 +828,11 @@ z里面是负数，外面是正数
 | `transform:rotateY(180deg);`                                 | 左右翻着旋转                                                 |
 | `transform:rotateZ(180deg);`                                 | 像时钟一样旋转                                               |
 | `transform:rotateX(45deg) rotateY(180deg) rotateZ(90deg) ；` | 分开写只显示下面的代码，简写可一起显示，旋转各轴的顺序不同，结果就不一样 |
-| `transform:rotate3d(x, y, z, a)`                             | x,y,z 定义选中轴，a 定义旋转角度，                           |
+| `transform:rotate3d(x, y, z, a)`                             | x,y,z 定义选中轴矢量，a 定义旋转角度，                       |
+
+[rotate3d()](<https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate3d>)：需要一定的数学知识
+
+由原点画一条指向（x, y, z）这个点的线，将元素绕线旋转 a 度（可能度数为 负 时指向原点）
 
 从矢量的末端向原点看，旋转是顺时针的。
 
@@ -865,12 +865,12 @@ translatez()：
 | animation-timing-function | 时间函数 |                            |
 | animation-delay           | 推迟时间 |                            |
 | animation-iteration-count | 播放次数 | number，infinite           |
-| animation-direction       | 运动方向 | normal，reverse，alternate |
+| animation-direction       | 动画方向 | normal，reverse，alternate |
 | animation-fill-mode       | 结束状态 | forwrads，backwards        |
 | animation-play-state      | 动画状态 | running，paused            |
 
 ```css
-@keyframes {
+@-wenkit-keyframes animateName {
     from {
         width: 40px;
         opacity: 1;
@@ -948,34 +948,39 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', en
 
 兼容性：ie11+
 
-| 属性              | 值                                                           | 描述                                       |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------ |
-| `flex`            |                                                              | 缩写                                       |
-| `flex-grow`       | 0                                                            | 扩展比率                                   |
-| `flex-shrink`     | 1                                                            | 收缩比率                                   |
-| `flex-basis`      | auto                                                         | 基准值                                     |
-| `flex-flow`       |                                                              | 缩写                                       |
-| `flex-direction`  | row（从左到右）、column-reverse（从下到上）                  | 主轴（用来多个盒子水平或垂直显示）         |
-| `flex-wrap`       | nowrap （默认不换行）wrap-reverse (以行为单位反转)           | 主轴是否换行                               |
-| `justify-content` | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式                               |
-| `align-items`     | flex-start、flex-end、center、baseline、stretch              | 每行侧轴对齐（多行时先把父元素平分再对齐） |
-| `align-content`   | flex-start、flex-end、center、space-between、space-around、stretch | 只能多行整体侧轴对齐                       |
-| `align-self`      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐                               |
-| `order`           | 0                                                            | 排列顺序                                   |
+| 属性              | 值                                                           | 描述                               |
+| ----------------- | ------------------------------------------------------------ | ---------------------------------- |
+| `flex`            |                                                              | 缩写                               |
+| `flex-grow`       | 0                                                            | 扩展比率                           |
+| `flex-shrink`     | 1                                                            | 收缩比率                           |
+| `flex-basis`      | auto                                                         | 基准值                             |
+| `flex-flow`       |                                                              | 缩写                               |
+| `flex-direction`  | row（从左到右）、column-reverse（从下到上）                  | 主轴（用来多个盒子水平或垂直显示） |
+| `flex-wrap`       | nowrap （默认不换行）wrap-reverse (以行为单位反转)           | 主轴是否换行                       |
+| `justify-content` | flex-start、flex-end、center、space-between、space-around    | 主轴对齐方式                       |
+| `align-items`     | flex-start、flex-end、center、baseline、stretch              | 每行侧轴对齐                       |
+| `align-content`   | flex-start、flex-end、center、space-between、space-around、stretch | 只能多行整体侧轴对齐               |
+| `align-self`      | flex-start、flex-end、center、baseline、stretch              | 单独侧轴对齐                       |
+| `order`           | 0                                                            | 排列顺序                           |
 
 flex-grow 计算方式：剩余空间 * 比率占比 = 扩展宽度
 
 flex-shrink 计算方式：a.basis / (a.basis * a.shrink + b.basis * b.shrink) * 差额空间 = 收缩宽度，比率占比和基准值有关
 
-flex-basis 和width有关，如：box-sizing: content-box; basis 是内容宽度（width），和边框无关。但是差额空间和剩余空间要减去padding 和 border 等。
+flex-basis 和width有关，如：box-sizing: content-box; basis 是内容宽度（width），和边框无关。但是差额空间和剩余空间要减去子项的 margin、padding 和 border 等。
 
-align-content 只作用于多行容器，和 align-items 的区别是：前者是容器整体对齐方式，后者是容器的每一行的对齐方式。默认都是：stretch
+align-content 只作用于多行容器，和 align-items 的区别是：前者是容器整体对齐方式；后者是把容器平分，每一行的对齐方式。默认都是：stretch
 
 flex 设置*文本溢出显示省略号*，对于一个设置了flex属性设置为1的div容器，需要先显式设置：min-width: 0; 保证内容不超过外层容器
 
 flex 默认 min-width: auto; ，没有设置：width，默认最小宽度为文本宽度，所以 基准值 basis 为文本宽度，就不会溢出隐藏（文本为伸缩的盒子的子元素）（<https://www.cnblogs.com/liyan-web/p/11217330.html>）
 
 # 疑难解答
+
+### 默认边距
+
+- `padding`：td ul ol dd
+- `margin`：body ul ol dl pre
 
 ### inline-block和float的区别
 
